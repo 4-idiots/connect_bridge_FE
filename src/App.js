@@ -1,14 +1,11 @@
 import React from 'react';
-import * as S from './example';
-import GlobalStyles from './reset'; // reset css
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <GlobalStyles />
-      <S.StyledExample>example</S.StyledExample>
+      <div>Main</div>
     </div>
   );
-}
+};
 
 export default App;

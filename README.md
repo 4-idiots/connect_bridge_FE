@@ -17,10 +17,20 @@
 ## 22.01.16
 
 1. React Design pattern 선택
+
+   - 그냥 평범하게 가자 atomic은 어렵고 딱히 마땅히 맘에 드는게 없네
    - 근본의 presentational - container 사용하려다 생각이 바뀌었다.
    - [presentational - container를 사용하지 않는 이유](https://tecoble.techcourse.co.kr/post/2021-04-26-presentational-and-container/)
    - class 형과 fun 형은 큰 차이가 있고 그에 적절한 것을 사용해야 한다.
+   - Page단위 폴더 생성
+   - 거기에 있는 모든 컴포넌트들을 해당 폴더에서 만들기
+   - 한 폴더에 모두 존재
+
 2. Storybook 설치
+
    - 상당히 유용한 라이브러리, 새로운 걸 적용하면 에러가 너무 많이 떠
    - [eslint와 storybook의 충돌](https://stackoverflow.com/questions/69928061/struggling-with-typescript-react-eslint-and-simple-arrow-functions-components)
    - [Storybook](https://storybook.js.org/tutorials/intro-to-storybook/react/ko/get-started/)
+
+3. 로그인, (아이디, 비밀번호) 찾기 기본 토대 완성
+   - 이제 개발 하면 됨
