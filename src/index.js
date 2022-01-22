@@ -5,7 +5,12 @@ import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App';
-import { LoginForm, FindIDForm, FindPWForm } from './components/index';
+import {
+  LoginForm,
+  FindIDForm,
+  FindPWForm,
+  SignupForm,
+} from './components/index';
 
 // import GlobalStyles from './reset'; // reset css
 // ReactDOM.render(
@@ -23,6 +28,7 @@ render(
       <Route path="/login" element={<LoginForm />} />
       <Route path="/login/findID" element={<FindIDForm />} />
       <Route path="/login/findPW" element={<FindPWForm />} />
+      <Route path="/sign" element={<SignupForm />} />
     </Routes>
   </BrowserRouter>,
   rootElement,
