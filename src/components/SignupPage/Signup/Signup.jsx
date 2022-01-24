@@ -12,6 +12,10 @@ export const SignupForm = () => {
   const [userEmail, setuserEmail] = useState('');
   const [userIntroduce, setuserIntroduce] = useState('');
   const [userGender, setuserGender] = useState(false);
+  const [userAbility, setuserAbility] = useState('');
+  const [userArea, setuserArea] = useState('');
+  const [userTime, setuserTime] = useState('');
+  const [userInterest, setuserInterest] = useState('');
 
   const gett = () => {
     return axios.get('/user').then(response => {
@@ -64,6 +68,22 @@ export const SignupForm = () => {
     setuserGender(current => !current);
   };
 
+  const userAbilitydata = e => {
+    setuserAbility(e.target.value);
+  };
+
+  const userAreadata = e => {
+    setuserArea(e.target.value);
+  };
+
+  const userTimedata = e => {
+    setuserTime(e.target.value);
+  };
+
+  const userInterestdata = e => {
+    setuserInterest(e.target.value);
+  };
+
   const Click = e => {
     e.preventDefault();
 
@@ -78,6 +98,10 @@ export const SignupForm = () => {
         userEmail,
         userIntroduce,
         userGender,
+        userAbility,
+        userArea,
+        userTime,
+        userInterest,
       })
 
       .then(response => {
@@ -160,6 +184,34 @@ export const SignupForm = () => {
           value={userGender}
         />
         여성
+        <br />
+        <select onChange={userAbilitydata} value={userAbility}>
+          <option value="">-----</option>
+          <option value="초등">초등</option>
+          <option value="중등">중등</option>
+          <option value="고등">고등</option>
+        </select>
+        <br />
+        <select onChange={userAreadata} value={userArea}>
+          <option value="">-----</option>
+          <option value="서울">서울</option>
+          <option value="대구">대구</option>
+          <option value="부산">부산</option>
+        </select>
+        <br />
+        <select onChange={userTimedata} value={userTime}>
+          <option value="">-----</option>
+          <option value="오전">오전</option>
+          <option value="오후">오후</option>
+          <option value="밤">밤</option>
+        </select>
+        <br />
+        <select onChange={userInterestdata} value={userInterest}>
+          <option value="">-----</option>
+          <option value="흥">흥</option>
+          <option value="흥">흥</option>
+          <option value="미">미</option>
+        </select>
         <br />
         <button type="button" onClick={Click}>
           회원가입
