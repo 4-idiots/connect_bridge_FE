@@ -11,6 +11,7 @@ export const SignupForm = () => {
   const [userBirthday, setuserBirthday] = useState('');
   const [userEmail, setuserEmail] = useState('');
   const [userIntroduce, setuserIntroduce] = useState('');
+  const [userGender, setuserGender] = useState(false);
 
   const gett = () => {
     return axios.get('/user').then(response => {
@@ -55,6 +56,14 @@ export const SignupForm = () => {
     setuserIntroduce(e.target.value);
   };
 
+  const userGenderdata = () => {
+    setuserGender(current => current);
+  };
+
+  const userGenderdata2 = () => {
+    setuserGender(current => !current);
+  };
+
   const Click = e => {
     e.preventDefault();
 
@@ -68,6 +77,7 @@ export const SignupForm = () => {
         userBirthday,
         userEmail,
         userIntroduce,
+        userGender,
       })
 
       .then(response => {
@@ -136,7 +146,20 @@ export const SignupForm = () => {
           value={userIntroduce}
         />
         <br />
-
+        <input
+          type="radio"
+          name="Gender"
+          onChange={userGenderdata}
+          value={userGender}
+        />
+        남성
+        <input
+          type="radio"
+          name="Gender"
+          onChange={userGenderdata2}
+          value={userGender}
+        />
+        여성
         <br />
         <button type="button" onClick={Click}>
           회원가입
