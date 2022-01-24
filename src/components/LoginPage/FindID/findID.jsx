@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import * as S from './style';
+// import axios from 'axios';
 
 export const FindIDForm = () => {
   const [userInfo, setUserInfo] = useState({
@@ -20,6 +21,9 @@ export const FindIDForm = () => {
   const onSubmitEvent = e => {
     e.preventDefault();
     console.log(userInfo);
+    // axios.post('', { userName, userPhone, userEmail }).then(response => {
+    //   console.log(response);
+    // });
   };
 
   return (
