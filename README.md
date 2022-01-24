@@ -15,4 +15,7 @@
 
 1. Gender 버튼 연동
 
+## 22.01.25
+
+1. select box 제작 int->string 바꿈 (다시수정의사 살짝있음)
 
