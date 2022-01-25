@@ -11,6 +11,12 @@ module.exports = {
     'plugin:storybook/recommended',
   ],
   rules: {
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
     'react/jsx-filename-extension': [
       'error',
       {
