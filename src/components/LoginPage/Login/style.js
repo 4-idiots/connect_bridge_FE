@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 export const contatiner = styled.div``;
@@ -12,9 +13,14 @@ export const input = styled.input``;
 
 export const submit = styled.button``;
 
+export const label = styled.label`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const serviceBox = styled.div``;
 
-export const serviceBtn = styled.button`
+export const serviceBtn = styled(Link)`
   ${props =>
     props.service === 'register' &&
     css`
@@ -26,7 +32,7 @@ export const serviceBtn = styled.button`
       color: green;
     `}
   ${props =>
-    props.service === 'indPW' &&
+    props.service === 'findPW' &&
     css`
       color: blue;
     `}
