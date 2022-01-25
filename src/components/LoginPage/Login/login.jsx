@@ -52,7 +52,7 @@ export const LoginForm = () => {
         <S.submit onClick={onSubmitEvent}>로그인</S.submit>
       </S.form>
       <S.serviceBox>
-        <S.serviceBtn service="register" to="/signup">
+        <S.serviceBtn service="register" to="/sign">
           회원가입
         </S.serviceBtn>
         <S.serviceBtn service="findID" to="/login/findID">
