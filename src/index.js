@@ -11,7 +11,7 @@ import {
   FindPWForm,
   SignupForm,
 } from './components/index';
-
+import 'bulma/css/bulma.css';
 // import GlobalStyles from './reset'; // reset css
 // ReactDOM.render(
 //   <React.StrictMode>
