@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import * as S from './style';
+import { Container, Heading, Form, Button, Box } from 'react-bulma-components';
 
 export const FindPWForm = () => {
   const [userInfo, setUserInfo] = useState({
@@ -26,41 +26,43 @@ export const FindPWForm = () => {
   };
 
   return (
-    <S.contatiner>
-      <S.title>비밀번호 찾기</S.title>
-      <S.form>
-        <S.label>
-          아이디
-          <S.input
-            type="text"
-            value={userID}
-            name="userID"
-            onChange={onChangeAccountEvent}
-            placeholder="아이디"
-          />
-        </S.label>
-        <S.label>
-          이름
-          <S.input
+    <Container>
+      <Heading style={{ textAlign: 'center' }}>비밀번호 찾기</Heading>
+      <Box style={{ width: '60%', margin: 'auto' }}>
+        <Form.Field>
+          <Form.Label>이름</Form.Label>
+          <Form.Input
             type="text"
             value={userName}
             name="userName"
             onChange={onChangeAccountEvent}
             placeholder="이름"
           />
-        </S.label>
-        <S.label>
-          이메일
-          <S.input
+        </Form.Field>
+        <Form.Field>
+          <Form.Label>아이디</Form.Label>
+          <Form.Input
+            type="text"
+            value={userID}
+            name="userID"
+            onChange={onChangeAccountEvent}
+            placeholder="아이디"
+          />
+        </Form.Field>
+        <Form.Field>
+          <Form.Label>이메일</Form.Label>
+          <Form.Input
             type="email"
             value={userEmail}
             name="userEmail"
             onChange={onChangeAccountEvent}
             placeholder="이메일"
           />
-        </S.label>
-        <S.submit onClick={onSubmitEvent}>아이디 찾기</S.submit>
-      </S.form>
-    </S.contatiner>
+        </Form.Field>
+        <Button color="success" onClick={onSubmitEvent}>
+          아이디 찾기
+        </Button>
+      </Box>
+    </Container>
   );
 };

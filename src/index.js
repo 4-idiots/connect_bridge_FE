@@ -12,7 +12,7 @@ import {
   SignupForm,
 } from './components/index';
 import 'bulma/css/bulma.css';
-// import GlobalStyles from './reset'; // reset css
+import GlobalStyles from './reset'; // reset css
 // ReactDOM.render(
 //   <React.StrictMode>
 //     <App />
@@ -23,6 +23,7 @@ import 'bulma/css/bulma.css';
 const rootElement = document.getElementById('root');
 render(
   <BrowserRouter>
+    <GlobalStyles />
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="/login" element={<LoginForm />} />
