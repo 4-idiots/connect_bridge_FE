@@ -54,7 +54,7 @@ export const LoginForm = () => {
             />
           </Form.Control>
         </Form.Field>
-        <Button color="success" onClick={onSubmitEvent}>
+        <Button color="purple" onClick={onSubmitEvent}>
           로그인
         </Button>
       </Box>

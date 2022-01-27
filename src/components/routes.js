@@ -1,3 +1,6 @@
+// Navbar
+export { NavbarForm } from './MainPage/navbar';
+
 // LoginPage
 export { LoginForm } from './LoginPage/login';
 export { FindIDForm } from './LoginPage/findID';
