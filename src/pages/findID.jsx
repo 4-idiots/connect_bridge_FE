@@ -1,12 +1,12 @@
 import React from 'react';
 import { Hero } from 'react-bulma-components';
-import { LoginForm, NavbarForm, FooterForm } from '../components/cRoutes';
+import { FindIDForm, NavbarForm, FooterForm } from '../components/cRoutes';
 
-export const Login = () => {
+export const FindID = () => {
   return (
-    <Hero color="pink">
+    <Hero>
       <NavbarForm />
-      <LoginForm />
+      <FindIDForm />
       <FooterForm />
     </Hero>
   );

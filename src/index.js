@@ -2,9 +2,9 @@ import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App';
-import { FindIDForm, FindPWForm, SignupForm } from './components/routes';
 import './assets/custom.css';
-import { Login } from './pages/login';
+import { Login, FindID, FindPW } from './pages/pRoutes';
+import { SignupForm } from './components/cRoutes';
 
 const rootElement = document.getElementById('root');
 render(
@@ -12,8 +12,8 @@ render(
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/login/findID" element={<FindIDForm />} />
-      <Route path="/login/findPW" element={<FindPWForm />} />
+      <Route path="/login/findID" element={<FindID />} />
+      <Route path="/login/findPW" element={<FindPW />} />
       <Route path="/sign" element={<SignupForm />} />
     </Routes>
   </BrowserRouter>,
