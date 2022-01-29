@@ -1,46 +1,45 @@
 import React, { useState } from 'react';
 // import axios from 'axios';
-import { Navbar, Image, Hero } from 'react-bulma-components';
+import { Navbar, Image } from 'react-bulma-components';
+import { Link } from 'react-router-dom';
 
 export const NavbarForm = () => {
   const [burger, setBurger] = useState(false);
 
   return (
-    <Hero.Header>
-      <Navbar backgroundColor="info">
-        <Navbar.Brand>
-          <Navbar.Item href="#">
-            <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuj0imqukWmBbCZxUZqpqHrIixs71sVj7k-g&usqp=CAU" />
+    <Navbar fixed="top" color="link">
+      <Navbar.Brand>
+        <Navbar.Item renderAs={Link} to="/">
+          <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuj0imqukWmBbCZxUZqpqHrIixs71sVj7k-g&usqp=CAU" />
+        </Navbar.Item>
+        <Navbar.Burger
+          onClick={() => {
+            setBurger(!burger);
+          }}
+          className={burger ? 'is-active' : ''}
+        />
+      </Navbar.Brand>
+      <Navbar.Menu className={burger ? 'is-active' : ''}>
+        <Navbar.Container>
+          <Navbar.Item backgroundColor="brown" renderAs={Link} to="#">
+            프로젝트
           </Navbar.Item>
-          <Navbar.Burger
-            onClick={() => {
-              setBurger(!burger);
-            }}
-            className={burger ? 'is-active' : ''}
-          />
-        </Navbar.Brand>
-        <Navbar.Menu className={burger ? 'is-active' : ''}>
-          <Navbar.Container>
-            <Navbar.Item backgroundColor="brown" href="#">
-              프로젝트
-            </Navbar.Item>
-            <Navbar.Item backgroundColor="success" href="#">
-              커뮤니티
-            </Navbar.Item>
-            <Navbar.Item backgroundColor="purple" href="#">
-              대외활동
-            </Navbar.Item>
-            <Navbar.Item backgroundColor="danger" href="#">
-              팀원
-            </Navbar.Item>
-          </Navbar.Container>
-          <Navbar.Container align="right">
-            <Navbar.Item backgroundColor="warning" href="#">
-              로그인
-            </Navbar.Item>
-          </Navbar.Container>
-        </Navbar.Menu>
-      </Navbar>
-    </Hero.Header>
+          <Navbar.Item renderAs={Link} to="#">
+            커뮤니티
+          </Navbar.Item>
+          <Navbar.Item renderAs={Link} to="#">
+            대외활동
+          </Navbar.Item>
+          <Navbar.Item renderAs={Link} to="#">
+            팀원
+          </Navbar.Item>
+        </Navbar.Container>
+        <Navbar.Container align="right">
+          <Navbar.Item renderAs={Link} to="/login">
+            로그인
+          </Navbar.Item>
+        </Navbar.Container>
+      </Navbar.Menu>
+    </Navbar>
   );
 };
