@@ -11,6 +11,7 @@ module.exports = {
     'plugin:storybook/recommended',
   ],
   rules: {
+    'no-unused-vars': 1,
     'prettier/prettier': [
       'error',
       {
