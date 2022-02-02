@@ -2,13 +2,9 @@ import React, { useState } from 'react';
 // import axios from 'axios';
 import { Container, Heading, Form, Button, Box } from 'react-bulma-components';
 import { Link } from 'react-router-dom';
-import validator from 'validator';
 
 export const LoginForm = () => {
-  const [account, setAccount] = useState({
-    userID: '',
-    userPW: '',
-  });
+  const [account, setAccount] = useState({});
 
   const { userID, userPW } = account;
 
@@ -21,22 +17,7 @@ export const LoginForm = () => {
 
   const onSubmitEvent = e => {
     e.preventDefault();
-    console.log(
-      validator.isStrongPassword(userPW, {
-        minLength: 8,
-        minLowercase: 0,
-        minUppercase: 0,
-        minNumbers: 0,
-        minSymbols: 0,
-        returnScore: false,
-        pointsPerUnique: 0,
-        pointsPerRepeat: 0,
-        pointsForContainingLower: 0,
-        pointsForContainingUpper: 0,
-        pointsForContainingNumber: 0,
-        pointsForContainingSymbol: 0,
-      }),
-    );
+    console.log(account);
     // axios.post('', { userID, userPW }).then(response => {
     //   console.log(response);
     // });
@@ -51,26 +32,19 @@ export const LoginForm = () => {
           <Form.Control>
             <Form.Input
               type="text"
-              value={userID}
+              value={userID || ''}
               name="userID"
               onChange={onChangeAccountEvent}
               placeholder="아이디"
             />
           </Form.Control>
-          {validator.isEmail(userID) ? (
-            <Form.Label style={{ color: 'green' }}>
-              이메일이 맞습니다.
-            </Form.Label>
-          ) : (
-            <Form.Label style={{ color: 'red' }}>이메일이 아닙니다!</Form.Label>
-          )}
         </Form.Field>
         <Form.Field>
           <Form.Label>비밀번호</Form.Label>
           <Form.Control>
             <Form.Input
               type="password"
-              value={userPW}
+              value={userPW || ''}
               name="userPW"
               onChange={onChangeAccountEvent}
               placeholder="비밀번호"

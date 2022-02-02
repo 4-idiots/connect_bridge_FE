@@ -1,7 +1,7 @@
 import useSWR from 'swr';
 import fetcher from './fetcher';
 
-const UserProfile = id => {
+export const UserProfile = id => {
   const { data, error } = useSWR(`/api/${id}`, fetcher);
 
   return {
