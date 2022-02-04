@@ -8,4 +8,4 @@ export { FindIDForm } from './LoginPage/findIDModule';
 export { FindPWForm } from './LoginPage/findPWModule';
 
 // SignupPage
-export { SignupForm } from './SignupPage/Signup/Signup';
+export { SignupForm } from './SignupPage/Signup';

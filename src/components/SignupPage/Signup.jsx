@@ -1,5 +1,15 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import validator from 'validator';
+import {
+  Container,
+  Heading,
+  Form,
+  Button,
+  Box,
+  Navbar,
+} from 'react-bulma-components';
+import { Link } from 'react-router-dom';
 
 export const SignupForm = () => {
   const [a, seta] = useState([]);
@@ -18,7 +28,7 @@ export const SignupForm = () => {
   const [userInterest, setuserInterest] = useState('');
 
   const gett = () => {
-    return axios.get('/user').then(response => {
+    return axios.get('http://4idiot.ddns.net:8080/user').then(response => {
       console.log(response);
       seta(response.data);
     });
@@ -87,28 +97,48 @@ export const SignupForm = () => {
   const Click = e => {
     e.preventDefault();
 
-    axios
-      .post('/user/register', {
-        userPhone,
-        userID,
-        userPW,
-        userNickname,
-        userName,
-        userBirthday,
-        userEmail,
-        userIntroduce,
-        userGender,
-        userAbility,
-        userArea,
-        userTime,
-        userInterest,
-      })
+    if (
+      userNickname &&
+      userName &&
+      userIntroduce &&
+      userAbility &&
+      userArea &&
+      userTime &&
+      userInterest &&
+      validator.isLength(userPhone, { min: 11, max: 11 }) === true &&
+      validator.isLength(userID, { min: 5, max: 20 }) === true &&
+      validator.isLength(userPW, { min: 8, max: 20 }) === true &&
+      validator.isDate(userBirthday) === true &&
+      validator.isEmail(userEmail) === true
+    ) {
+      alert('회원가입이 완료하였습니다.');
+      window.location = '/login';
 
-      .then(response => {
-        console.log(response);
-        console.log(a);
-        gett();
-      });
+      axios
+        .post('http://4idiot.ddns.net:8080/user/register', {
+          userPhone,
+          userID,
+          userPW,
+          userNickname,
+          userName,
+          userBirthday,
+          userEmail,
+          userIntroduce,
+          userGender,
+          userAbility,
+          userArea,
+          userTime,
+          userInterest,
+        })
+
+        .then(response => {
+          console.log(response);
+          console.log(a);
+          gett();
+        });
+    } else {
+      alert('입력값을 확인해주세요');
+    }
   };
 
   return (
@@ -120,21 +150,39 @@ export const SignupForm = () => {
           onChange={userPhonedata}
           value={userPhone}
         />
-        <br />
+        {validator.isLength(userPhone, { min: 11, max: 11 }) ? (
+          <Form.Label style={{ color: 'green' }}>O</Form.Label>
+        ) : (
+          <Form.Label style={{ size: 'medium', color: 'red' }}>
+            보기와 맞게 기입해주세요
+          </Form.Label>
+        )}
         <input
           type="text"
           placeholder="아이디"
           onChange={userIDdata}
           value={userID}
         />
-        <br />
+        {validator.isLength(userID, { min: 5, max: 20 }) ? (
+          <Form.Label style={{ color: 'green' }}>O</Form.Label>
+        ) : (
+          <Form.Label style={{ size: 'medium', color: 'red' }}>
+            5~20자로 사용하세요
+          </Form.Label>
+        )}
         <input
           type="text"
           placeholder="비번"
           onChange={userPWdata}
           value={userPW}
         />
-        <br />
+        {validator.isLength(userPW, { min: 8, max: 20 }) ? (
+          <Form.Label style={{ color: 'green' }}>O</Form.Label>
+        ) : (
+          <Form.Label style={{ size: 'medium', color: 'red' }}>
+            8~20자로 사용하세요
+          </Form.Label>
+        )}
         <input
           type="text"
           placeholder="닉네임"
@@ -151,18 +199,28 @@ export const SignupForm = () => {
         <br />
         <input
           type="text"
-          placeholder="생일(ex.10.23)"
+          placeholder="생년월일(ex.1998-10-23)"
           onChange={userBirthdaydata}
           value={userBirthday}
         />
-        <br />
+        {validator.isDate(userBirthday) ? (
+          <Form.Label style={{ color: 'green' }}>O</Form.Label>
+        ) : (
+          <Form.Label style={{ size: 'medium', color: 'red' }}>
+            보기와 맞게 기입해주세요
+          </Form.Label>
+        )}
         <input
           type="text"
           placeholder="이메일"
           onChange={userEmaildata}
           value={userEmail}
         />
-        <br />
+        {validator.isEmail(userEmail) ? (
+          <Form.Label style={{ color: 'green' }}>이메일이 맞습니다.</Form.Label>
+        ) : (
+          <Form.Label style={{ color: 'red' }}>이메일이 아닙니다!</Form.Label>
+        )}
         <input
           type="text"
           placeholder="자기소개"
@@ -213,9 +271,9 @@ export const SignupForm = () => {
           <option value="미">미</option>
         </select>
         <br />
-        <button type="button" onClick={Click}>
-          회원가입
-        </button>
+        <Button renderAs={Link} to="/sign" color="danger" onClick={Click}>
+          회원 가입
+        </Button>
       </form>
     </div>
   );
