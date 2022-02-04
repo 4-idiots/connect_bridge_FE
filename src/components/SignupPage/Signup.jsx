@@ -1,15 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import validator from 'validator';
-import {
-  Container,
-  Heading,
-  Form,
-  Button,
-  Box,
-  Block,
-  Columns,
-} from 'react-bulma-components';
+import { Container, Heading, Form, Button, Box } from 'react-bulma-components';
 import { Link } from 'react-router-dom';
 
 export const SignupForm = () => {
@@ -95,6 +87,22 @@ export const SignupForm = () => {
     setuserInterest(e.target.value);
   };
 
+  const sameNickname = e => {
+    e.preventDefault();
+
+    axios
+      .get('http://4idiot.ddns.net:8080/user/check/userNickname/{userNickname}')
+      .then(response => {
+        console.log(response);
+        if (response === true) {
+          alert('중복입니다. 다시 입력해주세요');
+          setuserNickname('');
+        } else {
+          alert('사용가능합니다.');
+        }
+      });
+  };
+
   const Click = e => {
     e.preventDefault();
 
@@ -143,10 +151,10 @@ export const SignupForm = () => {
   };
 
   return (
-    <Container backgroundColor="success">
-      <Heading style={{ textAlign: 'center' }}>회원가입</Heading>
+    <Container>
+      <Heading style={{ textAlign: 'center', margin: 35 }}>회원가입</Heading>
 
-      <Box style={{ width: '70%', margin: 'auto' }}>
+      <Box style={{ margin: 100, Box: 'center' }}>
         <Form.Field>
           <Form.Label>폰번호</Form.Label>
           <Form.Control>
@@ -160,13 +168,14 @@ export const SignupForm = () => {
           {validator.isLength(userPhone, { min: 11, max: 11 }) ? (
             <Form.Label style={{ color: 'green' }}>O</Form.Label>
           ) : (
-            <Form.Label style={{ size: 'medium', color: 'red' }}>
+            <Form.Label style={{ color: 'grey' }} size="small">
               보기와 맞게 기입해 주세요
             </Form.Label>
           )}
         </Form.Field>
         <Form.Field>
           <Form.Label>아이디</Form.Label>
+
           <Form.Control>
             <Form.Input
               type="text"
@@ -174,11 +183,15 @@ export const SignupForm = () => {
               onChange={userIDdata}
               value={userID}
             />
+
+            <Button mt="1" size="small" color="danger">
+              중복확인
+            </Button>
           </Form.Control>
           {validator.isLength(userID, { min: 5, max: 20 }) ? (
             <Form.Label style={{ color: 'green' }}>O</Form.Label>
           ) : (
-            <Form.Label style={{ size: 'medium', color: 'red' }}>
+            <Form.Label style={{ color: 'grey' }} size="small">
               5~20자로 사용하세요
             </Form.Label>
           )}
@@ -196,7 +209,7 @@ export const SignupForm = () => {
           {validator.isLength(userPW, { min: 8, max: 20 }) ? (
             <Form.Label style={{ color: 'green' }}>O</Form.Label>
           ) : (
-            <Form.Label style={{ size: 'medium', color: 'red' }}>
+            <Form.Label style={{ color: 'grey' }} size="small">
               8~20자로 사용하세요
             </Form.Label>
           )}
@@ -211,8 +224,11 @@ export const SignupForm = () => {
               value={userNickname}
             />
           </Form.Control>
+          <Button mt="1" size="small" color="danger" onClick={sameNickname}>
+            중복확인
+          </Button>
         </Form.Field>
-        <br />
+
         <Form.Field>
           <Form.Label>이름</Form.Label>
           <Form.Control>
@@ -224,7 +240,7 @@ export const SignupForm = () => {
             />
           </Form.Control>
         </Form.Field>
-        <br />
+
         <Form.Field>
           <Form.Label>생년월일</Form.Label>
           <Form.Control>
@@ -238,7 +254,7 @@ export const SignupForm = () => {
           {validator.isDate(userBirthday) ? (
             <Form.Label style={{ color: 'green' }}>O</Form.Label>
           ) : (
-            <Form.Label style={{ size: 'medium', color: 'red' }}>
+            <Form.Label style={{ color: 'grey' }} size="small">
               보기와 맞게 기입해 주세요
             </Form.Label>
           )}
@@ -256,8 +272,13 @@ export const SignupForm = () => {
           {validator.isEmail(userEmail) ? (
             <Form.Label style={{ color: 'green' }}>O</Form.Label>
           ) : (
-            <Form.Label style={{ color: 'red' }}>이메일이 아닙니다!</Form.Label>
+            <Form.Label style={{ color: 'grey' }} size="small">
+              이메일이 아닙니다!
+            </Form.Label>
           )}
+          <Button mt="1" size="small" color="danger">
+            중복확인
+          </Button>
         </Form.Field>
         <Form.Field>
           <Form.Label>자기소개</Form.Label>
