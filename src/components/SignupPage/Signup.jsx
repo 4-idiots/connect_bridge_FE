@@ -7,7 +7,8 @@ import {
   Form,
   Button,
   Box,
-  Navbar,
+  Block,
+  Columns,
 } from 'react-bulma-components';
 import { Link } from 'react-router-dom';
 
@@ -142,139 +143,230 @@ export const SignupForm = () => {
   };
 
   return (
-    <div className="signup">
-      <form>
-        <input
-          type="text"
-          placeholder="폰번호(ex.01012345678)"
-          onChange={userPhonedata}
-          value={userPhone}
-        />
-        {validator.isLength(userPhone, { min: 11, max: 11 }) ? (
-          <Form.Label style={{ color: 'green' }}>O</Form.Label>
-        ) : (
-          <Form.Label style={{ size: 'medium', color: 'red' }}>
-            보기와 맞게 기입해주세요
-          </Form.Label>
-        )}
-        <input
-          type="text"
-          placeholder="아이디"
-          onChange={userIDdata}
-          value={userID}
-        />
-        {validator.isLength(userID, { min: 5, max: 20 }) ? (
-          <Form.Label style={{ color: 'green' }}>O</Form.Label>
-        ) : (
-          <Form.Label style={{ size: 'medium', color: 'red' }}>
-            5~20자로 사용하세요
-          </Form.Label>
-        )}
-        <input
-          type="text"
-          placeholder="비번"
-          onChange={userPWdata}
-          value={userPW}
-        />
-        {validator.isLength(userPW, { min: 8, max: 20 }) ? (
-          <Form.Label style={{ color: 'green' }}>O</Form.Label>
-        ) : (
-          <Form.Label style={{ size: 'medium', color: 'red' }}>
-            8~20자로 사용하세요
-          </Form.Label>
-        )}
-        <input
-          type="text"
-          placeholder="닉네임"
-          onChange={userNicknamedata}
-          value={userNickname}
-        />
+    <Container backgroundColor="success">
+      <Heading style={{ textAlign: 'center' }}>회원가입</Heading>
+
+      <Box style={{ width: '70%', margin: 'auto' }}>
+        <Form.Field>
+          <Form.Label>폰번호</Form.Label>
+          <Form.Control>
+            <Form.Input
+              type="text"
+              placeholder="ex.01012345678"
+              onChange={userPhonedata}
+              value={userPhone}
+            />
+          </Form.Control>
+          {validator.isLength(userPhone, { min: 11, max: 11 }) ? (
+            <Form.Label style={{ color: 'green' }}>O</Form.Label>
+          ) : (
+            <Form.Label style={{ size: 'medium', color: 'red' }}>
+              보기와 맞게 기입해 주세요
+            </Form.Label>
+          )}
+        </Form.Field>
+        <Form.Field>
+          <Form.Label>아이디</Form.Label>
+          <Form.Control>
+            <Form.Input
+              type="text"
+              placeholder="아이디"
+              onChange={userIDdata}
+              value={userID}
+            />
+          </Form.Control>
+          {validator.isLength(userID, { min: 5, max: 20 }) ? (
+            <Form.Label style={{ color: 'green' }}>O</Form.Label>
+          ) : (
+            <Form.Label style={{ size: 'medium', color: 'red' }}>
+              5~20자로 사용하세요
+            </Form.Label>
+          )}
+        </Form.Field>
+        <Form.Field>
+          <Form.Label>비밀번호</Form.Label>
+          <Form.Control>
+            <Form.Input
+              type="text"
+              placeholder="비밀번호"
+              onChange={userPWdata}
+              value={userPW}
+            />
+          </Form.Control>
+          {validator.isLength(userPW, { min: 8, max: 20 }) ? (
+            <Form.Label style={{ color: 'green' }}>O</Form.Label>
+          ) : (
+            <Form.Label style={{ size: 'medium', color: 'red' }}>
+              8~20자로 사용하세요
+            </Form.Label>
+          )}
+        </Form.Field>
+        <Form.Field>
+          <Form.Label>닉네임</Form.Label>
+          <Form.Control>
+            <Form.Input
+              type="text"
+              placeholder="닉네임"
+              onChange={userNicknamedata}
+              value={userNickname}
+            />
+          </Form.Control>
+        </Form.Field>
         <br />
-        <input
-          type="text"
-          placeholder="이름"
-          onChange={userNamedata}
-          value={userName}
-        />
+        <Form.Field>
+          <Form.Label>이름</Form.Label>
+          <Form.Control>
+            <Form.Input
+              type="text"
+              placeholder="이름"
+              onChange={userNamedata}
+              value={userName}
+            />
+          </Form.Control>
+        </Form.Field>
         <br />
-        <input
-          type="text"
-          placeholder="생년월일(ex.1998-10-23)"
-          onChange={userBirthdaydata}
-          value={userBirthday}
-        />
-        {validator.isDate(userBirthday) ? (
-          <Form.Label style={{ color: 'green' }}>O</Form.Label>
-        ) : (
-          <Form.Label style={{ size: 'medium', color: 'red' }}>
-            보기와 맞게 기입해주세요
-          </Form.Label>
-        )}
-        <input
-          type="text"
-          placeholder="이메일"
-          onChange={userEmaildata}
-          value={userEmail}
-        />
-        {validator.isEmail(userEmail) ? (
-          <Form.Label style={{ color: 'green' }}>이메일이 맞습니다.</Form.Label>
-        ) : (
-          <Form.Label style={{ color: 'red' }}>이메일이 아닙니다!</Form.Label>
-        )}
-        <input
-          type="text"
-          placeholder="자기소개"
-          onChange={userIntroducedata}
-          value={userIntroduce}
-        />
+        <Form.Field>
+          <Form.Label>생년월일</Form.Label>
+          <Form.Control>
+            <Form.Input
+              type="text"
+              placeholder="ex.1998-10-23"
+              onChange={userBirthdaydata}
+              value={userBirthday}
+            />
+          </Form.Control>
+          {validator.isDate(userBirthday) ? (
+            <Form.Label style={{ color: 'green' }}>O</Form.Label>
+          ) : (
+            <Form.Label style={{ size: 'medium', color: 'red' }}>
+              보기와 맞게 기입해 주세요
+            </Form.Label>
+          )}
+        </Form.Field>
+        <Form.Field>
+          <Form.Label>이메일</Form.Label>
+          <Form.Control>
+            <Form.Input
+              type="text"
+              placeholder="이메일"
+              onChange={userEmaildata}
+              value={userEmail}
+            />
+          </Form.Control>
+          {validator.isEmail(userEmail) ? (
+            <Form.Label style={{ color: 'green' }}>O</Form.Label>
+          ) : (
+            <Form.Label style={{ color: 'red' }}>이메일이 아닙니다!</Form.Label>
+          )}
+        </Form.Field>
+        <Form.Field>
+          <Form.Label>자기소개</Form.Label>
+          <Form.Control>
+            <Form.Input
+              type="text"
+              placeholder="자기소개"
+              onChange={userIntroducedata}
+              value={userIntroduce}
+            />
+          </Form.Control>
+        </Form.Field>
         <br />
-        <input
-          type="radio"
-          name="Gender"
-          onChange={userGenderdata}
-          value={userGender}
-        />
-        남성
-        <input
-          type="radio"
-          name="Gender"
-          onChange={userGenderdata2}
-          value={userGender}
-        />
-        여성
+        <Form.Field>
+          <Form.Label>성별</Form.Label>
+          <Form.Control>
+            <Form.Radio
+              type="radio"
+              name="Gender"
+              onChange={userGenderdata}
+              value={userGender}
+            >
+              남
+            </Form.Radio>
+            <br />
+            <Form.Radio
+              type="radio"
+              name="Gender"
+              onChange={userGenderdata2}
+              value={userGender}
+            >
+              여
+            </Form.Radio>
+          </Form.Control>
+        </Form.Field>
         <br />
-        <select onChange={userAbilitydata} value={userAbility}>
-          <option value="">-----</option>
-          <option value="초등">초등</option>
-          <option value="중등">중등</option>
-          <option value="고등">고등</option>
-        </select>
+        <Form.Field>
+          <Form.Label>실력</Form.Label>
+          <Form.Control>
+            <Form.Select onChange={userAbilitydata} value={userAbility}>
+              <option value="">---------------------------</option>
+              <option value="초심자">초심자</option>
+              <option value="초보">초보</option>
+              <option value="중수">중수</option>
+              <option value="고수">고수</option>
+            </Form.Select>
+          </Form.Control>
+        </Form.Field>
+
+        <Form.Field>
+          <Form.Label>지역</Form.Label>
+          <Form.Control>
+            <Form.Select onChange={userAreadata} value={userArea}>
+              <option value="">---------------------------</option>
+              <option value="서울">서울</option>
+              <option value="경기도">경기도</option>
+              <option value="부산">부산</option>
+              <option value="인천">인천</option>
+              <option value="대구">대구</option>
+              <option value="대전">대전</option>
+              <option value="광주">광주</option>
+              <option value="울산">울산</option>
+              <option value="경상남도">경상남도</option>
+              <option value="경상북도">경상북도</option>
+              <option value="충청남도">충청남도</option>
+              <option value="충청북도">충청북도</option>
+              <option value="전라남도">전라남도</option>
+              <option value="전라북도">전라북도</option>
+              <option value="강원도">강원도</option>
+              <option value="제주도">제주도</option>
+            </Form.Select>
+          </Form.Control>
+        </Form.Field>
+
+        <Form.Field>
+          <Form.Label>시간</Form.Label>
+          <Form.Control>
+            <Form.Select
+              style={{ size: 'large' }}
+              onChange={userTimedata}
+              value={userTime}
+            >
+              <option value="">---------------------------</option>
+              <option value="평일만가능">평일만가능</option>
+              <option value="주말만가능">주말만가능</option>
+              <option value="전부가능">전부가능</option>
+            </Form.Select>
+          </Form.Control>
+        </Form.Field>
+
+        <Form.Field>
+          <Form.Label>흥미</Form.Label>
+          <Form.Control>
+            <Form.Select onChange={userInterestdata} value={userInterest}>
+              <option value="">---------------------------</option>
+              <option value="기획">기획</option>
+              <option value="디자인">디자인</option>
+              <option value="프론트엔드">프론트엔드</option>
+              <option value="백엔드">백엔드</option>
+              <option value="기타">기타</option>
+            </Form.Select>
+          </Form.Control>
+        </Form.Field>
         <br />
-        <select onChange={userAreadata} value={userArea}>
-          <option value="">-----</option>
-          <option value="서울">서울</option>
-          <option value="대구">대구</option>
-          <option value="부산">부산</option>
-        </select>
         <br />
-        <select onChange={userTimedata} value={userTime}>
-          <option value="">-----</option>
-          <option value="오전">오전</option>
-          <option value="오후">오후</option>
-          <option value="밤">밤</option>
-        </select>
-        <br />
-        <select onChange={userInterestdata} value={userInterest}>
-          <option value="">-----</option>
-          <option value="흥">흥</option>
-          <option value="흥">흥</option>
-          <option value="미">미</option>
-        </select>
-        <br />
-        <Button renderAs={Link} to="/sign" color="danger" onClick={Click}>
+        <Button color="danger" size="medium" onClick={Click}>
           회원 가입
         </Button>
-      </form>
-    </div>
+      </Box>
+    </Container>
   );
 };
