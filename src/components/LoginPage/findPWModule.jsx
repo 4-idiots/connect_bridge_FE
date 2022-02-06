@@ -1,22 +1,26 @@
-import React, { useState } from 'react';
-import { Container, Heading, Form, Button, Box } from 'react-bulma-components';
+import React, { useState, useCallback } from 'react';
+import { Container, Heading, Button, Box, Form } from 'react-bulma-components';
+// import { findPWServcie } from '../../service';
 
 export const FindPWForm = () => {
   const [userInfo, setUserInfo] = useState({});
 
   const { userID, userName, userEmail } = userInfo;
 
-  const onChangeAccountEvent = e => {
-    setUserInfo({
-      ...userInfo,
-      [e.currentTarget.name]: e.currentTarget.value,
-    });
-  };
+  const onChangeAccountEvent = useCallback(
+    e => {
+      setUserInfo({
+        ...userInfo,
+        [e.currentTarget.name]: e.currentTarget.value,
+      });
+    },
+    [userInfo],
+  );
 
   const onSubmitEvent = e => {
     e.preventDefault();
     console.log(userInfo);
-    // axios.post('', { userID, userName, userEmail }).then(response => {
+    // findPWServcie(userID, userName, userEmail).then(response => {
     //   console.log(response);
     // });
   };

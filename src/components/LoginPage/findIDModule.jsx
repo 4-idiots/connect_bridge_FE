@@ -1,23 +1,26 @@
-import React, { useState } from 'react';
-import { Container, Heading, Form, Button, Box } from 'react-bulma-components';
-// import axios from 'axios';
+import React, { useState, useCallback } from 'react';
+import { Container, Heading, Button, Box, Form } from 'react-bulma-components';
+// import { findIDService } from '../../service';
 
 export const FindIDForm = () => {
   const [userInfo, setUserInfo] = useState({});
 
   const { userName, userPhone, userEmail } = userInfo;
 
-  const onChangeAccountEvent = e => {
-    setUserInfo({
-      ...userInfo,
-      [e.currentTarget.name]: e.currentTarget.value,
-    });
-  };
+  const onChangeAccountEvent = useCallback(
+    e => {
+      setUserInfo({
+        ...userInfo,
+        [e.currentTarget.name]: e.currentTarget.value,
+      });
+    },
+    [userInfo],
+  );
 
   const onSubmitEvent = e => {
     e.preventDefault();
     console.log(userInfo);
-    // axios.post('', { userName, userPhone, userEmail }).then(response => {
+    // findIDService(userName, userPhone, userEmail).then(response => {
     //   console.log(response);
     // });
   };

@@ -1,25 +1,28 @@
-import React, { useState } from 'react';
-// import axios from 'axios';
-import { Container, Heading, Form, Button, Box } from 'react-bulma-components';
+import React, { useState, useCallback } from 'react';
+import { Container, Heading, Button, Box, Form } from 'react-bulma-components';
 import { Link } from 'react-router-dom';
+// import { loginService } from '../../service';
 
 export const LoginForm = () => {
-  const [account, setAccount] = useState({});
+  const [userInfo, setUserInfo] = useState({});
 
-  const { userID, userPW } = account;
+  const { userID, userPW } = userInfo;
 
-  const onChangeAccountEvent = e => {
-    setAccount({
-      ...account,
-      [e.currentTarget.name]: e.currentTarget.value,
-    });
-  };
+  const onChangeAccountEvent = useCallback(
+    e => {
+      setUserInfo({
+        ...userInfo,
+        [e.currentTarget.name]: e.currentTarget.value,
+      });
+    },
+    [userInfo],
+  );
 
   const onSubmitEvent = e => {
     e.preventDefault();
-    console.log(account);
-    // axios.post('', { userID, userPW }).then(response => {
-    //   console.log(response);
+    console.log(userInfo);
+    // loginService(userID, userPW).then(response => {
+    //   console.log(response.data);
     // });
   };
 
