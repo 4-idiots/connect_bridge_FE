@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { Container, Heading, Button, Box, Form } from 'react-bulma-components';
 import { Link } from 'react-router-dom';
-// import { loginService } from '../../service';
+import { loginService } from '../../service';
 
 export const LoginForm = () => {
   const [userInfo, setUserInfo] = useState({});
@@ -20,10 +20,9 @@ export const LoginForm = () => {
 
   const onSubmitEvent = e => {
     e.preventDefault();
-    console.log(userInfo);
-    // loginService(userID, userPW).then(response => {
-    //   console.log(response.data);
-    // });
+    loginService(userID, userPW).then(response => {
+      console.log(response.data);
+    });
   };
 
   return (

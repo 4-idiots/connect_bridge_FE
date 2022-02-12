@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { Container, Heading, Button, Box, Form } from 'react-bulma-components';
-// import { findIDService } from '../../service';
+import { findIDService } from '../../service';
 
 export const FindIDForm = () => {
   const [userInfo, setUserInfo] = useState({});
@@ -20,9 +20,9 @@ export const FindIDForm = () => {
   const onSubmitEvent = e => {
     e.preventDefault();
     console.log(userInfo);
-    // findIDService(userName, userPhone, userEmail).then(response => {
-    //   console.log(response);
-    // });
+    findIDService(userName, userPhone, userEmail).then(response => {
+      console.log(response);
+    });
   };
 
   return (
