@@ -5,13 +5,13 @@ import { Container, Heading, Form, Button, Box } from 'react-bulma-components';
 import { Link } from 'react-router-dom';
 
 export const SignupForm = () => {
-  const [a, seta] = useState([]);
+  const [data, setdata] = useState([]);
   const [userPhone, setuserPhone] = useState('');
   const [userID, setuserID] = useState('');
   const [userPW, setuserPW] = useState('');
+  const [userREPW, setuserREPW] = useState('');
   const [userNickname, setuserNickname] = useState('');
   const [userName, setuserName] = useState('');
-  const [userBirthday, setuserBirthday] = useState('');
   const [userEmail, setuserEmail] = useState('');
   const [userIntroduce, setuserIntroduce] = useState('');
   const [userGender, setuserGender] = useState(false);
@@ -19,16 +19,22 @@ export const SignupForm = () => {
   const [userArea, setuserArea] = useState('');
   const [userTime, setuserTime] = useState('');
   const [userInterest, setuserInterest] = useState('');
+  const [sameID, setsameID] = useState(false);
+  const [sameNickname, setsameNickname] = useState(false);
+  const [sameEmail, setsameEmail] = useState(false);
+  const [userBirthdayY, setuserBirthdayY] = useState('');
+  const [userBirthdayM, setuserBirthdayM] = useState('');
+  const [userBirthdayD, setuserBirthdayD] = useState('');
 
-  const gett = () => {
+  const userData = () => {
     return axios.get('http://4idiot.ddns.net:8080/user').then(response => {
       console.log(response);
-      seta(response.data);
+      setdata(response.data);
     });
   };
 
   useEffect(() => {
-    gett();
+    userData();
   }, []);
 
   const userPhonedata = e => {
@@ -43,6 +49,10 @@ export const SignupForm = () => {
     setuserPW(e.target.value);
   };
 
+  const userREPWdata = e => {
+    setuserREPW(e.target.value);
+  };
+
   const userNicknamedata = e => {
     setuserNickname(e.target.value);
   };
@@ -50,9 +60,14 @@ export const SignupForm = () => {
   const userNamedata = e => {
     setuserName(e.target.value);
   };
-
-  const userBirthdaydata = e => {
-    setuserBirthday(e.target.value);
+  const userBirthdayYdata = e => {
+    setuserBirthdayY(e.target.value);
+  };
+  const userBirthdayMdata = e => {
+    setuserBirthdayM(e.target.value);
+  };
+  const userBirthdayDdata = e => {
+    setuserBirthdayD(e.target.value);
   };
 
   const userEmaildata = e => {
@@ -63,11 +78,11 @@ export const SignupForm = () => {
     setuserIntroduce(e.target.value);
   };
 
-  const userGenderdata = () => {
+  const userGenderdataM = () => {
     setuserGender(current => current);
   };
 
-  const userGenderdata2 = () => {
+  const userGenderdataW = () => {
     setuserGender(current => !current);
   };
 
@@ -87,18 +102,66 @@ export const SignupForm = () => {
     setuserInterest(e.target.value);
   };
 
-  const sameNickname = e => {
+  const clicka = () => {
+    <Form.Label style={{ color: 'green' }} size="small">
+      O
+    </Form.Label>;
+  };
+
+  const sameIDButton = e => {
     e.preventDefault();
 
     axios
-      .get('http://4idiot.ddns.net:8080/user/check/userNickname/{userNickname}')
+      .get(`http://4idiot.ddns.net:8080/user/check/userID?userID=${userID}`)
       .then(response => {
         console.log(response);
-        if (response === true) {
+        if (response.data.value === true) {
           alert('중복입니다. 다시 입력해주세요');
-          setuserNickname('');
+
+          setsameID(false);
         } else {
-          alert('사용가능합니다.');
+          alert('중복이 아닙니다.');
+          setsameID(true);
+        }
+      });
+  };
+
+  const sameNicknameButton = e => {
+    e.preventDefault();
+
+    axios
+      .get(
+        `http://4idiot.ddns.net:8080/user/check/userNickname?userNickname=${userNickname}`,
+      )
+      .then(response => {
+        console.log(response);
+        if (response.data.value === true) {
+          alert('중복입니다. 다시 입력해주세요');
+
+          setsameNickname(false);
+        } else {
+          alert('중복이 아닙니다.');
+          setsameNickname(true);
+        }
+      });
+  };
+
+  const sameEmailButton = e => {
+    e.preventDefault();
+
+    axios
+      .get(
+        `http://4idiot.ddns.net:8080/user/check/userEmail?userEmail=${userEmail}`,
+      )
+      .then(response => {
+        console.log(response);
+        if (response.data.value === true) {
+          alert('중복입니다. 다시 입력해주세요.');
+
+          setsameEmail(false);
+        } else {
+          alert('중복이 아닙니다.');
+          setsameEmail(true);
         }
       });
   };
@@ -107,22 +170,24 @@ export const SignupForm = () => {
     e.preventDefault();
 
     if (
-      userNickname &&
       userName &&
       userIntroduce &&
       userAbility &&
       userArea &&
       userTime &&
       userInterest &&
-      validator.isLength(userPhone, { min: 11, max: 11 }) === true &&
+      userBirthdayY &&
+      userBirthdayM &&
+      userBirthdayD &&
+      userREPW === userPW &&
+      validator.isMobilePhone(userPhone, ['ko-KR']) === true &&
       validator.isLength(userID, { min: 5, max: 20 }) === true &&
       validator.isLength(userPW, { min: 8, max: 20 }) === true &&
-      validator.isDate(userBirthday) === true &&
-      validator.isEmail(userEmail) === true
+      validator.isEmail(userEmail) === true &&
+      sameID === true &&
+      sameNickname === true &&
+      sameEmail === true
     ) {
-      alert('회원가입이 완료하였습니다.');
-      window.location = '/login';
-
       axios
         .post('http://4idiot.ddns.net:8080/user/register', {
           userPhone,
@@ -130,7 +195,6 @@ export const SignupForm = () => {
           userPW,
           userNickname,
           userName,
-          userBirthday,
           userEmail,
           userIntroduce,
           userGender,
@@ -138,15 +202,27 @@ export const SignupForm = () => {
           userArea,
           userTime,
           userInterest,
+          userBirthdayY,
+          userBirthdayM,
+          userBirthdayD,
         })
 
         .then(response => {
-          console.log(response);
-          console.log(a);
-          gett();
+          console.log(response.data.message);
+          console.log(data);
+          userData();
+          alert('회원가입이 완료하였습니다.');
+          window.location = '/login';
+        })
+        .catch(response => {
+          alert('입력값을 확인해주세요.');
         });
     } else {
       alert('입력값을 확인해주세요');
+    }
+
+    if (userPW === userREPW) {
+      clicka();
     }
   };
 
@@ -165,10 +241,12 @@ export const SignupForm = () => {
               value={userPhone}
             />
           </Form.Control>
-          {validator.isLength(userPhone, { min: 11, max: 11 }) ? (
-            <Form.Label style={{ color: 'green' }}>O</Form.Label>
+          {validator.isMobilePhone(userPhone, ['ko-KR']) ? (
+            <Form.Label style={{ color: 'green' }} size="small">
+              O
+            </Form.Label>
           ) : (
-            <Form.Label style={{ color: 'grey' }} size="small">
+            <Form.Label style={{ color: '#ff6347' }} size="small">
               보기와 맞게 기입해 주세요
             </Form.Label>
           )}
@@ -183,52 +261,54 @@ export const SignupForm = () => {
               onChange={userIDdata}
               value={userID}
             />
-
-            <Button mt="1" size="small" color="danger">
-              중복확인
-            </Button>
           </Form.Control>
           {validator.isLength(userID, { min: 5, max: 20 }) ? (
-            <Form.Label style={{ color: 'green' }}>O</Form.Label>
+            <Form.Label style={{ color: 'green' }} size="small">
+              O
+            </Form.Label>
           ) : (
-            <Form.Label style={{ color: 'grey' }} size="small">
+            <Form.Label style={{ color: '#ff6347' }} size="small">
               5~20자로 사용하세요
             </Form.Label>
           )}
+          <Button size="small" color="danger" onClick={sameIDButton}>
+            중복확인
+          </Button>
         </Form.Field>
+        <br />
         <Form.Field>
           <Form.Label>비밀번호</Form.Label>
           <Form.Control>
             <Form.Input
-              type="text"
+              type="password"
               placeholder="비밀번호"
               onChange={userPWdata}
               value={userPW}
             />
           </Form.Control>
           {validator.isLength(userPW, { min: 8, max: 20 }) ? (
-            <Form.Label style={{ color: 'green' }}>O</Form.Label>
+            <Form.Label style={{ color: 'green' }} size="small">
+              O
+            </Form.Label>
           ) : (
-            <Form.Label style={{ color: 'grey' }} size="small">
+            <Form.Label style={{ color: '#ff6347' }} size="small">
               8~20자로 사용하세요
             </Form.Label>
           )}
         </Form.Field>
         <Form.Field>
-          <Form.Label>닉네임</Form.Label>
+          <Form.Label>비밀번호 재확인</Form.Label>
           <Form.Control>
             <Form.Input
-              type="text"
-              placeholder="닉네임"
-              onChange={userNicknamedata}
-              value={userNickname}
+              type="password"
+              placeholder="비밀번호 재확인"
+              onChange={userREPWdata}
+              value={userREPW}
             />
           </Form.Control>
-          <Button mt="1" size="small" color="danger" onClick={sameNickname}>
-            중복확인
-          </Button>
+          <div>{clicka}</div>
         </Form.Field>
-
+        <br />
         <Form.Field>
           <Form.Label>이름</Form.Label>
           <Form.Control>
@@ -240,46 +320,26 @@ export const SignupForm = () => {
             />
           </Form.Control>
         </Form.Field>
-
         <Form.Field>
-          <Form.Label>생년월일</Form.Label>
+          <Form.Label>닉네임</Form.Label>
           <Form.Control>
             <Form.Input
               type="text"
-              placeholder="ex.1998-10-23"
-              onChange={userBirthdaydata}
-              value={userBirthday}
+              placeholder="닉네임"
+              onChange={userNicknamedata}
+              value={userNickname}
             />
           </Form.Control>
-          {validator.isDate(userBirthday) ? (
-            <Form.Label style={{ color: 'green' }}>O</Form.Label>
-          ) : (
-            <Form.Label style={{ color: 'grey' }} size="small">
-              보기와 맞게 기입해 주세요
-            </Form.Label>
-          )}
-        </Form.Field>
-        <Form.Field>
-          <Form.Label>이메일</Form.Label>
-          <Form.Control>
-            <Form.Input
-              type="text"
-              placeholder="이메일"
-              onChange={userEmaildata}
-              value={userEmail}
-            />
-          </Form.Control>
-          {validator.isEmail(userEmail) ? (
-            <Form.Label style={{ color: 'green' }}>O</Form.Label>
-          ) : (
-            <Form.Label style={{ color: 'grey' }} size="small">
-              이메일이 아닙니다!
-            </Form.Label>
-          )}
-          <Button mt="1" size="small" color="danger">
+          <Button
+            mt="1"
+            size="small"
+            color="danger"
+            onClick={sameNicknameButton}
+          >
             중복확인
           </Button>
         </Form.Field>
+        <br />
         <Form.Field>
           <Form.Label>자기소개</Form.Label>
           <Form.Control>
@@ -291,14 +351,152 @@ export const SignupForm = () => {
             />
           </Form.Control>
         </Form.Field>
+        <Form.Field>
+          <Form.Label>이메일</Form.Label>
+          <Form.Control>
+            <Form.Input
+              type="email"
+              placeholder="이메일"
+              onChange={userEmaildata}
+              value={userEmail}
+            />
+          </Form.Control>
+
+          {validator.isEmail(userEmail) ? (
+            <Form.Label style={{ color: 'green' }} size="small">
+              O
+            </Form.Label>
+          ) : (
+            <Form.Label style={{ color: '#ff6347' }} size="small">
+              이메일 형식이 아닙니다!
+            </Form.Label>
+          )}
+          <Button size="small" color="danger" onClick={sameEmailButton}>
+            중복확인
+          </Button>
+        </Form.Field>
         <br />
+        <Form.Field>
+          <Form.Label>생년월일</Form.Label>
+          <Form.Control>
+            <Form.Select
+              className="is-rounded"
+              onChange={userBirthdayYdata}
+              value={userBirthdayY}
+              size="small"
+            >
+              <option value="">-------</option>
+              <option value="1970">1970</option>
+              <option value="1971">1971</option>
+              <option value="1972">1972</option>
+              <option value="1973">1973</option>
+              <option value="1974">1974</option>
+              <option value="1975">1975</option>
+              <option value="1976">1976</option>
+              <option value="1977">1977</option>
+              <option value="1978">1978</option>
+              <option value="1979">1979</option>
+              <option value="1980">1980</option>
+              <option value="1981">1981</option>
+              <option value="1982">1982</option>
+              <option value="1983">1983</option>
+              <option value="1984">1984</option>
+              <option value="1985">1985</option>
+              <option value="1986">1986</option>
+              <option value="1987">1987</option>
+              <option value="1988">1988</option>
+              <option value="1989">1989</option>
+              <option value="1990">1990</option>
+              <option value="1991">1991</option>
+              <option value="1992">1992</option>
+              <option value="1993">1993</option>
+              <option value="1994">1994</option>
+              <option value="1995">1995</option>
+              <option value="1996">1996</option>
+              <option value="1997">1997</option>
+              <option value="1998">1998</option>
+              <option value="1999">1999</option>
+              <option value="2000">2000</option>
+              <option value="2001">2001</option>
+              <option value="2002">2002</option>
+              <option value="2003">2003</option>
+              <option value="2004">2004</option>
+              <option value="2005">2005</option>
+              <option value="2006">2006</option>
+              <option value="2007">2007</option>
+              <option value="2008">2008</option>
+              <option value="2009">2009</option>
+              <option value="2010">2010</option>
+            </Form.Select>
+            년도
+            <Form.Select
+              onChange={userBirthdayMdata}
+              value={userBirthdayM}
+              size="small"
+            >
+              <option value="">-------</option>
+              <option value="01">01</option>
+              <option value="02">02</option>
+              <option value="03">03</option>
+              <option value="04">04</option>
+              <option value="05">05</option>
+              <option value="06">06</option>
+              <option value="07">07</option>
+              <option value="08">08</option>
+              <option value="09">09</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+            </Form.Select>
+            월
+            <Form.Select
+              onChange={userBirthdayDdata}
+              value={userBirthdayD}
+              size="small"
+            >
+              <option value="">-------</option>
+              <option value="01">01</option>
+              <option value="02">02</option>
+              <option value="03">03</option>
+              <option value="04">04</option>
+              <option value="05">05</option>
+              <option value="06">06</option>
+              <option value="07">07</option>
+              <option value="08">08</option>
+              <option value="09">09</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="23">23</option>
+              <option value="24">24</option>
+              <option value="25">25</option>
+              <option value="26">26</option>
+              <option value="27">27</option>
+              <option value="28">28</option>
+              <option value="29">29</option>
+              <option value="30">30</option>
+              <option value="31">31</option>
+            </Form.Select>
+            일
+          </Form.Control>
+        </Form.Field>
         <Form.Field>
           <Form.Label>성별</Form.Label>
           <Form.Control>
             <Form.Radio
               type="radio"
               name="Gender"
-              onChange={userGenderdata}
+              onChange={userGenderdataM}
               value={userGender}
             >
               남
@@ -307,7 +505,7 @@ export const SignupForm = () => {
             <Form.Radio
               type="radio"
               name="Gender"
-              onChange={userGenderdata2}
+              onChange={userGenderdataW}
               value={userGender}
             >
               여
@@ -327,7 +525,6 @@ export const SignupForm = () => {
             </Form.Select>
           </Form.Control>
         </Form.Field>
-
         <Form.Field>
           <Form.Label>지역</Form.Label>
           <Form.Control>
@@ -352,7 +549,6 @@ export const SignupForm = () => {
             </Form.Select>
           </Form.Control>
         </Form.Field>
-
         <Form.Field>
           <Form.Label>시간</Form.Label>
           <Form.Control>
@@ -368,7 +564,6 @@ export const SignupForm = () => {
             </Form.Select>
           </Form.Control>
         </Form.Field>
-
         <Form.Field>
           <Form.Label>흥미</Form.Label>
           <Form.Control>
