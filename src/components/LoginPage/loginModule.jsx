@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { Box, Button, Container, Form, Heading } from 'react-bulma-components';
 import { decodeToken } from 'react-jwt';
 import { Link, useNavigate } from 'react-router-dom';
@@ -6,6 +6,12 @@ import { loginService } from '../../service';
 
 export const LoginForm = () => {
   const navigate = useNavigate();
+  useEffect(() => {
+    const isUser = localStorage.getItem('token') || '';
+    if (isUser) {
+      navigate('/');
+    }
+  }, []);
   const [userInfo, setUserInfo] = useState({});
   const { userID, userPW } = userInfo;
 

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 export const NavbarForm = () => {
   const [burger, setBurger] = useState(false);
+  const isUser = localStorage.getItem('token') || '';
 
   return (
     <Navbar fixed="top" color="link">
@@ -35,9 +36,25 @@ export const NavbarForm = () => {
           </Navbar.Item>
         </Navbar.Container>
         <Navbar.Container align="right">
-          <Navbar.Item renderAs={Link} to="/login">
-            로그인
-          </Navbar.Item>
+          {isUser ? (
+            <>
+              <Navbar.Item renderAs={Link} to="/login">
+                마이페이지
+              </Navbar.Item>
+              <Navbar.Item
+                onClick={() => {
+                  localStorage.clear();
+                  window.location.replace('/');
+                }}
+              >
+                로그아웃
+              </Navbar.Item>
+            </>
+          ) : (
+            <Navbar.Item renderAs={Link} to="/login">
+              로그인
+            </Navbar.Item>
+          )}
         </Navbar.Container>
       </Navbar.Menu>
     </Navbar>
