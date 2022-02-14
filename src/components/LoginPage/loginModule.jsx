@@ -1,11 +1,12 @@
-import React, { useState, useCallback } from 'react';
-import { Container, Heading, Button, Box, Form } from 'react-bulma-components';
-import { Link } from 'react-router-dom';
+import React, { useCallback, useState } from 'react';
+import { Box, Button, Container, Form, Heading } from 'react-bulma-components';
+import { decodeToken } from 'react-jwt';
+import { Link, useNavigate } from 'react-router-dom';
 import { loginService } from '../../service';
 
 export const LoginForm = () => {
+  const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({});
-
   const { userID, userPW } = userInfo;
 
   const onChangeAccountEvent = useCallback(
@@ -20,9 +21,17 @@ export const LoginForm = () => {
 
   const onSubmitEvent = e => {
     e.preventDefault();
-    loginService(userID, userPW).then(response => {
-      console.log(response.data);
-    });
+    loginService(userID, userPW)
+      .then(response => {
+        const token = response.data.token || '';
+        const decode = decodeToken(token);
+        localStorage.setItem('token', token);
+        localStorage.setItem('decode', JSON.stringify(decode));
+        navigate('/');
+      })
+      .catch(error => {
+        alert('아이디 또는 비밀번호가 일치하지 않습니다.');
+      });
   };
 
   return (
