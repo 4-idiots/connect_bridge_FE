@@ -22,3 +22,13 @@ export const findIDService = (userName, userPhone, userEmail) => {
     userEmail,
   });
 };
+
+export const outdoorUploadService = formData => {
+  return axios.post(
+    `${process.env.REACT_APP_SUK_URL}/outdoor/post`,
+    {
+      formData,
+    },
+    { headers: { 'content-type': 'multipart/form-data' } },
+  );
+};

@@ -9,3 +9,6 @@ export { FindPWForm } from './LoginPage/findPWModule';
 
 // SignupPage
 export { SignupForm } from './SignupPage/Signup';
+
+// OutdoorPage
+export { OutdoorUploadForm } from './OutdoorPage/outdoorUploadModule';

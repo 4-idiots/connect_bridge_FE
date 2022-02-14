@@ -65,9 +65,11 @@ export const FindIDForm = () => {
             />
           </Form.Control>
         </Form.Field>
-        <Button color="success" onClick={onSubmitEvent}>
-          아이디 찾기
-        </Button>
+        <Button.Group align="center">
+          <Button color="success" onClick={onSubmitEvent}>
+            아이디 찾기
+          </Button>
+        </Button.Group>
       </Box>
     </Container>
   );

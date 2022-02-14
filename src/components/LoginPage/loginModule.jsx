@@ -68,13 +68,15 @@ export const LoginForm = () => {
             />
           </Form.Control>
         </Form.Field>
-        <Button color="success" onClick={onSubmitEvent}>
-          로그인
-        </Button>
+        <Button.Group align="center">
+          <Button color="success" onClick={onSubmitEvent}>
+            로그인
+          </Button>
+        </Button.Group>
       </Box>
 
       <Box style={{ width: '60%', margin: 'auto' }}>
-        <Button.Group>
+        <Button.Group align="center">
           <Button renderAs={Link} to="/sign" color="danger">
             회원 가입
           </Button>

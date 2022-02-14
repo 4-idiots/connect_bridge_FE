@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App';
 import './assets/custom.css';
-import { Login, FindID, FindPW, Sign } from './pages/pRoutes';
+import { Login, FindID, FindPW, Sign, OutdoorUpload } from './pages/pRoutes';
 
 const rootElement = document.getElementById('root');
 render(
@@ -14,6 +14,7 @@ render(
       <Route path="/login/findID" element={<FindID />} />
       <Route path="/login/findPW" element={<FindPW />} />
       <Route path="/sign" element={<Sign />} />
+      <Route path="/outdoor/upload" element={<OutdoorUpload />} />
     </Routes>
   </BrowserRouter>,
   rootElement,
