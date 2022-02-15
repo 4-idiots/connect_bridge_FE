@@ -71,11 +71,7 @@ export const OutdoorUploadForm = () => {
             }}
           >
             <Card style={{ width: 800 }}>
-              {preview ? (
-                <Card.Image size="1by1" src={preview} />
-              ) : (
-                <Card.Image size="1by1" src="" />
-              )}
+              {preview ? <Card.Image src={preview} /> : <Card.Image src="" />}
             </Card>
           </Box>
           <Form.Control>

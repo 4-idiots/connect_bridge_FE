@@ -30,9 +30,9 @@ export const LoginForm = () => {
     loginService(userID, userPW)
       .then(response => {
         const token = response.data.token || '';
-        const decode = decodeToken(token);
+        // const decode = decodeToken(token);
         localStorage.setItem('token', token);
-        localStorage.setItem('decode', JSON.stringify(decode));
+        // localStorage.setItem('decode', JSON.stringify(decode));
         navigate('/');
       })
       .catch(error => {
@@ -41,7 +41,7 @@ export const LoginForm = () => {
   };
 
   return (
-    <Container backgroundColor="success">
+    <Container>
       <Heading style={{ textAlign: 'center' }}>로그인</Heading>
       <Box style={{ width: '60%', margin: 'auto' }}>
         <Form.Field>

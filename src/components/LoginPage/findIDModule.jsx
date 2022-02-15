@@ -19,7 +19,6 @@ export const FindIDForm = () => {
 
   const onSubmitEvent = e => {
     e.preventDefault();
-    console.log(userInfo);
     findIDService(userName, userPhone, userEmail).then(response => {
       console.log(response);
     });

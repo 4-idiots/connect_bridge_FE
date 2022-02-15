@@ -19,7 +19,6 @@ export const FindPWForm = () => {
 
   const onSubmitEvent = e => {
     e.preventDefault();
-    console.log(userInfo);
     // findPWServcie(userID, userName, userEmail).then(response => {
     //   console.log(response);
     // });
