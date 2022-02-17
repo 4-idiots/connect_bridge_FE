@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { Button, Card, Media, Heading } from 'react-bulma-components';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+// import { outdoorDeleteService } from '../../service';
 
 export const OutdoorCardForm = ({
+  outActID,
   outActName,
   outActView,
   outActLike,
@@ -12,6 +15,16 @@ export const OutdoorCardForm = ({
   const [isHover, setIsHover] = useState(false);
   const [manager, setManager] = useState(true);
 
+  const onDeleteOutdoor = id => {
+    // outdoorDeleteService(id)
+    //   .then(response => {
+    //     console.log(response);
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
+    console.log('delete', id);
+  };
   return (
     <Card
       style={
@@ -54,10 +67,22 @@ export const OutdoorCardForm = ({
                   flexDirection: 'column',
                 }}
               >
-                <Button color="link" style={{ marginRight: 0 }}>
+                <Button
+                  renderAs={Link}
+                  to={`/outdoor/update/${outActID}`}
+                  color="link"
+                  style={{ marginRight: 0 }}
+                >
                   수정하기
                 </Button>
-                <Button color="danger">삭제하기</Button>
+                <Button
+                  onClick={() => {
+                    onDeleteOutdoor(outActID);
+                  }}
+                  color="danger"
+                >
+                  삭제하기
+                </Button>
               </Button.Group>
             ) : (
               <Button color="danger">Like: {outActLike}</Button>
@@ -70,6 +95,7 @@ export const OutdoorCardForm = ({
 };
 
 OutdoorCardForm.propTypes = {
+  outActID: PropTypes.number,
   outActName: PropTypes.string,
   outActView: PropTypes.number,
   outActLike: PropTypes.number,
@@ -78,6 +104,7 @@ OutdoorCardForm.propTypes = {
 };
 
 OutdoorCardForm.defaultProps = {
+  outActID: 0,
   outActName: 'Title',
   outActView: 0,
   outActLike: 0,

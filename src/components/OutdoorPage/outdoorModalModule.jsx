@@ -2,7 +2,15 @@ import React from 'react';
 import { Modal, Image, Button, Media, Box } from 'react-bulma-components';
 import PropTypes from 'prop-types';
 
-export const OutdoorModalForm = ({ close, title, image, link, view, like }) => {
+export const OutdoorModalForm = ({
+  close,
+  title,
+  image,
+  link,
+  view,
+  like,
+  id,
+}) => {
   return (
     <Modal show onClose={close} closeOnEsc closeOnBlur showClose={false}>
       <Modal.Card>
@@ -61,6 +69,7 @@ OutdoorModalForm.propTypes = {
   link: PropTypes.string,
   view: PropTypes.number,
   like: PropTypes.number,
+  id: PropTypes.number,
 };
 
 OutdoorModalForm.defaultProps = {
@@ -72,4 +81,5 @@ OutdoorModalForm.defaultProps = {
   link: 'link',
   view: 0,
   like: 0,
+  id: 0,
 };
