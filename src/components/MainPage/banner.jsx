@@ -4,7 +4,11 @@ import { Hero } from 'react-bulma-components';
 
 export const BannerForm = () => {
   return (
-    <Hero color="primary" size="small">
+    <Hero
+      color="primary"
+      size="small"
+      style={{ marginBottom: 30, marginTop: 30 }}
+    >
       <Hero.Header>header</Hero.Header>
       <Hero.Body>
         <p className="title">title</p>

@@ -4,3 +4,4 @@ export { FindPW } from './findPW';
 export { Sign } from './sign';
 export { OutdoorUpload } from './outdoorUpload';
 export { OutdoorMain } from './outdoorMain';
+export { OutdoorUpdate } from './outdoorUpdate';

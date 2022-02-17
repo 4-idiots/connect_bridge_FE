@@ -10,7 +10,7 @@ import {
   Sign,
   OutdoorMain,
   OutdoorUpload,
-  OutdoorDetail,
+  OutdoorUpdate,
 } from './pages/pRoutes';
 
 const rootElement = document.getElementById('root');
@@ -24,6 +24,7 @@ render(
       <Route path="/sign" element={<Sign />} />
       <Route path="/outdoor" element={<OutdoorMain />} />
       <Route path="/outdoor/upload" element={<OutdoorUpload />} />
+      <Route path="/outdoor/update/:outdoorID" element={<OutdoorUpdate />} />
     </Routes>
   </BrowserRouter>,
   rootElement,

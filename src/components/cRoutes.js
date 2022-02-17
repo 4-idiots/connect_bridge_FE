@@ -14,4 +14,4 @@ export { SignupForm } from './SignupPage/Signup';
 // OutdoorPage
 export { OutdoorMainForm } from './OutdoorPage/outdoorMainModule';
 export { OutdoorUploadForm } from './OutdoorPage/outdoorUploadModule';
-export { OutdoorModalForm } from './OutdoorPage/outdoorModalModule';
+export { OutdoorUpdateForm } from './OutdoorPage/outdoorUpdateModule';

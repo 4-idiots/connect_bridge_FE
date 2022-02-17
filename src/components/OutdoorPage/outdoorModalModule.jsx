@@ -1,18 +1,37 @@
 import React from 'react';
-import { Modal, Image, Button } from 'react-bulma-components';
+import { Modal, Image, Button, Media, Box } from 'react-bulma-components';
 import PropTypes from 'prop-types';
 
-export const OutdoorModalForm = ({ close, title, image, link }) => {
+export const OutdoorModalForm = ({ close, title, image, link, view, like }) => {
   return (
-    <Modal show onClose={close} closeOnEsc closeOnBlur>
+    <Modal show onClose={close} closeOnEsc closeOnBlur showClose={false}>
       <Modal.Card>
-        <Modal.Card.Header showClose={false}>{title}</Modal.Card.Header>
+        <Modal.Card.Header>
+          <Modal.Card.Title>{title}</Modal.Card.Title>
+        </Modal.Card.Header>
         <Modal.Card.Body>
-          <Image src={image} />
+          <Media style={{ display: 'flex', flexDirection: 'column' }}>
+            <Media.Item style={{ margin: 'auto' }}>
+              <Image src={image} />
+            </Media.Item>
+          </Media>
         </Modal.Card.Body>
-        <Modal.Card.Footer>
-          <Button.Group>
-            <Button color="danger">Like</Button>
+        <Modal.Card.Footer
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Box>
+            <Button
+              style={{ width: '8rem', pointerEvents: 'none' }}
+              color="success"
+            >
+              View: {view}
+            </Button>
+          </Box>
+          <Box>
             <Button color="info">
               <a
                 target="_blank"
@@ -23,7 +42,12 @@ export const OutdoorModalForm = ({ close, title, image, link }) => {
                 공식 사이트로 이동
               </a>
             </Button>
-          </Button.Group>
+          </Box>
+          <Box style={{ marginBottom: '1.5rem' }}>
+            <Button style={{ width: '8rem' }} color="danger">
+              Like: {like}
+            </Button>
+          </Box>
         </Modal.Card.Footer>
       </Modal.Card>
     </Modal>
@@ -35,6 +59,8 @@ OutdoorModalForm.propTypes = {
   title: PropTypes.string,
   image: PropTypes.string,
   link: PropTypes.string,
+  view: PropTypes.number,
+  like: PropTypes.number,
 };
 
 OutdoorModalForm.defaultProps = {
@@ -44,4 +70,6 @@ OutdoorModalForm.defaultProps = {
   title: 'Title',
   image: 'image',
   link: 'link',
+  view: 0,
+  like: 0,
 };

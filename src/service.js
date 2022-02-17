@@ -32,3 +32,33 @@ export const outdoorUploadService = formData => {
     { headers: { 'content-type': 'multipart/form-data' } },
   );
 };
+
+export const oudoorUpdateService = formData => {
+  return axios.update(
+    `${process.env.REACT_APP_SUK_URL}/outdoor/post`,
+    {
+      formData,
+    },
+    { headers: { 'content-type': 'multipart/form-data' } },
+  );
+};
+
+export const outdoorGetSomeService = outActID => {
+  return axios.get(`${process.env.REACT_APP_SUK_URL}/outdoor/post/${outActID}`);
+};
+
+export const outdoorDeleteService = outActID => {
+  return axios.delete(
+    `${process.env.REACT_APP_SUK_URL}/outdoor/post/${outActID}`,
+  );
+};
+
+export const outdoorGetAllService = () => {
+  return axios.get(`${process.env.REACT_APP_SUK_URL}/outdoor`);
+};
+
+export const outdoorLikeService = (outActID, userID) => {
+  return axios.get(
+    `${process.env.REACT_APP_SUK_URL}/outdoor/like?post=${outActID}&userID=${userID}`,
+  );
+};
