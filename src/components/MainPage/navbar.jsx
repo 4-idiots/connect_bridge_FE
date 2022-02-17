@@ -30,7 +30,7 @@ export const NavbarForm = () => {
           <Navbar.Item renderAs={Link} to="#">
             대외활동
           </Navbar.Item>
-          <Navbar.Item renderAs={Link} to="#">
+          <Navbar.Item renderAs={Link} to="/team">
             팀원
           </Navbar.Item>
         </Navbar.Container>

@@ -430,6 +430,7 @@ export const SignupForm = () => {
             </Form.Select>
             년도
             <Form.Select
+              className="is-rounded"
               onChange={userBirthdayMdata}
               value={userBirthdayM}
               size="small"
@@ -450,6 +451,7 @@ export const SignupForm = () => {
             </Form.Select>
             월
             <Form.Select
+              className="is-rounded"
               onChange={userBirthdayDdata}
               value={userBirthdayD}
               size="small"

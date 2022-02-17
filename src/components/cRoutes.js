@@ -9,3 +9,7 @@ export { FindPWForm } from './LoginPage/findPWModule';
 
 // SignupPage
 export { SignupForm } from './SignupPage/Signup';
+
+// TeamPage
+export { TeamForm } from './TeamPage/Team';
+export { TeaminfoForm } from './TeamPage/Teaminfo';
