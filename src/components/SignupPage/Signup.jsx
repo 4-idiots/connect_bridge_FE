@@ -2,7 +2,6 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import validator from 'validator';
 import { Container, Heading, Form, Button, Box } from 'react-bulma-components';
-import { Link } from 'react-router-dom';
 
 export const SignupForm = () => {
   const [data, setdata] = useState([]);
@@ -100,12 +99,6 @@ export const SignupForm = () => {
 
   const userInterestdata = e => {
     setuserInterest(e.target.value);
-  };
-
-  const clicka = () => {
-    <Form.Label style={{ color: 'green' }} size="small">
-      O
-    </Form.Label>;
   };
 
   const sameIDButton = e => {
@@ -220,10 +213,6 @@ export const SignupForm = () => {
     } else {
       alert('입력값을 확인해주세요');
     }
-
-    if (userPW === userREPW) {
-      clicka();
-    }
   };
 
   return (
@@ -306,7 +295,6 @@ export const SignupForm = () => {
               value={userREPW}
             />
           </Form.Control>
-          <div>{clicka}</div>
         </Form.Field>
         <br />
         <Form.Field>

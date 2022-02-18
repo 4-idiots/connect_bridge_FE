@@ -25,40 +25,41 @@ export const TeaminfoForm = () => {
   return (
     <Container>
       <Heading style={{ textAlign: 'center', margin: 35 }}>상세페이지</Heading>
-      <div>
-        {users.map(user => {
-          return <div key={user.id}>{user.userNickname}</div>;
-        })}
-        <br />
-        {users.map(user => {
-          return <div key={user.id}>{user.userName}</div>;
-        })}
-        <br />
-        {users.map(user => {
-          return <div key={user.id}>{user.userAbility}</div>;
-        })}
-        <br />
-        {users.map(user => {
-          return <div key={user.id}>{user.userArea}</div>;
-        })}
-        <br />
-        {users.map(user => {
-          return <div key={user.id}>{user.userTime}</div>;
-        })}
-        <br />
-        {users.map(user => {
-          return <div key={user.id}>{user.userInterest}</div>;
-        })}
-        <br />
-
-        {users.map(user => {
-          return <div key={user.id}>{user.userIntroduce}</div>;
-        })}
-        {users.map(user => {
-          return <div key={user.id}>{user.userPicture}</div>;
-        })}
-        <br />
-      </div>
+      <Box style={{ margin: 100, Box: 'center' }}>
+        <div>
+          {users.map(user => {
+            return <div key={user.id}>{user.userNickname}</div>;
+          })}
+          <br />
+          {users.map(user => {
+            return <div key={user.id}>{user.userName}</div>;
+          })}
+          <br />
+          {users.map(user => {
+            return <div key={user.id}>{user.userAbility}</div>;
+          })}
+          <br />
+          {users.map(user => {
+            return <div key={user.id}>{user.userArea}</div>;
+          })}
+          <br />
+          {users.map(user => {
+            return <div key={user.id}>{user.userTime}</div>;
+          })}
+          <br />
+          {users.map(user => {
+            return <div key={user.id}>{user.userInterest}</div>;
+          })}
+          <br />
+          {users.map(user => {
+            return <div key={user.id}>{user.userIntroduce}</div>;
+          })}
+          {users.map(user => {
+            return <div key={user.id}>{user.userPicture}</div>;
+          })}
+          <br />
+        </div>
+      </Box>
     </Container>
   );
 };
