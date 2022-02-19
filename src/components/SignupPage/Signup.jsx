@@ -205,7 +205,7 @@ export const SignupForm = () => {
           console.log(data);
           userData();
           alert('회원가입이 완료하였습니다.');
-          window.location = '/login';
+          /* window.location = '/login'; */
         })
         .catch(response => {
           alert('입력값을 확인해주세요.');

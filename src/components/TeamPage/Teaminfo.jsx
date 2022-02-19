@@ -28,36 +28,26 @@ export const TeaminfoForm = () => {
       <Box style={{ margin: 100, Box: 'center' }}>
         <div>
           {users.map(user => {
-            return <div key={user.id}>{user.userNickname}</div>;
+            return (
+              <>
+                <div key={user.id}>{user.userNickname}</div>
+                <br />
+                <div key={user.id}>{user.userName}</div>
+                <br />
+                <div key={user.id}>{user.userAbility}</div>
+                <br />
+                <div key={user.id}>{user.userArea}</div>
+                <br />
+                <div key={user.id}>{user.userTime}</div>
+                <br />
+                <div key={user.id}>{user.userInterest}</div>
+                <br />
+                <div key={user.id}>{user.userIntroduce}</div>
+                <br />
+                <div key={user.id}>{user.userPicture}</div>
+              </>
+            );
           })}
-          <br />
-          {users.map(user => {
-            return <div key={user.id}>{user.userName}</div>;
-          })}
-          <br />
-          {users.map(user => {
-            return <div key={user.id}>{user.userAbility}</div>;
-          })}
-          <br />
-          {users.map(user => {
-            return <div key={user.id}>{user.userArea}</div>;
-          })}
-          <br />
-          {users.map(user => {
-            return <div key={user.id}>{user.userTime}</div>;
-          })}
-          <br />
-          {users.map(user => {
-            return <div key={user.id}>{user.userInterest}</div>;
-          })}
-          <br />
-          {users.map(user => {
-            return <div key={user.id}>{user.userIntroduce}</div>;
-          })}
-          {users.map(user => {
-            return <div key={user.id}>{user.userPicture}</div>;
-          })}
-          <br />
         </div>
       </Box>
     </Container>
