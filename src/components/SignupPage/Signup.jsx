@@ -2,7 +2,6 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import validator from 'validator';
 import { Container, Heading, Form, Button, Box } from 'react-bulma-components';
-import { Link } from 'react-router-dom';
 
 export const SignupForm = () => {
   const [data, setdata] = useState([]);
@@ -100,12 +99,6 @@ export const SignupForm = () => {
 
   const userInterestdata = e => {
     setuserInterest(e.target.value);
-  };
-
-  const clicka = () => {
-    <Form.Label style={{ color: 'green' }} size="small">
-      O
-    </Form.Label>;
   };
 
   const sameIDButton = e => {
@@ -212,17 +205,13 @@ export const SignupForm = () => {
           console.log(data);
           userData();
           alert('회원가입이 완료하였습니다.');
-          window.location = '/login';
+          /* window.location = '/login'; */
         })
         .catch(response => {
           alert('입력값을 확인해주세요.');
         });
     } else {
       alert('입력값을 확인해주세요');
-    }
-
-    if (userPW === userREPW) {
-      clicka();
     }
   };
 
@@ -306,7 +295,6 @@ export const SignupForm = () => {
               value={userREPW}
             />
           </Form.Control>
-          <div>{clicka}</div>
         </Form.Field>
         <br />
         <Form.Field>
@@ -430,6 +418,7 @@ export const SignupForm = () => {
             </Form.Select>
             년도
             <Form.Select
+              className="is-rounded"
               onChange={userBirthdayMdata}
               value={userBirthdayM}
               size="small"
@@ -450,6 +439,7 @@ export const SignupForm = () => {
             </Form.Select>
             월
             <Form.Select
+              className="is-rounded"
               onChange={userBirthdayDdata}
               value={userBirthdayD}
               size="small"
