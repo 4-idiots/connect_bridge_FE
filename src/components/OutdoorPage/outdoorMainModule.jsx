@@ -8,6 +8,8 @@ export const OutdoorMainForm = () => {
 
   const { outID, check, title, image, link, view, like } = poster;
 
+  const newPosterBtn = () => {};
+
   const changePoster = (otitle, oimage, olink, oview, olike, ooutID) => {
     setPoster({
       ...poster,
