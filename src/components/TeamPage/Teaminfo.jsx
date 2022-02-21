@@ -17,7 +17,7 @@ export const TeaminfoForm = () => {
   const [users, setusers] = useState([]);
 
   useEffect(() => {
-    axios.get('http://4idiot.ddns.net:8080/user').then(response => {
+    axios.get('http://4idiot.ddns.net:8080/team/info/{id}').then(response => {
       setusers(response.data);
     });
   }, []);

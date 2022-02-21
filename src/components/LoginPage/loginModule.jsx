@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { Box, Button, Container, Form, Heading } from 'react-bulma-components';
-import { decodeToken } from 'react-jwt';
+/* import { decodeToken } from 'react-jwt'; */
 import { Link, useNavigate } from 'react-router-dom';
 import { loginService } from '../../service';
 
