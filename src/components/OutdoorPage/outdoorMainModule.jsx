@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Container } from 'react-bulma-components';
+import { Container, Icon, Box } from 'react-bulma-components';
+import { Link } from 'react-router-dom';
 import { OutdoorModalForm } from './outdoorModalModule';
 import { OutdoorCardForm } from './outdoorCardModule';
 
@@ -7,8 +8,6 @@ export const OutdoorMainForm = () => {
   const [poster, setPoster] = useState({});
 
   const { outID, check, title, image, link, view, like } = poster;
-
-  const newPosterBtn = () => {};
 
   const changePoster = (otitle, oimage, olink, oview, olike, ooutID) => {
     setPoster({
@@ -45,7 +44,7 @@ export const OutdoorMainForm = () => {
           id={outID}
         />
       )}
-
+      <NewPosterBtn />
       <OutdoorCardForm
         outActLike={345}
         outActName="Test1"
@@ -183,5 +182,26 @@ export const OutdoorMainForm = () => {
         outActID={8}
       />
     </Container>
+  );
+};
+
+const NewPosterBtn = () => {
+  return (
+    <Link to="/outdoor/upload">
+      <Box
+        style={{
+          borderRadius: '50%',
+          backgroundColor: 'brown',
+          position: 'fixed',
+          bottom: '8rem',
+          right: '10rem',
+          zIndex: 1,
+        }}
+      >
+        <Icon style={{ display: 'flex' }}>
+          <i className="fa fa-plus fa-2x" style={{ color: 'white' }} />
+        </Icon>
+      </Box>
+    </Link>
   );
 };
