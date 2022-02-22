@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import validator from 'validator';
 import { Container, Heading, Form, Button, Box } from 'react-bulma-components';
+import { InfoForm } from '../TeamPage/info';
 
 export const SignupForm = () => {
   const [data, setdata] = useState([]);

@@ -18,4 +18,4 @@ export { OutdoorUpdateForm } from './OutdoorPage/outdoorUpdateModule';
 
 // TeamPage
 export { TeamForm } from './TeamPage/Team';
-export { TeaminfoForm } from './TeamPage/Teaminfo';
+export { InfoForm } from './TeamPage/info';

@@ -10,7 +10,7 @@ import {
   FindPW,
   Sign,
   Team,
-  Teaminfo,
+  Info,
   OutdoorMain,
   OutdoorUpload,
   OutdoorUpdate,
@@ -31,7 +31,7 @@ render(
       <Route path="/outdoor/update/:outdoorID" element={<OutdoorUpdate />} />
 
       <Route path="/team" element={<Team />} />
-      <Route path="/team/teaminfo" element={<Teaminfo />} />
+      <Route path="/team/info/:teamID" element={<Info />} />
     </Routes>
   </BrowserRouter>,
   rootElement,

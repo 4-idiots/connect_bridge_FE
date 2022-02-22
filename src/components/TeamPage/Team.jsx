@@ -1,7 +1,7 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable react/no-array-index-key */
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import validator from 'validator';
 import { Link } from 'react-router-dom';
 import {
   Container,
@@ -14,12 +14,15 @@ import {
   Image,
   Content,
 } from 'react-bulma-components';
+import { InfoForm } from './info';
 
 export const TeamForm = () => {
   const [users, setusers] = useState([]);
+  const [id, setid] = useState();
 
   useEffect(() => {
     axios.get('http://4idiot.ddns.net:8080/team').then(response => {
+      console.log(response.data);
       setusers(response.data);
     });
   }, []);
@@ -50,7 +53,7 @@ export const TeamForm = () => {
                 >
                   <Card.Image
                     renderAs={Link}
-                    to="/team/teaminfo"
+                    to={`/team/info/${user.id}`}
                     size="4by3"
                     src="http://bulma.io/images/placeholders/1280x960.png"
                   />
@@ -78,10 +81,10 @@ export const TeamForm = () => {
                         </Heading>
                         <Heading size={6}>
                           <div>
-                            {users.map(userB => {
+                            {users.map(userA => {
                               return (
-                                userB.id === 1 && (
-                                  <div key={userB.id}>{user.userAbility}</div>
+                                userA.id === 1 && (
+                                  <div key={userA.id}>{user.userAbility}</div>
                                 )
                               );
                             })}
@@ -89,10 +92,10 @@ export const TeamForm = () => {
                         </Heading>
                         <Heading size={6}>
                           <div>
-                            {users.map(userC => {
+                            {users.map(userA => {
                               return (
-                                userC.id === 1 && (
-                                  <div key={userC.id}>{user.userInterest}</div>
+                                userA.id === 1 && (
+                                  <div key={userA.id}>{user.userInterest}</div>
                                 )
                               );
                             })}
