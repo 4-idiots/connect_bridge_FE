@@ -7,9 +7,11 @@ import {
   Form,
   Card,
 } from 'react-bulma-components';
+import { useNavigate } from 'react-router-dom';
 import { outdoorUploadService } from '../../service';
 
 export const OutdoorUploadForm = () => {
+  const navigate = useNavigate();
   const [uploadInfo, setUploadInfo] = useState({});
   const [imgData, setImageData] = useState({});
 
@@ -34,9 +36,12 @@ export const OutdoorUploadForm = () => {
     formData.append('outActLink', outActLink);
 
     outdoorUploadService(formData)
-      .then(response => console.log(response))
-      .catch(error => {
-        console.log(error);
+      .then(() => {
+        alert('등록 되었습니다.');
+        navigate('/outdoor');
+      })
+      .catch(() => {
+        alert('다시 시도해주세요');
       });
   };
 

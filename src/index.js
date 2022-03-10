@@ -13,6 +13,7 @@ import {
   OutdoorUpdate,
   Team,
   Teaminfo,
+  ProjectUpload,
 } from './pages/pRoutes';
 
 const rootElement = document.getElementById('root');
@@ -29,6 +30,7 @@ render(
       <Route path="/outdoor/update/:outdoorID" element={<OutdoorUpdate />} />
       <Route path="/team" element={<Team />} />
       <Route path="/team/teaminfo" element={<Teaminfo />} />
+      <Route path="/project/upload" element={<ProjectUpload />} />
     </Routes>
   </BrowserRouter>,
   rootElement,

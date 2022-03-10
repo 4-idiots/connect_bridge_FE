@@ -19,3 +19,6 @@ export { OutdoorUpdateForm } from './OutdoorPage/outdoorUpdateModule';
 // TeamPage
 export { TeamForm } from './TeamPage/Team';
 export { TeaminfoForm } from './TeamPage/Teaminfo';
+
+// ProjectPage
+export { ProjectUploadForm } from './ProjectPage/projectUploadModule';

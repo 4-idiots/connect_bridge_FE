@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Card, Media, Heading } from 'react-bulma-components';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-// import { outdoorDeleteService } from '../../service';
+import { outdoorDeleteService } from '../../service';
 
 export const OutdoorCardForm = ({
   outActID,
@@ -16,13 +16,13 @@ export const OutdoorCardForm = ({
   const [manager, setManager] = useState(true);
 
   const onDeleteOutdoor = id => {
-    // outdoorDeleteService(id)
-    //   .then(response => {
-    //     console.log(response);
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
+    outdoorDeleteService(id)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
     console.log('delete', id);
   };
   return (

@@ -24,13 +24,15 @@ export const findIDService = (userName, userPhone, userEmail) => {
 };
 
 export const outdoorUploadService = formData => {
-  return axios.post(`${process.env.REACT_APP_SUK_URL}/outdoor/post`, {
-    formData,
+  return axios.post(`${process.env.REACT_APP_SUK_URL}/outdoor/post`, formData, {
+    headers: {
+      'content-type': 'multipart/form-data',
+    },
   });
 };
 
-export const oudoorUpdateService = formData => {
-  return axios.update(
+export const outdoorUpdateService = formData => {
+  return axios.patch(
     `${process.env.REACT_APP_SUK_URL}/outdoor/post`,
     {
       formData,
@@ -40,6 +42,10 @@ export const oudoorUpdateService = formData => {
 };
 
 export const outdoorGetSomeService = outActID => {
+  // 테스트 용
+  // return axios.get(
+  //   'https://e84d5124-7e2a-45dd-81f6-f578fed64192.mock.pstmn.io/outdoor-get-some-post',
+  // );
   return axios.get(`${process.env.REACT_APP_SUK_URL}/outdoor/post/${outActID}`);
 };
 

@@ -7,11 +7,11 @@ import {
   Form,
   Card,
 } from 'react-bulma-components';
-import { useParams } from 'react-router-dom';
-import { oudoorUpdateService } from '../../service';
-// import { outdoorGetSomeService } from '../../service';
+import { useParams, useNavigate } from 'react-router-dom';
+import { outdoorUpdateService, outdoorGetSomeService } from '../../service';
 
 export const OutdoorUpdateForm = () => {
+  const navigate = useNavigate();
   const [uploadInfo, setUploadInfo] = useState({});
   const [imgData, setImageData] = useState({});
 
@@ -20,35 +20,20 @@ export const OutdoorUpdateForm = () => {
   const { outActID, outActName, outActLink } = uploadInfo;
   const { imgSrc, preview } = imgData;
 
-  //   useEffect(() => {
-  //     outdoorGetSomeService(1)
-  //       .then(response => {
-  //         setUploadInfo({
-  //           ...uploadInfo,
-  //           outActID: outdoorID,
-  //           outActName: response.data.outActName,
-  //           outActLink: response.data.outActName,
-  //         });
-  //         setImageData({ ...imgSrc, preview: response.data.outActImg });
-  //       })
-  //       .catch(error => {
-  //         console.log(error);
-  //       });
-  //   }, []);
-
   useEffect(() => {
-    setUploadInfo({
-      ...uploadInfo,
-      outActID: outdoorID,
-      outActName: 'teeest',
-      outActLink: 'teest',
-    });
-    setImageData({
-      ...imgData,
-      imgSrc: 'qwe',
-      preview:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU',
-    });
+    outdoorGetSomeService(10)
+      .then(response => {
+        setUploadInfo({
+          ...uploadInfo,
+          outActID: outdoorID,
+          outActName: response.data.outActName,
+          outActLink: response.data.outActLink,
+        });
+        setImageData({ ...imgSrc, preview: response.data.outActImg });
+      })
+      .catch(() => {
+        alert('다시 시도해주세요');
+      });
   }, []);
 
   const encodeFileToBase64 = fileBlob => {
@@ -69,10 +54,14 @@ export const OutdoorUpdateForm = () => {
     formData.append('outActImg', imgSrc);
     formData.append('outActLink', outActLink);
 
-    oudoorUpdateService(formData)
-      .then(response => console.log(response))
-      .catch(error => {
-        console.log(error);
+    outdoorUpdateService(formData)
+      .then(() => {
+        alert('수정이 완료되었습니다.');
+        navigate('/outdoor');
+      })
+      .catch(() => {
+        alert('다시 시도해주세요');
+        navigate('/outdoor');
       });
   };
 
