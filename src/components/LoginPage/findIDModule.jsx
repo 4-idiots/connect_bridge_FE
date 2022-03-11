@@ -17,11 +17,18 @@ export const FindIDForm = () => {
     [userInfo],
   );
 
+  const findIDAxios = async (uName, uPhone, uEmail) => {
+    try {
+      const result = findIDService(uName, uPhone, uEmail);
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const onSubmitEvent = e => {
     e.preventDefault();
-    findIDService(userName, userPhone, userEmail).then(response => {
-      console.log(response);
-    });
+    findIDAxios(userName, userPhone, userEmail);
   };
 
   return (

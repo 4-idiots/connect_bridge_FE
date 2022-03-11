@@ -24,9 +24,9 @@ export const OutdoorInfinite = ({ outActClick }) => {
   const isLoadingInitialData = !data && !error;
   const isLoadingMore =
     isLoadingInitialData ||
-    (size > 0 && data && typeof data[data.length - 1] === 'undefined');
+    (size > 0 && data && data[data.length - 1].length !== 0); // 3번쨰 조건 바꿨음
   const isEmpty = data?.[0]?.length === 0;
-  const isReachingEnd = data ? data[data.length - 1] : [''];
+  const isReachingEnd = data ? data[data.length - 1] : [];
   const isRefreshing = isValidating && data && data.length === size;
 
   useEffect(() => {

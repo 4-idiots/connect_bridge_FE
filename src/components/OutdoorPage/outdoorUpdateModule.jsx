@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   Container,
   Heading,
@@ -20,20 +20,32 @@ export const OutdoorUpdateForm = () => {
   const { outActID, outActName, outActLink } = uploadInfo;
   const { imgSrc, preview } = imgData;
 
+  const onChangeOutdoorEvent = useCallback(
+    e => {
+      setUploadInfo({
+        ...uploadInfo,
+        [e.currentTarget.name]: e.currentTarget.value,
+      });
+    },
+    [uploadInfo],
+  );
+
   useEffect(() => {
-    outdoorGetSomeService(outdoorID)
-      .then(response => {
+    const getAxios = async () => {
+      try {
+        const result = await outdoorGetSomeService(outdoorID);
         setUploadInfo({
           ...uploadInfo,
           outActID: outdoorID,
-          outActName: response.data.outActName,
-          outActLink: response.data.outActLink,
+          outActName: result.data.outActName,
+          outActLink: result.data.outActLink,
         });
-        setImageData({ ...imgSrc, preview: response.data.outActImg });
-      })
-      .catch(() => {
+        setImageData({ ...imgSrc, preview: result.data.outActImg });
+      } catch (error) {
         alert('다시 시도해주세요');
-      });
+      }
+    };
+    getAxios();
   }, []);
 
   const encodeFileToBase64 = fileBlob => {
@@ -47,6 +59,17 @@ export const OutdoorUpdateForm = () => {
     });
   };
 
+  const updateAxios = async formdata => {
+    try {
+      const result = await outdoorUpdateService(formdata);
+      alert('수정이 완료되었습니다.');
+      navigate('/outdoor');
+    } catch (error) {
+      alert('다시 시도해주세요');
+      navigate('/outdoor');
+    }
+  };
+
   const onSubmitEvent = () => {
     const formData = new FormData();
     formData.append('outActID', outActID);
@@ -54,15 +77,7 @@ export const OutdoorUpdateForm = () => {
     formData.append('outActImg', imgSrc);
     formData.append('outActLink', outActLink);
 
-    outdoorUpdateService(formData)
-      .then(() => {
-        alert('수정이 완료되었습니다.');
-        navigate('/outdoor');
-      })
-      .catch(() => {
-        alert('다시 시도해주세요');
-        navigate('/outdoor');
-      });
+    updateAxios(formData);
   };
 
   return (
@@ -76,12 +91,7 @@ export const OutdoorUpdateForm = () => {
               type="text"
               value={outActName || ''}
               name="outActName"
-              onChange={e => {
-                setUploadInfo({
-                  ...uploadInfo,
-                  outActName: e.currentTarget.value,
-                });
-              }}
+              onChange={onChangeOutdoorEvent}
               placeholder="대외 활동 제목"
             />
           </Form.Control>
@@ -121,12 +131,7 @@ export const OutdoorUpdateForm = () => {
               type="text"
               value={outActLink || ''}
               name="outActLink"
-              onChange={e => {
-                setUploadInfo({
-                  ...uploadInfo,
-                  outActLink: e.currentTarget.value,
-                });
-              }}
+              onChange={onChangeOutdoorEvent}
               placeholder="관련 링크"
             />
           </Form.Control>

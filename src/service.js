@@ -42,17 +42,16 @@ export const outdoorUpdateService = formData => {
 };
 
 export const outdoorGetSomeService = outActID => {
-  // 테스트 용
-  // return axios.get(
-  //   'https://e84d5124-7e2a-45dd-81f6-f578fed64192.mock.pstmn.io/outdoor-get-some-post',
-  // );
-  return axios.get(`${process.env.REACT_APP_SUK_URL}/outdoor/post/${outActID}`);
+  // return axios.get(`${process.env.REACT_APP_SUK_URL}/outdoor/post/${outActID}`);
+  return axios.get('http://localhost:4000/getSomeOutdoor');
 };
 
 export const outdoorDeleteService = outActID => {
-  return axios.delete(
-    `${process.env.REACT_APP_SUK_URL}/outdoor/post/${outActID}`,
-  );
+  // 테스트용
+  // return axios.delete(
+  //   `${process.env.REACT_APP_SUK_URL}/outdoor/post/${outActID}`,
+  // );
+  return axios.get('http://localhost:4000/deleteOutdoor');
 };
 
 export const outdoorLikeService = (outActID, userID) => {

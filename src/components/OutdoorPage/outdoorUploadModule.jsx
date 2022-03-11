@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   Container,
   Heading,
@@ -18,6 +18,16 @@ export const OutdoorUploadForm = () => {
   const { outActName, outActLink } = uploadInfo;
   const { imgSrc, preview } = imgData;
 
+  const onChangeOutdoorEvent = useCallback(
+    e => {
+      setUploadInfo({
+        ...uploadInfo,
+        [e.currentTarget.name]: e.currentTarget.value,
+      });
+    },
+    [uploadInfo],
+  );
+
   const encodeFileToBase64 = fileBlob => {
     const reader = new FileReader();
     reader.readAsDataURL(fileBlob);
@@ -29,20 +39,23 @@ export const OutdoorUploadForm = () => {
     });
   };
 
+  const uploadAxios = async formdata => {
+    try {
+      const result = await outdoorUploadService(formdata);
+      alert('등록 되었습니다.');
+      navigate('/outdoor');
+    } catch (error) {
+      alert('다시 시도해주세요');
+    }
+  };
+
   const onSubmitEvent = () => {
     const formData = new FormData();
     formData.append('outActName', outActName);
     formData.append('outActImg', imgSrc);
     formData.append('outActLink', outActLink);
 
-    outdoorUploadService(formData)
-      .then(() => {
-        alert('등록 되었습니다.');
-        navigate('/outdoor');
-      })
-      .catch(() => {
-        alert('다시 시도해주세요');
-      });
+    uploadAxios(formData);
   };
 
   return (
@@ -56,12 +69,7 @@ export const OutdoorUploadForm = () => {
               type="text"
               value={outActName || ''}
               name="outActName"
-              onChange={e => {
-                setUploadInfo({
-                  ...uploadInfo,
-                  outActName: e.currentTarget.value,
-                });
-              }}
+              onChange={onChangeOutdoorEvent}
               placeholder="대외 활동 제목"
             />
           </Form.Control>
@@ -101,12 +109,7 @@ export const OutdoorUploadForm = () => {
               type="text"
               value={outActLink || ''}
               name="outActLink"
-              onChange={e => {
-                setUploadInfo({
-                  ...uploadInfo,
-                  outActLink: e.currentTarget.value,
-                });
-              }}
+              onChange={onChangeOutdoorEvent}
               placeholder="관련 링크"
             />
           </Form.Control>

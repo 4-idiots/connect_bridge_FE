@@ -15,15 +15,15 @@ export const OutdoorCardForm = ({
   const [isHover, setIsHover] = useState(false);
   const [manager, setManager] = useState(true);
 
-  const onDeleteOutdoor = id => {
-    outdoorDeleteService(id)
-      .then(response => {
-        console.log(response);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-    console.log('delete', id);
+  const deleteAxios = async id => {
+    try {
+      const result = await outdoorDeleteService(id);
+      alert('삭제 완료');
+      window.location.replace('/outdoor');
+    } catch (error) {
+      alert('다시 시도해주세요');
+      window.location.replace('/outdoor');
+    }
   };
   return (
     <Card
@@ -77,7 +77,7 @@ export const OutdoorCardForm = ({
                 </Button>
                 <Button
                   onClick={() => {
-                    onDeleteOutdoor(outActID);
+                    deleteAxios(outActID);
                   }}
                   color="danger"
                 >

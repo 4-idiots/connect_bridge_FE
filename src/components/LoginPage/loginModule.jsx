@@ -25,19 +25,23 @@ export const LoginForm = () => {
     [userInfo],
   );
 
+  const loginAxios = async (uID, uPW) => {
+    try {
+      const result = await loginService(uID, uPW);
+      const token = result.data.token || '';
+      // const decode = decodeToken(token);
+      localStorage.setItem('token', token);
+      // localStorage.setItem('decode', JSON.stringify(decode));
+      navigate('/');
+    } catch (error) {
+      alert('아이디 또는 비밀번호가 일치하지 않습니다.');
+    }
+  };
+
   const onSubmitEvent = e => {
     e.preventDefault();
-    loginService(userID, userPW)
-      .then(response => {
-        const token = response.data.token || '';
-        // const decode = decodeToken(token);
-        localStorage.setItem('token', token);
-        // localStorage.setItem('decode', JSON.stringify(decode));
-        navigate('/');
-      })
-      .catch(error => {
-        alert('아이디 또는 비밀번호가 일치하지 않습니다.');
-      });
+
+    loginAxios(userID, userPW);
   };
 
   return (

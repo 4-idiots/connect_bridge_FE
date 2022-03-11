@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { Container, Heading, Button, Box, Form } from 'react-bulma-components';
-// import { findPWServcie } from '../../service';
+import { findPWServcie } from '../../service';
 
 export const FindPWForm = () => {
   const [userInfo, setUserInfo] = useState({});
@@ -17,11 +17,17 @@ export const FindPWForm = () => {
     [userInfo],
   );
 
+  const findPWAxios = async (uID, uName, uEmail) => {
+    try {
+      const result = await findPWServcie(uID, uName, uEmail);
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const onSubmitEvent = e => {
     e.preventDefault();
-    // findPWServcie(userID, userName, userEmail).then(response => {
-    //   console.log(response);
-    // });
+    findPWAxios(userID, userName, userEmail);
   };
 
   return (

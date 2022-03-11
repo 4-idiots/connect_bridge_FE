@@ -365,5 +365,13 @@
     ],
     "cursor7": [
 
-    ]
+    ],
+    "deleteOutdoor" : {
+        "msg": "success"
+    },
+    "getSomeOutdoor" : {
+        "outActName": "Test1",
+        "outActImg":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
+        "outActLink": "naver.com"
+    }
 }
