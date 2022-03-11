@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { Container, Icon, Box } from 'react-bulma-components';
 import { Link } from 'react-router-dom';
 import { OutdoorModalForm } from './outdoorModalModule';
-import { OutdoorCardForm } from './outdoorCardModule';
-import { InfinitePage } from '../../swr/infinitePage';
+import { OutdoorInfinite } from '../../swr/outdoorInfinite';
 
 export const OutdoorMainForm = () => {
   const [poster, setPoster] = useState({});
@@ -46,7 +45,7 @@ export const OutdoorMainForm = () => {
         />
       )}
       <NewPosterBtn />
-      <InfinitePage />
+      <OutdoorInfinite outActClick={changePoster} />
     </Container>
   );
 };
