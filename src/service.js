@@ -55,13 +55,6 @@ export const outdoorDeleteService = outActID => {
   );
 };
 
-export const outdoorGetAllService = cursor => {
-  return axios.get(
-    `https://e84d5124-7e2a-45dd-81f6-f578fed64192.mock.pstmn.io/outdoor-get-all/${cursor}`,
-  );
-  // return axios.get(`${process.env.REACT_APP_SUK_URL}/outdoor`);
-};
-
 export const outdoorLikeService = (outActID, userID) => {
   return axios.get(
     `${process.env.REACT_APP_SUK_URL}/outdoor/like?post=${outActID}&userID=${userID}`,

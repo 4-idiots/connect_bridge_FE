@@ -21,7 +21,7 @@ export const OutdoorUpdateForm = () => {
   const { imgSrc, preview } = imgData;
 
   useEffect(() => {
-    outdoorGetSomeService(10)
+    outdoorGetSomeService(outdoorID)
       .then(response => {
         setUploadInfo({
           ...uploadInfo,
