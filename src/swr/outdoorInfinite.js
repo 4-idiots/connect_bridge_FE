@@ -9,7 +9,9 @@ import { OutdoorCardForm } from '../components/OutdoorPage/outdoorCardModule';
 const getKey = (pageIndex, previousPageData) => {
   if (previousPageData && !previousPageData.length) return null;
 
-  return `http://localhost:4000/cursor${pageIndex + 1}`;
+  if (pageIndex === 0) return `http://localhost:4000/outdoor/0`;
+
+  return `http://localhost:4000/outdoor/${pageIndex + 1}`;
 };
 
 export const OutdoorInfinite = ({ outActClick }) => {

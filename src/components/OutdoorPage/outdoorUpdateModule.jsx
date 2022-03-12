@@ -82,7 +82,7 @@ export const OutdoorUpdateForm = () => {
 
   return (
     <Container>
-      <Heading style={{ textAlign: 'center' }}>{outActName} 수정하기</Heading>
+      <Heading style={{ textAlign: 'center' }}>수정하기</Heading>
       <Box style={{ width: '90%', margin: 'auto' }}>
         <Form.Field>
           <Form.Label>대외 활동 제목</Form.Label>
