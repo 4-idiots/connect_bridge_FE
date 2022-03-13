@@ -19,10 +19,11 @@ export const FindIDForm = () => {
 
   const findIDAxios = async (uName, uPhone, uEmail) => {
     try {
-      const result = findIDService(uName, uPhone, uEmail);
-      console.log(result);
+      const result = await findIDService(uName, uPhone, uEmail);
+      alert(`아이디는 ${result.userID} 입니다.`);
     } catch (error) {
-      console.log(error);
+      alert('다시 시도해주세요');
+      window.location.replace('/login/findID');
     }
   };
 

@@ -1,19 +1,21 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { Box, Button, Container, Form, Heading } from 'react-bulma-components';
-import { decodeToken } from 'react-jwt';
 import { Link, useNavigate } from 'react-router-dom';
 import { loginService } from '../../service';
+import { useAuth } from '../../contexts/hooks/useAuth';
 
 export const LoginForm = () => {
   const navigate = useNavigate();
+  const auth = useAuth();
+  const [userInfo, setUserInfo] = useState({});
+  const { userID, userPW } = userInfo;
+
   useEffect(() => {
     const isUser = localStorage.getItem('token') || '';
     if (isUser) {
       navigate('/');
     }
   }, []);
-  const [userInfo, setUserInfo] = useState({});
-  const { userID, userPW } = userInfo;
 
   const onChangeAccountEvent = useCallback(
     e => {
@@ -29,9 +31,7 @@ export const LoginForm = () => {
     try {
       const result = await loginService(uID, uPW);
       const token = result.data.token || '';
-      // const decode = decodeToken(token);
-      localStorage.setItem('token', token);
-      // localStorage.setItem('decode', JSON.stringify(decode));
+      auth.login(token);
       navigate('/');
     } catch (error) {
       alert('아이디 또는 비밀번호가 일치하지 않습니다.');
@@ -88,7 +88,7 @@ export const LoginForm = () => {
             아이디 찾기
           </Button>
           <Button renderAs={Link} to="/login/findPW" color="info">
-            비밀번호 찾기
+            비밀번호 재설정
           </Button>
         </Button.Group>
       </Box>

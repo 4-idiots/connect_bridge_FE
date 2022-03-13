@@ -32,7 +32,7 @@ export const FindPWForm = () => {
 
   return (
     <Container>
-      <Heading style={{ textAlign: 'center' }}>비밀번호 찾기</Heading>
+      <Heading style={{ textAlign: 'center' }}>비밀번호 재설정</Heading>
       <Box style={{ width: '60%', margin: 'auto' }}>
         <Form.Field>
           <Form.Label>이름</Form.Label>
@@ -72,7 +72,7 @@ export const FindPWForm = () => {
         </Form.Field>
         <Button.Group align="center">
           <Button color="success" onClick={onSubmitEvent}>
-            아이디 찾기
+            재설정 하기
           </Button>
         </Button.Group>
       </Box>

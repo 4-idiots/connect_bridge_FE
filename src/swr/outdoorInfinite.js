@@ -5,13 +5,14 @@ import PropTypes from 'prop-types';
 import fetcher from './fetcher';
 import useOnScreen from './useOnScreen';
 import { OutdoorCardForm } from '../components/OutdoorPage/outdoorCardModule';
+import { outdoorGetAllService } from '../service';
 
 const getKey = (pageIndex, previousPageData) => {
   if (previousPageData && !previousPageData.length) return null;
 
-  if (pageIndex === 0) return `http://localhost:4000/outdoor/0`;
+  if (pageIndex === 0) return outdoorGetAllService(0);
 
-  return `http://localhost:4000/outdoor/${pageIndex + 1}`;
+  return outdoorGetAllService(pageIndex + 1);
 };
 
 export const OutdoorInfinite = ({ outActClick }) => {
@@ -39,7 +40,7 @@ export const OutdoorInfinite = ({ outActClick }) => {
 
   return (
     <>
-      {isEmpty ? <p>Yay, no issues found.</p> : null}
+      {isEmpty ? <p>Yay, no outdoor found.</p> : null}
       {issues &&
         issues.map(item => (
           <OutdoorCardForm
