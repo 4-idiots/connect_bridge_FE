@@ -25,7 +25,7 @@ export const NavbarForm = () => {
           <Navbar.Item backgroundColor="brown" renderAs={Link} to="#">
             프로젝트
           </Navbar.Item>
-          <Navbar.Item renderAs={Link} to="#">
+          <Navbar.Item renderAs={Link} to="/community">
             커뮤니티
           </Navbar.Item>
           <Navbar.Item renderAs={Link} to="/outdoor">

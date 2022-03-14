@@ -9,3 +9,7 @@ export { OutdoorUpdate } from './outdoorUpdate';
 
 export { Team } from './team';
 export { Info } from './Info';
+
+export { Community } from './community';
+export { CommunityInfo } from './communityinfo';
+export { CommunityWrite } from './communitywrite';

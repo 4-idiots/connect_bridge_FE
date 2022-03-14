@@ -19,3 +19,8 @@ export { OutdoorUpdateForm } from './OutdoorPage/outdoorUpdateModule';
 // TeamPage
 export { TeamForm } from './TeamPage/Team';
 export { InfoForm } from './TeamPage/info';
+
+// CommunityPage
+export { CommunityForm } from './CommunityPage/communityMain';
+export { CommunityInfoForm } from './CommunityPage/communityInfo';
+export { CommunityWriteForm } from './CommunityPage/communityWrite';

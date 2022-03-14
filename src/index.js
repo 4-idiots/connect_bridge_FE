@@ -14,6 +14,9 @@ import {
   OutdoorMain,
   OutdoorUpload,
   OutdoorUpdate,
+  Community,
+  CommunityInfo,
+  CommunityWrite,
 } from './pages/pRoutes';
 
 const rootElement = document.getElementById('root');
@@ -32,6 +35,10 @@ render(
 
       <Route path="/team" element={<Team />} />
       <Route path="/team/info/:teamID" element={<Info />} />
+
+      <Route path="/community" element={<Community />} />
+      <Route path="/community/info/:communityID" element={<CommunityInfo />} />
+      <Route path="/community/write" element={<CommunityWrite />} />
     </Routes>
   </BrowserRouter>,
   rootElement,
