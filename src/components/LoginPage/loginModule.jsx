@@ -11,8 +11,8 @@ export const LoginForm = () => {
   const { userID, userPW } = userInfo;
 
   useEffect(() => {
-    const isUser = localStorage.getItem('token') || '';
-    if (isUser) {
+    const isLogin = localStorage.getItem('isLogin') || '';
+    if (isLogin) {
       navigate('/');
     }
   }, []);
@@ -30,7 +30,7 @@ export const LoginForm = () => {
   const loginAxios = async (uID, uPW) => {
     try {
       const result = await loginService(uID, uPW);
-      const token = result.data.token || '';
+      const token = result.data.accessToken || '';
       auth.login(token);
       navigate('/');
     } catch (error) {

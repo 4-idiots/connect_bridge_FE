@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 // import axios from 'axios';
 import { Navbar, Image } from 'react-bulma-components';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../contexts/hooks/useAuth';
 
 export const NavbarForm = () => {
+  const auth = useAuth();
   const [burger, setBurger] = useState(false);
-  const isUser = localStorage.getItem('token') || '';
+  const isLogin = localStorage.getItem('isLogin') || '';
 
   return (
     <Navbar fixed="top" color="link">
@@ -36,14 +38,14 @@ export const NavbarForm = () => {
           </Navbar.Item>
         </Navbar.Container>
         <Navbar.Container align="right">
-          {isUser ? (
+          {isLogin ? (
             <>
               <Navbar.Item renderAs={Link} to="/login">
                 마이페이지
               </Navbar.Item>
               <Navbar.Item
                 onClick={() => {
-                  localStorage.clear();
+                  auth.logout();
                   window.location.replace('/');
                 }}
               >
