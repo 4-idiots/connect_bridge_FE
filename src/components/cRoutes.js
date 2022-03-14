@@ -18,16 +18,12 @@ export { OutdoorUpdateForm } from './OutdoorPage/outdoorUpdateModule';
 
 // TeamPage
 export { TeamForm } from './TeamPage/Team';
-<<<<<<< HEAD
-export { TeaminfoForm } from './TeamPage/Teaminfo';
+export { InfoForm } from './TeamPage/info';
 
 // ProjectPage
 export { ProjectUploadForm } from './ProjectPage/projectUploadModule';
-=======
-export { InfoForm } from './TeamPage/info';
 
 // CommunityPage
 export { CommunityForm } from './CommunityPage/communityMain';
 export { CommunityInfoForm } from './CommunityPage/communityInfo';
 export { CommunityWriteForm } from './CommunityPage/communityWrite';
->>>>>>> team_sec

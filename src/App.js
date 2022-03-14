@@ -10,7 +10,6 @@ import {
   OutdoorUpload,
   OutdoorUpdate,
   Team,
-  Teaminfo,
   ProjectUpload,
   Main,
 } from './pages/pRoutes';
@@ -36,7 +35,6 @@ const App = () => {
             element={<OutdoorUpdate />}
           />
           <Route path="/team" element={<Team />} />
-          <Route path="/team/teaminfo" element={<Teaminfo />} />
           <Route path="/project/upload" element={<ProjectUpload />} />
         </Routes>
       </BrowserRouter>
