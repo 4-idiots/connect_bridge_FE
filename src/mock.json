@@ -353,6 +353,9 @@
     "outActLink": "naver.com"
   },
   "logToken": {
-    "token": "eyJ0eXAiOiJKV1QiLCJ0b2tlbl90eXBlIjoiYWNjZXNzIHRva2VuIiwiYWxnIjoiSFMyNTYifQ.eyJpZCI6MSwidXNlck5hbWUiOiIxMTExIiwiZXhwIjoxNjQ3MTQ5MjAzLCJ1c2VySUQiOiIxMTExIiwiaWF0IjoxNjQ3MTQ1NjAzfQ.YZdiryTFStxLxmGkHzJIYKXYSjqftLNgXgEJ1DnJmIk"
+    "accessToken": "eyJ0eXAiOiJKV1QiLCJ0b2tlbl90eXBlIjoiYWNjZXNzIHRva2VuIiwiYWxnIjoiSFMyNTYifQ.eyJpZCI6MSwidXNlck5hbWUiOiIxMTExIiwiZXhwIjoxNjQ3MTQ5MjAzLCJ1c2VySUQiOiIxMTExIiwiaWF0IjoxNjQ3MTQ1NjAzfQ.YZdiryTFStxLxmGkHzJIYKXYSjqftLNgXgEJ1DnJmIk"
+  },
+  "refresh": {
+    "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MywidXNlck5hbWUiOiIxMTExIiwiZXhwIjoxNjQ3MTY5MDU4LCJ1c2VySUQiOiIxMTExIiwiaWF0IjoxNjQ3MTY5MDQ4fQ.6JbnK4HytonQ3nUpyYBtkqFpT9KtB-xCPT3QuNCHwH4"
   }
 }

@@ -22,28 +22,28 @@ export const useProvideAuth = () => {
 
   // Refresh token for persisting session
   // 여기에 리프레시 토큰 주소 넣기
-  // const { data, error, isValidating } = useSWR(
-  //   isLogin ? `/refresh-token.php` : null,
-  //   url =>
-  //     fetch(url, {
-  //       credentials: 'include',
-  //     }).then(res => res.json()),
-  //   {
-  //     // Silently refresh token every expiry time
-  //     refreshInterval: 1000 * 60 * 15,
-  //     revalidateOnFocus: false,
-  //   },
-  // );
+  const { data, error, isValidating } = useSWR(
+    isLogin ? `http://localhost:4000/refresh` : null,
+    url =>
+      fetch(url, {
+        credentials: 'include',
+      }).then(res => res.json()),
+    {
+      // Silently refresh token every expiry time
+      refreshInterval: 1000 * 60 * 15,
+      revalidateOnFocus: false,
+    },
+  );
 
-  // useEffect(() => {
-  //   if (data) {
-  //     login(data.accessToken);
-  //   }
-  //   if (error) {
-  //     logout();
-  //   }
-  //   setIsLoading(isValidating);
-  // }, [data, error, isValidating]);
+  useEffect(() => {
+    if (data) {
+      login(data.accessToken);
+    }
+    if (error) {
+      logout();
+    }
+    setIsLoading(isValidating);
+  }, [data, error, isValidating]);
 
   useEffect(() => {
     // Sync all tabs on login or logout
