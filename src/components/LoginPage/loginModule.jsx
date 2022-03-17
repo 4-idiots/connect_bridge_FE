@@ -1,6 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { Box, Button, Container, Form, Heading } from 'react-bulma-components';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { loginService } from '../../service';
 import { useAuth } from '../../contexts/hooks/useAuth';
 
@@ -31,6 +32,7 @@ export const LoginForm = () => {
     try {
       const result = await loginService(uID, uPW);
       const token = result.data.accessToken || '';
+      axios.defaults.headers.common.Authorization = `Bearer ${token}`;
       auth.login(token);
       navigate('/');
     } catch (error) {

@@ -64,7 +64,7 @@ export const outdoorUpdateService = formData => {
 };
 
 export const outdoorGetAllService = cursor => {
-  return `http://localhost:4000/cursor${cursor + 1}`;
+  return `${process.env.REACT_APP_MOON_URL}/team/${cursor}`;
 };
 
 export const outdoorGetSomeService = outActID => {
@@ -84,4 +84,8 @@ export const outdoorLikeService = (outActID, userID) => {
   return customAxios.get(
     `${process.env.REACT_APP_SUK_URL}/outdoor/like?post=${outActID}&userID=${userID}`,
   );
+};
+
+export const validToken = () => {
+  return `http://localhost:8080/valid`;
 };

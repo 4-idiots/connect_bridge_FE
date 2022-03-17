@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
-import axios from 'axios';
 import { useAuth } from './useAuth';
 
 export const useUser = () => {
