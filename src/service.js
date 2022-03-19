@@ -86,6 +86,17 @@ export const outdoorLikeService = (outActID, userID) => {
   );
 };
 
+<<<<<<< HEAD
 export const validToken = () => {
   return `http://localhost:8080/valid`;
 };
+=======
+export const teamGetAllService = team => {
+  return `http://4idiot.ddns.net:8080/team${team}`;
+};
+
+/* export const teamGetAllService = team => {
+  return `http://localhost:4000/team${team}`;
+};
+ */
+>>>>>>> team_for
