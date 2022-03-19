@@ -12,7 +12,7 @@ const getKey = (pageIndex, previousPageData) => {
 
   if (pageIndex === 0) return outdoorGetAllService(0);
 
-  return outdoorGetAllService(pageIndex + 1);
+  return outdoorGetAllService(pageIndex);
 };
 
 export const OutdoorInfinite = ({ outActClick }) => {

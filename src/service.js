@@ -26,7 +26,7 @@ export const setAuthorizationToken = token => {
 };
 
 export const findPWServcie = (userID, userName, userEmail) => {
-  return customAxios.post(`${process.env.REACT_APP_SUK_URL}/user/findPW`, {
+  return customAxios.post(`http://localhost:8080/user/findPW`, {
     userID,
     userName,
     userEmail,
@@ -34,7 +34,7 @@ export const findPWServcie = (userID, userName, userEmail) => {
 };
 
 export const findIDService = (userName, userPhone, userEmail) => {
-  return customAxios.post(`${process.env.REACT_APP_SUK_URL}/user/findID`, {
+  return customAxios.post(`http://localhost:8080/user/findID`, {
     userName,
     userPhone,
     userEmail,
