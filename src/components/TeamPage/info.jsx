@@ -16,13 +16,13 @@ import { useParams } from 'react-router-dom';
 
 export const InfoForm = () => {
   const [users, setusers] = useState([]);
-  const [userNickname, setuserNickname] = useState([]);
-  const [userName, setuserName] = useState([]);
-  const [userAbility, setuserAbility] = useState([]);
-  const [userArea, setuserArea] = useState([]);
-  const [userTime, setuserTime] = useState([]);
-  const [userInterest, setuserInterest] = useState([]);
-  const [userIntroduce, setuserIntroduce] = useState([]);
+  const [userNickname, setuserNickname] = useState('');
+  const [userName, setuserName] = useState('');
+  const [userAbility, setuserAbility] = useState('');
+  const [userArea, setuserArea] = useState('');
+  const [userTime, setuserTime] = useState('');
+  const [userInterest, setuserInterest] = useState('');
+  const [userIntroduce, setuserIntroduce] = useState('');
   const { teamID } = useParams();
   const [like, setlike] = useState([0]);
 
@@ -32,13 +32,13 @@ export const InfoForm = () => {
       .then(response => {
         console.log(response);
         setusers(response.data);
-        setuserNickname(response.data.registerDto.userNickname);
-        setuserName(response.data.registerDto.userName);
-        setuserAbility(response.data.registerDto.userAbility);
-        setuserArea(response.data.registerDto.userArea);
-        setuserTime(response.data.registerDto.userTime);
-        setuserInterest(response.data.registerDto.userInterest);
-        setuserIntroduce(response.data.registerDto.userIntroduce);
+        setuserNickname(response.data.userNickname);
+        setuserName(response.data.userName);
+        setuserAbility(response.data.userAbility);
+        setuserArea(response.data.userArea);
+        setuserTime(response.data.userTime);
+        setuserInterest(response.data.userInterest);
+        setuserIntroduce(response.data.userIntroduce);
       });
   };
 
@@ -186,42 +186,6 @@ export const InfoForm = () => {
             {userIntroduce}
           </span>
         </span>
-      </Box>
-      <Box style={{ margin: 100, Box: 'center' }}>
-        {like.map((a, i) => {
-          return (
-            <div key={a}>
-              <h3>
-                {a}
-                <Button
-                  onClick={() =>
-                    setlike(arr =>
-                      arr.map((el, idx) => (idx === i ? el + 1 : el)),
-                    )
-                  }
-                >
-                  <span role="img" aria-label="good">
-                    👍
-                  </span>
-                </Button>
-                <Button
-                  onClick={() =>
-                    setlike(arr =>
-                      arr.map((el, idx) => (idx === i ? el - 1 : el)),
-                    )
-                  }
-                >
-                  <span role="img" aria-label="bad">
-                    👎
-                  </span>
-                </Button>
-                {like[i]}
-              </h3>
-              <p>좋아요</p>
-              <hr />
-            </div>
-          );
-        })}
       </Box>
     </Container>
   );

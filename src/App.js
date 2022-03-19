@@ -12,6 +12,7 @@ import {
   Team,
   ProjectUpload,
   Main,
+  Info,
 } from './pages/pRoutes';
 import { AuthContext } from './contexts/store/auth';
 import { useProvideAuth } from './contexts/hooks/useProvideAuth';
@@ -35,6 +36,7 @@ const App = () => {
             element={<OutdoorUpdate />}
           />
           <Route path="/team" element={<Team />} />
+          <Route path="/team/info/:teamID" element={<Info />} />
           <Route path="/project/upload" element={<ProjectUpload />} />
         </Routes>
       </BrowserRouter>

@@ -1,3 +1,6 @@
+/* eslint-disable no-shadow */
+/* eslint-disable no-undef */
+/* eslint-disable react/jsx-no-undef */
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import validator from 'validator';
@@ -25,6 +28,7 @@ export const SignupForm = () => {
   const [userBirthdayY, setuserBirthdayY] = useState('');
   const [userBirthdayM, setuserBirthdayM] = useState('');
   const [userBirthdayD, setuserBirthdayD] = useState('');
+  const [code, setcode] = useState('');
 
   const userData = () => {
     return axios.get('http://4idiot.ddns.net:8080/users').then(response => {
@@ -101,6 +105,9 @@ export const SignupForm = () => {
   const userInterestdata = e => {
     setuserInterest(e.target.value);
   };
+  const codedata = e => {
+    setcode(e.target.value);
+  };
 
   const sameIDButton = e => {
     e.preventDefault();
@@ -160,6 +167,78 @@ export const SignupForm = () => {
       });
   };
 
+  /* const EmailcheckButton = e => {
+    e.preventDefault();
+
+    axios
+      .get(
+        `http://4idiot.ddns.net:8080/users/check/userEmail?userEmail=${userEmail}`,
+      )
+      .then(response => {
+        console.log(response);
+        if (response.data.value === true) {
+          alert('중복입니다. 다시 입력해주세요.');
+
+          setsameEmail(false);
+        } else {
+          Prompt((message = '페이지를 떠나시겠습니까?'));
+          setsameEmail(true);
+        }
+      });
+  }; */
+
+  /*   this.input(
+    axios
+      .post('http://4idiot.ddns.net:8080/verifyCode', {
+        result,
+      })
+      .then(response => {
+        
+      }),
+    // eslint-disable-next-line no-unused-vars
+  ).innerText = greeting;
+})
+.catch(response => {
+  alert('안됨.');
+});
+} else {
+alert('다시 확인해주세요');
+}
+ */
+
+  const EmailOnClick = e => {
+    e.preventDefault();
+    if (sameEmail === true) {
+      // eslint-disable-next-line prefer-const
+      axios
+        .post('http://4idiot.ddns.net:8080/users/check/Email', {
+          userEmail,
+        })
+        .then(response => {
+          console.log(response.data.message);
+          console.log(data);
+          alert('이메일 인증', '6글자를 입력해주세여');
+          // eslint-disable-next-line react/no-this-in-sfc
+          axios
+            .post('http://4idiot.ddns.net:8080/verifycode', {
+              code,
+            })
+            .then(response => {
+              console.log(response.data.message);
+              console.log(code);
+            });
+          // eslint-disable-next-line no-unused-vars
+        })
+        // eslint-disable-next-line no-unused-vars
+        .catch(error => {
+          alert('이메일 중복 체크를 해주세요.');
+        });
+    } else alert('이메일 중복 체크를 해주세요.');
+  };
+
+  const EmailCode = e => {
+    e.preventDefault();
+  };
   const Click = e => {
     e.preventDefault();
 
@@ -363,6 +442,22 @@ export const SignupForm = () => {
           <Button size="small" color="danger" onClick={sameEmailButton}>
             중복확인
           </Button>
+          <Button size="small" color="danger" onClick={EmailOnClick}>
+            이메일 인증
+          </Button>
+          <Form.Control>
+            <Form.Input
+              type="emailcode"
+              placeholder="이메일코드"
+              onChange={codedata}
+              value={code}
+            />
+          </Form.Control>
+          <Button size="small" color="danger" onClick={EmailCode}>
+            확인
+          </Button>
+
+          <div id="result" />
         </Form.Field>
         <br />
         <Form.Field>

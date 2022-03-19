@@ -85,3 +85,12 @@ export const outdoorLikeService = (outActID, userID) => {
     `${process.env.REACT_APP_SUK_URL}/outdoor/like?post=${outActID}&userID=${userID}`,
   );
 };
+
+export const teamGetAllService = team => {
+  return `http://4idiot.ddns.net:8080/team${team}`;
+};
+
+/* export const teamGetAllService = team => {
+  return `http://localhost:4000/team${team}`;
+};
+ */
