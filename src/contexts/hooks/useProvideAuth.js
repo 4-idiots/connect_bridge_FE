@@ -22,23 +22,12 @@ export const useProvideAuth = () => {
     localStorage.removeItem('token');
     setToken(null);
     setIsLogin(false);
-    alert('다시 로그인 해주세요');
+    alert('다시 로그인 해주세요.');
     window.location.replace('/login');
   };
 
-  // Refresh token for persisting session
-  // 여기에 리프레시 토큰 주소 넣기
   const { data, error, isValidating } = useSWR(
     isLogin ? validToken : null,
-    // url =>
-    //   fetch(url, {
-    //     credentials: 'include',
-    //   }).then(res => res.json()),
-    // {
-    //   // Silently refresh token every expiry time
-    //   refreshInterval: 1000 * 60 * 15,
-    //   revalidateOnFocus: false,
-    // },
     url => axios.get(url).then(response => response.data),
     {
       refreshInterval: 10000,

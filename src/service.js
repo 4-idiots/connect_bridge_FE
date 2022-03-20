@@ -6,9 +6,8 @@ import axios from 'axios';
 const customAxios = axios.create({ timeout: 10000 });
 
 export const loginService = (userID, userPW) => {
-  return customAxios.get(
-    'http://localhost:4000/logToken',
-    // `${process.env.REACT_APP_SUK_URL}/user/login`,
+  return customAxios.post(
+    `${process.env.REACT_APP_MOON_URL}/user/login`,
     {
       userID,
       userPW,
@@ -26,7 +25,7 @@ export const setAuthorizationToken = token => {
 };
 
 export const findPWServcie = (userID, userName, userEmail) => {
-  return customAxios.post(`http://localhost:8080/user/findPW`, {
+  return customAxios.post(`${process.env.REACT_APP_MOON_URL}/user/findPW`, {
     userID,
     userName,
     userEmail,
@@ -34,7 +33,7 @@ export const findPWServcie = (userID, userName, userEmail) => {
 };
 
 export const findIDService = (userName, userPhone, userEmail) => {
-  return customAxios.post(`http://localhost:8080/user/findID`, {
+  return customAxios.post(`${process.env.REACT_APP_MOON_URL}/user/findID`, {
     userName,
     userPhone,
     userEmail,
@@ -43,7 +42,7 @@ export const findIDService = (userName, userPhone, userEmail) => {
 
 export const outdoorUploadService = formData => {
   return customAxios.post(
-    `${process.env.REACT_APP_SUK_URL}/outdoor/post`,
+    `${process.env.REACT_APP_MOON_URL}/outdoor/post`,
     formData,
     {
       headers: {
@@ -55,7 +54,7 @@ export const outdoorUploadService = formData => {
 
 export const outdoorUpdateService = formData => {
   return customAxios.patch(
-    `${process.env.REACT_APP_SUK_URL}/outdoor/post`,
+    `${process.env.REACT_APP_MOON_URL}/outdoor/post`,
     {
       formData,
     },
@@ -64,30 +63,29 @@ export const outdoorUpdateService = formData => {
 };
 
 export const outdoorGetAllService = cursor => {
-  return `${process.env.REACT_APP_MOON_URL}/team/${cursor}`;
+  return `${process.env.REACT_APP_MOON_URL}/outdoor/${cursor}`;
 };
 
 export const outdoorGetSomeService = outActID => {
-  // return axios.get(`${process.env.REACT_APP_SUK_URL}/outdoor/post/${outActID}`);
-  return customAxios.get('http://localhost:4000/getSomeOutdoor');
+  return customAxios.get(
+    `${process.env.REACT_APP_MOON_URL}/outdoor/post/${outActID}`,
+  );
 };
 
 export const outdoorDeleteService = outActID => {
-  // 테스트용
-  // return axios.delete(
-  //   `${process.env.REACT_APP_SUK_URL}/outdoor/post/${outActID}`,
-  // );
-  return customAxios.get('http://localhost:4000/deleteOutdoor');
+  return customAxios.delete(
+    `${process.env.REACT_APP_MOON_URL}/outdoor/post/${outActID}`,
+  );
 };
 
 export const outdoorLikeService = (outActID, userID) => {
   return customAxios.get(
-    `${process.env.REACT_APP_SUK_URL}/outdoor/like?post=${outActID}&userID=${userID}`,
+    `${process.env.REACT_APP_MOON_URL}/outdoor/like?post=${outActID}&userID=${userID}`,
   );
 };
 
 export const validToken = () => {
-  return `http://localhost:8080/valid`;
+  return `${process.env.REACT_APP_MOON_URL}/valid`;
 };
 
 export const teamGetAllService = team => {

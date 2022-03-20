@@ -9,9 +9,7 @@ import { outdoorGetAllService } from '../service';
 
 const getKey = (pageIndex, previousPageData) => {
   if (previousPageData && !previousPageData.length) return null;
-
   if (pageIndex === 0) return outdoorGetAllService(0);
-
   return outdoorGetAllService(pageIndex);
 };
 
@@ -23,7 +21,7 @@ export const OutdoorInfinite = ({ outActClick }) => {
     getKey,
     fetcher,
   );
-  const issues = data ? [].concat(...data) : []; // 이게 대박 하나로 통일 하는 코드, 안쓰면 렌더링에서 map을 2번 써야 함
+  const issues = data ? [].concat(...data) : []; // 하나로 통일 하는 코드, 안쓰면 렌더링에서 map을 2번 써야 함
   const isLoadingInitialData = !data && !error;
   const isLoadingMore =
     isLoadingInitialData ||
