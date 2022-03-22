@@ -41,20 +41,16 @@ export const findIDService = (userName, userPhone, userEmail) => {
 };
 
 export const outdoorUploadService = formData => {
-  return customAxios.post(
-    `${process.env.REACT_APP_MOON_URL}/outdoor/post`,
-    formData,
-    {
-      headers: {
-        'content-type': 'multipart/form-data',
-      },
+  return customAxios.post(`http://localhost:8080/outdoor/post`, formData, {
+    headers: {
+      'content-type': 'multipart/form-data',
     },
-  );
+  });
 };
 
 export const outdoorUpdateService = formData => {
   return customAxios.patch(
-    `${process.env.REACT_APP_MOON_URL}/outdoor/post`,
+    `http://localhost:8080/outdoor/post`,
     {
       formData,
     },
@@ -73,9 +69,7 @@ export const outdoorGetSomeService = outActID => {
 };
 
 export const outdoorDeleteService = outActID => {
-  return customAxios.delete(
-    `${process.env.REACT_APP_MOON_URL}/outdoor/post/${outActID}`,
-  );
+  return customAxios.delete(`http://localhost:8080/outdoor/post/${outActID}`);
 };
 
 export const outdoorLikeService = (outActID, userID) => {
