@@ -1,17 +1,17 @@
 import React from 'react';
 import {
-  FindPWForm,
+  OutdoorMainForm,
   NavbarForm,
   FooterForm,
   BannerForm,
-} from '../components/cRoutes';
+} from '../../components/cRoutes';
 
-export const FindPW = () => {
+export const OutdoorMain = () => {
   return (
     <>
       <NavbarForm />
       <BannerForm />
-      <FindPWForm />
+      <OutdoorMainForm />
       <FooterForm />
     </>
   );

@@ -6,14 +6,18 @@ import {
   Box,
   Form,
   Card,
-  Tag,
 } from 'react-bulma-components';
 import styled, { css } from 'styled-components';
 import ReactQuill from 'react-quill';
-import EditorToolbar, { modules, formats } from './projectQuill';
+import EditorToolbar, { modules, formats } from './dev/projectQuill';
 import 'react-quill/dist/quill.snow.css';
-import { checekArray, onOffArray, areaArray, platArray } from './projectValue';
-import { Recruit } from './projectRecruit';
+import {
+  checekArray,
+  onOffArray,
+  areaArray,
+  platArray,
+} from './dev/projectValue';
+import { Recruit } from './dev/projectRecruit';
 
 export const ProjectUploadForm = () => {
   const [platform, setPlatform] = useState([]);

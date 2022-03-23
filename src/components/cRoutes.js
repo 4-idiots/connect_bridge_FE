@@ -22,6 +22,7 @@ export { InfoForm } from './TeamPage/info';
 
 // ProjectPage
 export { ProjectUploadForm } from './ProjectPage/projectUploadModule';
+export { ProjectMainForm } from './ProjectPage/projectMainModule';
 
 // CommunityPage
 export { CommunityForm } from './CommunityPage/communityMain';

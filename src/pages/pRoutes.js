@@ -1,16 +1,21 @@
-export { Login } from './login';
-export { FindID } from './findID';
-export { FindPW } from './findPW';
-export { Sign } from './sign';
-
-export { OutdoorUpload } from './outdoorUpload';
-export { OutdoorMain } from './outdoorMain';
-export { OutdoorUpdate } from './outdoorUpdate';
-export { Team } from './team';
-export { ProjectUpload } from './projectUpload';
 export { Main } from './main';
-export { Info } from './Info';
 
-export { Community } from './community';
-export { CommunityInfo } from './communityinfo';
-export { CommunityWrite } from './communitywrite';
+export { Login } from './login/login';
+export { FindID } from './login/findID';
+export { FindPW } from './login/findPW';
+
+export { Sign } from './signup/sign';
+
+export { OutdoorUpload } from './outdoor/outdoorUpload';
+export { OutdoorMain } from './outdoor/outdoorMain';
+export { OutdoorUpdate } from './outdoor/outdoorUpdate';
+
+export { Team } from './team/team';
+export { Info } from './team/Info';
+
+export { Community } from './community/community';
+export { CommunityInfo } from './community/communityinfo';
+export { CommunityWrite } from './community/communitywrite';
+
+export { ProjectUpload } from './project/projectUpload';
+export { ProjectMain } from './project/projectMain';

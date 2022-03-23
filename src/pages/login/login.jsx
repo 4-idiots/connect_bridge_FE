@@ -1,17 +1,17 @@
 import React from 'react';
 import {
-  OutdoorMainForm,
+  LoginForm,
   NavbarForm,
   FooterForm,
   BannerForm,
-} from '../components/cRoutes';
+} from '../../components/cRoutes';
 
-export const OutdoorMain = () => {
+export const Login = () => {
   return (
     <>
       <NavbarForm />
       <BannerForm />
-      <OutdoorMainForm />
+      <LoginForm />
       <FooterForm />
     </>
   );

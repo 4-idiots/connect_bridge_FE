@@ -1,17 +1,15 @@
 import React from 'react';
 import {
-  LoginForm,
+  ProjectMainForm,
   NavbarForm,
   FooterForm,
-  BannerForm,
-} from '../components/cRoutes';
+} from '../../components/cRoutes';
 
-export const Login = () => {
+export const ProjectMain = () => {
   return (
     <>
       <NavbarForm />
-      <BannerForm />
-      <LoginForm />
+      <ProjectMainForm />
       <FooterForm />
     </>
   );

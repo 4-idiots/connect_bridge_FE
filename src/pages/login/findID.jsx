@@ -1,15 +1,17 @@
 import React from 'react';
 import {
-  OutdoorUpdateForm,
+  FindIDForm,
   NavbarForm,
   FooterForm,
-} from '../components/cRoutes';
+  BannerForm,
+} from '../../components/cRoutes';
 
-export const OutdoorUpdate = () => {
+export const FindID = () => {
   return (
     <>
       <NavbarForm />
-      <OutdoorUpdateForm />
+      <BannerForm />
+      <FindIDForm />
       <FooterForm />
     </>
   );
