@@ -6,12 +6,20 @@ import {
   Box,
   Form,
   Card,
+  Tag,
 } from 'react-bulma-components';
-import styled from 'styled-components';
-import { checekArray, onOffArray, areaArray } from './projectValue';
+import styled, { css } from 'styled-components';
+import ReactQuill from 'react-quill';
+import EditorToolbar, { modules, formats } from './projectQuill';
+import 'react-quill/dist/quill.snow.css';
+import { checekArray, onOffArray, areaArray, platArray } from './projectValue';
 import { Recruit } from './projectRecruit';
 
 export const ProjectUploadForm = () => {
+  const [platform, setPlatform] = useState([]);
+  const [member, setMember] = useState([
+    { main: '기획', sub: 'UI/UX 기획', need: 1 },
+  ]);
   const [postInfo, setPostInfo] = useState({
     radio: true,
     onOff: '온라인/오프라인 모두 가능',
@@ -28,6 +36,7 @@ export const ProjectUploadForm = () => {
     area,
     language,
     reference,
+    content,
   } = postInfo;
 
   const onChangeProjectEvent = useCallback(
@@ -45,6 +54,23 @@ export const ProjectUploadForm = () => {
       ...postInfo,
       field: e.currentTarget.name,
     });
+  };
+
+  const onChangeContent = value => {
+    setPostInfo({
+      ...postInfo,
+      content: value,
+    });
+  };
+
+  const onChangePlatform = e => {
+    if (platform.includes(e.currentTarget.name)) {
+      const list = [...platform];
+      list.splice(platform.indexOf(e.currentTarget.name), 1);
+      setPlatform(list);
+    } else {
+      setPlatform([...platform, e.currentTarget.name]);
+    }
   };
 
   const encodeFileToBase64 = fileBlob => {
@@ -113,6 +139,7 @@ export const ProjectUploadForm = () => {
             >
               {checekArray.map(item => (
                 <Customcheckbox
+                  checktype="field"
                   key={item}
                   name={item}
                   checked={field === item}
@@ -178,9 +205,49 @@ export const ProjectUploadForm = () => {
             </Form.Select>
           </Form.Control>
         </Form.Field>
-
-        <Recruit />
-
+        <Recruit member={member} setMember={setMember} />
+        <Form.Field>
+          <Form.Label>* 출시 플랫폼</Form.Label>
+          <Form.Help>
+            ! 출시 플랫폼은 중복 체크가 가능합니다. (ex: IOS, MAC OS)
+          </Form.Help>
+          <div
+            style={{
+              width: '100%',
+              margin: 'auto',
+              display: 'flex',
+              flexWrap: 'wrap',
+            }}
+          >
+            {platArray.map(item => (
+              <Customcheckbox
+                checktype="platform"
+                key={item}
+                name={item}
+                onChange={onChangePlatform}
+                checked={platform.includes(item)}
+              >
+                {item}
+              </Customcheckbox>
+            ))}
+          </div>
+        </Form.Field>
+        <Form.Field>
+          <Form.Label>* 프로젝트 설명</Form.Label>
+          <Form.Help>
+            ! 설명이 풍부한 프로젝트는 풍부하지 않은 프로젝트에 비해 지원율리
+            50% 높습니다.
+          </Form.Help>
+          <EditorToolbar />
+          <ReactQuill
+            theme="snow"
+            value={content || ''}
+            onChange={onChangeContent}
+            placeholder="Write something awesome..."
+            modules={modules}
+            formats={formats}
+          />
+        </Form.Field>
         <Form.Field>
           <Form.Label>* 기술/언어 (최대 10개)</Form.Label>
           <Form.Help>
@@ -211,16 +278,26 @@ export const ProjectUploadForm = () => {
           </Form.Control>
         </Form.Field>
       </Box>
+      <Button onClick={() => console.log(content)}>test</Button>
     </Container>
   );
 };
 
 const Customcheckbox = styled(Form.Checkbox)`
-  display: flex;
-  width: 12rem;
+  ${props =>
+    props.checktype === 'platform' &&
+    css`
+      font-size: 1rem;
+    `}
+  ${props =>
+    props.checktype === 'field' &&
+    css`
+      font-size: 1.3rem;
+      width: 12rem;
+    `}
   margin: 1rem;
+  display: flex;
   text-align: center;
-  font-size: 1.3rem;
   input[type='checkbox'] {
     width: 1.5rem;
     height: 1.5rem;

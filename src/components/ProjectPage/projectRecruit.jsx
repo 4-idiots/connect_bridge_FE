@@ -1,6 +1,8 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable react/no-array-index-key */
 import React, { useState } from 'react';
-import { Form, Button } from 'react-bulma-components';
+import PropTypes from 'prop-types';
+import { Form, Button, Icon } from 'react-bulma-components';
 import {
   mainArray,
   planArray,
@@ -11,8 +13,16 @@ import {
   etcArray,
 } from './projectValue';
 
-export const Recruit = () => {
-  const [member, setMember] = useState([{ main: '기획', sub: 'UI/UX 기획' }]);
+export const Recruit = ({ member, setMember }) => {
+  const [full, setFull] = useState(1);
+
+  const checkMem = () => {
+    let memVal = 0;
+    member.map(item => {
+      memVal += item.need;
+      return setFull(memVal);
+    });
+  };
 
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
@@ -21,18 +31,42 @@ export const Recruit = () => {
     setMember(list);
   };
 
+  const handleNeedPlus = (ne, index) => {
+    if (member.length > 8 || full + 1 > 9) {
+      alert('추가할 수 없습니다.');
+    } else {
+      const list = [...member];
+      list[index][ne] = member[index][ne] + 1;
+      setMember(list);
+    }
+    checkMem();
+  };
+
+  const handleNeedMinus = (ne, index) => {
+    if (member[index][ne] === 1) {
+      // pass
+    } else {
+      const list = [...member];
+      list[index][ne] = member[index][ne] - 1;
+      setMember(list);
+    }
+    checkMem();
+  };
+
   const handleRemove = index => {
     const list = [...member];
     list.splice(index, 1);
     setMember(list);
+    checkMem();
   };
 
   const handleAdd = () => {
-    if (member.length > 8) {
+    if (member.length > 8 || full + 1 > 9) {
       alert('추가할 수 없습니다.');
     } else {
-      setMember([...member, { main: '기획', sub: 'UI/UX 기획' }]);
+      setMember([...member, { main: '기획', sub: 'UI/UX 기획', need: 1 }]);
     }
+    checkMem();
   };
 
   const genOption = arrayTitle => {
@@ -57,7 +91,7 @@ export const Recruit = () => {
       <Form.Control>
         {member.map((m, index) => {
           return (
-            <div key={index}>
+            <div key={index} style={{ display: 'flex' }}>
               <Form.Select
                 name="main"
                 onChange={e => handleInputChange(e, index)}
@@ -77,6 +111,16 @@ export const Recruit = () => {
               </Form.Select>
 
               <div>
+                <Icon onClick={() => handleNeedPlus('need', index)}>
+                  <i className="fas fa-plus" />
+                </Icon>
+                {m.need}
+                <Icon onClick={() => handleNeedMinus('need', index)}>
+                  <i className="fas fa-minus" />
+                </Icon>
+              </div>
+
+              <div>
                 {member.length - 1 === index && (
                   <Button color="info" onClick={handleAdd}>
                     추가
@@ -94,4 +138,9 @@ export const Recruit = () => {
       </Form.Control>
     </Form.Field>
   );
+};
+
+Recruit.propTypes = {
+  member: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setMember: PropTypes.func.isRequired,
 };

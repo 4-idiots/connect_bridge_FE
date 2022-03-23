@@ -95,3 +95,12 @@ export const coopArray = [
 ];
 
 export const etcArray = ['작가/블로거', '인플루언서/유튜버', '작곡(사운드)'];
+
+export const platArray = [
+  '반응형 웹(PC/모바일)',
+  '안드로이드 앱',
+  'PC(윈도우/맥) 프로그램',
+  'IOS 앱',
+  '설치형/SASS 솔루션',
+  '미정(논의 후 확정)',
+];
