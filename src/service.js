@@ -90,3 +90,13 @@ export const teamGetAllService = team => {
   return `http://localhost:4000/team${team}`;
 };
  */
+
+export const projectUploadService = formData => {
+  return customAxios.post(
+    `http://localhost:8080/project`,
+    {
+      formData,
+    },
+    { headers: { 'content-type': 'multipart/form-data' } },
+  );
+};

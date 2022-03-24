@@ -11,9 +11,9 @@ import {
   backArray,
   coopArray,
   etcArray,
-} from './projectValue';
+} from './uploadValue';
 
-export const Recruit = ({ member, setMember }) => {
+export const ProjectRecruit = ({ member, setMember }) => {
   const [full, setFull] = useState(1);
 
   const checkMem = () => {
@@ -140,7 +140,7 @@ export const Recruit = ({ member, setMember }) => {
   );
 };
 
-Recruit.propTypes = {
+ProjectRecruit.propTypes = {
   member: PropTypes.arrayOf(PropTypes.object).isRequired,
   setMember: PropTypes.func.isRequired,
 };
