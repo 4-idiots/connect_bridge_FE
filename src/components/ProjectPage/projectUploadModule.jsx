@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import EditorToolbar, { modules, formats } from './dev/quill';
 import 'react-quill/dist/quill.snow.css';
-import 'react-datepicker/dist/react-datepicker.css';
+import './uploadComponent/datepicker.css';
 import {
   ProjectType,
   ProjectRecruit,
