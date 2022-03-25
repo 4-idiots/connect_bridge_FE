@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import styled, { css } from 'styled-components';
 import { Form } from 'react-bulma-components';
 import DatePicker from 'react-datepicker';
