@@ -38,6 +38,6 @@ export const ProjectPlatform = ({ checked, onChange }) => {
 };
 
 ProjectPlatform.propTypes = {
-  checked: PropTypes.arrayOf(PropTypes.object).isRequired,
+  checked: PropTypes.arrayOf(PropTypes.string).isRequired,
   onChange: PropTypes.func.isRequired,
 };

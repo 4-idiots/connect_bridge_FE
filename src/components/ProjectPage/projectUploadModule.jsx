@@ -102,7 +102,10 @@ export const ProjectUploadForm = () => {
     formData.append('projectPlatform', platform);
     formData.append('projectSkill', skill);
 
-    uploadAxios(formData);
+    // uploadAxios(formData);
+    console.log(postInfo);
+    console.log(platform);
+    console.log(member);
   };
 
   return (
