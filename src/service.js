@@ -93,8 +93,6 @@ export const teamGetAllService = team => {
 export const communityGetAllService = community => {
   return `http://localhost:4000/community${community}`;
 };
-<<<<<<< HEAD
- */
 
 export const projectUploadService = formData => {
   return customAxios.post(
@@ -105,5 +103,3 @@ export const projectUploadService = formData => {
     { headers: { 'content-type': 'multipart/form-data' } },
   );
 };
-=======
->>>>>>> team_six

@@ -24,11 +24,7 @@ export const NavbarForm = () => {
       </Navbar.Brand>
       <Navbar.Menu className={burger ? 'is-active' : ''}>
         <Navbar.Container>
-<<<<<<< HEAD
           <Navbar.Item renderAs={Link} to="/project">
-=======
-          <Navbar.Item renderAs={Link} to="#">
->>>>>>> team_six
             프로젝트
           </Navbar.Item>
           <Navbar.Item renderAs={Link} to="/community">
@@ -42,7 +38,7 @@ export const NavbarForm = () => {
           </Navbar.Item>
         </Navbar.Container>
         <Navbar.Container align="right">
-          {!isLogin ? (
+          {isLogin ? (
             <>
               <Navbar.Item renderAs={Link} to="/project/upload">
                 프로젝트 생성
