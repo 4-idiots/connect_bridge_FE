@@ -29,6 +29,7 @@ export const SignupForm = () => {
   const [userBirthdayM, setuserBirthdayM] = useState('');
   const [userBirthdayD, setuserBirthdayD] = useState('');
   const [code, setcode] = useState('');
+  const [codeon, setcodeon] = useState(false);
 
   const userData = () => {
     return axios.get('http://4idiot.ddns.net:8080/users').then(response => {
@@ -156,6 +157,7 @@ export const SignupForm = () => {
       )
       .then(response => {
         console.log(response);
+        console.log(response.data.value);
         if (response.data.value === true) {
           alert('중복입니다. 다시 입력해주세요.');
 
@@ -215,29 +217,38 @@ alert('다시 확인해주세요');
           userEmail,
         })
         .then(response => {
-          console.log(response.data.message);
           console.log(data);
-          alert('이메일 인증', '6글자를 입력해주세여');
+          alert('이메일 인증칸에 6글자를 입력해주세요');
           // eslint-disable-next-line react/no-this-in-sfc
-          axios
-            .post('http://4idiot.ddns.net:8080/verifycode', {
-              code,
-            })
-            .then(response => {
-              console.log(response.data.message);
-              console.log(code);
-            });
+
           // eslint-disable-next-line no-unused-vars
         })
         // eslint-disable-next-line no-unused-vars
         .catch(error => {
           alert('이메일 중복 체크를 해주세요.');
         });
-    } else alert('이메일 중복 체크를 해주세요.');
+    } else alert('이메일 중복 체크를 해주세요');
   };
 
   const EmailCode = e => {
     e.preventDefault();
+    console.log(data);
+    console.log(code);
+    axios
+      .post('http://4idiot.ddns.net:8080/verifycode', {
+        code,
+        userEmail,
+      })
+      .then(response => {
+        console.log(response);
+        console.log(response.data.message);
+        console.log(code);
+      });
+    if (data === 'ok' && codeon === false) {
+      alert('인증완료');
+      setcodeon(true);
+    } else alert('다시 확인해 주세요.');
+    setcodeon(false);
   };
   const Click = e => {
     e.preventDefault();
@@ -288,7 +299,7 @@ alert('다시 확인해주세요');
           window.location = '/login';
         })
         .catch(response => {
-          alert('입력값을 확인해주세요.');
+          alert('입력값을 다시 확인해주세요.');
         });
     } else {
       alert('입력값을 확인해주세요');

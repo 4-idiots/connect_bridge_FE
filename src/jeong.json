@@ -1,378 +1,170 @@
 {
-  "team0": [
+  "community0": [
     {
-      "id": 81,
-      "userNickname": "aaa",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "aaa",
-      "userInterest": "aaa",
-      "userLike": 0,
-      "outActSub": null
-    },
-    {
-      "id": 80,
+      "postID": 81,
+      "title": "bbb",
       "userNickname": "bbb",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "bbb",
-      "userInterest": "bbb",
-      "userLike": 0,
-      "outActSub": null
+      "viewCount": 81,
+      "likeCount": 2,
+      "commentCount": 3
     },
     {
-      "id": 79,
-      "userNickname": "ccc",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "ccc",
-      "userInterest": "ccc",
-      "userLike": 0,
-      "outActSub": null
+      "postID": 80,
+      "title": "bbb",
+      "userNickname": "bbb",
+      "viewCount": 80,
+      "likeCount": 2,
+      "commentCount": 3
     },
     {
-      "id": 78,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
+      "postID": 79,
+      "title": "bbb",
+      "userNickname": "bbb",
+      "viewCount": 79,
+      "likeCount": 2,
+      "commentCount": 3
     },
     {
-      "id": 77,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
+      "postID": 78,
+      "title": "bbb",
+      "userNickname": "bbb",
+      "viewCount": 78,
+      "likeCount": 2,
+      "commentCount": 3
+    },
+    {
+      "postID": 77,
+      "title": "bbb",
+      "userNickname": "bbb",
+      "viewCount": 77,
+      "likeCount": 2,
+      "commentCount": 3
     }
   ],
-  "team1": [
+  "community1": [
     {
-      "id": 76,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
+      "postID": 76,
+      "title": "bbb",
+      "userNickname": "bbb",
+      "viewCount": 76,
+      "likeCount": 2,
+      "commentCount": 3
     },
     {
-      "id": 75,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
+      "postID": 75,
+      "title": "bbb",
+      "userNickname": "bbb",
+      "viewCount": 75,
+      "likeCount": 2,
+      "commentCount": 3
     },
     {
-      "id": 74,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
+      "postID": 74,
+      "title": "bbb",
+      "userNickname": "bbb",
+      "viewCount": 74,
+      "likeCount": 2,
+      "commentCount": 3
     },
     {
-      "id": 73,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
+      "postID": 73,
+      "title": "bbb",
+      "userNickname": "bbb",
+      "viewCount": 73,
+      "likeCount": 2,
+      "commentCount": 3
     },
     {
-      "id": 72,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
+      "postID": 72,
+      "title": "bbb",
+      "userNickname": "bbb",
+      "viewCount": 72,
+      "likeCount": 2,
+      "commentCount": 3
     }
   ],
-  "team2": [
+  "community2": [
     {
-      "id": 71,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
+      "postID": 71,
+      "title": "bbb",
+      "userNickname": "bbb",
+      "viewCount": 71,
+      "likeCount": 2,
+      "commentCount": 3
     },
     {
-      "id": 70,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
+      "postID": 70,
+      "title": "bbb",
+      "userNickname": "bbb",
+      "viewCount": 70,
+      "likeCount": 2,
+      "commentCount": 3
     },
     {
-      "id": 69,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
+      "postID": 69,
+      "title": "bbb",
+      "userNickname": "bbb",
+      "viewCount": 69,
+      "likeCount": 2,
+      "commentCount": 3
     },
     {
-      "id": 68,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
+      "postID": 68,
+      "title": "bbb",
+      "userNickname": "bbb",
+      "viewCount": 68,
+      "likeCount": 2,
+      "commentCount": 3
     },
     {
-      "id": 67,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
+      "postID": 67,
+      "title": "bbb",
+      "userNickname": "bbb",
+      "viewCount": 67,
+      "likeCount": 2,
+      "commentCount": 3
     }
   ],
-  "team3": [
+  "community3": [
     {
-      "id": 66,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
+      "postID": 66,
+      "title": "bbb",
+      "userNickname": "bbb",
+      "viewCount": 66,
+      "likeCount": 2,
+      "commentCount": 3
     },
     {
-      "id": 65,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
+      "postID": 65,
+      "title": "bbb",
+      "userNickname": "bbb",
+      "viewCount": 65,
+      "likeCount": 2,
+      "commentCount": 3
     },
     {
-      "id": 64,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
+      "postID": 64,
+      "title": "bbb",
+      "userNickname": "bbb",
+      "viewCount": 64,
+      "likeCount": 2,
+      "commentCount": 3
     },
     {
-      "id": 63,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
+      "postID": 63,
+      "title": "bbb",
+      "userNickname": "bbb",
+      "viewCount": 63,
+      "likeCount": 2,
+      "commentCount": 3
     },
     {
-      "id": 62,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
-    }
-  ],
-  "team4": [
-    {
-      "id": 61,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
-    },
-    {
-      "id": 60,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
-    },
-    {
-      "id": 59,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
-    },
-    {
-      "id": 58,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
-    },
-    {
-      "id": 57,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
-    }
-  ],
-  "team5": [
-    {
-      "id": 56,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
-    },
-    {
-      "id": 55,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
-    },
-    {
-      "id": 54,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
-    },
-    {
-      "id": 53,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
-    },
-    {
-      "id": 52,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
-    }
-  ],
-  "team6": [
-    {
-      "id": 51,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
-    },
-    {
-      "id": 50,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
-    },
-    {
-      "id": 49,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
-    },
-    {
-      "id": 48,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
-    },
-    {
-      "id": 47,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
-    }
-  ],
-  "team7": [
-    {
-      "id": 46,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
-    },
-    {
-      "id": 45,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
-    },
-    {
-      "id": 44,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
-    },
-    {
-      "id": 43,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
-    },
-    {
-      "id": 42,
-      "userNickname": "qweqweeqw",
-      "userPicture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
-      "userAbility": "qweqweqwewq",
-      "userInterest": "qweqweqwewq",
-      "userLike": 0,
-      "outActSub": null
+      "postID": 62,
+      "title": "bbb",
+      "userNickname": "bbb",
+      "viewCount": 62,
+      "likeCount": 2,
+      "commentCount": 3
     }
   ],
 

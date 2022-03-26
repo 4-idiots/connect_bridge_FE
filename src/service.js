@@ -86,9 +86,14 @@ export const teamGetAllService = team => {
   return `http://4idiot.ddns.net:8080/team${team}`;
 };
 
-/* export const teamGetAllService = team => {
-  return `http://localhost:4000/team${team}`;
+/* export const communityGetAllService = community => {
+  return `http://4idiot.ddns.net:8080/community${community}`;
+}; */
+
+export const communityGetAllService = community => {
+  return `http://localhost:4000/community${community}`;
 };
+<<<<<<< HEAD
  */
 
 export const projectUploadService = formData => {
@@ -100,3 +105,5 @@ export const projectUploadService = formData => {
     { headers: { 'content-type': 'multipart/form-data' } },
   );
 };
+=======
+>>>>>>> team_six

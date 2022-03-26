@@ -119,7 +119,9 @@ export const CommunityWriteForm = () => {
 
   return (
     <Container>
-      <Heading style={{ textAlign: 'center', margin: 35 }}>글쓰기</Heading>
+      <Heading style={{ textAlign: 'center', margin: 35 }}>
+        커뮤니티 글쓰기
+      </Heading>
       <Box style={{ margin: 100, Box: 'center' }}>
         <Form.Field>
           <Form.Label>제목</Form.Label>

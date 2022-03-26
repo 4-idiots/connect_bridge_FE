@@ -10,7 +10,7 @@ export const NavbarForm = () => {
   const isLogin = localStorage.getItem('isLogin') || '';
 
   return (
-    <Navbar fixed="top" color="link">
+    <Navbar fixed="top" color="write">
       <Navbar.Brand>
         <Navbar.Item renderAs={Link} to="/">
           <Image src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuj0imqukWmBbCZxUZqpqHrIixs71sVj7k-g&usqp=CAU" />
@@ -24,7 +24,11 @@ export const NavbarForm = () => {
       </Navbar.Brand>
       <Navbar.Menu className={burger ? 'is-active' : ''}>
         <Navbar.Container>
+<<<<<<< HEAD
           <Navbar.Item renderAs={Link} to="/project">
+=======
+          <Navbar.Item renderAs={Link} to="#">
+>>>>>>> team_six
             프로젝트
           </Navbar.Item>
           <Navbar.Item renderAs={Link} to="/community">

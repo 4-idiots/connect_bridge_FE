@@ -24,7 +24,8 @@ export const TeamCardForm = ({
         style={{
           marginTop: '30px',
           marginRight: '30px',
-          width: '260px',
+          width: '200px',
+          height: '350px',
           border: '2px solid #e7e7e7',
           padding: '14px ',
         }}
@@ -32,7 +33,17 @@ export const TeamCardForm = ({
         <Card.Content>
           <Media>
             <Media.Item>
-              <Heading size={4}>{userNickname}</Heading>
+              <div style={{ marginRight: '30px' }}>
+                <Image
+                  renderAs={Link}
+                  to={`/team/info/${id}`}
+                  size="4by4"
+                  alt="64x64"
+                  src="http://bulma.io/images/placeholders/64x64.png"
+                />
+                <div size={5}>{userNickname}</div>
+              </div>
+
               <br />
               <Heading subtitle size={6}>
                 능력: {userAbility}
@@ -41,13 +52,6 @@ export const TeamCardForm = ({
                 흥미: {userInterest}
               </Heading>
 
-              <Image
-                renderAs={Link}
-                to={`/team/info/${id}`}
-                size={25}
-                alt="64x64"
-                src="http://bulma.io/images/placeholders/64x64.png"
-              />
               <br />
             </Media.Item>
           </Media>
