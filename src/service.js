@@ -103,3 +103,12 @@ export const projectUploadService = formData => {
     { headers: { 'content-type': 'multipart/form-data' } },
   );
 };
+
+export const projectDeleteService = projectID => {
+  return customAxios.delete(`http://localhost:8080/project/${projectID}`);
+};
+
+export const projectGetSomeService = projectID => {
+  return customAxios.get('http://localhost:4000/project1');
+  // return customAxios.get(`http://localhost:8080/project/${projectID}`);
+};

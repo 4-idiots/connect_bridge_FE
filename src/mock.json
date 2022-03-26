@@ -357,5 +357,26 @@
   },
   "refresh": {
     "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MywidXNlck5hbWUiOiIxMTExIiwiZXhwIjoxNjQ3MTY5MDU4LCJ1c2VySUQiOiIxMTExIiwiaWF0IjoxNjQ3MTY5MDQ4fQ.6JbnK4HytonQ3nUpyYBtkqFpT9KtB-xCPT3QuNCHwH4"
+  },
+  "project1": { 
+    "userID" : 3,
+    "projectName" : "title",
+    "projectView" : 68,
+    "projcetLike" : 24,
+    "projectImg" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU",
+    "projectSub" : true,
+    "projectField" : "이커머스",
+    "projectState" : true,
+    "projectArea" : "서울특별시",
+    "projectStart" : "2022/01/02",
+    "projectEnd" : "2022/01/17",
+    "projectMotive": true,
+    "projectContent": "content",
+    "projectOnOff" : "온라인만 가능",
+    "projectTotal" :  [{"main": "기획", "sub": "UI/UX 기획", "need": 2},{"main": "프론트엔드개발", "sub": "언드로이드 앱", "need": 3},{"main": "백엔드개발", "sub": "웹서버", "need": 2}],
+    "projectReference" : "https://naver.com",
+    "projectPlatform": ["반응형 웹(PC/모바일)", "안드로이드 앱", "PC(윈도우/맥) 프로그램"],
+    "createDate": "2022/01/01",
+    "projectSkill": "Java, React"
   }
 }

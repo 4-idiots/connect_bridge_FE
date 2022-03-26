@@ -19,3 +19,4 @@ export { CommunityWrite } from './community/communitywrite';
 
 export { ProjectUpload } from './project/projectUpload';
 export { ProjectMain } from './project/projectMain';
+export { ProjectUpdate } from './project/projectUpdate';

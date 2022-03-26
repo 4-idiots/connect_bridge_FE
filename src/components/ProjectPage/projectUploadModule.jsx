@@ -19,31 +19,32 @@ import { projectUploadService } from '../../service';
 
 export const ProjectUploadForm = () => {
   const navigate = useNavigate();
-  const [platform, setPlatform] = useState([]);
-  const [member, setMember] = useState([
+  const [projectTotal, setProjectTotal] = useState([
     { main: '기획', sub: 'UI/UX 기획', need: 1 },
   ]);
   const [postInfo, setPostInfo] = useState({
-    type: true,
-    onOff: '온라인/오프라인 모두 가능',
-    area: '상관없음',
-    start: new Date('2022/01/02'),
-    end: new Date('2022/01/07'),
+    projectMotive: true,
+    projectOnOff: '온라인/오프라인 모두 가능',
+    projectArea: '상관없음',
+    projectStart: new Date('2022/01/02'),
+    projectEnd: new Date('2022/01/07'),
+    projectPlatform: [],
   });
 
   const {
-    type,
-    title,
-    field,
-    imgSrc,
+    projectMotive,
+    projectName,
+    projectField,
+    projectImg,
     preview,
-    onOff,
-    area,
-    skill,
-    reference,
-    content,
-    start,
-    end,
+    projectOnOff,
+    projectArea,
+    projectSkill,
+    projectReference,
+    projectContent,
+    projectStart,
+    projectEnd,
+    projectPlatform,
   } = postInfo;
 
   const onChangeProjectEvent = useCallback(
@@ -57,12 +58,12 @@ export const ProjectUploadForm = () => {
   );
 
   const onChangePlatform = e => {
-    if (platform.includes(e.currentTarget.name)) {
-      const list = [...platform];
-      list.splice(platform.indexOf(e.currentTarget.name), 1);
-      setPlatform(list);
+    if (projectPlatform.includes(e.currentTarget.name)) {
+      const list = [...projectPlatform];
+      list.splice(projectPlatform.indexOf(e.currentTarget.name), 1);
+      setPostInfo({ projectPlatform: list });
     } else {
-      setPlatform([...platform, e.currentTarget.name]);
+      setPostInfo({ ...postInfo, projectPlatform: e.currentTarget.name });
     }
   };
 
@@ -71,7 +72,11 @@ export const ProjectUploadForm = () => {
     reader.readAsDataURL(fileBlob);
     return new Promise(resolve => {
       reader.onload = () => {
-        setPostInfo({ ...postInfo, preview: reader.result, imgSrc: fileBlob });
+        setPostInfo({
+          ...postInfo,
+          preview: reader.result,
+          projectImg: fileBlob,
+        });
         resolve();
       };
     });
@@ -90,51 +95,52 @@ export const ProjectUploadForm = () => {
   const onSubmitEvent = () => {
     const formData = new FormData();
     formData.append('userID', 1);
-    formData.append('projectName', title);
-    formData.append('projectMotive', type);
-    formData.append('projectImg', imgSrc);
-    formData.append('projectContent', content);
-    formData.append('projectField', field);
-    formData.append('projectOnOff', onOff);
-    formData.append('projectArea', area);
-    formData.append('projectTotal', member);
-    formData.append('projectReference', reference);
-    formData.append('projectPlatform', platform);
-    formData.append('projectSkill', skill);
+    formData.append('projectName', projectName);
+    formData.append('projectMotive', projectMotive);
+    formData.append('projectImg', projectImg);
+    formData.append('projectContent', projectContent);
+    formData.append('projectField', projectField);
+    formData.append('projectOnOff', projectOnOff);
+    formData.append('projectArea', projectArea);
+    formData.append('projectTotal', projectTotal);
+    formData.append('projectReference', projectReference);
+    formData.append('projectPlatform', projectPlatform);
+    formData.append('projectSkill', projectSkill);
+    formData.append('projectStart', projectStart);
+    formData.append('projectEnd', projectEnd);
 
     // uploadAxios(formData);
     console.log(postInfo);
-    console.log(platform);
-    console.log(member);
+    console.log(projectTotal);
   };
 
   return (
     <Container>
-      <Heading style={{ textAlign: 'center' }}>모임 생성 하기</Heading>
+      <Heading style={{ textAlign: 'center' }}>모임 수정 하기</Heading>
       <Box style={{ width: '90%', margin: 'auto' }}>
         <ProjectType
-          valcheck={type}
+          valcheck={projectMotive}
           gettrue={() => {
-            setPostInfo({ ...postInfo, type: true });
+            setPostInfo({ ...postInfo, projectMotive: true });
           }}
           getfalse={() => {
-            setPostInfo({ ...postInfo, type: false });
+            setPostInfo({ ...postInfo, projectMotive: false });
           }}
         />
         <ProjectInput
           label="* 프로젝트명"
           help="! 직관적인 프로젝트명을 사용하시면 클릭률이 올라갑니다."
           placeholder="3~20글자로 적어주세요 ex)승차거부 신고앱"
-          value={title}
-          name="title"
+          value={projectName || ''}
+          name="projectName"
           onChange={onChangeProjectEvent}
         />
         <ProjectField
-          checked={field}
+          checked={projectField}
           onChange={e =>
             setPostInfo({
               ...postInfo,
-              field: e.currentTarget.name,
+              projectField: e.currentTarget.name,
             })
           }
         />
@@ -145,8 +151,11 @@ export const ProjectUploadForm = () => {
           }}
         />
         <ProjectArea onChange={onChangeProjectEvent} />
-        <ProjectRecruit member={member} setMember={setMember} />
-        <ProjectPlatform checked={platform} onChange={onChangePlatform} />
+        <ProjectRecruit member={projectTotal} setMember={setProjectTotal} />
+        <ProjectPlatform
+          checked={projectPlatform}
+          onChange={onChangePlatform}
+        />
         <Form.Field>
           <Form.Label>* 프로젝트 설명</Form.Label>
           <Form.Help>
@@ -156,11 +165,11 @@ export const ProjectUploadForm = () => {
           <EditorToolbar />
           <ReactQuill
             theme="snow"
-            value={content || ''}
+            value={projectContent || ''}
             onChange={value =>
               setPostInfo({
                 ...postInfo,
-                content: value,
+                projectContent: value,
               })
             }
             placeholder="Write something awesome..."
@@ -169,34 +178,34 @@ export const ProjectUploadForm = () => {
           />
         </Form.Field>
         <ProjectDate
-          start={start}
-          end={end}
+          start={projectStart}
+          end={projectEnd}
           startChange={date => {
-            setPostInfo({ ...postInfo, start: date });
+            setPostInfo({ ...postInfo, projectStart: date });
           }}
           endChange={date => {
-            setPostInfo({ ...postInfo, end: date });
+            setPostInfo({ ...postInfo, projectEnd: date });
           }}
         />
         <ProjectInput
           label="* 기술/언어 (최대 10개)"
           help="! 프로젝트에 적용된/적용하고자 하는 기술/디자인 플랫폼을 적어주세요."
           placeholder="ex) java, react, figma, photoshop"
-          value={skill}
-          name="skill"
+          value={projectSkill}
+          name="projectSkill"
           onChange={onChangeProjectEvent}
         />
         <ProjectInput
           label="* 참고자료"
           help="! 벤치마킹하는 서비스나, 프로젝트를 정리하신 자료의 웹주소를 등록해주세요."
           placeholder="https://4idiot.com"
-          value={reference}
-          name="reference"
+          value={projectReference}
+          name="projectReference"
           onChange={onChangeProjectEvent}
         />
         <Button.Group align="center">
           <Button color="success" onClick={onSubmitEvent}>
-            올리기
+            수정하기
           </Button>
         </Button.Group>
       </Box>
