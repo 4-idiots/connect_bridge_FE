@@ -13,6 +13,9 @@ import {
   ProjectUpload,
   Main,
   Info,
+  Community,
+  CommunityWrite,
+  CommunityInfo,
 } from './pages/pRoutes';
 import { AuthContext } from './contexts/store/auth';
 import { useProvideAuth } from './contexts/hooks/useProvideAuth';
@@ -38,6 +41,12 @@ const App = () => {
           <Route path="/team" element={<Team />} />
           <Route path="/team/info/:teamID" element={<Info />} />
           <Route path="/project/upload" element={<ProjectUpload />} />
+          <Route path="/community" element={<Community />} />
+          <Route path="/community/write" element={<CommunityWrite />} />
+          <Route
+            path="/community/info/:communityID"
+            element={<CommunityInfo />}
+          />
         </Routes>
       </BrowserRouter>
     </AuthContext.Provider>

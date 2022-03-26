@@ -41,7 +41,7 @@ export const useProvideAuth = () => {
     // },
     url => axios.get(url).then(response => response.data),
     {
-      refreshInterval: 10000,
+      refreshInterval: 1000000,
       revalidateOnFocus: false,
     },
   );
