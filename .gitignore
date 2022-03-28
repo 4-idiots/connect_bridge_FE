@@ -28,3 +28,6 @@ storybook-static
 /src/assets
 yarn.lock
 .env
+.css
+.svg
+.png

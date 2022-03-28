@@ -1,8 +1,6 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 
 import {
   Container,
@@ -131,16 +129,6 @@ export const CommunityWriteForm = () => {
         </Form.Field>
 
         <Form.Label>내용</Form.Label>
-        <Form.Field>
-          <div style={{}}>
-            <ReactQuill
-              style={{ height: 400 }}
-              theme="snow"
-              delta={contents}
-              onChange={setcontents}
-            />
-          </div>
-        </Form.Field>
         <br />
         <br />
 

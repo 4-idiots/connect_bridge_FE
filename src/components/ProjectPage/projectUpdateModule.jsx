@@ -1,9 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { Container, Heading, Button, Box, Form } from 'react-bulma-components';
 import { useNavigate } from 'react-router-dom';
-import ReactQuill from 'react-quill';
-import EditorToolbar, { modules, formats } from './dev/quill';
-import 'react-quill/dist/quill.snow.css';
 import './uploadComponent/datepicker.css';
 import {
   ProjectType,
@@ -196,21 +193,8 @@ export const ProjectUpdateForm = () => {
             ! 설명이 풍부한 프로젝트는 풍부하지 않은 프로젝트에 비해 지원율리
             50% 높습니다.
           </Form.Help>
-          <EditorToolbar />
-          <ReactQuill
-            theme="snow"
-            value={projectContent || ''}
-            onChange={value =>
-              setPostInfo({
-                ...postInfo,
-                projectContent: value,
-              })
-            }
-            placeholder="Write something awesome..."
-            modules={modules}
-            formats={formats}
-          />
         </Form.Field>
+
         <ProjectDate
           start={projectStart}
           end={projectEnd}
