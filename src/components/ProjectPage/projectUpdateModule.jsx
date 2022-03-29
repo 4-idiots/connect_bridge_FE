@@ -13,12 +13,10 @@ import {
   ProjectDate,
 } from './uploadComponent/uploadRoutes';
 import { projectGetSomeService, projectUploadService } from '../../service';
+import SlateEditor from '../../SlateEditor/Editor';
 
 export const ProjectUpdateForm = () => {
   const navigate = useNavigate();
-  const [projectTotal, setProjectTotal] = useState([
-    { main: '기획', sub: 'UI/UX 기획', need: 1 },
-  ]);
   const [postInfo, setPostInfo] = useState({
     projectMotive: true,
     projectOnOff: '온라인/오프라인 모두 가능',
@@ -26,6 +24,8 @@ export const ProjectUpdateForm = () => {
     projectStart: new Date('2022/01/02'),
     projectEnd: new Date('2022/01/07'),
     projectPlatform: [],
+    projectTotal: [{ main: '기획', sub: 'UI/UX 기획', need: 1 }],
+    projectImg: '',
   });
 
   const {
@@ -33,7 +33,6 @@ export const ProjectUpdateForm = () => {
     projectName,
     projectField,
     projectImg,
-    preview,
     projectOnOff,
     projectArea,
     projectSkill,
@@ -42,6 +41,7 @@ export const ProjectUpdateForm = () => {
     projectStart,
     projectEnd,
     projectPlatform,
+    projectTotal,
   } = postInfo;
 
   const onChangeProjectEvent = useCallback(
@@ -53,31 +53,6 @@ export const ProjectUpdateForm = () => {
     },
     [postInfo],
   );
-
-  const onChangePlatform = e => {
-    if (projectPlatform.includes(e.currentTarget.name)) {
-      const list = [...projectPlatform];
-      list.splice(projectPlatform.indexOf(e.currentTarget.name), 1);
-      setPostInfo({ projectPlatform: list });
-    } else {
-      setPostInfo({ ...postInfo, projectPlatform: e.currentTarget.name });
-    }
-  };
-
-  const encodeFileToBase64 = fileBlob => {
-    const reader = new FileReader();
-    reader.readAsDataURL(fileBlob);
-    return new Promise(resolve => {
-      reader.onload = () => {
-        setPostInfo({
-          ...postInfo,
-          preview: reader.result,
-          projectImg: fileBlob,
-        });
-        resolve();
-      };
-    });
-  };
 
   const uploadAxios = async formdata => {
     try {
@@ -93,27 +68,7 @@ export const ProjectUpdateForm = () => {
     try {
       const result = await projectGetSomeService(prID);
       const { data } = result;
-      // setPostInfo(data);
-      // 밑에꺼는 임시로 쓰는 코드 백엔드 완서오디면 위의 한 줄로 끝
-      setPostInfo({
-        ...postInfo,
-        userID: data.userID,
-        projectName: data.projectName,
-        projectMotive: data.projectMotive,
-        preview: data.projectImg,
-        // projectContent: data.projectContent,
-        projectField: data.projectField,
-        projectOnOff: data.projectOnOff,
-        projectArea: data.projectArea,
-        projectReference: data.projectReference,
-        projectPlatform: data.projectPlatform,
-        projectSkill: data.projectSkill,
-        projectStart: new Date(data.projectStart),
-        projectEnd: new Date(data.projectEnd),
-      });
-
-      setProjectTotal(data.projectTotal);
-      console.log(data);
+      setPostInfo(data);
     } catch (error) {
       console.log(error);
     }
@@ -175,18 +130,11 @@ export const ProjectUpdateForm = () => {
             })
           }
         />
-        <ProjectImg
-          preview={preview}
-          onChange={e => {
-            encodeFileToBase64(e.target.files[0]);
-          }}
-        />
+
+        <ProjectImg postInfo={postInfo} setPostInfo={setPostInfo} />
         <ProjectArea onChange={onChangeProjectEvent} />
-        <ProjectRecruit member={projectTotal} setMember={setProjectTotal} />
-        <ProjectPlatform
-          checked={projectPlatform}
-          onChange={onChangePlatform}
-        />
+        <ProjectRecruit member={postInfo} setMember={setPostInfo} />
+        <ProjectPlatform checked={postInfo} onChange={setPostInfo} />
         <Form.Field>
           <Form.Label>* 프로젝트 설명</Form.Label>
           <Form.Help>
@@ -194,8 +142,10 @@ export const ProjectUpdateForm = () => {
             50% 높습니다.
           </Form.Help>
         </Form.Field>
-
-        <ProjectDate
+        {projectContent && (
+          <SlateEditor value={postInfo} setValue={setPostInfo} />
+        )}
+        {/* <ProjectDate
           start={projectStart}
           end={projectEnd}
           startChange={date => {
@@ -204,7 +154,7 @@ export const ProjectUpdateForm = () => {
           endChange={date => {
             setPostInfo({ ...postInfo, projectEnd: date });
           }}
-        />
+        /> */}
         <ProjectInput
           label="* 기술/언어 (최대 10개)"
           help="! 프로젝트에 적용된/적용하고자 하는 기술/디자인 플랫폼을 적어주세요."

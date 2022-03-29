@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { createEditor } from 'slate';
 import { withHistory } from 'slate-history';
 import { Slate, Editable, withReact } from 'slate-react';
@@ -127,19 +127,12 @@ const Leaf = ({ attributes, children, leaf }) => {
   }
   return <span {...attributes}>{children}</span>;
 };
-const SlateEditor = () => {
+const SlateEditor = ({value, setValue}) => {
   const editor = useMemo(
     () =>
       withHistory(withEmbeds(withTables(withLinks(withReact(createEditor()))))),
     [],
   );
-
-  const [value, setValue] = useState([
-    {
-      type: 'paragaph',
-      children: [{ text: 'First line of text in Slate JS. ' }],
-    },
-  ]);
 
   const renderElement = useCallback(props => <Element {...props} />, []);
 
@@ -150,8 +143,8 @@ const SlateEditor = () => {
   return (
     <Slate
       editor={editor}
-      value={value}
-      onChange={newValue => setValue(newValue)}
+      value={value.projectContent}
+      onChange={newValue => setValue({...value, projectContent: newValue})}
     >
       <Toolbar />
       <div

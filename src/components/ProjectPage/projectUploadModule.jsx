@@ -17,9 +17,6 @@ import SlateEditor from '../../SlateEditor/Editor';
 
 export const ProjectUploadForm = () => {
   const navigate = useNavigate();
-  const [projectTotal, setProjectTotal] = useState([
-    { main: '기획', sub: 'UI/UX 기획', need: 1 },
-  ]);
   const [postInfo, setPostInfo] = useState({
     projectMotive: true,
     projectOnOff: '온라인/오프라인 모두 가능',
@@ -27,6 +24,14 @@ export const ProjectUploadForm = () => {
     projectStart: new Date('2022/01/02'),
     projectEnd: new Date('2022/01/07'),
     projectPlatform: [],
+    projectContent: [
+      {
+        type: 'paragaph',
+        children: [{ text: '프로젝트를 소개 하자면....' }],
+      },
+    ],
+    projectTotal: [{ main: '기획', sub: 'UI/UX 기획', need: 1 }],
+    projectImg: '',
   });
 
   const {
@@ -34,7 +39,6 @@ export const ProjectUploadForm = () => {
     projectName,
     projectField,
     projectImg,
-    preview,
     projectOnOff,
     projectArea,
     projectSkill,
@@ -43,6 +47,7 @@ export const ProjectUploadForm = () => {
     projectStart,
     projectEnd,
     projectPlatform,
+    projectTotal,
   } = postInfo;
 
   const onChangeProjectEvent = useCallback(
@@ -54,31 +59,6 @@ export const ProjectUploadForm = () => {
     },
     [postInfo],
   );
-
-  const onChangePlatform = e => {
-    if (projectPlatform.includes(e.currentTarget.name)) {
-      const list = [...projectPlatform];
-      list.splice(projectPlatform.indexOf(e.currentTarget.name), 1);
-      setPostInfo({ projectPlatform: list });
-    } else {
-      setPostInfo({ ...postInfo, projectPlatform: e.currentTarget.name });
-    }
-  };
-
-  const encodeFileToBase64 = fileBlob => {
-    const reader = new FileReader();
-    reader.readAsDataURL(fileBlob);
-    return new Promise(resolve => {
-      reader.onload = () => {
-        setPostInfo({
-          ...postInfo,
-          preview: reader.result,
-          projectImg: fileBlob,
-        });
-        resolve();
-      };
-    });
-  };
 
   const uploadAxios = async formdata => {
     try {
@@ -109,7 +89,6 @@ export const ProjectUploadForm = () => {
 
     // uploadAxios(formData);
     console.log(postInfo);
-    console.log(projectTotal);
   };
 
   return (
@@ -142,18 +121,10 @@ export const ProjectUploadForm = () => {
             })
           }
         />
-        <ProjectImg
-          preview={preview}
-          onChange={e => {
-            encodeFileToBase64(e.target.files[0]);
-          }}
-        />
+        <ProjectImg postInfo={postInfo} setPostInfo={setPostInfo} />
         <ProjectArea onChange={onChangeProjectEvent} />
-        <ProjectRecruit member={projectTotal} setMember={setProjectTotal} />
-        <ProjectPlatform
-          checked={projectPlatform}
-          onChange={onChangePlatform}
-        />
+        <ProjectRecruit member={postInfo} setMember={setPostInfo} />
+        <ProjectPlatform checked={postInfo} onChange={setPostInfo} />
         <Form.Field>
           <Form.Label>* 프로젝트 설명</Form.Label>
           <Form.Help>
@@ -161,7 +132,7 @@ export const ProjectUploadForm = () => {
             50% 높습니다.
           </Form.Help>
         </Form.Field>
-        <SlateEditor />
+        <SlateEditor value={postInfo} setValue={setPostInfo} />
         <ProjectDate
           start={projectStart}
           end={projectEnd}
@@ -190,7 +161,7 @@ export const ProjectUploadForm = () => {
         />
         <Button.Group align="center">
           <Button color="success" onClick={onSubmitEvent}>
-            수정하기
+            작성하기
           </Button>
         </Button.Group>
       </Box>

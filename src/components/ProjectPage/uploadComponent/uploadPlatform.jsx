@@ -5,6 +5,18 @@ import { platArray } from './uploadValue';
 import { CustomCheckbox } from './uploadCustom';
 
 export const ProjectPlatform = ({ checked, onChange }) => {
+  const onChangePlatform = e => {
+    if (checked.projectPlatform.includes(e.currentTarget.name)) {
+      const list = [...checked.projectPlatform];
+      list.splice(checked.projectPlatform.indexOf(e.currentTarget.name), 1);
+      onChange({ ...checked, projectPlatform: list });
+    } else {
+      onChange({
+        ...checked,
+        projectPlatform: [...checked.projectPlatform, e.currentTarget.name],
+      });
+    }
+  };
   return (
     <Form.Field>
       <Form.Label>* 출시 플랫폼</Form.Label>
@@ -25,8 +37,8 @@ export const ProjectPlatform = ({ checked, onChange }) => {
               checktype="platform"
               key={item}
               name={item}
-              onChange={onChange}
-              checked={checked.includes(item)}
+              onChange={onChangePlatform}
+              checked={checked.projectPlatform.includes(item)}
             >
               {item}
             </CustomCheckbox>
@@ -38,6 +50,6 @@ export const ProjectPlatform = ({ checked, onChange }) => {
 };
 
 ProjectPlatform.propTypes = {
-  checked: PropTypes.arrayOf(PropTypes.string).isRequired,
+  checked: PropTypes.objectOf(PropTypes.any).isRequired,
   onChange: PropTypes.func.isRequired,
 };

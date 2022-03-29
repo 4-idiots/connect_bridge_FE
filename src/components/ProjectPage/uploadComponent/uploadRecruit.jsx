@@ -14,59 +14,53 @@ import {
 } from './uploadValue';
 
 export const ProjectRecruit = ({ member, setMember }) => {
-  const [full, setFull] = useState(1);
-
-  const checkMem = () => {
-    let memVal = 0;
-    member.map(item => {
-      memVal += item.need;
-      return setFull(memVal);
-    });
-  };
+  // 옛날에 짠 인원제한 체크 함수 = 잘 안됨
+  // const [full, setFull] = useState(1);
+  // const checkMem = () => {
+  //   let memVal = 0;
+  //   member.projectTotal.map(item => {
+  //     memVal += item.need;
+  //     return setFull(memVal);
+  //   });
+  // };
 
   const handleInputChange = (e, index) => {
     const { name, value } = e.target;
-    const list = [...member];
+    const list = [...member.projectTotal];
     list[index][name] = value;
-    setMember(list);
+    setMember({ ...member, projectTotal: list });
   };
 
   const handleNeedPlus = (ne, index) => {
-    if (member.length > 8 || full + 1 > 9) {
-      alert('추가할 수 없습니다.');
-    } else {
-      const list = [...member];
-      list[index][ne] = member[index][ne] + 1;
-      setMember(list);
-    }
-    checkMem();
+    const list = [...member.projectTotal];
+    list[index][ne] = member.projectTotal[index][ne] + 1;
+    setMember({ ...member, projectTotal: list });
   };
 
   const handleNeedMinus = (ne, index) => {
-    if (member[index][ne] === 1) {
+    if (member.projectTotal[index][ne] === 1) {
       // pass
     } else {
-      const list = [...member];
-      list[index][ne] = member[index][ne] - 1;
-      setMember(list);
+      const list = [...member.projectTotal];
+      list[index][ne] = member.projectTotal[index][ne] - 1;
+      setMember({ ...member, projectTotal: list });
     }
-    checkMem();
   };
 
   const handleRemove = index => {
-    const list = [...member];
+    const list = [...member.projectTotal];
     list.splice(index, 1);
-    setMember(list);
-    checkMem();
+    setMember({ ...member, projectTotal: list });
   };
 
   const handleAdd = () => {
-    if (member.length > 8 || full + 1 > 9) {
-      alert('추가할 수 없습니다.');
-    } else {
-      setMember([...member, { main: '기획', sub: 'UI/UX 기획', need: 1 }]);
-    }
-    checkMem();
+    setMember({
+      ...member,
+      projectTotal: [
+        ...member.projectTotal,
+        { main: '기획', sub: 'UI/UX 기획', need: 1 },
+      ],
+    });
   };
 
   const genOption = arrayTitle => {
@@ -89,7 +83,7 @@ export const ProjectRecruit = ({ member, setMember }) => {
         가능합니다.)
       </Form.Help>
       <Form.Control>
-        {member.map((m, index) => {
+        {member.projectTotal.map((m, index) => {
           return (
             <div key={index} style={{ display: 'flex' }}>
               <Form.Select
@@ -121,12 +115,12 @@ export const ProjectRecruit = ({ member, setMember }) => {
               </div>
 
               <div>
-                {member.length - 1 === index && (
+                {member.projectTotal.length - 1 === index && (
                   <Button color="info" onClick={handleAdd}>
                     추가
                   </Button>
                 )}
-                {member.length !== 1 && (
+                {member.projectTotal.length !== 1 && (
                   <Button color="danger" onClick={() => handleRemove(index)}>
                     삭제
                   </Button>
@@ -141,6 +135,6 @@ export const ProjectRecruit = ({ member, setMember }) => {
 };
 
 ProjectRecruit.propTypes = {
-  member: PropTypes.arrayOf(PropTypes.object).isRequired,
+  member: PropTypes.objectOf(PropTypes.any).isRequired,
   setMember: PropTypes.func.isRequired,
 };

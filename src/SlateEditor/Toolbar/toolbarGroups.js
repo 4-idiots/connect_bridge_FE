@@ -135,18 +135,19 @@ const toolbarGroups = [
       format: 'video',
       type: 'embed',
     },
-    {
-      id: 23,
-      type: 'table',
-    },
+    // {
+    //   id: 23,
+    //   type: 'table',
+    // },
   ],
 
-  [
-    {
-      id: 24,
-      type: 'inTable',
-    },
-  ],
+  // [
+  //   {
+  //     id: 24,
+  //     type: 'inTable',
+  //   },
+  // ],
 ];
+// 테이블 에러 떠서 일단 제거
 
 export default toolbarGroups;
