@@ -13,7 +13,7 @@ import Link from './Elements/Link/Link';
 import Image from './Elements/Image/Image';
 import Video from './Elements/Video/Video';
 
-const Element = props => {
+export const Element = props => {
   const { attributes, children, element } = props;
 
   switch (element.type) {
@@ -83,7 +83,7 @@ const Element = props => {
       return <p {...attributes}>{children}</p>;
   }
 };
-const Leaf = ({ attributes, children, leaf }) => {
+export const Leaf = ({ attributes, children, leaf }) => {
   if (leaf.bold) {
     children = <strong>{children}</strong>;
   }

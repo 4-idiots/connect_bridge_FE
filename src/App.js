@@ -13,6 +13,7 @@ import {
   ProjectUpload,
   ProjectMain,
   ProjectUpdate,
+  ProjectDetail,
   Main,
   Info,
   Community,
@@ -43,6 +44,7 @@ const App = () => {
           <Route path="/team" element={<Team />} />
           <Route path="/team/info/:teamID" element={<Info />} />
           <Route path="/project" element={<ProjectMain />} />
+          <Route path="/project/:projectID" element={<ProjectDetail />} />
           <Route path="/project/upload" element={<ProjectUpload />} />
           <Route path="/project/update" element={<ProjectUpdate />} />
           <Route path="/community" element={<Community />} />

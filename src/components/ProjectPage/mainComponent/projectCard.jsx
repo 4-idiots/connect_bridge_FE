@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Media, Content, Heading, Icon } from 'react-bulma-components';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import useSWR, { useSWRConfig } from 'swr';
 import axios from 'axios';
@@ -20,6 +21,7 @@ export const ProjectCard = ({
   prUserID,
   prID,
 }) => {
+  const navigate = useNavigate();
   const { mutate } = useSWRConfig(); // 여기가 아니라 main에서 사용해야 함
   const { data } = useSWR('test', fetcher);
 
@@ -37,7 +39,7 @@ export const ProjectCard = ({
   const handleLike = now => {
     return (
       setUsLike(!usLike),
-      now ? setLikeCount(likeCount + 1) : setLikeCount(likeCount - 1),
+      now ? setLikeCount(likeCount - 1) : setLikeCount(likeCount + 1),
       mutate('test', { ...data, like: !usLike }, false),
       likeAxios()
     );
@@ -45,6 +47,7 @@ export const ProjectCard = ({
 
   return (
     <Card
+      onClick={() => navigate(`/project/${prID}`)}
       style={{
         width: 285,
         position: 'relative',

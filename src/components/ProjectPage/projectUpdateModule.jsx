@@ -14,6 +14,7 @@ import {
 } from './uploadComponent/uploadRoutes';
 import { projectGetSomeService, projectUploadService } from '../../service';
 import SlateEditor from '../../SlateEditor/Editor';
+import ReadOnlySlate from '../../SlateEditor/ReadOnly';
 
 export const ProjectUpdateForm = () => {
   const navigate = useNavigate();
@@ -145,6 +146,7 @@ export const ProjectUpdateForm = () => {
         {projectContent && (
           <SlateEditor value={postInfo} setValue={setPostInfo} />
         )}
+        {projectContent && <ReadOnlySlate value={projectContent} />}
         {/* <ProjectDate
           start={projectStart}
           end={projectEnd}
