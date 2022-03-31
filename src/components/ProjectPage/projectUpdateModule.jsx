@@ -14,7 +14,6 @@ import {
 } from './uploadComponent/uploadRoutes';
 import { projectGetSomeService, projectUploadService } from '../../service';
 import SlateEditor from '../../SlateEditor/Editor';
-import ReadOnlySlate from '../../SlateEditor/ReadOnly';
 
 export const ProjectUpdateForm = () => {
   const navigate = useNavigate();
@@ -146,8 +145,7 @@ export const ProjectUpdateForm = () => {
         {projectContent && (
           <SlateEditor value={postInfo} setValue={setPostInfo} />
         )}
-        {projectContent && <ReadOnlySlate value={projectContent} />}
-        {/* <ProjectDate
+        <ProjectDate
           start={projectStart}
           end={projectEnd}
           startChange={date => {
@@ -156,7 +154,7 @@ export const ProjectUpdateForm = () => {
           endChange={date => {
             setPostInfo({ ...postInfo, projectEnd: date });
           }}
-        /> */}
+        />
         <ProjectInput
           label="* 기술/언어 (최대 10개)"
           help="! 프로젝트에 적용된/적용하고자 하는 기술/디자인 플랫폼을 적어주세요."
