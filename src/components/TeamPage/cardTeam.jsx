@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { Button, Card, Media, Heading, Image } from 'react-bulma-components';
+
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { useJwt } from 'react-jwt';
+import { useAuth } from '../../contexts/hooks/useAuth';
 
 export const TeamCardForm = ({
-  id,
+  myid,
   userNickname,
   userAbility,
   userInterest,
@@ -12,6 +15,8 @@ export const TeamCardForm = ({
   onActClick,
   userPicture,
 }) => {
+  const auth = useAuth();
+  const { decodedToken } = useJwt(auth.token);
   return (
     <div
       style={{
@@ -33,14 +38,16 @@ export const TeamCardForm = ({
         <Card.Content>
           <Media>
             <Media.Item>
+              {JSON.stringify(decodedToken?.id)}
               <div style={{ marginRight: '30px' }}>
                 <Image
                   renderAs={Link}
-                  to={`/team/info/${id}`}
+                  to={`/team/info/${decodedToken?.id}/${myid}`}
                   size="4by4"
                   alt="64x64"
                   src="http://bulma.io/images/placeholders/64x64.png"
                 />
+
                 <div size={5}>{userNickname}</div>
               </div>
 
@@ -62,7 +69,7 @@ export const TeamCardForm = ({
 };
 
 TeamCardForm.propTypes = {
-  id: PropTypes.number,
+  myid: PropTypes.number,
   userNickname: PropTypes.string,
   userAbility: PropTypes.string,
   userInterest: PropTypes.string,
@@ -72,7 +79,7 @@ TeamCardForm.propTypes = {
 };
 
 TeamCardForm.defaultProps = {
-  id: 0,
+  myid: 0,
   userNickname: 'Title',
   userAbility: 'Ability',
   userInterest: 'Interest',

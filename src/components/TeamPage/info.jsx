@@ -1,3 +1,5 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable import/no-unresolved */
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import validator from 'validator';
@@ -13,9 +15,12 @@ import {
   Content,
 } from 'react-bulma-components';
 import { useParams } from 'react-router-dom';
+import { useJwt } from 'react-jwt';
+import { useAuth } from '../../contexts/hooks/useAuth';
 
 export const InfoForm = () => {
   const [users, setusers] = useState([]);
+  const [myid, setmyid] = useState();
   const [userNickname, setuserNickname] = useState('');
   const [userName, setuserName] = useState('');
   const [userAbility, setuserAbility] = useState('');
@@ -24,23 +29,76 @@ export const InfoForm = () => {
   const [userInterest, setuserInterest] = useState('');
   const [userIntroduce, setuserIntroduce] = useState('');
   const { teamID } = useParams();
-  const [like, setlike] = useState([0]);
+  const [off, setoff] = useState(0);
+  const [like, setlike] = useState(0);
+  const [follow, setfollow] = useState(0);
+  const auth = useAuth();
+  const { decodedToken, isExpired } = useJwt(auth.token);
+  const { teID } = useParams(`${decodedToken?.id}`);
 
   const userData = () => {
-    return axios
-      .get(`http://4idiot.ddns.net:8080/team/info/${teamID}`)
-      .then(response => {
-        console.log(response);
-        setusers(response.data);
-        setuserNickname(response.data.userNickname);
-        setuserName(response.data.userName);
-        setuserAbility(response.data.userAbility);
-        setuserArea(response.data.userArea);
-        setuserTime(response.data.userTime);
-        setuserInterest(response.data.userInterest);
-        setuserIntroduce(response.data.userIntroduce);
-      });
+    if (teID > 0) {
+      axios
+        .get(`http://4idiot.ddns.net:8080/team/info/${teID}/${teamID}`)
+        .then(response => {
+          console.log(response);
+          setusers(response.data);
+          setmyid(response.data.myid);
+          setuserNickname(response.data.userNickname);
+          setuserName(response.data.userName);
+          setuserAbility(response.data.userAbility);
+          setuserArea(response.data.userArea);
+          setuserTime(response.data.userTime);
+          setuserInterest(response.data.userInterest);
+          setuserIntroduce(response.data.userIntroduce);
+          setfollow(response.data.follow);
+        });
+    } else {
+      axios
+        .get(`http://4idiot.ddns.net:8080/team/info/0/${teamID}`)
+        .then(response => {
+          console.log(response);
+          setusers(response.data);
+          setmyid(response.data.myid);
+          setuserNickname(response.data.userNickname);
+          setuserName(response.data.userName);
+          setuserAbility(response.data.userAbility);
+          setuserArea(response.data.userArea);
+          setuserTime(response.data.userTime);
+          setuserInterest(response.data.userInterest);
+          setuserIntroduce(response.data.userIntroduce);
+          setfollow(response.data.follow);
+        });
+    }
   };
+  const followdata = () => {
+    setfollow(current => !current);
+  };
+
+  const likeClick = () => {
+    // eslint-disable-next-line no-restricted-globals
+    location.reload();
+    if (follow === 1) {
+      axios
+        .get(`http://4idiot.ddns.net:8080/follow/${decodedToken.id}/${teamID}`)
+        .then(response => {
+          console.log(decodedToken.id);
+          console.log(teamID);
+          console.log(response.data.follow);
+        });
+    } else if (follow === 2)
+      axios
+        .delete(
+          `http://4idiot.ddns.net:8080/follow/${decodedToken.id}/${teamID}`,
+        )
+        .then(response => {
+          console.log(decodedToken.id);
+          console.log(teamID);
+          console.log(response.data.follow);
+        });
+  };
+
+  const likeunClick = () => {};
 
   useEffect(() => {
     userData();
@@ -48,6 +106,7 @@ export const InfoForm = () => {
 
   return (
     <Container>
+      {JSON.stringify(follow)}
       <Heading
         style={{
           textAlign: 'center',
@@ -56,6 +115,7 @@ export const InfoForm = () => {
           padding: '20px 50px',
         }}
       >
+        {JSON.stringify(decodedToken)}
         상세페이지
       </Heading>
       <Box
@@ -70,29 +130,49 @@ export const InfoForm = () => {
           style={{ padding: '20px 400px' }}
           src="https://wallpapercave.com/wp/tU89SSy.jpg"
         />
-
         <div style={{ textAlign: 'center', fontSize: 36, fontWeight: 600 }}>
           {userNickname}
         </div>
         <br />
-        <div style={{ textAlign: 'center' }}>
-          <Button
-            style={{
-              width: '10%',
-              alignItems: 'center',
-              color: 'white',
-              backgroundColor: 'red',
-              padding: '15px 50px',
-            }}
-          >
-            ♥
-          </Button>
-        </div>
-        <br />
-        <br />
-        <br />
-        <br />
 
+        <div style={{ textAlign: 'center' }}>
+          {follow === 1 ? (
+            <Button
+              onClick={likeClick}
+              onChange={followdata}
+              style={{
+                width: '10%',
+                alignItems: 'center',
+                color: 'white',
+                backgroundColor: 'black',
+                padding: '15px 50px',
+              }}
+            >
+              ♥
+            </Button>
+          ) : follow === 2 ? (
+            <Button
+              onClick={likeClick}
+              onChange={followdata}
+              style={{
+                width: '10%',
+                alignItems: 'center',
+                color: 'white',
+                backgroundColor: 'red',
+                padding: '15px 50px',
+              }}
+            >
+              ♥
+            </Button>
+          ) : (
+            <> </>
+          )}
+        </div>
+
+        <br />
+        <br />
+        <br />
+        <br />
         <span
           style={{
             fontSize: 20,
