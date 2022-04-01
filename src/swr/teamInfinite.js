@@ -44,7 +44,7 @@ export const TeamInfinite = ({ outActClick }) => {
       {issues &&
         issues.map(item => (
           <TeamCardForm
-            key={item.id}
+            key={item.myid}
             userNickname={item.userNickname}
             userAbility={item.userAbility}
             userInterest={item.userInterest}
@@ -57,10 +57,10 @@ export const TeamInfinite = ({ outActClick }) => {
                 item.userInterest,
                 item.userPicture,
                 item.userLike,
-                item.id,
+                item.myid,
               );
             }}
-            id={item.id}
+            myid={item.myid}
           />
         ))}
       <div ref={ref}>
@@ -71,8 +71,8 @@ export const TeamInfinite = ({ outActClick }) => {
 };
 
 TeamInfinite.defaultProps = {
-  outActClick: (name, img, Ability, Interest, like, id) => {
-    console.log(name, img, Ability, Interest, like, id);
+  outActClick: (name, img, Ability, Interest, like, myid) => {
+    console.log(name, img, Ability, Interest, like, myid);
   },
 };
 

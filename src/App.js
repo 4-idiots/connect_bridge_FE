@@ -42,7 +42,7 @@ const App = () => {
             element={<OutdoorUpdate />}
           />
           <Route path="/team" element={<Team />} />
-          <Route path="/team/info/:teamID" element={<Info />} />
+          <Route path="/team/info/:teID/:teamID" element={<Info />} />
           <Route path="/project" element={<ProjectMain />} />
           <Route path="/project/:projectID" element={<ProjectDetail />} />
           <Route path="/project/upload" element={<ProjectUpload />} />
