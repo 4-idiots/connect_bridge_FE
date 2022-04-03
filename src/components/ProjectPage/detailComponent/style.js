@@ -45,7 +45,6 @@ export const StatusBox = styled.div`
 `;
 
 export const PageWrap = styled.div`
-  margin-left: 100px;
   max-width: 1200px;
   width: 100%;
   display: flex;
