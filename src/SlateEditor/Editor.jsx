@@ -127,7 +127,7 @@ export const Leaf = ({ attributes, children, leaf }) => {
   }
   return <span {...attributes}>{children}</span>;
 };
-const SlateEditor = ({value, setValue}) => {
+const SlateEditor = ({ value, setValue }) => {
   const editor = useMemo(
     () =>
       withHistory(withEmbeds(withTables(withLinks(withReact(createEditor()))))),
@@ -144,7 +144,7 @@ const SlateEditor = ({value, setValue}) => {
     <Slate
       editor={editor}
       value={value.projectContent}
-      onChange={newValue => setValue({...value, projectContent: newValue})}
+      onChange={newValue => setValue({ ...value, projectContent: newValue })}
     >
       <Toolbar />
       <div

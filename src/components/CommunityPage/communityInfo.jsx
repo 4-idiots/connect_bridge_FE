@@ -13,6 +13,7 @@ import {
   Content,
 } from 'react-bulma-components';
 import { useParams } from 'react-router-dom';
+import ReadOnlySlate from '../../SlateEditor/ReadOnly';
 
 export const CommunityInfoForm = () => {
   const [users, setusers] = useState([]);
@@ -22,6 +23,30 @@ export const CommunityInfoForm = () => {
   const [likeCount, setlikeCount] = useState(0);
   const [commentCount, setcommentCount] = useState(0);
   const { communityID } = useParams();
+
+  const [Contents, setContent] = useState({
+    projectContent: [
+      {
+        type: 'paragaph',
+        children: [
+          { text: 'asdasd ' },
+          { text: ' sadasd....asdasd', bold: true },
+        ],
+      },
+      {
+        type: 'paragaph',
+        children: [
+          { text: 'bbbb', color: '#a10000', bold: true },
+          { color: '#a10000', text: 'sdasd' },
+        ],
+      },
+      { type: 'paragaph', children: [{ text: 'asdasd', color: '#a10000' }] },
+      { type: 'blockquote', children: [{ text: 'asdas' }] },
+      { type: 'paragaph', children: [{ text: 'das', underline: true }] },
+      { type: 'paragaph', children: [{ text: 'dasd' }] },
+      { type: 'paragaph', children: [{ text: 'asd' }] },
+    ],
+  });
 
   const userData = () => {
     return axios
@@ -47,6 +72,7 @@ export const CommunityInfoForm = () => {
       </Heading>
       <Box style={{ margin: 100, Box: 'center' }}>
         <div>.</div>
+        <ReadOnlySlate value={Contents.projectContent} />
       </Box>
     </Container>
   );

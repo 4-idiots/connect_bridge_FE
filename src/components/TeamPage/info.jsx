@@ -35,6 +35,7 @@ export const InfoForm = () => {
   const auth = useAuth();
   const { decodedToken, isExpired } = useJwt(auth.token);
   const { teID } = useParams(`${decodedToken?.id}`);
+  const [color, setColor] = useState('red');
 
   const userData = () => {
     if (teID > 0) {
@@ -78,7 +79,10 @@ export const InfoForm = () => {
   const likeClick = () => {
     // eslint-disable-next-line no-restricted-globals
     location.reload();
+
     if (follow === 1) {
+      // eslint-disable-next-line no-unused-expressions
+      /* color === 'red' ? setColor('yellow') : setColor('red'); */
       axios
         .get(`http://4idiot.ddns.net:8080/follow/${decodedToken.id}/${teamID}`)
         .then(response => {
@@ -87,6 +91,8 @@ export const InfoForm = () => {
           console.log(response.data.follow);
         });
     } else if (follow === 2)
+      // eslint-disable-next-line no-unused-expressions
+      /* color === 'yellow' ? setColor('red') : setColor('yellow'); */
       axios
         .delete(
           `http://4idiot.ddns.net:8080/follow/${decodedToken.id}/${teamID}`,
@@ -137,31 +143,11 @@ export const InfoForm = () => {
 
         <div style={{ textAlign: 'center' }}>
           {follow === 1 ? (
-            <Button
-              onClick={likeClick}
-              onChange={followdata}
-              style={{
-                width: '10%',
-                alignItems: 'center',
-                color: 'white',
-                backgroundColor: 'black',
-                padding: '15px 50px',
-              }}
-            >
+            <Button onClick={likeClick} onChange={followdata}>
               ♥
             </Button>
           ) : follow === 2 ? (
-            <Button
-              onClick={likeClick}
-              onChange={followdata}
-              style={{
-                width: '10%',
-                alignItems: 'center',
-                color: 'white',
-                backgroundColor: 'red',
-                padding: '15px 50px',
-              }}
-            >
+            <Button onClick={likeClick} onChange={followdata}>
               ♥
             </Button>
           ) : (

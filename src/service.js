@@ -86,13 +86,13 @@ export const teamGetAllService = team => {
   return `http://4idiot.ddns.net:8080/team${team}`;
 };
 
-/* export const communityGetAllService = community => {
-  return `http://4idiot.ddns.net:8080/community${community}`;
-}; */
-
 export const communityGetAllService = community => {
-  return `http://localhost:4000/community${community}`;
+  return `http://4idiot.ddns.net:8080/community${community}`;
 };
+
+/* export const communityGetAllService = community => {
+  return `http://localhost:4000/community${community}`;
+}; */
 
 export const projectUploadService = formData => {
   return customAxios.post(
