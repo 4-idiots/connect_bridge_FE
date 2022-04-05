@@ -56,6 +56,7 @@ export const PageRight = styled.div`
   max-width: 300px;
   max-height: 600px;
   width: 100%;
+  height: 100%;
   border: 1px solid #ddd;
   padding: 20px;
   border-radius: 5px;
@@ -156,8 +157,18 @@ export const PlatformWrap = styled.div`
   display: flex;
 `;
 
+export const PlatformBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20px;
+`;
+
 export const PlatformText = styled.div`
-  margin-right: 10px;
+  text-align: center;
+  font-size: 16px;
+  margin-top: 8px;
 `;
 
 export const DetailContent = styled.div`
