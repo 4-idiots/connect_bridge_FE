@@ -9,14 +9,22 @@ export const ProjectArea = ({ onChange }) => {
       <Form.Label>* 지역</Form.Label>
       <Form.Help>! 온/오프라인 여부와 장소를 선택해주세요.</Form.Help>
       <Form.Control>
-        <Form.Select name="projectOnOff" onChange={onChange}>
+        <Form.Select
+          style={{ width: '20%' }}
+          name="projectOnOff"
+          onChange={onChange}
+        >
           {onOffArray.map(item => (
             <option key={item} value={item}>
               {item}
             </option>
           ))}
         </Form.Select>
-        <Form.Select name="projectArea" onChange={onChange}>
+        <Form.Select
+          style={{ width: '16%' }}
+          name="projectArea"
+          onChange={onChange}
+        >
           {areaArray.map(item => (
             <option key={item} value={item}>
               {item}

@@ -13,7 +13,13 @@ export const DetailSkill = ({ projectSkill }) => {
       </Heading>
       <S.SkillBox>
         {strToTag.map(item => (
-          <Tag key={item} color="dark" style={{ marginRight: 10 }} rounded>
+          <Tag
+            key={item}
+            color="info"
+            style={{ marginRight: 10 }}
+            rounded
+            className="is-medium"
+          >
             {item}
           </Tag>
         ))}

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import useSWR, { useSWRConfig } from 'swr';
 import axios from 'axios';
 import fetcher from '../../../swr/fetcher';
-import { CustomDiv } from './mainCustom';
+import { CustomDiv } from './style';
 import { ReactComponent as Gray } from '../../../assets/svg/grayHeart.svg';
 import { ReactComponent as Pink } from '../../../assets/svg/pinkHeart.svg';
 
@@ -25,6 +25,7 @@ export const ProjectCard = ({
   const { mutate } = useSWRConfig(); // 여기가 아니라 main에서 사용해야 함
   const { data } = useSWR('test', fetcher);
 
+  const [isHover, setIsHover] = useState(false);
   const [usLike, setUsLike] = useState(isLike); // 나중에 통신 완성 되면 이거랑 밑에 state 제거 됨
   const [likeCount, setLikeCount] = useState(prLike);
 
@@ -47,15 +48,40 @@ export const ProjectCard = ({
 
   return (
     <Card
-      onClick={() => navigate(`/project/${prID}`)}
-      style={{
-        width: 285,
-        position: 'relative',
-        borderRadius: '5%',
-        height: 330,
+      style={
+        isHover
+          ? {
+              transform: 'scale(1.1)',
+              width: 285,
+              position: 'relative',
+              borderRadius: '5%',
+              height: 360,
+            }
+          : {
+              width: 285,
+              position: 'relative',
+              borderRadius: '5%',
+              height: 360,
+            }
+      }
+      onMouseEnter={() => {
+        setIsHover(true);
+      }}
+      onMouseLeave={() => {
+        setIsHover(false);
       }}
     >
-      <Card.Image size="2by1" src={thumbnail} />
+      <div
+        onClick={() => navigate(`/project/${prID}`)}
+        className="imgclick"
+        role="presentation"
+      >
+        <img
+          src={thumbnail}
+          style={{ width: '100%', height: '160px', borderRadius: '5%' }}
+          alt="img"
+        />
+      </div>
       <div
         style={{
           position: 'absolute',
@@ -82,7 +108,7 @@ export const ProjectCard = ({
           </Icon>
         </CustomDiv>
       )}
-      <Card.Content>
+      <Card.Content onClick={() => navigate(`/project/${prID}`)}>
         <Media style={{ marginBottom: 0 }}>
           <Media.Item>
             <Heading subtitle size={7}>

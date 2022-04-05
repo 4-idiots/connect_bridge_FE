@@ -31,14 +31,12 @@ export const OutdoorCardForm = ({
         isHover
           ? {
               width: 280,
-              backgroundColor: 'pink',
               marginTop: 30,
               marginRight: 30,
               transform: 'scale(1.1)',
             }
           : {
               width: 280,
-              backgroundColor: 'pink',
               marginTop: 30,
               marginRight: 30,
             }

@@ -167,7 +167,8 @@ export const PlatformBox = styled.div`
 
 export const PlatformText = styled.div`
   text-align: center;
-  font-size: 16px;
+  font-size: 15px;
+  font-weight: bold;
   margin-top: 8px;
 `;
 
