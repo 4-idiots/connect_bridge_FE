@@ -22,7 +22,7 @@ export const ProjectDetailForm = () => {
     projectType: true,
     projectTitle: '웹소설 웹툰 IP 웹 3.0',
     leaderImg:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyGnV38qI3kabyXoa6e9eOn9960Lcnzj3jGA&usqp=CAU',
+      'https://letspl.s3.ap-northeast-2.amazonaws.com/images/project_thumb_05.png',
     leaderName: '배고픈개발자',
     leaderInfo: '돈까스를 좋아하는 개발자 입니다.',
     projectStatus: true,

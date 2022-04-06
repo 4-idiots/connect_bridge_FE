@@ -52,13 +52,13 @@ export const ProjectCard = ({
         isHover
           ? {
               transform: 'scale(1.1)',
-              width: 285,
+              width: 290,
               position: 'relative',
               borderRadius: '5%',
               height: 360,
             }
           : {
-              width: 285,
+              width: 290,
               position: 'relative',
               borderRadius: '5%',
               height: 360,
