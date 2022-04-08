@@ -14,7 +14,14 @@ export const SuggestCard = () => {
         <S.suggestInfo>
           <S.suggestTop>
             <S.suggestName>스마트팜교육메타버스아바타챗봇</S.suggestName>
-            <S.suggestHeart>a</S.suggestHeart>
+            <S.suggestIconWrap>
+              <S.suggestHeart>
+                <Icon>
+                  <Heart fill="rgb(128,128,128)" />
+                </Icon>
+              </S.suggestHeart>
+              <span>23</span>
+            </S.suggestIconWrap>
           </S.suggestTop>
 
           <S.suggestMid>

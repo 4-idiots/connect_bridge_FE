@@ -65,6 +65,8 @@ export const ProjectMainForm = () => {
             </Heading>
           </S.textWrap>
           <SuggestCard />
+          <SuggestCard />
+          <SuggestCard />
         </S.suggestWrap>
       </Block>
       <Block>

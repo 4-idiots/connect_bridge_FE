@@ -87,15 +87,14 @@ export const suggestWrap = styled.div`
   width: 590px;
   display: flex;
   align-items: center;
-  justify-content: center;
   flex-direction: column;
 `;
 
 export const suggestCardContainer = styled.div`
   width: 520px;
-  height: 380px;
   display: flex;
   flex-direction: column;
+  margin-bottom: 14px;
 `;
 
 export const suggestBox = styled.div`
@@ -106,6 +105,8 @@ export const suggestBox = styled.div`
   border: 1px solid #ebebeb;
   border-radius: 8px;
   display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 `;
 
 export const suggestImg = styled.img`
@@ -123,6 +124,7 @@ export const suggestTop = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 400px;
+  margin-bottom: 8px;
 `;
 
 export const suggestName = styled.div`
@@ -141,4 +143,11 @@ export const suggestBottom = styled.div`
   width: 400px;
 `;
 
-export const suggestHeart = styled.div``;
+export const suggestHeart = styled.div`
+  height: 18px;
+  margin-right: 6px;
+`;
+
+export const suggestIconWrap = styled.div`
+  display: flex;
+`;
