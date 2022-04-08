@@ -2,12 +2,8 @@ import React, { useState } from 'react';
 import { Card, Media, Content, Heading, Icon } from 'react-bulma-components';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import useSWR, { useSWRConfig } from 'swr';
-import axios from 'axios';
-import fetcher from '../../../swr/fetcher';
 import { CustomDiv } from './style';
-import { ReactComponent as Gray } from '../../../assets/svg/grayHeart.svg';
-import { ReactComponent as Pink } from '../../../assets/svg/pinkHeart.svg';
+import { ReactComponent as Heart } from '../../../assets/svg/heart.svg';
 
 export const ProjectCard = ({
   prType,
@@ -22,27 +18,16 @@ export const ProjectCard = ({
   prID,
 }) => {
   const navigate = useNavigate();
-  const { mutate } = useSWRConfig(); // 여기가 아니라 main에서 사용해야 함
-  const { data } = useSWR('test', fetcher);
 
   const [isHover, setIsHover] = useState(false);
   const [usLike, setUsLike] = useState(isLike); // 나중에 통신 완성 되면 이거랑 밑에 state 제거 됨
+  const [onHeart, setOnHeart] = useState(false);
   const [likeCount, setLikeCount] = useState(prLike);
-
-  const likeAxios = async () => {
-    try {
-      const result = await axios.get('test');
-    } catch (error) {
-      console.log('error');
-    }
-  };
 
   const handleLike = now => {
     return (
       setUsLike(!usLike),
-      now ? setLikeCount(likeCount - 1) : setLikeCount(likeCount + 1),
-      mutate('test', { ...data, like: !usLike }, false),
-      likeAxios()
+      now ? setLikeCount(likeCount - 1) : setLikeCount(likeCount + 1)
     );
   };
 
@@ -78,7 +63,12 @@ export const ProjectCard = ({
       >
         <img
           src={thumbnail}
-          style={{ width: '100%', height: '160px', borderRadius: '5%' }}
+          style={{
+            width: '100%',
+            height: '160px',
+            borderRadius: '5%',
+            objectFit: 'cover',
+          }}
           alt="img"
         />
       </div>
@@ -95,19 +85,25 @@ export const ProjectCard = ({
       >
         {prType ? '사이드프로젝트' : '스터디/네트워킹'}
       </div>
-      {usLike ? (
-        <CustomDiv onClick={() => handleLike(true)}>
+      <CustomDiv
+        onClick={() => handleLike(!usLike)}
+        onMouseEnter={() => {
+          setOnHeart(true);
+        }}
+        onMouseLeave={() => {
+          setOnHeart(false);
+        }}
+      >
+        {usLike ? (
           <Icon>
-            <Pink />
+            <Heart fill={onHeart ? 'rgb(255,192,203)' : 'rgb(215,90,74)'} />
           </Icon>
-        </CustomDiv>
-      ) : (
-        <CustomDiv onClick={() => handleLike(false)}>
+        ) : (
           <Icon>
-            <Gray />
+            <Heart fill={onHeart ? 'rgb(255,192,203)' : 'rgb(128,128,128)'} />
           </Icon>
-        </CustomDiv>
-      )}
+        )}
+      </CustomDiv>
       <Card.Content onClick={() => navigate(`/project/${prID}`)}>
         <Media style={{ marginBottom: 0 }}>
           <Media.Item>
