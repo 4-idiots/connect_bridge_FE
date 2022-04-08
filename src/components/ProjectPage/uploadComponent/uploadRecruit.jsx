@@ -87,12 +87,14 @@ export const ProjectRecruit = ({ member, setMember }) => {
           return (
             <div key={index} style={{ display: 'flex' }}>
               <Form.Select
+                style={{ width: '14%' }}
                 name="main"
                 onChange={e => handleInputChange(e, index)}
               >
                 {genOption(mainArray)}
               </Form.Select>
               <Form.Select
+                style={{ width: '16%' }}
                 name="sub"
                 onChange={e => handleInputChange(e, index)}
               >
