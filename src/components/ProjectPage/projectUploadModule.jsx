@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { Container, Heading, Button, Box, Form } from 'react-bulma-components';
 import { useNavigate } from 'react-router-dom';
 import './uploadComponent/datepicker.css';
+import axios from 'axios';
 import {
   ProjectType,
   ProjectRecruit,
@@ -76,7 +77,7 @@ export const ProjectUploadForm = () => {
     formData.append('projectName', projectName);
     formData.append('projectMotive', projectMotive);
     formData.append('projectImg', projectImg);
-    formData.append('projectContent', projectContent);
+    formData.append('projectContent', JSON.stringify(projectContent));
     formData.append('projectField', projectField);
     formData.append('projectOnOff', projectOnOff);
     formData.append('projectArea', projectArea);
@@ -88,6 +89,18 @@ export const ProjectUploadForm = () => {
     formData.append('projectEnd', projectEnd);
 
     // uploadAxios(formData);
+
+    // axios
+    //   .post('http://4idiot.ddns.net:8080/text', {
+    //     text: JSON.stringify(projectContent),
+    //   })
+    //   .then(response => {
+    //     console.log('success');
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+
     console.log(postInfo);
   };
 
