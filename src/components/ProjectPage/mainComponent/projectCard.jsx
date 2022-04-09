@@ -100,7 +100,7 @@ export const ProjectCard = ({
           </Icon>
         ) : (
           <Icon>
-            <Heart fill={onHeart ? 'rgb(255,192,203)' : 'rgb(128,128,128)'} />
+            <Heart fill={onHeart ? 'rgb(211,211,211)' : 'rgb(128,128,128)'} />
           </Icon>
         )}
       </CustomDiv>
