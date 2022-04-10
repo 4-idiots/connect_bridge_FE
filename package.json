@@ -38,9 +38,7 @@
     "start": "npm run css-build && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -72,14 +70,6 @@
   },
   "devDependencies": {
     "@babel/preset-react": "^7.16.7",
-    "@storybook/addon-actions": "^6.4.13",
-    "@storybook/addon-essentials": "^6.4.13",
-    "@storybook/addon-links": "^6.4.13",
-    "@storybook/builder-webpack5": "^6.4.13",
-    "@storybook/manager-webpack5": "^6.4.13",
-    "@storybook/node-logger": "^6.4.13",
-    "@storybook/preset-create-react-app": "^4.0.0",
-    "@storybook/react": "^6.4.13",
     "eslint": "^8.7.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.3.0",
@@ -89,6 +79,7 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-storybook": "^0.5.5",
+    "mini-css-extract-plugin": "2.4.5",
     "prettier": "^2.5.1",
     "webpack": "^5.66.0"
   }
