@@ -1,0 +1,19 @@
+@charset "utf-8";
+
+$custom-colors: (
+  'purple': (
+    #8a4d76,
+    #fff,
+    // 이건 글씨 색
+  ),
+  'pink': #f88fa1,
+  'brown': #757763,
+  'beige-light': #d0d1cd,
+  'beige-lighter': #eff0eb,
+  'yellow': rgb(198, 216, 33),
+  'white': #ffffff,
+  'linkColor': #3e56c4,
+);
+
+// Import only what you need from Bulma 서순이 중요하다.
+@import '../../node_modules/bulma/bulma.sass';

@@ -23,11 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 
 .DS_Store
-storybook-static
 /api-integrate
-/src/assets
 yarn.lock
 .env
-.css
-.svg
-.png
