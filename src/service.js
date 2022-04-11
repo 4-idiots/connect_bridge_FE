@@ -109,6 +109,5 @@ export const projectDeleteService = projectID => {
 };
 
 export const projectGetSomeService = projectID => {
-  return customAxios.get('http://localhost:4000/project1');
-  // return customAxios.get(`http://localhost:8080/project/${projectID}`);
+  return customAxios.get(`http://localhost:8080/project/${projectID}`);
 };

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Heading } from 'react-bulma-components';
 import {
@@ -13,9 +13,46 @@ import {
   DetailRightCard,
 } from './detailComponent/detailRoutes';
 import * as S from './detailComponent/style';
+import { projectGetSomeService } from '../../service';
 
 export const ProjectDetailForm = () => {
   const { projectID } = useParams();
+  const [postData, setPostData] = useState({});
+
+  useEffect(() => {
+    const getAxios = async id => {
+      try {
+        const result = await projectGetSomeService(id);
+        setPostData(result.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getAxios(projectID);
+  }, []);
+
+  const {
+    projectMotive,
+    projectTotal,
+    projectImg,
+    projectOnOff,
+    projectArea,
+    projectName,
+    projectField,
+    projectSkill,
+    projectReference,
+    projectContent,
+    projectStart,
+    projectEnd,
+    projectPlatform,
+    projectStatus,
+    projectType,
+    projectLike,
+    projectView,
+    projectSub,
+  } = postData;
+
   const [isInfo, setIsInfo] = useState(true);
   const [comment, setComment] = useState('');
   const [test, setTest] = useState({
@@ -68,9 +105,9 @@ export const ProjectDetailForm = () => {
   return (
     <Container>
       <DetailHeader
-        projectStatus={test.projectStatus}
-        projectTitle={test.projectTitle}
-        projectType={test.projectType}
+        projectStatus={projectStatus}
+        projectTitle={projectName}
+        projectType={projectMotive}
         leaderImg={test.leaderImg}
         leaderName={test.leaderName}
       />
@@ -85,10 +122,10 @@ export const ProjectDetailForm = () => {
           {isInfo && (
             <S.LeftDetail>
               <DetailRecurit /> {/* 여기는 석환이랑 db 협의가 끝나면 개발 */}
-              <DetailPlatform projectPlatform={test.projectPlatform} />
-              <DetailContent value={test.projectContent} />
-              <DetailSkill projectSkill={test.projectSkill} />
-              <DetailReference projectReference={test.projectReference} />
+              <DetailPlatform projectPlatform={projectPlatform} />
+              <DetailContent value={projectContent} />
+              <DetailSkill projectSkill={projectSkill} />
+              <DetailReference projectReference={projectReference} />
             </S.LeftDetail>
           )}
           {!isInfo && (
@@ -107,12 +144,12 @@ export const ProjectDetailForm = () => {
           leaderImg={test.leaderImg}
           leaderName={test.leaderName}
           leaderInfo={test.leaderInfo}
-          projectField={test.projectField}
-          projectLike={test.projectLike}
-          projectView={test.projectView}
-          projectStart={test.projectStart}
-          projectEnd={test.projectEnd}
-          projectSub={test.projectSub}
+          projectField={projectField}
+          projectLike={projectLike}
+          projectView={projectView}
+          projectStart={projectStart}
+          projectEnd={projectEnd}
+          projectSub={projectSub}
         />
       </S.PageWrap>
     </Container>
