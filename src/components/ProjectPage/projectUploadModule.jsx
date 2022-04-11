@@ -60,9 +60,23 @@ export const ProjectUploadForm = () => {
     [postInfo],
   );
 
-  const uploadAxios = async formdata => {
+  const uploadAxios = async () => {
     try {
-      const result = await projectUploadService(formdata);
+      const result = await projectUploadService(
+        1,
+        projectName,
+        projectMotive,
+        projectImg,
+        JSON.stringify(projectContent),
+        projectField,
+        projectArea,
+        JSON.stringify(projectTotal),
+        projectReference,
+        projectPlatform,
+        projectSkill,
+        projectStart,
+        projectEnd,
+      );
       alert('등록 되었습니다.');
       navigate('/project');
     } catch (error) {
@@ -71,24 +85,7 @@ export const ProjectUploadForm = () => {
   };
 
   const onSubmitEvent = () => {
-    const formData = new FormData();
-    formData.append('userID', 1);
-    formData.append('projectName', projectName);
-    formData.append('projectMotive', projectMotive);
-    formData.append('projectImg', projectImg);
-    formData.append('projectContent', JSON.stringify(projectContent));
-    formData.append('projectField', projectField);
-    formData.append('projectOnOff', projectOnOff);
-    formData.append('projectArea', projectArea);
-    formData.append('projectTotal', projectTotal);
-    formData.append('projectReference', projectReference);
-    formData.append('projectPlatform', projectPlatform);
-    formData.append('projectSkill', projectSkill);
-    formData.append('projectStart', projectStart);
-    formData.append('projectEnd', projectEnd);
-
-    uploadAxios(formData);
-
+    uploadAxios();
     console.log(postInfo);
   };
 

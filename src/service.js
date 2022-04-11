@@ -94,14 +94,36 @@ export const communityGetAllService = community => {
   return `http://localhost:4000/community${community}`;
 };
 
-export const projectUploadService = formData => {
-  return customAxios.post(
-    `http://localhost:8080/project`,
-    {
-      formData,
-    },
-    { headers: { 'content-type': 'multipart/form-data' } },
-  );
+export const projectUploadService = (
+  userID,
+  projectName,
+  projectMotive,
+  projectImg,
+  projectContent,
+  projectField,
+  projectArea,
+  projectTotal,
+  projectReference,
+  projectPlatform,
+  projectSkill,
+  projectStart,
+  projectEnd,
+) => {
+  return customAxios.post(`http://localhost:8080/project`, {
+    userID,
+    projectName,
+    projectMotive,
+    projectImg,
+    projectContent,
+    projectField,
+    projectArea,
+    projectTotal,
+    projectReference,
+    projectPlatform,
+    projectSkill,
+    projectStart,
+    projectEnd,
+  });
 };
 
 export const projectDeleteService = projectID => {

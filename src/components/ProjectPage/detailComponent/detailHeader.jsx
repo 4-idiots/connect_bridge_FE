@@ -4,8 +4,8 @@ import { Heading, Tag } from 'react-bulma-components';
 import * as S from './style';
 
 export const DetailHeader = ({
-  projectType,
-  projectTitle,
+  projectMotive,
+  projectName,
   leaderImg,
   leaderName,
   projectStatus,
@@ -13,7 +13,7 @@ export const DetailHeader = ({
   return (
     <S.HeaderWrap>
       <S.HeaderContent>
-        {projectType ? (
+        {projectMotive ? (
           <S.ProjectContent>사이드프로젝트</S.ProjectContent>
         ) : (
           <S.ProjectContent>스터디/네트워킹</S.ProjectContent>
@@ -22,7 +22,7 @@ export const DetailHeader = ({
           size={4}
           style={{ fontWeight: 'bold', fontSize: 38, margin: 24 }}
         >
-          {projectTitle}
+          {projectName}
         </Heading>
         <S.LeaderWrap>
           <S.LeaderImg src={leaderImg} />
@@ -47,8 +47,8 @@ export const DetailHeader = ({
 };
 
 DetailHeader.propTypes = {
-  projectType: PropTypes.bool.isRequired,
-  projectTitle: PropTypes.string.isRequired,
+  projectMotive: PropTypes.bool.isRequired,
+  projectName: PropTypes.string.isRequired,
   leaderImg: PropTypes.string.isRequired,
   leaderName: PropTypes.string.isRequired,
   projectStatus: PropTypes.bool.isRequired,
