@@ -30,8 +30,9 @@ export const ProjectUploadForm = () => {
         children: [{ text: '프로젝트를 소개 하자면....' }],
       },
     ],
-    projectTotal: [{ main: '기획', sub: 'UI/UX 기획', need: 1 }],
+    projectTotal: [{ main: '기획', sub: 'UI/UX 기획' }],
     projectImg: '',
+    uiuxPlan: 1,
   });
 
   const {
@@ -123,6 +124,7 @@ export const ProjectUploadForm = () => {
         <ProjectArea onChange={onChangeProjectEvent} />
         <ProjectRecruit member={postInfo} setMember={setPostInfo} />
         <ProjectPlatform checked={postInfo} onChange={setPostInfo} />
+
         <Form.Field>
           <Form.Label>* 프로젝트 설명</Form.Label>
           <Form.Help>

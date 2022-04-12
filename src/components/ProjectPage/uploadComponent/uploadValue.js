@@ -104,3 +104,39 @@ export const platArray = [
   '설치형/SASS 솔루션',
   '미정(논의 후 확정)',
 ];
+
+export const recruitDB = [
+  'uiuxPlan',
+  'gamePlan',
+  'managerPlan',
+  'hwPlan',
+  'iosFr',
+  'androidFr',
+  'webFrontFr',
+  'webPublicFr',
+  'crossFr',
+
+  'uiuxDe',
+  'graphicDe',
+  'thrdDe',
+  'hwDe',
+  'etcDe',
+
+  'webBk',
+  'blchBk',
+  'aiBk',
+  'dsBk',
+  'gameBk',
+
+  'planBu',
+  'marketingBu',
+  'financeBu',
+  'salseBu',
+  'consultBu',
+  'investBu',
+  'etcBu',
+
+  'blogEtc',
+  'influEtc',
+  'compEtc',
+];
