@@ -21,7 +21,7 @@ export const ProjectUploadForm = () => {
     projectMotive: true,
     projectOnOff: '온라인/오프라인 모두 가능',
     projectArea: '상관없음',
-    projectStart: new Date('2022/01/02'),
+    projectStart: new Date('2022/01/01'),
     projectEnd: new Date('2022/01/07'),
     projectPlatform: [],
     projectContent: [
@@ -33,6 +33,34 @@ export const ProjectUploadForm = () => {
     projectTotal: [{ main: '기획', sub: 'UI/UX 기획' }],
     projectImg: '',
     uiuxPlan: 1,
+    gamePlan: 0,
+    managerPlan: 0,
+    hwPlan: 0,
+    iosFr: 0,
+    androidFr: 0,
+    webFrontFr: 0,
+    webPublicFr: 0,
+    crossFr: 0,
+    uiuxDe: 0,
+    graphicDe: 0,
+    thrdDe: 0,
+    hwDe: 0,
+    etcDe: 0,
+    webBk: 0,
+    blchBk: 0,
+    aiBk: 0,
+    dsBk: 0,
+    gameBk: 0,
+    planBu: 0,
+    marketingBu: 0,
+    financeBu: 0,
+    salseBu: 0,
+    consultBu: 0,
+    investBu: 0,
+    etcBu: 0,
+    blogEtc: 0,
+    influEtc: 0,
+    compEtc: 0,
   });
 
   const {
@@ -40,7 +68,6 @@ export const ProjectUploadForm = () => {
     projectName,
     projectField,
     projectImg,
-    projectOnOff,
     projectArea,
     projectSkill,
     projectReference,
@@ -49,6 +76,35 @@ export const ProjectUploadForm = () => {
     projectEnd,
     projectPlatform,
     projectTotal,
+    uiuxPlan,
+    gamePlan,
+    managerPlan,
+    hwPlan,
+    iosFr,
+    androidFr,
+    webFrontFr,
+    webPublicFr,
+    crossFr,
+    uiuxDe,
+    graphicDe,
+    thrdDe,
+    hwDe,
+    etcDe,
+    webBk,
+    blchBk,
+    aiBk,
+    dsBk,
+    gameBk,
+    planBu,
+    marketingBu,
+    financeBu,
+    salseBu,
+    consultBu,
+    investBu,
+    etcBu,
+    blogEtc,
+    influEtc,
+    compEtc,
   } = postInfo;
 
   const onChangeProjectEvent = useCallback(
@@ -61,23 +117,9 @@ export const ProjectUploadForm = () => {
     [postInfo],
   );
 
-  const uploadAxios = async () => {
+  const uploadAxios = async formData => {
     try {
-      const result = await projectUploadService(
-        1,
-        projectName,
-        projectMotive,
-        projectImg,
-        JSON.stringify(projectContent),
-        projectField,
-        projectArea,
-        JSON.stringify(projectTotal),
-        projectReference,
-        projectPlatform,
-        projectSkill,
-        projectStart,
-        projectEnd,
-      );
+      const result = await projectUploadService(formData);
       alert('등록 되었습니다.');
       navigate('/project');
     } catch (error) {
@@ -86,7 +128,50 @@ export const ProjectUploadForm = () => {
   };
 
   const onSubmitEvent = () => {
-    uploadAxios();
+    const formData = new FormData();
+    formData.append('userID', 1);
+    formData.append('projectName', projectName);
+    formData.append('projectMotive', projectMotive);
+    formData.append('projectImg', projectImg);
+    formData.append('projectContent', JSON.stringify(projectContent));
+    formData.append('projectField', projectField);
+    formData.append('projectArea', projectArea);
+    formData.append('projectTotal', JSON.stringify(projectTotal));
+    formData.append('projectReference', projectReference);
+    formData.append('projectPlatform', projectPlatform);
+    formData.append('projectSkill', projectSkill);
+    formData.append('projectStart', projectStart);
+    formData.append('projectEnd', projectEnd);
+    formData.append('uiuxPlan', uiuxPlan);
+    formData.append('gamePlan', gamePlan);
+    formData.append('managerPlan', managerPlan);
+    formData.append('hwPlan', hwPlan);
+    formData.append('iosFr', iosFr);
+    formData.append('androidFr', androidFr);
+    formData.append('webFrontFr', webFrontFr);
+    formData.append('webPublicFr', webPublicFr);
+    formData.append('crossFr', crossFr);
+    formData.append('uiuxDe', uiuxDe);
+    formData.append('graphicDe', graphicDe);
+    formData.append('thrdDe', thrdDe);
+    formData.append('hwDe', hwDe);
+    formData.append('etcDe', etcDe);
+    formData.append('webBk', webBk);
+    formData.append('aiBk', aiBk);
+    formData.append('dsBk', dsBk);
+    formData.append('gameBk', gameBk);
+    formData.append('planBu', planBu);
+    formData.append('marketingBu', marketingBu);
+    formData.append('financeBu', financeBu);
+    formData.append('salseBu', salseBu);
+    formData.append('consultBu', consultBu);
+    formData.append('investBu', investBu);
+    formData.append('etcBu', etcBu);
+    formData.append('blogEtc', blogEtc);
+    formData.append('influEtc', influEtc);
+    formData.append('compEtc', compEtc);
+
+    // uploadAxios(formData);
     console.log(postInfo);
   };
 
