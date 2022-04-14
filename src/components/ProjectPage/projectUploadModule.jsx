@@ -157,6 +157,7 @@ export const ProjectUploadForm = () => {
     formData.append('hwDe', hwDe);
     formData.append('etcDe', etcDe);
     formData.append('webBk', webBk);
+    formData.append('blchBk', blchBk);
     formData.append('aiBk', aiBk);
     formData.append('dsBk', dsBk);
     formData.append('gameBk', gameBk);
