@@ -40,13 +40,14 @@ export const CommunityInfinite = ({ outActClick }) => {
 
   return (
     <>
-      {isEmpty ? <p>Yay, no team found.</p> : null}
+      {isEmpty ? <p>Yay, no community found.</p> : null}
       {issues &&
         issues.map(item => (
           <CommunityCardForm
             key={item.postID}
             title={item.title}
             userNickname={item.userNickname}
+            hashtag={item.hashtag}
             viewCount={item.viewCount}
             likeCount={item.likeCount}
             commentCount={item.commentCount}
@@ -56,11 +57,12 @@ export const CommunityInfinite = ({ outActClick }) => {
                 item.userNickname,
                 item.viewCount,
                 item.likeCount,
+                item.hashtag,
                 item.commentCount,
                 item.postID,
               );
             }}
-            id={item.postID}
+            postID={item.postID}
           />
         ))}
       <div ref={ref}>

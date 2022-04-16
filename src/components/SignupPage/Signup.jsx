@@ -169,45 +169,6 @@ export const SignupForm = () => {
       });
   };
 
-  /* const EmailcheckButton = e => {
-    e.preventDefault();
-
-    axios
-      .get(
-        `http://4idiot.ddns.net:8080/users/check/userEmail?userEmail=${userEmail}`,
-      )
-      .then(response => {
-        console.log(response);
-        if (response.data.value === true) {
-          alert('중복입니다. 다시 입력해주세요.');
-
-          setsameEmail(false);
-        } else {
-          Prompt((message = '페이지를 떠나시겠습니까?'));
-          setsameEmail(true);
-        }
-      });
-  }; */
-
-  /*   this.input(
-    axios
-      .post('http://4idiot.ddns.net:8080/verifyCode', {
-        result,
-      })
-      .then(response => {
-        
-      }),
-    // eslint-disable-next-line no-unused-vars
-  ).innerText = greeting;
-})
-.catch(response => {
-  alert('안됨.');
-});
-} else {
-alert('다시 확인해주세요');
-}
- */
-
   const EmailOnClick = e => {
     e.preventDefault();
     if (sameEmail === true) {
