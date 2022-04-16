@@ -49,13 +49,9 @@ export const outdoorUploadService = formData => {
 };
 
 export const outdoorUpdateService = formData => {
-  return customAxios.patch(
-    `http://localhost:8080/outdoor/post`,
-    {
-      formData,
-    },
-    { headers: { 'content-type': 'multipart/form-data' } },
-  );
+  return customAxios.patch(`http://localhost:8080/outdoor/post`, formData, {
+    headers: { 'content-type': 'multipart/form-data' },
+  });
 };
 
 export const outdoorGetAllService = cursor => {
@@ -95,13 +91,9 @@ export const communityGetAllService = community => {
 };
 
 export const projectUploadService = formData => {
-  return customAxios.post(
-    `http://localhost:8080/project`,
-    {
-      formData,
-    },
-    { headers: { 'content-type': 'multipart/form-data' } },
-  );
+  return customAxios.post(`http://localhost:8080/project`, formData, {
+    headers: { 'content-type': 'multipart/form-data' },
+  });
 };
 
 export const projectDeleteService = projectID => {
@@ -110,4 +102,12 @@ export const projectDeleteService = projectID => {
 
 export const projectGetSomeService = projectID => {
   return customAxios.get(`http://localhost:8080/project/${projectID}`);
+};
+
+export const projectApplyService = (projectID, userID, field) => {
+  return customAxios.post('http://localhost:8080/project/apply', {
+    projectID,
+    userID,
+    field,
+  });
 };

@@ -110,6 +110,7 @@ export const recruitDB = [
   'gamePlan',
   'managerPlan',
   'hwPlan',
+
   'iosFr',
   'androidFr',
   'webFrontFr',
@@ -139,4 +140,41 @@ export const recruitDB = [
   'blogEtc',
   'influEtc',
   'compEtc',
+];
+
+export const recruitNowDB = [
+  'uiuxPlanNow',
+  'gamePlanNow',
+  'managerPlanNow',
+  'hwPlanNow',
+
+  'iosFrNow',
+  'androidFrNow',
+  'webFrontFrNow',
+  'webPublicFrNow',
+  'crossFrNow',
+
+  'uiuxDeNow',
+  'graphicDeNow',
+  'thrdDeNow',
+  'hwDeNow',
+  'etcDeNow',
+
+  'webBkNow',
+  'blchBkNow',
+  'aiBkNow',
+  'dsBkNow',
+  'gameBkNow',
+
+  'planBuNow',
+  'marketingBuNow',
+  'financeBuNow',
+  'salseBuNow',
+  'consultBuNow',
+  'investBuNow',
+  'etcBuNow',
+
+  'blogEtcNow',
+  'influEtcNow',
+  'compEtcNow',
 ];
