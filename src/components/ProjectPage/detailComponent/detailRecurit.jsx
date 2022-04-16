@@ -149,9 +149,9 @@ export const DetailRecurit = ({
             <S.StatusSmallP>
               {managerPlanNow} / {managerPlan}
             </S.StatusSmallP>
-            {gamePlanNow !== 0 ? (
+            {managerPlanNow !== 0 ? (
               <>
-                {gamePlan === gamePlanNow ? (
+                {managerPlan === managerPlanNow ? (
                   <Button color="danger">완료</Button>
                 ) : (
                   <Button
@@ -184,9 +184,9 @@ export const DetailRecurit = ({
             <S.StatusSmallP>
               {hwPlanNow} / {hwPlan}
             </S.StatusSmallP>
-            {gamePlanNow !== 0 ? (
+            {hwPlanNow !== 0 ? (
               <>
-                {gamePlan === gamePlanNow ? (
+                {hwPlan === hwPlanNow ? (
                   <Button color="danger">완료</Button>
                 ) : (
                   <Button
@@ -219,9 +219,9 @@ export const DetailRecurit = ({
             <S.StatusSmallP>
               {iosFrNow} / {iosFr}
             </S.StatusSmallP>
-            {gamePlanNow !== 0 ? (
+            {iosFrNow !== 0 ? (
               <>
-                {gamePlan === gamePlanNow ? (
+                {iosFr === iosFrNow ? (
                   <Button color="danger">완료</Button>
                 ) : (
                   <Button
@@ -254,9 +254,9 @@ export const DetailRecurit = ({
             <S.StatusSmallP>
               {androidFrNow} / {androidFr}
             </S.StatusSmallP>
-            {gamePlanNow !== 0 ? (
+            {androidFrNow !== 0 ? (
               <>
-                {gamePlan === gamePlanNow ? (
+                {androidFr === androidFrNow ? (
                   <Button color="danger">완료</Button>
                 ) : (
                   <Button
@@ -289,9 +289,9 @@ export const DetailRecurit = ({
             <S.StatusSmallP>
               {webFrontFrNow} / {webFrontFr}
             </S.StatusSmallP>
-            {gamePlanNow !== 0 ? (
+            {webFrontFrNow !== 0 ? (
               <>
-                {gamePlan === gamePlanNow ? (
+                {webFrontFr === webFrontFrNow ? (
                   <Button color="danger">완료</Button>
                 ) : (
                   <Button
@@ -324,9 +324,9 @@ export const DetailRecurit = ({
             <S.StatusSmallP>
               {webPublicFrNow} / {webPublicFr}
             </S.StatusSmallP>
-            {gamePlanNow !== 0 ? (
+            {webPublicFrNow !== 0 ? (
               <>
-                {gamePlan === gamePlanNow ? (
+                {webPublicFr === webPublicFrNow ? (
                   <Button color="danger">완료</Button>
                 ) : (
                   <Button
@@ -359,9 +359,9 @@ export const DetailRecurit = ({
             <S.StatusSmallP>
               {crossFrNow} / {crossFr}
             </S.StatusSmallP>
-            {gamePlanNow !== 0 ? (
+            {crossFrNow !== 0 ? (
               <>
-                {gamePlan === gamePlanNow ? (
+                {crossFr === crossFrNow ? (
                   <Button color="danger">완료</Button>
                 ) : (
                   <Button
@@ -394,9 +394,9 @@ export const DetailRecurit = ({
             <S.StatusSmallP>
               {graphicDeNow} / {graphicDe}
             </S.StatusSmallP>
-            {gamePlanNow !== 0 ? (
+            {graphicDeNow !== 0 ? (
               <>
-                {gamePlan === gamePlanNow ? (
+                {graphicDe === graphicDeNow ? (
                   <Button color="danger">완료</Button>
                 ) : (
                   <Button
@@ -429,9 +429,9 @@ export const DetailRecurit = ({
             <S.StatusSmallP>
               {uiuxDeNow} / {uiuxDe}
             </S.StatusSmallP>
-            {gamePlanNow !== 0 ? (
+            {uiuxDeNow !== 0 ? (
               <>
-                {gamePlan === gamePlanNow ? (
+                {uiuxDe === uiuxDeNow ? (
                   <Button color="danger">완료</Button>
                 ) : (
                   <Button
@@ -464,9 +464,9 @@ export const DetailRecurit = ({
             <S.StatusSmallP>
               {thrdDeNow} / {thrdDe}
             </S.StatusSmallP>
-            {gamePlanNow !== 0 ? (
+            {thrdDeNow !== 0 ? (
               <>
-                {gamePlan === gamePlanNow ? (
+                {thrdDe === thrdDeNow ? (
                   <Button color="danger">완료</Button>
                 ) : (
                   <Button
@@ -499,9 +499,9 @@ export const DetailRecurit = ({
             <S.StatusSmallP>
               {hwDeNow} / {hwDe}
             </S.StatusSmallP>
-            {gamePlanNow !== 0 ? (
+            {hwDeNow !== 0 ? (
               <>
-                {gamePlan === gamePlanNow ? (
+                {hwDe === hwDeNow ? (
                   <Button color="danger">완료</Button>
                 ) : (
                   <Button
@@ -534,9 +534,9 @@ export const DetailRecurit = ({
             <S.StatusSmallP>
               {etcDeNow} / {etcDe}
             </S.StatusSmallP>
-            {gamePlanNow !== 0 ? (
+            {etcDeNow !== 0 ? (
               <>
-                {gamePlan === gamePlanNow ? (
+                {etcDe === etcDeNow ? (
                   <Button color="danger">완료</Button>
                 ) : (
                   <Button
@@ -569,9 +569,9 @@ export const DetailRecurit = ({
             <S.StatusSmallP>
               {webBkNow} / {webBk}
             </S.StatusSmallP>
-            {gamePlanNow !== 0 ? (
+            {webBkNow !== 0 ? (
               <>
-                {gamePlan === gamePlanNow ? (
+                {webBk === webBkNow ? (
                   <Button color="danger">완료</Button>
                 ) : (
                   <Button
@@ -604,9 +604,9 @@ export const DetailRecurit = ({
             <S.StatusSmallP>
               {blchBkNow} / {blchBk}
             </S.StatusSmallP>
-            {gamePlanNow !== 0 ? (
+            {blchBkNow !== 0 ? (
               <>
-                {gamePlan === gamePlanNow ? (
+                {blchBk === blchBkNow ? (
                   <Button color="danger">완료</Button>
                 ) : (
                   <Button
@@ -639,9 +639,9 @@ export const DetailRecurit = ({
             <S.StatusSmallP>
               {aiBkNow} / {aiBk}
             </S.StatusSmallP>
-            {gamePlanNow !== 0 ? (
+            {aiBkNow !== 0 ? (
               <>
-                {gamePlan === gamePlanNow ? (
+                {aiBk === aiBkNow ? (
                   <Button color="danger">완료</Button>
                 ) : (
                   <Button
@@ -674,9 +674,9 @@ export const DetailRecurit = ({
             <S.StatusSmallP>
               {dsBkNow} / {dsBk}
             </S.StatusSmallP>
-            {gamePlanNow !== 0 ? (
+            {dsBkNow !== 0 ? (
               <>
-                {gamePlan === gamePlanNow ? (
+                {dsBk === dsBkNow ? (
                   <Button color="danger">완료</Button>
                 ) : (
                   <Button
@@ -997,7 +997,7 @@ export const DetailRecurit = ({
                   <Button
                     color="info"
                     onClick={() => {
-                      apply(projectID, userID, 'game_plan_now');
+                      apply(projectID, userID, 'blog_etc_now');
                     }}
                   >
                     신청
@@ -1008,7 +1008,7 @@ export const DetailRecurit = ({
               <Button
                 color="info"
                 onClick={() => {
-                  apply(projectID, userID, 'game_plan_now');
+                  apply(projectID, userID, 'blog_etc_now');
                 }}
               >
                 신청
@@ -1032,7 +1032,7 @@ export const DetailRecurit = ({
                   <Button
                     color="info"
                     onClick={() => {
-                      apply(projectID, userID, 'game_plan_now');
+                      apply(projectID, userID, 'influ_etc_now');
                     }}
                   >
                     신청
@@ -1043,7 +1043,7 @@ export const DetailRecurit = ({
               <Button
                 color="info"
                 onClick={() => {
-                  apply(projectID, userID, 'game_plan_now');
+                  apply(projectID, userID, 'influ_etc_now');
                 }}
               >
                 신청
@@ -1067,7 +1067,7 @@ export const DetailRecurit = ({
                   <Button
                     color="info"
                     onClick={() => {
-                      apply(projectID, userID, 'game_plan_now');
+                      apply(projectID, userID, 'comp_etc_now');
                     }}
                   >
                     신청
@@ -1078,7 +1078,7 @@ export const DetailRecurit = ({
               <Button
                 color="info"
                 onClick={() => {
-                  apply(projectID, userID, 'game_plan_now');
+                  apply(projectID, userID, 'comp_etc_now');
                 }}
               >
                 신청
