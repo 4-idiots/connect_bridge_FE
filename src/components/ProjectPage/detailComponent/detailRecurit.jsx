@@ -709,9 +709,9 @@ export const DetailRecurit = ({
             <S.StatusSmallP>
               {gameBkNow} / {gameBk}
             </S.StatusSmallP>
-            {gamePlanNow !== 0 ? (
+            {gameBkNow !== 0 ? (
               <>
-                {gamePlan === gamePlanNow ? (
+                {gameBk === gameBkNow ? (
                   <Button color="danger">완료</Button>
                 ) : (
                   <Button
@@ -744,9 +744,9 @@ export const DetailRecurit = ({
             <S.StatusSmallP>
               {planBuNow} / {planBu}
             </S.StatusSmallP>
-            {gamePlanNow !== 0 ? (
+            {planBuNow !== 0 ? (
               <>
-                {gamePlan === gamePlanNow ? (
+                {planBu === planBuNow ? (
                   <Button color="danger">완료</Button>
                 ) : (
                   <Button
@@ -779,9 +779,9 @@ export const DetailRecurit = ({
             <S.StatusSmallP>
               {marketingBuNow} / {marketingBu}
             </S.StatusSmallP>
-            {gamePlanNow !== 0 ? (
+            {marketingBuNow !== 0 ? (
               <>
-                {gamePlan === gamePlanNow ? (
+                {marketingBu === marketingBuNow ? (
                   <Button color="danger">완료</Button>
                 ) : (
                   <Button
@@ -814,9 +814,9 @@ export const DetailRecurit = ({
             <S.StatusSmallP>
               {financeBuNow} / {financeBu}
             </S.StatusSmallP>
-            {gamePlanNow !== 0 ? (
+            {financeBuNow !== 0 ? (
               <>
-                {gamePlan === gamePlanNow ? (
+                {financeBu === financeBuNow ? (
                   <Button color="danger">완료</Button>
                 ) : (
                   <Button
@@ -849,9 +849,9 @@ export const DetailRecurit = ({
             <S.StatusSmallP>
               {salesBuNow} / {salesBu}
             </S.StatusSmallP>
-            {gamePlanNow !== 0 ? (
+            {salesBuNow !== 0 ? (
               <>
-                {gamePlan === gamePlanNow ? (
+                {salesBu === salesBuNow ? (
                   <Button color="danger">완료</Button>
                 ) : (
                   <Button
@@ -884,9 +884,9 @@ export const DetailRecurit = ({
             <S.StatusSmallP>
               {consultBuNow} / {consultBu}
             </S.StatusSmallP>
-            {gamePlanNow !== 0 ? (
+            {consultBuNow !== 0 ? (
               <>
-                {gamePlan === gamePlanNow ? (
+                {consultBu === consultBuNow ? (
                   <Button color="danger">완료</Button>
                 ) : (
                   <Button
@@ -919,9 +919,9 @@ export const DetailRecurit = ({
             <S.StatusSmallP>
               {investBuNow} / {investBu}
             </S.StatusSmallP>
-            {gamePlanNow !== 0 ? (
+            {investBuNow !== 0 ? (
               <>
-                {gamePlan === gamePlanNow ? (
+                {investBu === investBuNow ? (
                   <Button color="danger">완료</Button>
                 ) : (
                   <Button
@@ -954,9 +954,9 @@ export const DetailRecurit = ({
             <S.StatusSmallP>
               {etcBuNow} / {etcBu}
             </S.StatusSmallP>
-            {gamePlanNow !== 0 ? (
+            {etcBuNow !== 0 ? (
               <>
-                {gamePlan === gamePlanNow ? (
+                {etcBu === etcBuNow ? (
                   <Button color="danger">완료</Button>
                 ) : (
                   <Button
@@ -989,9 +989,9 @@ export const DetailRecurit = ({
             <S.StatusSmallP>
               {blogEtcNow} / {blogEtc}
             </S.StatusSmallP>
-            {gamePlanNow !== 0 ? (
+            {blogEtcNow !== 0 ? (
               <>
-                {gamePlan === gamePlanNow ? (
+                {blogEtc === blogEtcNow ? (
                   <Button color="danger">완료</Button>
                 ) : (
                   <Button
@@ -1024,9 +1024,9 @@ export const DetailRecurit = ({
             <S.StatusSmallP>
               {influEtcNow} / {influEtc}
             </S.StatusSmallP>
-            {gamePlanNow !== 0 ? (
+            {influEtcNow !== 0 ? (
               <>
-                {gamePlan === gamePlanNow ? (
+                {influEtc === influEtcNow ? (
                   <Button color="danger">완료</Button>
                 ) : (
                   <Button
@@ -1059,9 +1059,9 @@ export const DetailRecurit = ({
             <S.StatusSmallP>
               {compEtcNow} / {compEtc}
             </S.StatusSmallP>
-            {gamePlanNow !== 0 ? (
+            {compEtcNow !== 0 ? (
               <>
-                {gamePlan === gamePlanNow ? (
+                {compEtc === compEtcNow ? (
                   <Button color="danger">완료</Button>
                 ) : (
                   <Button

@@ -70,7 +70,7 @@ export const ProjectDetailForm = () => {
     planBu,
     marketingBu,
     financeBu,
-    salseBu,
+    salesBu,
     consultBu,
     investBu,
     etcBu,
@@ -99,7 +99,7 @@ export const ProjectDetailForm = () => {
     planBuNow,
     marketingBuNow,
     financeBuNow,
-    salseBuNow,
+    salesBuNow,
     consultBuNow,
     investBuNow,
     etcBuNow,
@@ -168,7 +168,7 @@ export const ProjectDetailForm = () => {
                   planBu={planBu}
                   marketingBu={marketingBu}
                   financeBu={financeBu}
-                  salseBu={salseBu}
+                  salesBu={salesBu}
                   consultBu={consultBu}
                   investBu={investBu}
                   etcBu={etcBu}
@@ -197,7 +197,7 @@ export const ProjectDetailForm = () => {
                   planBuNow={planBuNow}
                   marketingBuNow={marketingBuNow}
                   financeBuNow={financeBuNow}
-                  salseBuNow={salseBuNow}
+                  salesBuNow={salesBuNow}
                   consultBuNow={consultBuNow}
                   investBuNow={investBuNow}
                   etcBuNow={etcBuNow}

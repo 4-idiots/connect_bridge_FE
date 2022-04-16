@@ -143,7 +143,7 @@ export const StatusBigP = styled.p`
 
 export const StatusSmallP = styled.p`
   margin-right: 34px;
-  width: 20px;
+  width: 60px;
 `;
 
 export const DetailPlatform = styled.div`
