@@ -32,13 +32,6 @@ export const TeamForm = () => {
     });
   };
 
-  /* useEffect(() => {
-    axios.get('http://4idiot.ddns.net:8080/team').then(response => {
-      console.log(response.data);
-      setusers(response.data);
-    });
-  }, []);
- */
   return (
     <Container>
       <Heading style={{ textAlign: 'center', margin: 35 }}>팀원 구하기</Heading>

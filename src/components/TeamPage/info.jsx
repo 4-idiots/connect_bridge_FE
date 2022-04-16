@@ -35,7 +35,7 @@ export const InfoForm = () => {
   const auth = useAuth();
   const { decodedToken, isExpired } = useJwt(auth.token);
   const { teID } = useParams(`${decodedToken?.id}`);
-  const [color, setColor] = useState('red');
+  const [color, setColor] = useState('');
 
   const userData = () => {
     if (teID > 0) {
@@ -53,6 +53,7 @@ export const InfoForm = () => {
           setuserInterest(response.data.userInterest);
           setuserIntroduce(response.data.userIntroduce);
           setfollow(response.data.follow);
+          setColor(response.data.color);
         });
     } else {
       axios
@@ -77,12 +78,7 @@ export const InfoForm = () => {
   };
 
   const likeClick = () => {
-    // eslint-disable-next-line no-restricted-globals
-    location.reload();
-
     if (follow === 1) {
-      // eslint-disable-next-line no-unused-expressions
-      /* color === 'red' ? setColor('yellow') : setColor('red'); */
       axios
         .get(`http://4idiot.ddns.net:8080/follow/${decodedToken.id}/${teamID}`)
         .then(response => {
@@ -90,9 +86,10 @@ export const InfoForm = () => {
           console.log(teamID);
           console.log(response.data.follow);
         });
-    } else if (follow === 2)
       // eslint-disable-next-line no-unused-expressions
-      /* color === 'yellow' ? setColor('red') : setColor('yellow'); */
+      color === 'black' ? setColor('danger') : setColor('black');
+      // eslint-disable-next-line no-unused-expressions
+    } else if (follow === 2)
       axios
         .delete(
           `http://4idiot.ddns.net:8080/follow/${decodedToken.id}/${teamID}`,
@@ -102,9 +99,14 @@ export const InfoForm = () => {
           console.log(teamID);
           console.log(response.data.follow);
         });
+    // eslint-disable-next-line no-unused-expressions
+    color === 'danger' ? setColor('black') : setColor('danger');
   };
 
-  const likeunClick = () => {};
+  const likeunClick = () => {
+    // eslint-disable-next-line no-unused-expressions
+    color === 'danger' ? setColor('black') : setColor('danger');
+  };
 
   useEffect(() => {
     userData();
@@ -121,7 +123,6 @@ export const InfoForm = () => {
           padding: '20px 50px',
         }}
       >
-        {JSON.stringify(decodedToken)}
         상세페이지
       </Heading>
       <Box
@@ -143,12 +144,12 @@ export const InfoForm = () => {
 
         <div style={{ textAlign: 'center' }}>
           {follow === 1 ? (
-            <Button onClick={likeClick} onChange={followdata}>
-              ♥
+            <Button onClick={likeClick} onChange={followdata} color={color}>
+              <h1>♥</h1>
             </Button>
           ) : follow === 2 ? (
-            <Button onClick={likeClick} onChange={followdata}>
-              ♥
+            <Button onClick={likeClick} onChange={followdata} color={color}>
+              <h1>♥</h1>
             </Button>
           ) : (
             <> </>
@@ -256,37 +257,3 @@ export const InfoForm = () => {
     </Container>
   );
 };
-
-/* axios.post('/api/like/getLike', body).then(res => {
-  if (res.data.getLike) {
-    // 얼마나 많은 좋아요를 받았는가
-    setLikes(res.data.likes.length);
-
-    // 내가 이미 좋아요를 눌렀는가
-    res.data.likes.map(like => {
-      if (like.userId === userData._id) {
-        setAction('liked');
-      }
-    });
-  } else {
-    alert('좋아요 데이터를 가져오는데 실패했습니다.');
-  }
-});
-  }, []);
- */
-
-/*  apiRouter.post("/like/uplike", (req, res) => {
-    let { commentId, userId } = req.body;
-  
-    const LikeIns = new Like({ userId, commentId });
-  
-    LikeIns.save((err, result) => {
-      if (err) return res.status(400).json({ upLike: false, err });
-  
-      // 만약 이미 싫어요를 누른 상태라면, 싫어요를 취소야 합니다.
-      Dislike.findByIdAndDelete(result._id).exec((err, dislikeResult) => {
-        if (err) return res.status(400).json({ upLike: false, err });
-        return res.status(200).json({ upLike: true });
-      });
-    });
-  }); */

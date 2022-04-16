@@ -4,9 +4,9 @@
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable react/button-has-type */
 import axios from 'axios';
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
-import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import {
   Container,
@@ -20,6 +20,8 @@ import {
   Tag,
   tags,
 } from 'react-bulma-components';
+import { useJwt } from 'react-jwt';
+import { useAuth } from '../../contexts/hooks/useAuth';
 import SlateEditor from '../../SlateEditor/Editor';
 
 export const CommunityWriteForm = () => {
@@ -27,6 +29,9 @@ export const CommunityWriteForm = () => {
   const [tagInput, setTagInput] = useState('');
   const [hashtag, sethashtag] = useState([]);
   const [title, settitle] = useState('');
+  const auth = useAuth();
+  const { decodedToken, isExpired } = useJwt(auth.token);
+  const { fromUserId } = useParams(`${decodedToken?.id}`);
 
   /* const [postInfo, setPostInfo] = useState({
     indata: [
@@ -47,24 +52,16 @@ export const CommunityWriteForm = () => {
     ],
   });
 
-  /*  useEffect(() => {
-    axios.get('http://4idiot.ddns.net:8080/team').then(response => {
-      console.log(response.data);
-      setusers(response.data);
-    });
-  }, []);
- */
-
-  /*  const userData = () => {
+  const userData = () => {
     return axios.get('http://4idiot.ddns.net:8080/community').then(response => {
       console.log(response);
       setdata(response.data);
     });
   };
+
   useEffect(() => {
     userData();
   }, []);
- */
 
   const titledata = e => {
     settitle(e.target.value);
@@ -78,21 +75,22 @@ export const CommunityWriteForm = () => {
     }
     console.log(hashtag);
   };
+  const removeList = id => {
+    console.log(id);
+
+    sethashtag(hashtag.filter(item => item !== id));
+  };
 
   const Write = e => {
-    e.preventDefault();
-    /* 
-    if (hashtag && title && contents) {
+    if (title) {
       axios
-        .post('http://4idiot.ddns.net:8080/community/write', {
+        .post(`http://4idiot.ddns.net:8080/write/${decodedToken?.id}`, {
           hashtag,
           title,
-          contents,
         })
 
         .then(response => {
           console.log(response.data.message);
-          console.log(data);
           userData();
           alert('작성이 완료하였습니다.');
           window.location = '/community';
@@ -101,55 +99,14 @@ export const CommunityWriteForm = () => {
           alert('입력값을 확인해주세요.');
         });
     } else {
-      alert('입력값을 확인해주세요');
-    } */
-  };
-
-  /*  const contentsdata = e => {
-    setcontents(e.target.value);
-  }; */
-
-  /* const userData = () => {
-    return axios.get('http://4idiot.ddns.net:8080/users').then(response => {
-      console.log(response);
-      setdata(response.data);
-    });
-  };
-
-  useEffect(() => {
-    userData();
-  }, []); */
-
-  /* const Write = e => {
+      alert('입력값을 확인해');
+    }
     e.preventDefault();
-
-    axios
-      .post('http://4idiot.ddns.net:8080/users/register', {
-        hashtag,
-        title,
-        contents,
-      })
-
-      .then(response => {
-        console.log(response.data.message);
-        console.log(data);
-          userData();
-        alert('회원가입이 완료하였습니다.'); 
-        window.location = '/community';
-      })
-      .catch(response => {
-        alert('입력값을 확인해주세요.');
-      });
-  }; */
-
-  const removeList = id => {
-    console.log(id);
-
-    sethashtag(hashtag.filter(item => item !== id));
   };
 
   return (
     <Container>
+      {JSON.stringify(fromUserId)}
       <Heading style={{ textAlign: 'center', margin: 35 }}>
         커뮤니티 글쓰기
       </Heading>
