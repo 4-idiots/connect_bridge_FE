@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Heading, Button } from 'react-bulma-components';
@@ -26,7 +27,7 @@ export const DetailRecurit = ({
   planBu,
   marketingBu,
   financeBu,
-  salseBu,
+  salesBu,
   consultBu,
   investBu,
   etcBu,
@@ -55,7 +56,7 @@ export const DetailRecurit = ({
   planBuNow,
   marketingBuNow,
   financeBuNow,
-  salseBuNow,
+  salesBuNow,
   consultBuNow,
   investBuNow,
   etcBuNow,
@@ -72,527 +73,1020 @@ export const DetailRecurit = ({
         모집 현황
       </Heading>
       <S.StatusUl>
-        {uiuxPlan && (
+        {uiuxPlan ? (
           <S.StatusLi>
             <S.StatusBigP>UI/UX 기획</S.StatusBigP>
             <S.StatusSmallP>
               {uiuxPlanNow} / {uiuxPlan}
             </S.StatusSmallP>
-            {uiuxPlanNow === 0 ? (
-              <Button color="danger">완료</Button>
+            {uiuxPlanNow !== 0 ? (
+              <>
+                {uiuxPlan === uiuxPlanNow ? (
+                  <Button color="danger">완료</Button>
+                ) : (
+                  <Button
+                    color="info"
+                    onClick={() => {
+                      apply(projectID, userID, 'uiux_plan_now');
+                    }}
+                  >
+                    신청
+                  </Button>
+                )}
+              </>
             ) : (
               <Button
                 color="info"
-                onClick={apply(projectID, userID, 'uiux_plan_now')}
+                onClick={() => {
+                  apply(projectID, userID, 'uiux_plan_now');
+                }}
               >
                 신청
               </Button>
             )}
           </S.StatusLi>
+        ) : (
+          ''
         )}
-        {gamePlan && (
+        {gamePlan ? (
           <S.StatusLi>
             <S.StatusBigP>게임 기획</S.StatusBigP>
             <S.StatusSmallP>
               {gamePlanNow} / {gamePlan}
             </S.StatusSmallP>
-            {gamePlanNow === 0 ? (
-              <Button color="danger">완료</Button>
+            {gamePlanNow !== 0 ? (
+              <>
+                {gamePlan === gamePlanNow ? (
+                  <Button color="danger">완료</Button>
+                ) : (
+                  <Button
+                    color="info"
+                    onClick={() => {
+                      apply(projectID, userID, 'game_plan_now');
+                    }}
+                  >
+                    신청
+                  </Button>
+                )}
+              </>
             ) : (
               <Button
                 color="info"
-                onClick={apply(projectID, userID, 'game_plan_now')}
+                onClick={() => {
+                  apply(projectID, userID, 'game_plan_now');
+                }}
               >
                 신청
               </Button>
             )}
           </S.StatusLi>
+        ) : (
+          ''
         )}
-        {managerPlan && (
+        {managerPlan ? (
           <S.StatusLi>
             <S.StatusBigP>프로젝트 매니저</S.StatusBigP>
             <S.StatusSmallP>
               {managerPlanNow} / {managerPlan}
             </S.StatusSmallP>
-            {managerPlanNow === 0 ? (
-              <Button color="danger">완료</Button>
+            {gamePlanNow !== 0 ? (
+              <>
+                {gamePlan === gamePlanNow ? (
+                  <Button color="danger">완료</Button>
+                ) : (
+                  <Button
+                    color="info"
+                    onClick={() => {
+                      apply(projectID, userID, 'manager_plan_now');
+                    }}
+                  >
+                    신청
+                  </Button>
+                )}
+              </>
             ) : (
               <Button
                 color="info"
-                onClick={apply(projectID, userID, 'manager_plan_now')}
+                onClick={() => {
+                  apply(projectID, userID, 'manager_plan_now');
+                }}
               >
                 신청
               </Button>
             )}
           </S.StatusLi>
+        ) : (
+          ''
         )}
-        {hwPlan && (
+        {hwPlan ? (
           <S.StatusLi>
             <S.StatusBigP>하드웨어(제품) 기획</S.StatusBigP>
             <S.StatusSmallP>
               {hwPlanNow} / {hwPlan}
             </S.StatusSmallP>
-            {hwPlanNow === 0 ? (
-              <Button color="danger">완료</Button>
+            {gamePlanNow !== 0 ? (
+              <>
+                {gamePlan === gamePlanNow ? (
+                  <Button color="danger">완료</Button>
+                ) : (
+                  <Button
+                    color="info"
+                    onClick={() => {
+                      apply(projectID, userID, 'hw_plan_now');
+                    }}
+                  >
+                    신청
+                  </Button>
+                )}
+              </>
             ) : (
               <Button
                 color="info"
-                onClick={apply(projectID, userID, 'hw_plan_now')}
+                onClick={() => {
+                  apply(projectID, userID, 'hw_plan_now');
+                }}
               >
                 신청
               </Button>
             )}
           </S.StatusLi>
+        ) : (
+          ''
         )}
-        {iosFr && (
+        {iosFr ? (
           <S.StatusLi>
             <S.StatusBigP>IOS</S.StatusBigP>
             <S.StatusSmallP>
               {iosFrNow} / {iosFr}
             </S.StatusSmallP>
-            {iosFrNow === 0 ? (
-              <Button color="danger">완료</Button>
+            {gamePlanNow !== 0 ? (
+              <>
+                {gamePlan === gamePlanNow ? (
+                  <Button color="danger">완료</Button>
+                ) : (
+                  <Button
+                    color="info"
+                    onClick={() => {
+                      apply(projectID, userID, 'ios_fr_now');
+                    }}
+                  >
+                    신청
+                  </Button>
+                )}
+              </>
             ) : (
               <Button
                 color="info"
-                onClick={apply(projectID, userID, 'ios_fr_now')}
+                onClick={() => {
+                  apply(projectID, userID, 'ios_fr_now');
+                }}
               >
                 신청
               </Button>
             )}
           </S.StatusLi>
+        ) : (
+          ''
         )}
-        {androidFr && (
+        {androidFr ? (
           <S.StatusLi>
             <S.StatusBigP>안드로이드</S.StatusBigP>
             <S.StatusSmallP>
               {androidFrNow} / {androidFr}
             </S.StatusSmallP>
-            {androidFrNow === 0 ? (
-              <Button color="danger">완료</Button>
+            {gamePlanNow !== 0 ? (
+              <>
+                {gamePlan === gamePlanNow ? (
+                  <Button color="danger">완료</Button>
+                ) : (
+                  <Button
+                    color="info"
+                    onClick={() => {
+                      apply(projectID, userID, 'android_fr_now');
+                    }}
+                  >
+                    신청
+                  </Button>
+                )}
+              </>
             ) : (
               <Button
                 color="info"
-                onClick={apply(projectID, userID, 'android_fr_now')}
+                onClick={() => {
+                  apply(projectID, userID, 'android_fr_now');
+                }}
               >
                 신청
               </Button>
             )}
           </S.StatusLi>
+        ) : (
+          ''
         )}
-        {webFrontFr && (
+        {webFrontFr ? (
           <S.StatusLi>
             <S.StatusBigP>웹프론트엔드</S.StatusBigP>
             <S.StatusSmallP>
               {webFrontFrNow} / {webFrontFr}
             </S.StatusSmallP>
-            {webFrontFrNow === 0 ? (
-              <Button color="danger">완료</Button>
+            {gamePlanNow !== 0 ? (
+              <>
+                {gamePlan === gamePlanNow ? (
+                  <Button color="danger">완료</Button>
+                ) : (
+                  <Button
+                    color="info"
+                    onClick={() => {
+                      apply(projectID, userID, 'webfront_fr_now');
+                    }}
+                  >
+                    신청
+                  </Button>
+                )}
+              </>
             ) : (
               <Button
                 color="info"
-                onClick={apply(projectID, userID, 'webfront_fr_now')}
+                onClick={() => {
+                  apply(projectID, userID, 'webfront_fr_now');
+                }}
               >
                 신청
               </Button>
             )}
           </S.StatusLi>
+        ) : (
+          ''
         )}
-        {webPublicFr && (
+        {webPublicFr ? (
           <S.StatusLi>
             <S.StatusBigP>웹퍼블리셔</S.StatusBigP>
             <S.StatusSmallP>
               {webPublicFrNow} / {webPublicFr}
             </S.StatusSmallP>
-            {webPublicFrNow === 0 ? (
-              <Button color="danger">완료</Button>
+            {gamePlanNow !== 0 ? (
+              <>
+                {gamePlan === gamePlanNow ? (
+                  <Button color="danger">완료</Button>
+                ) : (
+                  <Button
+                    color="info"
+                    onClick={() => {
+                      apply(projectID, userID, 'webpublick_fr_now');
+                    }}
+                  >
+                    신청
+                  </Button>
+                )}
+              </>
             ) : (
               <Button
                 color="info"
-                onClick={apply(projectID, userID, 'webpublic_now')}
+                onClick={() => {
+                  apply(projectID, userID, 'webpublick_fr_now');
+                }}
               >
                 신청
               </Button>
             )}
           </S.StatusLi>
+        ) : (
+          ''
         )}
-        {crossFr && (
+        {crossFr ? (
           <S.StatusLi>
             <S.StatusBigP>크로스플랫폼</S.StatusBigP>
             <S.StatusSmallP>
               {crossFrNow} / {crossFr}
             </S.StatusSmallP>
-            {crossFrNow === 0 ? (
-              <Button color="danger">완료</Button>
+            {gamePlanNow !== 0 ? (
+              <>
+                {gamePlan === gamePlanNow ? (
+                  <Button color="danger">완료</Button>
+                ) : (
+                  <Button
+                    color="info"
+                    onClick={() => {
+                      apply(projectID, userID, 'cross_fr_now');
+                    }}
+                  >
+                    신청
+                  </Button>
+                )}
+              </>
             ) : (
               <Button
                 color="info"
-                onClick={apply(projectID, userID, 'cross_fr_now')}
+                onClick={() => {
+                  apply(projectID, userID, 'cross_fr_now');
+                }}
               >
                 신청
               </Button>
             )}
           </S.StatusLi>
+        ) : (
+          ''
         )}
-        {graphicDe && (
+        {graphicDe ? (
           <S.StatusLi>
             <S.StatusBigP>그래픽디자인</S.StatusBigP>
             <S.StatusSmallP>
               {graphicDeNow} / {graphicDe}
             </S.StatusSmallP>
-            {graphicDeNow === 0 ? (
-              <Button color="danger">완료</Button>
+            {gamePlanNow !== 0 ? (
+              <>
+                {gamePlan === gamePlanNow ? (
+                  <Button color="danger">완료</Button>
+                ) : (
+                  <Button
+                    color="info"
+                    onClick={() => {
+                      apply(projectID, userID, 'graphic_de_now');
+                    }}
+                  >
+                    신청
+                  </Button>
+                )}
+              </>
             ) : (
               <Button
                 color="info"
-                onClick={apply(projectID, userID, 'graphic_de_now')}
+                onClick={() => {
+                  apply(projectID, userID, 'graphic_de_now');
+                }}
               >
                 신청
               </Button>
             )}
           </S.StatusLi>
+        ) : (
+          ''
         )}
-        {uiuxDe && (
+        {uiuxDe ? (
           <S.StatusLi>
             <S.StatusBigP>UI/UX디자인</S.StatusBigP>
             <S.StatusSmallP>
               {uiuxDeNow} / {uiuxDe}
             </S.StatusSmallP>
-            {uiuxDeNow === 0 ? (
-              <Button color="danger">완료</Button>
+            {gamePlanNow !== 0 ? (
+              <>
+                {gamePlan === gamePlanNow ? (
+                  <Button color="danger">완료</Button>
+                ) : (
+                  <Button
+                    color="info"
+                    onClick={() => {
+                      apply(projectID, userID, 'uiux_de_now');
+                    }}
+                  >
+                    신청
+                  </Button>
+                )}
+              </>
             ) : (
               <Button
                 color="info"
-                onClick={apply(projectID, userID, 'uiux_de_now')}
+                onClick={() => {
+                  apply(projectID, userID, 'uiux_de_now');
+                }}
               >
                 신청
               </Button>
             )}
           </S.StatusLi>
+        ) : (
+          ''
         )}
-        {thrdDe && (
+        {thrdDe ? (
           <S.StatusLi>
             <S.StatusBigP>3D디자인</S.StatusBigP>
             <S.StatusSmallP>
               {thrdDeNow} / {thrdDe}
             </S.StatusSmallP>
-            {thrdDeNow === 0 ? (
-              <Button color="danger">완료</Button>
+            {gamePlanNow !== 0 ? (
+              <>
+                {gamePlan === gamePlanNow ? (
+                  <Button color="danger">완료</Button>
+                ) : (
+                  <Button
+                    color="info"
+                    onClick={() => {
+                      apply(projectID, userID, 'thr_de_now');
+                    }}
+                  >
+                    신청
+                  </Button>
+                )}
+              </>
             ) : (
               <Button
                 color="info"
-                onClick={apply(projectID, userID, 'thrd_de_now')}
+                onClick={() => {
+                  apply(projectID, userID, 'thr_de_now');
+                }}
               >
                 신청
               </Button>
             )}
           </S.StatusLi>
+        ) : (
+          ''
         )}
-        {hwDe && (
+        {hwDe ? (
           <S.StatusLi>
             <S.StatusBigP>하드웨어(제품)디자인</S.StatusBigP>
             <S.StatusSmallP>
               {hwDeNow} / {hwDe}
             </S.StatusSmallP>
-            {hwDeNow === 0 ? (
-              <Button color="danger">완료</Button>
+            {gamePlanNow !== 0 ? (
+              <>
+                {gamePlan === gamePlanNow ? (
+                  <Button color="danger">완료</Button>
+                ) : (
+                  <Button
+                    color="info"
+                    onClick={() => {
+                      apply(projectID, userID, 'hw_de_now');
+                    }}
+                  >
+                    신청
+                  </Button>
+                )}
+              </>
             ) : (
               <Button
                 color="info"
-                onClick={apply(projectID, userID, 'hw_de_now')}
+                onClick={() => {
+                  apply(projectID, userID, 'hw_de_now');
+                }}
               >
                 신청
               </Button>
             )}
           </S.StatusLi>
+        ) : (
+          ''
         )}
-        {etcDe && (
+        {etcDe ? (
           <S.StatusLi>
             <S.StatusBigP>(디자인)기타</S.StatusBigP>
             <S.StatusSmallP>
               {etcDeNow} / {etcDe}
             </S.StatusSmallP>
-            {etcDeNow === 0 ? (
-              <Button color="danger">완료</Button>
+            {gamePlanNow !== 0 ? (
+              <>
+                {gamePlan === gamePlanNow ? (
+                  <Button color="danger">완료</Button>
+                ) : (
+                  <Button
+                    color="info"
+                    onClick={() => {
+                      apply(projectID, userID, 'etc_de_now');
+                    }}
+                  >
+                    신청
+                  </Button>
+                )}
+              </>
             ) : (
               <Button
                 color="info"
-                onClick={apply(projectID, userID, 'etc_de_now')}
+                onClick={() => {
+                  apply(projectID, userID, 'etc_de_now');
+                }}
               >
                 신청
               </Button>
             )}
           </S.StatusLi>
+        ) : (
+          ''
         )}
-        {webBk && (
+        {webBk ? (
           <S.StatusLi>
             <S.StatusBigP>웹서버</S.StatusBigP>
             <S.StatusSmallP>
               {webBkNow} / {webBk}
             </S.StatusSmallP>
-            {webBkNow === 0 ? (
-              <Button color="danger">완료</Button>
+            {gamePlanNow !== 0 ? (
+              <>
+                {gamePlan === gamePlanNow ? (
+                  <Button color="danger">완료</Button>
+                ) : (
+                  <Button
+                    color="info"
+                    onClick={() => {
+                      apply(projectID, userID, 'web_bk_now');
+                    }}
+                  >
+                    신청
+                  </Button>
+                )}
+              </>
             ) : (
               <Button
                 color="info"
-                onClick={apply(projectID, userID, 'web_bk_now')}
+                onClick={() => {
+                  apply(projectID, userID, 'web_bk_now');
+                }}
               >
                 신청
               </Button>
             )}
           </S.StatusLi>
+        ) : (
+          ''
         )}
-        {blchBk && (
+        {blchBk ? (
           <S.StatusLi>
             <S.StatusBigP>블록체인</S.StatusBigP>
             <S.StatusSmallP>
               {blchBkNow} / {blchBk}
             </S.StatusSmallP>
-            {blchBkNow === 0 ? (
-              <Button color="danger">완료</Button>
+            {gamePlanNow !== 0 ? (
+              <>
+                {gamePlan === gamePlanNow ? (
+                  <Button color="danger">완료</Button>
+                ) : (
+                  <Button
+                    color="info"
+                    onClick={() => {
+                      apply(projectID, userID, 'blch_bk_now');
+                    }}
+                  >
+                    신청
+                  </Button>
+                )}
+              </>
             ) : (
               <Button
                 color="info"
-                onClick={apply(projectID, userID, 'blch_bk_now')}
+                onClick={() => {
+                  apply(projectID, userID, 'blch_bk_now');
+                }}
               >
                 신청
               </Button>
             )}
           </S.StatusLi>
+        ) : (
+          ''
         )}
-        {aiBk && (
+        {aiBk ? (
           <S.StatusLi>
             <S.StatusBigP>AI</S.StatusBigP>
             <S.StatusSmallP>
               {aiBkNow} / {aiBk}
             </S.StatusSmallP>
-            {aiBkNow === 0 ? (
-              <Button color="danger">완료</Button>
+            {gamePlanNow !== 0 ? (
+              <>
+                {gamePlan === gamePlanNow ? (
+                  <Button color="danger">완료</Button>
+                ) : (
+                  <Button
+                    color="info"
+                    onClick={() => {
+                      apply(projectID, userID, 'ai_bk_now');
+                    }}
+                  >
+                    신청
+                  </Button>
+                )}
+              </>
             ) : (
               <Button
                 color="info"
-                onClick={apply(projectID, userID, 'ai_bk_now')}
+                onClick={() => {
+                  apply(projectID, userID, 'ai_bk_now');
+                }}
               >
                 신청
               </Button>
             )}
           </S.StatusLi>
+        ) : (
+          ''
         )}
-        {dsBk && (
+        {dsBk ? (
           <S.StatusLi>
             <S.StatusBigP>DB/빅데이터/DS</S.StatusBigP>
             <S.StatusSmallP>
               {dsBkNow} / {dsBk}
             </S.StatusSmallP>
-            {dsBkNow === 0 ? (
-              <Button color="danger">완료</Button>
+            {gamePlanNow !== 0 ? (
+              <>
+                {gamePlan === gamePlanNow ? (
+                  <Button color="danger">완료</Button>
+                ) : (
+                  <Button
+                    color="info"
+                    onClick={() => {
+                      apply(projectID, userID, 'ds_bk_now');
+                    }}
+                  >
+                    신청
+                  </Button>
+                )}
+              </>
             ) : (
               <Button
                 color="info"
-                onClick={apply(projectID, userID, 'ds_bk_now')}
+                onClick={() => {
+                  apply(projectID, userID, 'ds_bk_now');
+                }}
               >
                 신청
               </Button>
             )}
           </S.StatusLi>
+        ) : (
+          ''
         )}
-        {gameBk && (
+        {gameBk ? (
           <S.StatusLi>
             <S.StatusBigP>게임서버</S.StatusBigP>
             <S.StatusSmallP>
               {gameBkNow} / {gameBk}
             </S.StatusSmallP>
-            {gameBkNow === 0 ? (
-              <Button color="danger">완료</Button>
+            {gamePlanNow !== 0 ? (
+              <>
+                {gamePlan === gamePlanNow ? (
+                  <Button color="danger">완료</Button>
+                ) : (
+                  <Button
+                    color="info"
+                    onClick={() => {
+                      apply(projectID, userID, 'game_bk_now');
+                    }}
+                  >
+                    신청
+                  </Button>
+                )}
+              </>
             ) : (
               <Button
                 color="info"
-                onClick={apply(projectID, userID, 'game_bk_now')}
+                onClick={() => {
+                  apply(projectID, userID, 'game_bk_now');
+                }}
               >
                 신청
               </Button>
             )}
           </S.StatusLi>
+        ) : (
+          ''
         )}
-        {planBu && (
+        {planBu ? (
           <S.StatusLi>
             <S.StatusBigP>사업기획</S.StatusBigP>
             <S.StatusSmallP>
               {planBuNow} / {planBu}
             </S.StatusSmallP>
-            {planBuNow === 0 ? (
-              <Button color="danger">완료</Button>
+            {gamePlanNow !== 0 ? (
+              <>
+                {gamePlan === gamePlanNow ? (
+                  <Button color="danger">완료</Button>
+                ) : (
+                  <Button
+                    color="info"
+                    onClick={() => {
+                      apply(projectID, userID, 'plan_bu_now');
+                    }}
+                  >
+                    신청
+                  </Button>
+                )}
+              </>
             ) : (
               <Button
                 color="info"
-                onClick={apply(projectID, userID, 'plan_bu_now')}
+                onClick={() => {
+                  apply(projectID, userID, 'plan_bu_now');
+                }}
               >
                 신청
               </Button>
             )}
           </S.StatusLi>
+        ) : (
+          ''
         )}
-        {marketingBu && (
+        {marketingBu ? (
           <S.StatusLi>
             <S.StatusBigP>마케팅</S.StatusBigP>
             <S.StatusSmallP>
               {marketingBuNow} / {marketingBu}
             </S.StatusSmallP>
-            {marketingBuNow === 0 ? (
-              <Button color="danger">완료</Button>
+            {gamePlanNow !== 0 ? (
+              <>
+                {gamePlan === gamePlanNow ? (
+                  <Button color="danger">완료</Button>
+                ) : (
+                  <Button
+                    color="info"
+                    onClick={() => {
+                      apply(projectID, userID, 'marketing_bu_now');
+                    }}
+                  >
+                    신청
+                  </Button>
+                )}
+              </>
             ) : (
               <Button
                 color="info"
-                onClick={apply(projectID, userID, 'marketing_bu_now')}
+                onClick={() => {
+                  apply(projectID, userID, 'marketing_bu_now');
+                }}
               >
                 신청
               </Button>
             )}
           </S.StatusLi>
+        ) : (
+          ''
         )}
-        {financeBu && (
+        {financeBu ? (
           <S.StatusLi>
             <S.StatusBigP>재무/회계</S.StatusBigP>
             <S.StatusSmallP>
               {financeBuNow} / {financeBu}
             </S.StatusSmallP>
-            {financeBuNow === 0 ? (
-              <Button color="danger">완료</Button>
+            {gamePlanNow !== 0 ? (
+              <>
+                {gamePlan === gamePlanNow ? (
+                  <Button color="danger">완료</Button>
+                ) : (
+                  <Button
+                    color="info"
+                    onClick={() => {
+                      apply(projectID, userID, 'finance_bu_now');
+                    }}
+                  >
+                    신청
+                  </Button>
+                )}
+              </>
             ) : (
               <Button
                 color="info"
-                onClick={apply(projectID, userID, 'finance_bu_now')}
+                onClick={() => {
+                  apply(projectID, userID, 'finance_bu_now');
+                }}
               >
                 신청
               </Button>
             )}
           </S.StatusLi>
+        ) : (
+          ''
         )}
-        {salseBu && (
+        {salesBu ? (
           <S.StatusLi>
             <S.StatusBigP>영업</S.StatusBigP>
             <S.StatusSmallP>
-              {salseBuNow} / {salseBu}
+              {salesBuNow} / {salesBu}
             </S.StatusSmallP>
-            {salseBuNow === 0 ? (
-              <Button color="danger">완료</Button>
+            {gamePlanNow !== 0 ? (
+              <>
+                {gamePlan === gamePlanNow ? (
+                  <Button color="danger">완료</Button>
+                ) : (
+                  <Button
+                    color="info"
+                    onClick={() => {
+                      apply(projectID, userID, 'sales_bu_now');
+                    }}
+                  >
+                    신청
+                  </Button>
+                )}
+              </>
             ) : (
               <Button
                 color="info"
-                onClick={apply(projectID, userID, 'salse_bu_now')}
+                onClick={() => {
+                  apply(projectID, userID, 'sales_bu_now');
+                }}
               >
                 신청
               </Button>
             )}
           </S.StatusLi>
+        ) : (
+          ''
         )}
-        {consultBu && (
+        {consultBu ? (
           <S.StatusLi>
             <S.StatusBigP>전략/컨설팅</S.StatusBigP>
             <S.StatusSmallP>
               {consultBuNow} / {consultBu}
             </S.StatusSmallP>
-            {consultBuNow === 0 ? (
-              <Button color="danger">완료</Button>
+            {gamePlanNow !== 0 ? (
+              <>
+                {gamePlan === gamePlanNow ? (
+                  <Button color="danger">완료</Button>
+                ) : (
+                  <Button
+                    color="info"
+                    onClick={() => {
+                      apply(projectID, userID, 'consult_bu_now');
+                    }}
+                  >
+                    신청
+                  </Button>
+                )}
+              </>
             ) : (
               <Button
                 color="info"
-                onClick={apply(projectID, userID, 'consult_bu_now')}
+                onClick={() => {
+                  apply(projectID, userID, 'consult_bu_now');
+                }}
               >
                 신청
               </Button>
             )}
           </S.StatusLi>
+        ) : (
+          ''
         )}
-        {investBu && (
+        {investBu ? (
           <S.StatusLi>
             <S.StatusBigP>투자/고문</S.StatusBigP>
             <S.StatusSmallP>
               {investBuNow} / {investBu}
             </S.StatusSmallP>
-            {investBuNow === 0 ? (
-              <Button color="danger">완료</Button>
+            {gamePlanNow !== 0 ? (
+              <>
+                {gamePlan === gamePlanNow ? (
+                  <Button color="danger">완료</Button>
+                ) : (
+                  <Button
+                    color="info"
+                    onClick={() => {
+                      apply(projectID, userID, 'invest_bu_now');
+                    }}
+                  >
+                    신청
+                  </Button>
+                )}
+              </>
             ) : (
               <Button
                 color="info"
-                onClick={apply(projectID, userID, 'invest_bu_now')}
+                onClick={() => {
+                  apply(projectID, userID, 'invest_bu_now');
+                }}
               >
                 신청
               </Button>
             )}
           </S.StatusLi>
+        ) : (
+          ''
         )}
-        {etcBu && (
+        {etcBu ? (
           <S.StatusLi>
             <S.StatusBigP>(사업)그외</S.StatusBigP>
             <S.StatusSmallP>
               {etcBuNow} / {etcBu}
             </S.StatusSmallP>
-            {etcBuNow === 0 ? (
-              <Button color="danger">완료</Button>
+            {gamePlanNow !== 0 ? (
+              <>
+                {gamePlan === gamePlanNow ? (
+                  <Button color="danger">완료</Button>
+                ) : (
+                  <Button
+                    color="info"
+                    onClick={() => {
+                      apply(projectID, userID, 'etc_bu_now');
+                    }}
+                  >
+                    신청
+                  </Button>
+                )}
+              </>
             ) : (
               <Button
                 color="info"
-                onClick={apply(projectID, userID, 'etc_bu_now')}
+                onClick={() => {
+                  apply(projectID, userID, 'etc_bu_now');
+                }}
               >
                 신청
               </Button>
             )}
           </S.StatusLi>
+        ) : (
+          ''
         )}
-        {blogEtc && (
+        {blogEtc ? (
           <S.StatusLi>
             <S.StatusBigP>작가/블로거</S.StatusBigP>
             <S.StatusSmallP>
               {blogEtcNow} / {blogEtc}
             </S.StatusSmallP>
-            {blogEtcNow === 0 ? (
-              <Button color="danger">완료</Button>
+            {gamePlanNow !== 0 ? (
+              <>
+                {gamePlan === gamePlanNow ? (
+                  <Button color="danger">완료</Button>
+                ) : (
+                  <Button
+                    color="info"
+                    onClick={() => {
+                      apply(projectID, userID, 'game_plan_now');
+                    }}
+                  >
+                    신청
+                  </Button>
+                )}
+              </>
             ) : (
               <Button
                 color="info"
-                onClick={apply(projectID, userID, 'blog_etc_now')}
+                onClick={() => {
+                  apply(projectID, userID, 'game_plan_now');
+                }}
               >
                 신청
               </Button>
             )}
           </S.StatusLi>
+        ) : (
+          ''
         )}
-        {influEtc && (
+        {influEtc ? (
           <S.StatusLi>
             <S.StatusBigP>인플루언서/유튜버</S.StatusBigP>
             <S.StatusSmallP>
               {influEtcNow} / {influEtc}
             </S.StatusSmallP>
-            {influEtcNow === 0 ? (
-              <Button color="danger">완료</Button>
+            {gamePlanNow !== 0 ? (
+              <>
+                {gamePlan === gamePlanNow ? (
+                  <Button color="danger">완료</Button>
+                ) : (
+                  <Button
+                    color="info"
+                    onClick={() => {
+                      apply(projectID, userID, 'game_plan_now');
+                    }}
+                  >
+                    신청
+                  </Button>
+                )}
+              </>
             ) : (
               <Button
                 color="info"
-                onClick={apply(projectID, userID, 'influ_etc_now')}
+                onClick={() => {
+                  apply(projectID, userID, 'game_plan_now');
+                }}
               >
                 신청
               </Button>
             )}
           </S.StatusLi>
+        ) : (
+          ''
         )}
-        {compEtc && (
+        {compEtc ? (
           <S.StatusLi>
             <S.StatusBigP>작곡(사운드)</S.StatusBigP>
             <S.StatusSmallP>
               {compEtcNow} / {compEtc}
             </S.StatusSmallP>
-            {compEtcNow === 0 ? (
-              <Button color="danger">완료</Button>
+            {gamePlanNow !== 0 ? (
+              <>
+                {gamePlan === gamePlanNow ? (
+                  <Button color="danger">완료</Button>
+                ) : (
+                  <Button
+                    color="info"
+                    onClick={() => {
+                      apply(projectID, userID, 'game_plan_now');
+                    }}
+                  >
+                    신청
+                  </Button>
+                )}
+              </>
             ) : (
               <Button
                 color="info"
-                onClick={apply(projectID, userID, 'comp_etc_now')}
+                onClick={() => {
+                  apply(projectID, userID, 'game_plan_now');
+                }}
               >
                 신청
               </Button>
             )}
           </S.StatusLi>
+        ) : (
+          ''
         )}
       </S.StatusUl>
     </S.DetailStatus>
@@ -622,7 +1116,7 @@ DetailRecurit.propTypes = {
   planBu: PropTypes.number.isRequired,
   marketingBu: PropTypes.number.isRequired,
   financeBu: PropTypes.number.isRequired,
-  salseBu: PropTypes.number.isRequired,
+  salesBu: PropTypes.number.isRequired,
   consultBu: PropTypes.number.isRequired,
   investBu: PropTypes.number.isRequired,
   etcBu: PropTypes.number.isRequired,
@@ -651,7 +1145,7 @@ DetailRecurit.propTypes = {
   planBuNow: PropTypes.number.isRequired,
   marketingBuNow: PropTypes.number.isRequired,
   financeBuNow: PropTypes.number.isRequired,
-  salseBuNow: PropTypes.number.isRequired,
+  salesBuNow: PropTypes.number.isRequired,
   consultBuNow: PropTypes.number.isRequired,
   investBuNow: PropTypes.number.isRequired,
   etcBuNow: PropTypes.number.isRequired,

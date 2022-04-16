@@ -36,8 +36,8 @@ export const ProjectDetailForm = () => {
     projectMotive,
     projectTotal,
     projectImg,
-    projectOnOff,
     projectArea,
+    projectOnOff,
     projectName,
     projectField,
     projectSkill,
@@ -46,10 +46,8 @@ export const ProjectDetailForm = () => {
     projectStart,
     projectEnd,
     projectPlatform,
-    projectStatus,
     projectLike,
     projectView,
-    projectSub,
     uiuxPlan,
     gamePlan,
     managerPlan,
@@ -124,9 +122,9 @@ export const ProjectDetailForm = () => {
 
   return (
     <Container>
-      {projectStatus && projectName && projectMotive && (
+      {projectOnOff && projectName && projectMotive && (
         <DetailHeader
-          projectStatus={projectStatus}
+          projectOnOff={projectOnOff}
           projectName={projectName}
           projectMotive={projectMotive}
           leaderImg="https://letspl.s3.ap-northeast-2.amazonaws.com/images/project_thumb_05.png"
@@ -229,8 +227,7 @@ export const ProjectDetailForm = () => {
           )}
         </S.PageLeft>
         {projectField &&
-          projectLike &&
-          projectView &&
+          typeof projectLike === typeof projectView &&
           projectStart &&
           projectEnd && (
             <DetailRightCard
@@ -242,7 +239,7 @@ export const ProjectDetailForm = () => {
               projectView={projectView}
               projectStart={projectStart}
               projectEnd={projectEnd}
-              projectSub={projectSub}
+              projectSub={false}
             />
           )}
       </S.PageWrap>

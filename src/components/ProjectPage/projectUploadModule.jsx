@@ -54,7 +54,7 @@ export const ProjectUploadForm = () => {
     planBu: 0,
     marketingBu: 0,
     financeBu: 0,
-    salseBu: 0,
+    salesBu: 0,
     consultBu: 0,
     investBu: 0,
     etcBu: 0,
@@ -98,7 +98,7 @@ export const ProjectUploadForm = () => {
     planBu,
     marketingBu,
     financeBu,
-    salseBu,
+    salesBu,
     consultBu,
     investBu,
     etcBu,
@@ -164,7 +164,7 @@ export const ProjectUploadForm = () => {
     formData.append('planBu', planBu);
     formData.append('marketingBu', marketingBu);
     formData.append('financeBu', financeBu);
-    formData.append('salseBu', salseBu);
+    formData.append('salesBu', salesBu);
     formData.append('consultBu', consultBu);
     formData.append('investBu', investBu);
     formData.append('etcBu', etcBu);
