@@ -41,17 +41,25 @@ export const findIDService = (userName, userPhone, userEmail) => {
 };
 
 export const outdoorUploadService = formData => {
-  return customAxios.post(`http://localhost:8080/outdoor/post`, formData, {
-    headers: {
-      'content-type': 'multipart/form-data',
+  return customAxios.post(
+    `${process.env.REACT_APP_MOON_URL}/outdoor/post`,
+    formData,
+    {
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
     },
-  });
+  );
 };
 
 export const outdoorUpdateService = formData => {
-  return customAxios.patch(`http://localhost:8080/outdoor/post`, formData, {
-    headers: { 'content-type': 'multipart/form-data' },
-  });
+  return customAxios.patch(
+    `${process.env.REACT_APP_MOON_URL}/outdoor/post`,
+    formData,
+    {
+      headers: { 'content-type': 'multipart/form-data' },
+    },
+  );
 };
 
 export const outdoorGetAllService = cursor => {
@@ -65,7 +73,9 @@ export const outdoorGetSomeService = outActID => {
 };
 
 export const outdoorDeleteService = outActID => {
-  return customAxios.delete(`http://localhost:8080/outdoor/post/${outActID}`);
+  return customAxios.delete(
+    `${process.env.REACT_APP_MOON_URL}/outdoor/post/${outActID}`,
+  );
 };
 
 export const outdoorLikeService = (outActID, userID) => {
@@ -91,21 +101,31 @@ export const communityGetAllService = community => {
 }; */
 
 export const projectUploadService = formData => {
-  return customAxios.post(`http://localhost:8080/project`, formData, {
-    headers: { 'content-type': 'multipart/form-data' },
-  });
+  return customAxios.post(
+    `${process.env.REACT_APP_MOON_URL}/project`,
+    formData,
+    {
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
+    },
+  );
 };
 
 export const projectDeleteService = projectID => {
-  return customAxios.delete(`http://localhost:8080/project/${projectID}`);
+  return customAxios.delete(
+    `${process.env.REACT_APP_MOON_URL}/project/${projectID}`,
+  );
 };
 
 export const projectGetSomeService = projectID => {
-  return customAxios.get(`http://localhost:8080/project/${projectID}`);
+  return customAxios.get(
+    `${process.env.REACT_APP_MOON_URL}/project/${projectID}`,
+  );
 };
 
 export const projectApplyService = (projectID, userID, field) => {
-  return customAxios.post('http://localhost:8080/project/apply', {
+  return customAxios.post(`${process.env.REACT_APP_MOON_URL}/project/apply`, {
     projectID,
     userID,
     field,

@@ -32,7 +32,7 @@ export const SignupForm = () => {
   const [codeon, setcodeon] = useState(false);
 
   const userData = () => {
-    return axios.get('https://4idiot.ddns.net:8080/users').then(response => {
+    return axios.get('http://4idiot.ddns.net:8080/users').then(response => {
       console.log(response);
       setdata(response.data);
     });
@@ -114,7 +114,7 @@ export const SignupForm = () => {
     e.preventDefault();
 
     axios
-      .get(`https://4idiot.ddns.net:8080/users/check/userID?userID=${userID}`)
+      .get(`http://4idiot.ddns.net:8080/users/check/userID?userID=${userID}`)
       .then(response => {
         console.log(response);
         if (response.data.value === true) {
@@ -133,7 +133,7 @@ export const SignupForm = () => {
 
     axios
       .get(
-        `https://4idiot.ddns.net:8080/users/check/userNickname?userNickname=${userNickname}`,
+        `http://4idiot.ddns.net:8080/users/check/userNickname?userNickname=${userNickname}`,
       )
       .then(response => {
         console.log(response);
@@ -153,7 +153,7 @@ export const SignupForm = () => {
 
     axios
       .get(
-        `https://4idiot.ddns.net:8080/users/check/userEmail?userEmail=${userEmail}`,
+        `http://4idiot.ddns.net:8080/users/check/userEmail?userEmail=${userEmail}`,
       )
       .then(response => {
         console.log(response);
@@ -174,7 +174,7 @@ export const SignupForm = () => {
     if (sameEmail === true) {
       // eslint-disable-next-line prefer-const
       axios
-        .post('https://4idiot.ddns.net:8080/users/check/Email', {
+        .post('http://4idiot.ddns.net:8080/users/check/Email', {
           userEmail,
         })
         .then(response => {
@@ -196,7 +196,7 @@ export const SignupForm = () => {
     console.log(data);
     console.log(code);
     axios
-      .post('https://4idiot.ddns.net:8080/verifycode', {
+      .post('http://4idiot.ddns.net:8080/verifycode', {
         code,
         userEmail,
       })
@@ -234,7 +234,7 @@ export const SignupForm = () => {
       sameEmail === true
     ) {
       axios
-        .post('https://4idiot.ddns.net:8080/users/register', {
+        .post('http://4idiot.ddns.net:8080/users/register', {
           userPhone,
           userID,
           userPW,

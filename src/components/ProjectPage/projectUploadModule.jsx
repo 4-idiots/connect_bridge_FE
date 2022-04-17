@@ -172,8 +172,9 @@ export const ProjectUploadForm = () => {
     formData.append('influEtc', influEtc);
     formData.append('compEtc', compEtc);
 
-    // uploadAxios(formData);
     console.log(postInfo);
+
+    uploadAxios(formData);
   };
 
   return (

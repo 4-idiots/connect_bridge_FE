@@ -45,6 +45,7 @@ export const OutdoorUploadForm = () => {
       alert('등록 되었습니다.');
       navigate('/outdoor');
     } catch (error) {
+      console.log(error);
       alert('다시 시도해주세요');
     }
   };

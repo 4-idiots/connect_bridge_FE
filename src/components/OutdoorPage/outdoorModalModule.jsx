@@ -44,7 +44,7 @@ export const OutdoorModalForm = ({
               <a
                 target="_blank"
                 href={link}
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 style={{ textDecorationLine: 'none', color: 'white' }}
               >
                 공식 사이트로 이동

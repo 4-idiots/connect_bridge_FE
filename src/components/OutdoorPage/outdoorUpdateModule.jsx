@@ -65,6 +65,7 @@ export const OutdoorUpdateForm = () => {
       alert('수정이 완료되었습니다.');
       navigate('/outdoor');
     } catch (error) {
+      console.log(error);
       alert('다시 시도해주세요');
       navigate('/outdoor');
     }

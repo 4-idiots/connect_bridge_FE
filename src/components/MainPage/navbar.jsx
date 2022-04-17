@@ -38,7 +38,7 @@ export const NavbarForm = () => {
           </Navbar.Item>
         </Navbar.Container>
         <Navbar.Container align="right">
-          {!isLogin ? (
+          {isLogin ? (
             <>
               <Navbar.Item renderAs={Link} to="/project/upload">
                 프로젝트 생성

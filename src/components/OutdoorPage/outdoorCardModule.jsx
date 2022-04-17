@@ -31,14 +31,13 @@ export const OutdoorCardForm = ({
         isHover
           ? {
               width: 280,
-              marginTop: 30,
-              marginRight: 30,
+              height: 500,
               transform: 'scale(1.1)',
             }
           : {
               width: 280,
-              marginTop: 30,
-              marginRight: 30,
+              height: 500,
+              overflow: 'hidden',
             }
       }
       onMouseEnter={() => {
@@ -48,30 +47,38 @@ export const OutdoorCardForm = ({
         setIsHover(false);
       }}
     >
-      <Card.Image onClick={onActClick} src={outActImg} />
+      <div style={{ height: 380, overflow: 'hidden' }}>
+        <Card.Image onClick={onActClick} src={outActImg} />
+      </div>
+
       <Card.Content>
-        <Media>
-          <Media.Item>
-            <Heading size={4}>{outActName}</Heading>
-            <Heading subtitle size={6}>
-              View: {outActView}
-            </Heading>
+        <Media
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          <Media.Item style={{ height: 36, textOverflow: 'ellipsis' }}>
+            <Heading size={6}>{outActName}</Heading>
           </Media.Item>
-          <Media.Item align="right">
+          <Media.Item style={{ marginTop: 10 }}>
             {manager ? (
               <Button.Group
                 style={{
+                  width: 232,
                   display: 'flex',
-                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
+                  marginTop: 4,
                 }}
               >
                 <Button
                   renderAs={Link}
                   to={`/outdoor/update/${outActID}`}
                   color="link"
-                  style={{ marginRight: 0 }}
+                  style={{ marginRight: 6 }}
                 >
-                  수정하기
+                  수정
                 </Button>
                 <Button
                   onClick={() => {
@@ -79,11 +86,21 @@ export const OutdoorCardForm = ({
                   }}
                   color="danger"
                 >
-                  삭제하기
+                  삭제
                 </Button>
               </Button.Group>
             ) : (
-              <Button color="danger">Like: {outActLike}</Button>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  width: 232,
+                }}
+              >
+                <p>View: {outActView}</p>
+                <Button color="danger">Like: {outActLike}</Button>
+              </div>
             )}
           </Media.Item>
         </Media>

@@ -82,55 +82,7 @@ export const ProjectMainForm = () => {
             prView={65}
             prTotal={[{ test: 3 }]}
             prUserID={1}
-            prID={20}
-          />
-          <ProjectCard
-            prType
-            isLike
-            thumbnail="https://letspl.s3.ap-northeast-2.amazonaws.com/images/project_thumb_05.png"
-            prField="이커머스"
-            prTitle="웹소설 웹툰 IP 웹 3.0"
-            prLike={24}
-            prView={65}
-            prTotal={[{ test: 3 }]}
-            prUserID={1}
-            prID={20}
-          />
-          <ProjectCard
-            prType
-            isLike
-            thumbnail="https://letspl.s3.ap-northeast-2.amazonaws.com/images/project_thumb_05.png"
-            prField="이커머스"
-            prTitle="웹소설 웹툰 IP 웹 3.0"
-            prLike={24}
-            prView={65}
-            prTotal={[{ test: 3 }]}
-            prUserID={1}
-            prID={20}
-          />
-          <ProjectCard
-            prType
-            isLike
-            thumbnail="https://letspl.s3.ap-northeast-2.amazonaws.com/images/project_thumb_05.png"
-            prField="이커머스"
-            prTitle="웹소설 웹툰 IP 웹 3.0"
-            prLike={24}
-            prView={65}
-            prTotal={[{ test: 3 }]}
-            prUserID={1}
-            prID={20}
-          />
-          <ProjectCard
-            prType
-            isLike
-            thumbnail="https://letspl.s3.ap-northeast-2.amazonaws.com/images/project_thumb_05.png"
-            prField="이커머스"
-            prTitle="웹소설 웹툰 IP 웹 3.0"
-            prLike={24}
-            prView={65}
-            prTotal={[{ test: 3 }]}
-            prUserID={1}
-            prID={20}
+            prID={30}
           />
         </S.gridBox>
       </Block>

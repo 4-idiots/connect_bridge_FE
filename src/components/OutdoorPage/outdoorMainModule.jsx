@@ -23,14 +23,7 @@ export const OutdoorMainForm = () => {
   };
 
   return (
-    <Container
-      style={{
-        flexWrap: 'wrap',
-        display: 'flex',
-        alignItems: 'start',
-        justifyContent: 'center',
-      }}
-    >
+    <Container>
       {check && (
         <OutdoorModalForm
           close={() => {
@@ -45,7 +38,15 @@ export const OutdoorMainForm = () => {
         />
       )}
       <NewPosterBtn />
-      <OutdoorInfinite outActClick={changePoster} />
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr 1fr 1fr',
+          rowGap: '3rem',
+        }}
+      >
+        <OutdoorInfinite outActClick={changePoster} />
+      </div>
     </Container>
   );
 };
