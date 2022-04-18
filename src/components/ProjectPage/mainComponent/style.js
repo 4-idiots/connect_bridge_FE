@@ -151,3 +151,56 @@ export const suggestHeart = styled.div`
 export const suggestIconWrap = styled.div`
   display: flex;
 `;
+
+export const DetailStatus = styled.div`
+  border: 1px solid #e6e6e6;
+  margin-bottom: 35px;
+  background-color: white;
+  position: absolute;
+  width: 240px;
+  bottom: 0;
+`;
+
+export const StatusUl = styled.ul`
+  margin-top: 16px;
+`;
+
+export const StatusLi = styled.li`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 8px;
+  align-items: center;
+`;
+
+export const StatusBigP = styled.p`
+  color: #424251;
+  margin-left: 20px;
+  width: 220px;
+  font-size: 14px;
+  font-weight: bold;
+`;
+
+export const StatusSmallP = styled.p`
+  margin-right: 20px;
+  width: 50px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #3e56c4;
+`;
+
+export const mainRecruitBox = styled.div`
+  font-size: 0.8rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+`;
+
+export const mainRecruitWrap = styled.div`
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(219, 219, 219, 0.5);
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgba(219, 219, 219, 0.5);
+  position: 'relative';
+`;

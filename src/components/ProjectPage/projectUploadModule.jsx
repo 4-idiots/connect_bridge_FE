@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { Container, Heading, Button, Box, Form } from 'react-bulma-components';
 import { useNavigate } from 'react-router-dom';
 import './uploadComponent/datepicker.css';
+import { useJwt } from 'react-jwt';
 import {
   ProjectType,
   ProjectRecruit,
@@ -14,8 +15,12 @@ import {
 } from './uploadComponent/uploadRoutes';
 import { projectUploadService } from '../../service';
 import SlateEditor from '../../SlateEditor/Editor';
+import { useAuth } from '../../contexts/hooks/useAuth';
 
 export const ProjectUploadForm = () => {
+  const auth = useAuth();
+  const { decodedToken, isExpired } = useJwt(auth.token);
+
   const navigate = useNavigate();
   const [postInfo, setPostInfo] = useState({
     projectMotive: true,
@@ -123,13 +128,14 @@ export const ProjectUploadForm = () => {
       alert('등록 되었습니다.');
       navigate('/project');
     } catch (error) {
+      console.log(error);
       alert('다시 시도해주세요');
     }
   };
 
   const onSubmitEvent = () => {
     const formData = new FormData();
-    formData.append('userID', 1);
+    formData.append('userID', decodedToken.id);
     formData.append('projectName', projectName);
     formData.append('projectMotive', projectMotive);
     formData.append('projectImg', projectImg);
@@ -172,14 +178,12 @@ export const ProjectUploadForm = () => {
     formData.append('influEtc', influEtc);
     formData.append('compEtc', compEtc);
 
-    console.log(postInfo);
-
     uploadAxios(formData);
   };
 
   return (
-    <Container>
-      <Heading style={{ textAlign: 'center' }}>모임 수정 하기</Heading>
+    <Container style={{ marginTop: 80 }}>
+      <Heading style={{ textAlign: 'center' }}>모임 생성 하기</Heading>
       <Box style={{ width: '90%', margin: 'auto' }}>
         <ProjectType
           valcheck={projectMotive}

@@ -61,7 +61,7 @@ export const OutdoorInfinite = ({ outActClick }) => {
           />
         ))}
       <div ref={ref}>
-        {isLoadingMore ? 'loading...' : isReachingEnd ? 'no more' : ''}
+        {isLoadingMore ? 'loading...' : isReachingEnd ? '' : ''}
       </div>
     </>
   );

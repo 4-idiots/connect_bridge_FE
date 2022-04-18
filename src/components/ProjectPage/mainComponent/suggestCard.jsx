@@ -17,7 +17,7 @@ export const SuggestCard = () => {
             <S.suggestIconWrap>
               <S.suggestHeart>
                 <Icon>
-                  <Heart fill="rgb(128,128,128)" />
+                  <Heart fill="rgb(255,192,203)" />
                 </Icon>
               </S.suggestHeart>
               <span>23</span>
@@ -31,7 +31,7 @@ export const SuggestCard = () => {
                   type: 'paragaph',
                   children: [
                     {
-                      text: '프로젝트를 소 개 하자면....asdasd a sdasd asdasd asdas das dasd asd',
+                      text: '프로젝트를 소 개 하자면....asdasd',
                     },
                   ],
                 },

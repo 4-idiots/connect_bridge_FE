@@ -1,8 +1,10 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import React, { useState } from 'react';
 import { Button, Card, Media, Heading } from 'react-bulma-components';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { outdoorDeleteService } from '../../service';
+import { useAuth } from '../../contexts/hooks/useAuth';
 
 export const OutdoorCardForm = ({
   outActID,
@@ -14,6 +16,9 @@ export const OutdoorCardForm = ({
 }) => {
   const [isHover, setIsHover] = useState(false);
   const [manager, setManager] = useState(true);
+
+  const auth = useAuth();
+  const isLogin = localStorage.getItem('isLogin') || '';
 
   const deleteAxios = async id => {
     try {
@@ -59,48 +64,54 @@ export const OutdoorCardForm = ({
           }}
         >
           <Media.Item style={{ height: 36, textOverflow: 'ellipsis' }}>
-            <Heading size={6}>{outActName}</Heading>
+            <Heading size={isLogin ? 6 : 5}>{outActName}</Heading>
           </Media.Item>
           <Media.Item style={{ marginTop: 10 }}>
-            {manager ? (
-              <Button.Group
-                style={{
-                  width: 232,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'flex-end',
-                  marginTop: 4,
-                }}
-              >
-                <Button
-                  renderAs={Link}
-                  to={`/outdoor/update/${outActID}`}
-                  color="link"
-                  style={{ marginRight: 6 }}
-                >
-                  수정
-                </Button>
-                <Button
-                  onClick={() => {
-                    deleteAxios(outActID);
-                  }}
-                  color="danger"
-                >
-                  삭제
-                </Button>
-              </Button.Group>
+            {isLogin ? (
+              <>
+                {manager ? (
+                  <Button.Group
+                    style={{
+                      width: 232,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'flex-end',
+                      marginTop: 4,
+                    }}
+                  >
+                    <Button
+                      renderAs={Link}
+                      to={`/outdoor/update/${outActID}`}
+                      color="link"
+                      style={{ marginRight: 6 }}
+                    >
+                      수정
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        deleteAxios(outActID);
+                      }}
+                      color="danger"
+                    >
+                      삭제
+                    </Button>
+                  </Button.Group>
+                ) : (
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      width: 232,
+                    }}
+                  >
+                    <p>View: {outActView}</p>
+                    <Button color="danger">Like: {outActLike}</Button>
+                  </div>
+                )}
+              </>
             ) : (
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  width: 232,
-                }}
-              >
-                <p>View: {outActView}</p>
-                <Button color="danger">Like: {outActLike}</Button>
-              </div>
+              ''
             )}
           </Media.Item>
         </Media>

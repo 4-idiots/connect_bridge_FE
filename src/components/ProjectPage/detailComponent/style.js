@@ -98,6 +98,16 @@ export const PageLeft = styled.div`
 export const LeftTab = styled.div`
   margin-bottom: 15px;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const TabUpdate = styled.div`
+  font-size: 15px;
+  color: #42495b;
+  padding: 12px;
+  border: 1px solid #000;
 `;
 
 export const TalUl = styled.ul`

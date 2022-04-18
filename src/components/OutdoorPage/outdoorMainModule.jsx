@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Icon, Box } from 'react-bulma-components';
+import { Container, Icon, Box, Heading } from 'react-bulma-components';
 import { Link } from 'react-router-dom';
 import { OutdoorModalForm } from './outdoorModalModule';
 import { OutdoorInfinite } from '../../swr/outdoorInfinite';
@@ -23,7 +23,8 @@ export const OutdoorMainForm = () => {
   };
 
   return (
-    <Container>
+    <Container style={{ marginTop: 80 }}>
+      <Heading>대외활동 둘러보기</Heading>
       {check && (
         <OutdoorModalForm
           close={() => {

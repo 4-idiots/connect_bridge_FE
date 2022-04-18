@@ -15,7 +15,7 @@ import {
   etcArray,
 } from './uploadValue';
 
-export const ProjectRecruit = ({ member, setMember }) => {
+export const UpdateRecruit = ({ member, setMember }) => {
   const [fieldMember, setFieldMember] = useState({
     nuiuxPlan: 1,
     ngamePlan: 1,
@@ -906,7 +906,7 @@ export const ProjectRecruit = ({ member, setMember }) => {
   );
 };
 
-ProjectRecruit.propTypes = {
+UpdateRecruit.propTypes = {
   member: PropTypes.objectOf(PropTypes.any).isRequired,
   setMember: PropTypes.func.isRequired,
 };

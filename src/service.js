@@ -131,3 +131,19 @@ export const projectApplyService = (projectID, userID, field) => {
     field,
   });
 };
+
+export const projectGetAllService = () => {
+  return customAxios.get(`${process.env.REACT_APP_MOON_URL}/project`);
+};
+
+export const proejctUpdateService = formData => {
+  return customAxios.patch(
+    `${process.env.REACT_APP_MOON_URL}/project`,
+    formData,
+    {
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
+    },
+  );
+};

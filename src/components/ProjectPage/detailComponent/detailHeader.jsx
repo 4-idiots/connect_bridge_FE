@@ -8,7 +8,7 @@ export const DetailHeader = ({
   projectName,
   leaderImg,
   leaderName,
-  projectStatus,
+  projectOnOff,
 }) => {
   return (
     <S.HeaderWrap>
@@ -33,11 +33,11 @@ export const DetailHeader = ({
             color="info"
             rounded
             style={{ marginRight: 10 }}
-            className={projectStatus ? '' : 'is-light'}
+            className={projectOnOff ? '' : 'is-light'}
           >
             모집 중
           </Tag>
-          <Tag color="info" rounded className={projectStatus ? 'is-light' : ''}>
+          <Tag color="info" rounded className={projectOnOff ? 'is-light' : ''}>
             진행 중
           </Tag>
         </S.StatusBox>
@@ -51,5 +51,5 @@ DetailHeader.propTypes = {
   projectName: PropTypes.string.isRequired,
   leaderImg: PropTypes.string.isRequired,
   leaderName: PropTypes.string.isRequired,
-  projectStatus: PropTypes.bool.isRequired,
+  projectOnOff: PropTypes.bool.isRequired,
 };

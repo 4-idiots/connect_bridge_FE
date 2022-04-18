@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Heading } from 'react-bulma-components';
+import { useJwt } from 'react-jwt';
 import {
   DetailContent,
   DetailHeader,
@@ -13,26 +14,47 @@ import {
   DetailRightCard,
 } from './detailComponent/detailRoutes';
 import * as S from './detailComponent/style';
-import { projectGetSomeService, projectApplyService } from '../../service';
+import {
+  projectGetSomeService,
+  projectApplyService,
+  projectDeleteService,
+} from '../../service';
+import { useAuth } from '../../contexts/hooks/useAuth';
 
 export const ProjectDetailForm = () => {
+  const auth = useAuth();
+  const { decodedToken, isExpired } = useJwt(auth.token);
+  const navigate = useNavigate();
+
   const { projectID } = useParams();
   const [postData, setPostData] = useState({});
 
-  useEffect(() => {
-    const getAxios = async id => {
-      try {
-        const result = await projectGetSomeService(id);
-        setPostData(result.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  const getAxios = async id => {
+    try {
+      const result = await projectGetSomeService(id);
+      console.log(result.data);
+      setPostData(result.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  const deleteAxios = async id => {
+    try {
+      const result = await projectDeleteService(id);
+      alert('삭제되었습니다.');
+      navigate('/project');
+    } catch (error) {
+      alert('다시 시도해주세요');
+    }
+  };
+
+  useEffect(() => {
     getAxios(projectID);
   }, []);
 
   const {
+    userID,
     projectMotive,
     projectTotal,
     projectImg,
@@ -114,15 +136,15 @@ export const ProjectDetailForm = () => {
   const applyService = async (prid, uid, field) => {
     try {
       const result = await projectApplyService(prid, uid, field);
-      console.log('success');
+      alert('정상적으로 신청이 되었습니다.');
     } catch (error) {
-      console.log(error);
+      alert('이미 신청하셨습니다.');
     }
   };
 
   return (
-    <Container>
-      {projectOnOff && projectName && projectMotive && (
+    <Container style={{ marginTop: 80 }}>
+      {typeof projectOnOff === typeof projectMotive && projectName && (
         <DetailHeader
           projectOnOff={projectOnOff}
           projectName={projectName}
@@ -138,6 +160,24 @@ export const ProjectDetailForm = () => {
               <S.TabLi onClick={() => setIsInfo(true)}>정보</S.TabLi>
               <S.TabLi onClick={() => setIsInfo(false)}>질문</S.TabLi>
             </S.TalUl>
+            {decodedToken && userID === decodedToken.id ? (
+              <S.TalUl>
+                <S.TabUpdate
+                  onClick={() => navigate(`/project/update/${projectID}`)}
+                >
+                  수정
+                </S.TabUpdate>
+                <S.TabUpdate
+                  onClick={() => {
+                    deleteAxios(projectID);
+                  }}
+                >
+                  삭제
+                </S.TabUpdate>
+              </S.TalUl>
+            ) : (
+              ''
+            )}
           </S.LeftTab>
           {isInfo &&
             projectPlatform &&

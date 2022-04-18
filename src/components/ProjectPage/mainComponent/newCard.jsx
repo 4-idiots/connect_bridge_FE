@@ -64,7 +64,7 @@ export const NewCard = ({
             </S.newHeart>
             <span>{prView}</span>
           </S.heartWrap>
-          <S.newRecruit>모집완료 {JSON.stringify(prTotal)}</S.newRecruit>
+          <S.newRecruit>모집완료</S.newRecruit>
         </S.newInfoBox>
       </S.newBottom>
     </S.newCardContainer>
