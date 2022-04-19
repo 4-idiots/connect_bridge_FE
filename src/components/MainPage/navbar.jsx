@@ -31,28 +31,28 @@ export const NavbarForm = () => {
           <Navbar.Item
             renderAs={Link}
             to="/project"
-            style={{ fontSize: 20, fontWeight: 'bold' }}
+            style={{ fontSize: 20, fontWeight: 'bold', marginRight: 30 }}
           >
             프로젝트
           </Navbar.Item>
           <Navbar.Item
             renderAs={Link}
             to="/community"
-            style={{ fontSize: 20, fontWeight: 'bold' }}
+            style={{ fontSize: 20, fontWeight: 'bold', marginRight: 30 }}
           >
             커뮤니티
           </Navbar.Item>
           <Navbar.Item
             renderAs={Link}
             to="/outdoor"
-            style={{ fontSize: 20, fontWeight: 'bold' }}
+            style={{ fontSize: 20, fontWeight: 'bold', marginRight: 30 }}
           >
             대외활동
           </Navbar.Item>
           <Navbar.Item
             renderAs={Link}
             to="/team"
-            style={{ fontSize: 20, fontWeight: 'bold' }}
+            style={{ fontSize: 20, fontWeight: 'bold', marginRight: 30 }}
           >
             팀원
           </Navbar.Item>
