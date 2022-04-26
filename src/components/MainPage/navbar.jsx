@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import axios from 'axios';
 import { Navbar } from 'react-bulma-components';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/hooks/useAuth';
@@ -69,7 +68,7 @@ export const NavbarForm = () => {
               </Navbar.Item>
               <Navbar.Item
                 renderAs={Link}
-                to="/login"
+                to="/my/info"
                 style={{ fontSize: 20, fontWeight: 'bold' }}
               >
                 마이페이지

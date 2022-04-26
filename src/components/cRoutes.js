@@ -30,3 +30,6 @@ export { ProjectDetailForm } from './ProjectPage/projectDetailModule';
 export { CommunityForm } from './CommunityPage/communityMain';
 export { CommunityInfoForm } from './CommunityPage/communityInfo';
 export { CommunityWriteForm } from './CommunityPage/communityWrite';
+
+// MyPage
+export { MyPageForm } from './MyPage/myPageModule';

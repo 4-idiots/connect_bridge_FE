@@ -19,6 +19,7 @@ import {
   Community,
   CommunityWrite,
   CommunityInfo,
+  MyPage,
 } from './pages/pRoutes';
 import { AuthContext } from './contexts/store/auth';
 import { useProvideAuth } from './contexts/hooks/useProvideAuth';
@@ -56,6 +57,7 @@ const App = () => {
             path="/community/info/:teID/:communityID"
             element={<CommunityInfo />}
           />
+          <Route path="/my/info" element={<MyPage />} />
         </Routes>
       </BrowserRouter>
     </AuthContext.Provider>
