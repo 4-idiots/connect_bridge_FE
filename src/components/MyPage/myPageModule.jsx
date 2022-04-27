@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Container, Heading, Button } from 'react-bulma-components';
-import { MyPageInput, MyPageSelect } from './userInfo/infoRoute';
+import { Heading, Button } from 'react-bulma-components';
+import { MyPageInput, MyPageSelect, MyPageImg } from './userInfo/infoRoute';
 import * as S from './userInfo/style';
 
 export const MyPageForm = () => {
@@ -11,7 +11,7 @@ export const MyPageForm = () => {
     introduce: 'introduce',
     portfolio: 'portfolio',
     onOff: '온라인/오프라인 모두가능',
-    area: '상관없음',
+    area: '서울특별시',
     time: '상관없음',
     main: '프론트엔드개발',
     mSkill: 'IOS',
@@ -19,6 +19,9 @@ export const MyPageForm = () => {
     sub: '기획',
     sSkill: 'UI/UX기획',
     sPro: '고수',
+    preview:
+      'https://letspl.s3.ap-northeast-2.amazonaws.com/images/project_thumb_05.png',
+    profileImg: '',
   });
 
   const {
@@ -33,9 +36,12 @@ export const MyPageForm = () => {
     main,
     mSkill,
     mPro,
+    mainSum,
     sub,
     sSkill,
     sPro,
+    subSum,
+    profileImg,
   } = user;
 
   const onChangeInput = e => {
@@ -43,8 +49,8 @@ export const MyPageForm = () => {
   };
 
   return (
-    <Container style={{ marginTop: 80 }}>
-      <Heading style={{ textAlign: 'center' }}>마이 페이지</Heading>
+    <>
+      <MyPageImg user={user} setUser={setUser} />
       <S.InfoBox>
         <MyPageInput
           label="이메일"
@@ -81,19 +87,15 @@ export const MyPageForm = () => {
 
         <MyPageSelect
           type="본 캐릭터 직무/능력치"
-          onChange={onChangeInput}
-          main={main}
-          mSkill={mSkill}
-          mPro={mPro}
+          onChange={setUser}
+          user={user}
         />
         <MyPageSelect
           type="부 캐릭터 직무/능력치"
-          onChange={onChangeInput}
-          sub={sub}
-          sSkill={sSkill}
-          sPro={sPro}
+          onChange={setUser}
+          user={user}
         />
-        <MyPageSelect type="지역 및 시간 설정" onChange={onChangeInput} />
+        <MyPageSelect type="지역 및 시간 설정" onChange={setUser} user={user} />
 
         <Button.Group align="center">
           <Button
@@ -106,6 +108,6 @@ export const MyPageForm = () => {
           </Button>
         </Button.Group>
       </S.InfoBox>
-    </Container>
+    </>
   );
 };
