@@ -28,5 +28,8 @@ export { ProjectDetailForm } from './ProjectPage/projectDetailModule';
 
 // CommunityPage
 export { CommunityForm } from './CommunityPage/communityMain';
+export { CommunityPForm } from './CommunityPage/communityP';
+export { CommunityserachForm } from './CommunityPage/communityserach';
+
 export { CommunityInfoForm } from './CommunityPage/communityInfo';
 export { CommunityWriteForm } from './CommunityPage/communityWrite';

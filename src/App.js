@@ -19,6 +19,8 @@ import {
   Community,
   CommunityWrite,
   CommunityInfo,
+  CommunityP,
+  Communityserach,
 } from './pages/pRoutes';
 import { AuthContext } from './contexts/store/auth';
 import { useProvideAuth } from './contexts/hooks/useProvideAuth';
@@ -48,6 +50,8 @@ const App = () => {
           <Route path="/project/upload" element={<ProjectUpload />} />
           <Route path="/project/update" element={<ProjectUpdate />} />
           <Route path="/community" element={<Community />} />
+          <Route path="/community/popular" element={<CommunityP />} />
+          <Route path="/serach/:query" element={<Communityserach />} />
           <Route path="/community/write" element={<CommunityWrite />} />
           <Route
             path="/community/info/:teID/:communityID"

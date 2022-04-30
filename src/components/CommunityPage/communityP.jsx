@@ -24,7 +24,7 @@ import { useJwt } from 'react-jwt';
 import { useAuth } from '../../contexts/hooks/useAuth';
 import { Pagination } from '../../swr/Pagination';
 
-export const CommunityForm = ({ commentCount, onActClick, hashtag }) => {
+export const CommunityPForm = ({ commentCount, onActClick, hashtag }) => {
   const [posts, setPosts] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
@@ -59,7 +59,7 @@ export const CommunityForm = ({ commentCount, onActClick, hashtag }) => {
     }
   };
   useEffect(() => {
-    fetch('http://4idiot.ddns.net:8080/community')
+    fetch('http://4idiot.ddns.net:8080/community/popular')
       .then(res => res.json())
       .then(data => setPosts(data));
   }, []);
@@ -67,10 +67,10 @@ export const CommunityForm = ({ commentCount, onActClick, hashtag }) => {
   return (
     <Layout>
       <header>
-        <h1>전체 게시물 목록</h1>
+        <h1>인기 게시물 목록</h1>
       </header>
-      <Card renderAs={Link} to="/community/popular">
-        인기
+      <Card renderAs={Link} to="/community">
+        전체
       </Card>
       <label>
         페이지 당 표시할 게시물 수:&nbsp;
@@ -159,14 +159,14 @@ const Layouta = styled.div`
   align-items: left;
 `;
 
-CommunityForm.propTypes = {
+CommunityPForm.propTypes = {
   commentCount: PropTypes.number,
   onActClick: PropTypes.func,
   // eslint-disable-next-line react/forbid-prop-types
   hashtag: PropTypes.array,
 };
 
-CommunityForm.defaultProps = {
+CommunityPForm.defaultProps = {
   commentCount: 0,
 
   onActClick: () => {

@@ -53,10 +53,12 @@ export const CommunityWriteForm = () => {
   });
 
   const userData = () => {
-    return axios.get('http://4idiot.ddns.net:8080/community').then(response => {
-      console.log(response);
-      setdata(response.data);
-    });
+    return axios
+      .get('http://4idiot.ddns.net:8080/communityw')
+      .then(response => {
+        console.log(response);
+        setdata(response.data);
+      });
   };
 
   useEffect(() => {

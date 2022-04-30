@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable no-undef */
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
@@ -5,7 +6,6 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { BiListCheck, BiSearchAlt2 } from 'react-icons/bi';
 import PropTypes from 'prop-types';
 import {
   Container,
@@ -24,7 +24,7 @@ import { useJwt } from 'react-jwt';
 import { useAuth } from '../../contexts/hooks/useAuth';
 import { Pagination } from '../../swr/Pagination';
 
-export const CommunityForm = ({ commentCount, onActClick, hashtag }) => {
+export const CommunityserachForm = ({ commentCount, onActClick, hashtag }) => {
   const [posts, setPosts] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
@@ -33,37 +33,40 @@ export const CommunityForm = ({ commentCount, onActClick, hashtag }) => {
   const { teID } = useParams(`${decodedToken?.id}`);
   const offset = (page - 1) * limit;
   const [items, setItems] = useState();
-  const [query, setquery] = useState('');
+  /* const [query, setquery] = useState(''); */
+  const { query } = useParams();
+  const [querya, setquerya] = useState('');
   const handleQuery = e => {
-    setquery(e.target.value);
+    setquerya(e.target.value);
   };
   const handleButton = async () => {
     try {
       const res = await axios.get(
-        `http://4idiot.ddns.net:8080/serach/${query}`,
+        `http://4idiot.ddns.net:8080/serach/${querya}`,
         {
           params: {
             // eslint-disable-next-line object-shorthand
-            query: query,
+            querya: querya,
           },
         },
-        window.location.replace(`/serach/${query}`),
       );
       if (res && res.status === 200) {
         const { data } = res;
         console.log(data);
         setItems(data.items);
+        window.location.replace(`/serach/${querya}`);
       }
     } catch (e) {
       console.log('error ', e);
     }
   };
+
   useEffect(() => {
-    fetch('http://4idiot.ddns.net:8080/community')
+    // eslint-disable-next-line prefer-template
+    fetch('http://4idiot.ddns.net:8080/serach/' + query)
       .then(res => res.json())
       .then(data => setPosts(data));
   }, []);
-
   return (
     <Layout>
       <header>
@@ -159,14 +162,14 @@ const Layouta = styled.div`
   align-items: left;
 `;
 
-CommunityForm.propTypes = {
+CommunityserachForm.propTypes = {
   commentCount: PropTypes.number,
   onActClick: PropTypes.func,
   // eslint-disable-next-line react/forbid-prop-types
   hashtag: PropTypes.array,
 };
 
-CommunityForm.defaultProps = {
+CommunityserachForm.defaultProps = {
   commentCount: 0,
 
   onActClick: () => {
