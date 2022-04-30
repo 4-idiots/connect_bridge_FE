@@ -230,10 +230,6 @@ export const SignupForm = () => {
     ) {
       axios
         .post('http://4idiot.ddns.net:8080/users/register', {
-<<<<<<< HEAD
-          userPhone,
-=======
->>>>>>> community_third
           userID,
           userPW,
           userNickname,

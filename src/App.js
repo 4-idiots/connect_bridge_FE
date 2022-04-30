@@ -19,12 +19,9 @@ import {
   Community,
   CommunityWrite,
   CommunityInfo,
-<<<<<<< HEAD
   MyPage,
-=======
   CommunityP,
   Communityserach,
->>>>>>> community_third
 } from './pages/pRoutes';
 import { AuthContext } from './contexts/store/auth';
 import { useProvideAuth } from './contexts/hooks/useProvideAuth';
