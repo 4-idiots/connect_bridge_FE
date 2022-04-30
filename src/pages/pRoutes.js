@@ -16,6 +16,8 @@ export { Info } from './team/Info';
 export { Community } from './community/community';
 export { CommunityInfo } from './community/communityinfo';
 export { CommunityWrite } from './community/communitywrite';
+export { CommunityP } from './community/communityP';
+export { Communityserach } from './community/communityserach';
 
 export { ProjectUpload } from './project/projectUpload';
 export { ProjectMain } from './project/projectMain';

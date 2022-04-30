@@ -5,11 +5,18 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import validator from 'validator';
 import { Container, Heading, Form, Button, Box } from 'react-bulma-components';
-import { InfoForm } from '../TeamPage/info';
+import {
+  mainArray,
+  planArray,
+  frontArray,
+  designArray,
+  backArray,
+  coopArray,
+  etcArray,
+} from '../ProjectPage/uploadComponent/uploadValue';
 
 export const SignupForm = () => {
   const [data, setdata] = useState([]);
-  const [userPhone, setuserPhone] = useState('');
   const [userID, setuserID] = useState('');
   const [userPW, setuserPW] = useState('');
   const [userREPW, setuserREPW] = useState('');
@@ -17,20 +24,28 @@ export const SignupForm = () => {
   const [userName, setuserName] = useState('');
   const [userEmail, setuserEmail] = useState('');
   const [userIntroduce, setuserIntroduce] = useState('');
-  const [userGender, setuserGender] = useState(false);
   const [userAbility, setuserAbility] = useState('');
   const [userArea, setuserArea] = useState('');
   const [userTime, setuserTime] = useState('');
-  const [userInterest, setuserInterest] = useState('');
+  const [userInterestMain, setuserInterestMain] = useState('');
   const [sameID, setsameID] = useState(false);
   const [sameNickname, setsameNickname] = useState(false);
   const [sameEmail, setsameEmail] = useState(false);
-  const [userBirthdayY, setuserBirthdayY] = useState('');
-  const [userBirthdayM, setuserBirthdayM] = useState('');
-  const [userBirthdayD, setuserBirthdayD] = useState('');
   const [code, setcode] = useState('');
   const [codeon, setcodeon] = useState(false);
+  const [userInterestSub, setuserInterestSub] = useState('');
 
+  const genOption = arrayTitle => {
+    return (
+      <>
+        {arrayTitle.map(item => (
+          <option key={item} value={item}>
+            {item}
+          </option>
+        ))}
+      </>
+    );
+  };
   const userData = () => {
     return axios.get('http://4idiot.ddns.net:8080/users').then(response => {
       console.log(response);
@@ -41,10 +56,6 @@ export const SignupForm = () => {
   useEffect(() => {
     userData();
   }, []);
-
-  const userPhonedata = e => {
-    setuserPhone(e.target.value);
-  };
 
   const userIDdata = e => {
     setuserID(e.target.value);
@@ -65,14 +76,9 @@ export const SignupForm = () => {
   const userNamedata = e => {
     setuserName(e.target.value);
   };
-  const userBirthdayYdata = e => {
-    setuserBirthdayY(e.target.value);
-  };
-  const userBirthdayMdata = e => {
-    setuserBirthdayM(e.target.value);
-  };
-  const userBirthdayDdata = e => {
-    setuserBirthdayD(e.target.value);
+
+  const userInterestSubdata = e => {
+    setuserInterestSub(e.target.value);
   };
 
   const userEmaildata = e => {
@@ -81,14 +87,6 @@ export const SignupForm = () => {
 
   const userIntroducedata = e => {
     setuserIntroduce(e.target.value);
-  };
-
-  const userGenderdataM = () => {
-    setuserGender(current => current);
-  };
-
-  const userGenderdataW = () => {
-    setuserGender(current => !current);
   };
 
   const userAbilitydata = e => {
@@ -103,8 +101,8 @@ export const SignupForm = () => {
     setuserTime(e.target.value);
   };
 
-  const userInterestdata = e => {
-    setuserInterest(e.target.value);
+  const userInterestMaindata = e => {
+    setuserInterestMain(e.target.value);
   };
   const codedata = e => {
     setcode(e.target.value);
@@ -220,12 +218,9 @@ export const SignupForm = () => {
       userAbility &&
       userArea &&
       userTime &&
-      userInterest &&
-      userBirthdayY &&
-      userBirthdayM &&
-      userBirthdayD &&
+      userInterestMain &&
+      userInterestSub &&
       userREPW === userPW &&
-      validator.isMobilePhone(userPhone, ['ko-KR']) === true &&
       validator.isLength(userID, { min: 5, max: 20 }) === true &&
       validator.isLength(userPW, { min: 8, max: 20 }) === true &&
       validator.isEmail(userEmail) === true &&
@@ -235,25 +230,26 @@ export const SignupForm = () => {
     ) {
       axios
         .post('http://4idiot.ddns.net:8080/users/register', {
+<<<<<<< HEAD
           userPhone,
+=======
+>>>>>>> community_third
           userID,
           userPW,
           userNickname,
           userName,
           userEmail,
           userIntroduce,
-          userGender,
           userAbility,
           userArea,
           userTime,
-          userInterest,
-          userBirthdayY,
-          userBirthdayM,
-          userBirthdayD,
+          userInterestMain,
+          userInterestSub,
         })
 
         .then(response => {
           console.log(response.data.message);
+
           console.log(data);
           userData();
           alert('회원가입이 완료하였습니다.');
@@ -272,26 +268,6 @@ export const SignupForm = () => {
       <Heading style={{ textAlign: 'center', margin: 35 }}>회원가입</Heading>
 
       <Box style={{ margin: 100, Box: 'center' }}>
-        <Form.Field>
-          <Form.Label>폰번호</Form.Label>
-          <Form.Control>
-            <Form.Input
-              type="text"
-              placeholder="ex.01012345678"
-              onChange={userPhonedata}
-              value={userPhone}
-            />
-          </Form.Control>
-          {validator.isMobilePhone(userPhone, ['ko-KR']) ? (
-            <Form.Label style={{ color: 'green' }} size="small">
-              O
-            </Form.Label>
-          ) : (
-            <Form.Label style={{ color: '#ff6347' }} size="small">
-              보기와 맞게 기입해 주세요
-            </Form.Label>
-          )}
-        </Form.Field>
         <Form.Field>
           <Form.Label>아이디</Form.Label>
 
@@ -432,145 +408,7 @@ export const SignupForm = () => {
           <div id="result" />
         </Form.Field>
         <br />
-        <Form.Field>
-          <Form.Label>생년월일</Form.Label>
-          <Form.Control>
-            <Form.Select
-              className="is-rounded"
-              onChange={userBirthdayYdata}
-              value={userBirthdayY}
-              size="small"
-            >
-              <option value="">-------</option>
-              <option value="1970">1970</option>
-              <option value="1971">1971</option>
-              <option value="1972">1972</option>
-              <option value="1973">1973</option>
-              <option value="1974">1974</option>
-              <option value="1975">1975</option>
-              <option value="1976">1976</option>
-              <option value="1977">1977</option>
-              <option value="1978">1978</option>
-              <option value="1979">1979</option>
-              <option value="1980">1980</option>
-              <option value="1981">1981</option>
-              <option value="1982">1982</option>
-              <option value="1983">1983</option>
-              <option value="1984">1984</option>
-              <option value="1985">1985</option>
-              <option value="1986">1986</option>
-              <option value="1987">1987</option>
-              <option value="1988">1988</option>
-              <option value="1989">1989</option>
-              <option value="1990">1990</option>
-              <option value="1991">1991</option>
-              <option value="1992">1992</option>
-              <option value="1993">1993</option>
-              <option value="1994">1994</option>
-              <option value="1995">1995</option>
-              <option value="1996">1996</option>
-              <option value="1997">1997</option>
-              <option value="1998">1998</option>
-              <option value="1999">1999</option>
-              <option value="2000">2000</option>
-              <option value="2001">2001</option>
-              <option value="2002">2002</option>
-              <option value="2003">2003</option>
-              <option value="2004">2004</option>
-              <option value="2005">2005</option>
-              <option value="2006">2006</option>
-              <option value="2007">2007</option>
-              <option value="2008">2008</option>
-              <option value="2009">2009</option>
-              <option value="2010">2010</option>
-            </Form.Select>
-            년도
-            <Form.Select
-              className="is-rounded"
-              onChange={userBirthdayMdata}
-              value={userBirthdayM}
-              size="small"
-            >
-              <option value="">-------</option>
-              <option value="01">01</option>
-              <option value="02">02</option>
-              <option value="03">03</option>
-              <option value="04">04</option>
-              <option value="05">05</option>
-              <option value="06">06</option>
-              <option value="07">07</option>
-              <option value="08">08</option>
-              <option value="09">09</option>
-              <option value="10">10</option>
-              <option value="11">11</option>
-              <option value="12">12</option>
-            </Form.Select>
-            월
-            <Form.Select
-              className="is-rounded"
-              onChange={userBirthdayDdata}
-              value={userBirthdayD}
-              size="small"
-            >
-              <option value="">-------</option>
-              <option value="01">01</option>
-              <option value="02">02</option>
-              <option value="03">03</option>
-              <option value="04">04</option>
-              <option value="05">05</option>
-              <option value="06">06</option>
-              <option value="07">07</option>
-              <option value="08">08</option>
-              <option value="09">09</option>
-              <option value="10">10</option>
-              <option value="11">11</option>
-              <option value="12">12</option>
-              <option value="13">13</option>
-              <option value="14">14</option>
-              <option value="15">15</option>
-              <option value="16">16</option>
-              <option value="17">17</option>
-              <option value="18">18</option>
-              <option value="19">19</option>
-              <option value="20">20</option>
-              <option value="21">21</option>
-              <option value="22">22</option>
-              <option value="23">23</option>
-              <option value="24">24</option>
-              <option value="25">25</option>
-              <option value="26">26</option>
-              <option value="27">27</option>
-              <option value="28">28</option>
-              <option value="29">29</option>
-              <option value="30">30</option>
-              <option value="31">31</option>
-            </Form.Select>
-            일
-          </Form.Control>
-        </Form.Field>
-        <Form.Field>
-          <Form.Label>성별</Form.Label>
-          <Form.Control>
-            <Form.Radio
-              type="radio"
-              name="Gender"
-              onChange={userGenderdataM}
-              value={userGender}
-            >
-              남
-            </Form.Radio>
-            <br />
-            <Form.Radio
-              type="radio"
-              name="Gender"
-              onChange={userGenderdataW}
-              value={userGender}
-            >
-              여
-            </Form.Radio>
-          </Form.Control>
-        </Form.Field>
-        <br />
+
         <Form.Field>
           <Form.Label>실력</Form.Label>
           <Form.Control>
@@ -622,16 +460,33 @@ export const SignupForm = () => {
             </Form.Select>
           </Form.Control>
         </Form.Field>
+
         <Form.Field>
           <Form.Label>흥미</Form.Label>
           <Form.Control>
-            <Form.Select onChange={userInterestdata} value={userInterest}>
+            <Form.Select
+              onChange={userInterestMaindata}
+              value={userInterestMain}
+            >
               <option value="">---------------------------</option>
-              <option value="기획">기획</option>
-              <option value="디자인">디자인</option>
-              <option value="프론트엔드">프론트엔드</option>
-              <option value="백엔드">백엔드</option>
-              <option value="기타">기타</option>
+              {genOption(mainArray)}
+            </Form.Select>
+          </Form.Control>
+        </Form.Field>
+
+        <Form.Field>
+          <Form.Label>asd</Form.Label>
+          <Form.Control>
+            <Form.Select onChange={userInterestSubdata} value={userInterestSub}>
+              <option value="">---------------------------</option>
+              {userInterestMain === '기획' && <>{genOption(planArray)}</>}
+              {userInterestMain === '디자인' && <>{genOption(designArray)}</>}
+              {userInterestMain === '프론트엔드개발' && (
+                <>{genOption(frontArray)}</>
+              )}
+              {userInterestMain === '백엔드개발' && <>{genOption(backArray)}</>}
+              {userInterestMain === '사업' && <>{genOption(coopArray)}</>}
+              {userInterestMain === '기타' && <>{genOption(etcArray)}</>}
             </Form.Select>
           </Form.Control>
         </Form.Field>
