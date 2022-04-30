@@ -43,6 +43,7 @@ export const MyPageSelect = ({ type, onChange, user }) => {
             onChange={e => onChange({ ...user, main: e.currentTarget.value })}
             defaultValue={user.main}
           >
+            <option value="">-------</option>
             {genOption(mainArray)}
           </Form.Select>
           <Form.Select
@@ -51,6 +52,7 @@ export const MyPageSelect = ({ type, onChange, user }) => {
             onChange={e => onChange({ ...user, mSkill: e.currentTarget.value })}
             defaultValue={user.mSkill}
           >
+            <option value="">-------</option>
             {user.main === '기획' && <>{genOption(planArray)}</>}
             {user.main === '디자인' && <>{genOption(designArray)}</>}
             {user.main === '프론트엔드개발' && <>{genOption(frontArray)}</>}
@@ -64,39 +66,7 @@ export const MyPageSelect = ({ type, onChange, user }) => {
             defaultValue={user.mPro}
             onChange={e => onChange({ ...user, mPro: e.currentTarget.value })}
           >
-            {genOption(skillArray)}
-          </Form.Select>
-        </Form.Control>
-      )}
-      {type === '부 캐릭터 직무/능력치' && (
-        <Form.Control>
-          <Form.Select
-            style={{ width: '14%' }}
-            name="sub"
-            onChange={e => onChange({ ...user, sub: e.currentTarget.value })}
-            defaultValue={user.sub}
-          >
-            {genOption(mainArray)}
-          </Form.Select>
-          <Form.Select
-            style={{ width: '16%' }}
-            name="sSkill"
-            onChange={e => onChange({ ...user, sSkill: e.currentTarget.value })}
-            defaultValue={user.sSkill}
-          >
-            {user.sub === '기획' && <>{genOption(planArray)}</>}
-            {user.sub === '디자인' && <>{genOption(designArray)}</>}
-            {user.sub === '프론트엔드개발' && <>{genOption(frontArray)}</>}
-            {user.sub === '백엔드개발' && <>{genOption(backArray)}</>}
-            {user.sub === '사업' && <>{genOption(coopArray)}</>}
-            {user.sub === '기타' && <>{genOption(etcArray)}</>}
-          </Form.Select>
-          <Form.Select
-            style={{ width: '14%' }}
-            name="sPro"
-            onChange={e => onChange({ ...user, sPro: e.currentTarget.value })}
-            defaultValue={user.sPro}
-          >
+            <option value="">-------</option>
             {genOption(skillArray)}
           </Form.Select>
         </Form.Control>

@@ -13,12 +13,9 @@ export const MyPageForm = () => {
     onOff: '온라인/오프라인 모두가능',
     area: '서울특별시',
     time: '상관없음',
-    main: '프론트엔드개발',
-    mSkill: 'IOS',
-    mPro: '중수',
-    sub: '기획',
-    sSkill: 'UI/UX기획',
-    sPro: '고수',
+    main: '',
+    mSkill: '',
+    mPro: '',
     preview:
       'https://letspl.s3.ap-northeast-2.amazonaws.com/images/project_thumb_05.png',
     profileImg: '',
@@ -36,11 +33,6 @@ export const MyPageForm = () => {
     main,
     mSkill,
     mPro,
-    mainSum,
-    sub,
-    sSkill,
-    sPro,
-    subSum,
     profileImg,
   } = user;
 
@@ -87,11 +79,6 @@ export const MyPageForm = () => {
 
         <MyPageSelect
           type="본 캐릭터 직무/능력치"
-          onChange={setUser}
-          user={user}
-        />
-        <MyPageSelect
-          type="부 캐릭터 직무/능력치"
           onChange={setUser}
           user={user}
         />

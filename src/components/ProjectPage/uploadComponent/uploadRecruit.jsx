@@ -603,7 +603,7 @@ export const ProjectRecruit = ({ member, setMember }) => {
       ...member,
       projectTotal: [
         ...member.projectTotal,
-        { main: '기획', sub: 'UI/UX 기획' },
+        { main: '-------', sub: '-------' },
       ],
     });
   };
@@ -671,6 +671,7 @@ export const ProjectRecruit = ({ member, setMember }) => {
                 onChange={e => handleInputChange(e, index, m.sub)}
                 value={m.main}
               >
+                <option value="">-------</option>
                 {genOption(mainArray)}
               </Form.Select>
               <Form.Select
@@ -679,6 +680,7 @@ export const ProjectRecruit = ({ member, setMember }) => {
                 onChange={e => handleInputChange(e, index, m.sub)}
                 value={m.sub}
               >
+                <option value="">-------</option>
                 {m.main === '기획' && <>{genOption(planArray)}</>}
                 {m.main === '디자인' && <>{genOption(designArray)}</>}
                 {m.main === '프론트엔드개발' && <>{genOption(frontArray)}</>}

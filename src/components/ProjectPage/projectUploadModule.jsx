@@ -35,7 +35,7 @@ export const ProjectUploadForm = () => {
         children: [{ text: '프로젝트를 소개 하자면....' }],
       },
     ],
-    projectTotal: [{ main: '기획', sub: 'UI/UX 기획' }],
+    projectTotal: [{ main: '-------', sub: '-------' }],
     projectImg: '',
     uiuxPlan: 1,
     gamePlan: 0,
