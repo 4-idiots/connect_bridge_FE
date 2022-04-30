@@ -3116,7 +3116,8 @@ a.tag:hover {
     fieldset[disabled] .select select:hover {
       border-color: whitesmoke; }
     .select select:not([multiple]) {
-      padding-right: 2.5em; }
+      padding-right: 2.5em;
+      width: 100%; }
     .select select[multiple] {
       height: auto;
       padding: 0; }
