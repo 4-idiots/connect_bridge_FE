@@ -4,20 +4,20 @@ import { Heading, Tag } from 'react-bulma-components';
 import * as S from './style';
 
 export const DetailHeader = ({
-  projectName,
+  studyName,
   leaderImg,
   leaderName,
-  projectOnOff,
+  studyOnOff,
 }) => {
   return (
     <S.HeaderWrap>
       <S.HeaderContent>
-        <S.ProjectContent>사이드프로젝트</S.ProjectContent>
+        <S.ProjectContent>스터디/네트워킹</S.ProjectContent>
         <Heading
           size={4}
           style={{ fontWeight: 'bold', fontSize: 38, margin: 24 }}
         >
-          {projectName}
+          {studyName}
         </Heading>
         <S.LeaderWrap>
           <S.LeaderImg src={leaderImg} />
@@ -28,11 +28,11 @@ export const DetailHeader = ({
             color="info"
             rounded
             style={{ marginRight: 10 }}
-            className={projectOnOff ? '' : 'is-light'}
+            className={studyOnOff ? '' : 'is-light'}
           >
             모집 중
           </Tag>
-          <Tag color="info" rounded className={projectOnOff ? 'is-light' : ''}>
+          <Tag color="info" rounded className={studyOnOff ? 'is-light' : ''}>
             진행 중
           </Tag>
         </S.StatusBox>
@@ -42,8 +42,8 @@ export const DetailHeader = ({
 };
 
 DetailHeader.propTypes = {
-  projectName: PropTypes.string.isRequired,
+  studyName: PropTypes.string.isRequired,
   leaderImg: PropTypes.string.isRequired,
   leaderName: PropTypes.string.isRequired,
-  projectOnOff: PropTypes.bool.isRequired,
+  studyOnOff: PropTypes.bool.isRequired,
 };

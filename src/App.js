@@ -22,6 +22,7 @@ import {
   MyPage,
   CommunityP,
   Communityserach,
+  StudyDetail,
 } from './pages/pRoutes';
 import { AuthContext } from './contexts/store/auth';
 import { useProvideAuth } from './contexts/hooks/useProvideAuth';
@@ -46,6 +47,7 @@ const App = () => {
           />
           <Route path="/team" element={<Team />} />
           <Route path="/team/info/:teID/:teamID" element={<Info />} />
+          <Route path="/study/:studyID" element={<StudyDetail />} />
           <Route path="/project" element={<ProjectMain />} />
           <Route path="/project/:projectID" element={<ProjectDetail />} />
           <Route path="/project/upload" element={<ProjectUpload />} />

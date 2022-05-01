@@ -64,7 +64,7 @@ export const ProjectDetailForm = () => {
     projectField,
     projectSkill,
     projectReference,
-    projectContent,
+    content,
     projectStart,
     projectEnd,
     projectPlatform,
@@ -144,11 +144,10 @@ export const ProjectDetailForm = () => {
 
   return (
     <Container style={{ marginTop: 80 }}>
-      {typeof projectOnOff === typeof projectMotive && projectName && (
+      {projectName && (
         <DetailHeader
           projectOnOff={projectOnOff}
           projectName={projectName}
-          projectMotive={projectMotive}
           leaderImg="https://letspl.s3.ap-northeast-2.amazonaws.com/images/project_thumb_05.png"
           leaderName="name"
         />
@@ -181,7 +180,7 @@ export const ProjectDetailForm = () => {
           </S.LeftTab>
           {isInfo &&
             projectPlatform &&
-            projectContent &&
+            content &&
             projectSkill &&
             projectReference && (
               <S.LeftDetail>
@@ -249,7 +248,7 @@ export const ProjectDetailForm = () => {
                   projectID={Number(projectID)}
                 />
                 <DetailPlatform projectPlatform={projectPlatform} />
-                <DetailContent value={projectContent} />
+                <DetailContent value={content} />
                 <DetailSkill projectSkill={projectSkill} />
                 <DetailReference projectReference={projectReference} />
               </S.LeftDetail>

@@ -135,6 +135,24 @@ export const studyUploadService = (
   });
 };
 
+export const studyGetSomeService = studyID => {
+  return customAxios.get(`${process.env.REACT_APP_MOON_URL}/study/${studyID}`);
+};
+
+export const studyApplyService = (studyID, userID, field) => {
+  return customAxios.post(`${process.env.REACT_APP_MOON_URL}/study/apply`, {
+    studyID,
+    userID,
+    field,
+  });
+};
+
+export const studyDeleteService = studyID => {
+  return customAxios.delete(
+    `${process.env.REACT_APP_MOON_URL}/study/${studyID}`,
+  );
+};
+
 export const projectDeleteService = projectID => {
   return customAxios.delete(
     `${process.env.REACT_APP_MOON_URL}/project/${projectID}`,

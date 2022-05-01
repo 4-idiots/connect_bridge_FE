@@ -25,6 +25,7 @@ export { ProjectMainForm } from './ProjectPage/projectMainModule';
 export { ProjectUpdateForm } from './ProjectPage/projectUpdateModule';
 export { ProjectDetailForm } from './ProjectPage/projectDetailModule';
 export { ProjectStudyUploadForm } from './ProjectPage/prStUploadModule';
+export { StudyDetailForm } from './ProjectPage/studyDetailModule';
 
 // CommunityPage
 export { CommunityForm } from './CommunityPage/communityMain';

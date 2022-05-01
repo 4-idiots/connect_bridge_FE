@@ -22,7 +22,6 @@ export const ProjectUploadForm = () => {
 
   const navigate = useNavigate();
   const [postInfo, setPostInfo] = useState({
-    projectMotive: true,
     projectOnOff: '-------',
     projectArea: '-------',
     projectStart: new Date('2022/01/01'),
@@ -68,7 +67,6 @@ export const ProjectUploadForm = () => {
   });
 
   const {
-    projectMotive,
     projectName,
     projectField,
     projectImg,
@@ -136,7 +134,6 @@ export const ProjectUploadForm = () => {
     const formData = new FormData();
     formData.append('userID', decodedToken.id);
     formData.append('projectName', projectName);
-    formData.append('projectMotive', projectMotive);
     formData.append('projectImg', projectImg);
     formData.append('projectContent', JSON.stringify(content));
     formData.append('projectField', projectField);
