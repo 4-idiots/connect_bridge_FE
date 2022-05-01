@@ -55,7 +55,6 @@ export const ProjectDetailForm = () => {
 
   const {
     userID,
-    projectMotive,
     projectTotal,
     projectImg,
     projectArea,

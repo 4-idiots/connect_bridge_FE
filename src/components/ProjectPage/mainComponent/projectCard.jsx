@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Media, Content, Heading, Icon } from 'react-bulma-components';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as S from './style';
 import { ReactComponent as Heart } from '../../../assets/svg/heart.svg';
 import { RecruitModal } from './recruitModal';
+import { projectLikeCheck } from '../../../service';
 
 export const ProjectCard = ({
-  projectMotive,
-  isLike,
   projectImg,
   projectField,
   projectName,
@@ -80,8 +79,22 @@ export const ProjectCard = ({
   const [isHover, setIsHover] = useState(false);
   const [onHeart, setOnHeart] = useState(false);
   const [onRecruit, setOnRecruit] = useState(false);
-  const [usLike, setUsLike] = useState(isLike);
+  const [usLike, setUsLike] = useState(true);
   const [likeCount, setLikeCount] = useState(projectLike);
+
+  const checkLike = async () => {
+    try {
+      const result = await projectLikeCheck(projectID);
+      setUsLike(result.data);
+    } catch (error) {
+      setUsLike(false);
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    checkLike();
+  }, []);
 
   const handleLike = now => {
     return (
@@ -142,7 +155,7 @@ export const ProjectCard = ({
           fontWeight: 'bold',
         }}
       >
-        {projectMotive ? '사이드프로젝트' : '스터디/네트워킹'}
+        사이드프로젝트
       </div>
       <S.CustomDiv
         onClick={() => handleLike(!usLike)}
@@ -286,8 +299,6 @@ export const ProjectCard = ({
 };
 
 ProjectCard.propTypes = {
-  projectMotive: PropTypes.bool.isRequired,
-  isLike: PropTypes.bool.isRequired,
   projectImg: PropTypes.string.isRequired,
   projectField: PropTypes.string.isRequired,
   projectName: PropTypes.string.isRequired,

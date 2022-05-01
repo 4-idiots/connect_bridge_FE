@@ -1,9 +1,13 @@
 /* eslint-disable react/jsx-no-useless-fragment */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Card, Media, Heading } from 'react-bulma-components';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { outdoorDeleteService } from '../../service';
+import {
+  outdoorDeleteService,
+  outdoorLikeCheck,
+  outdoorLikeService,
+} from '../../service';
 import { useAuth } from '../../contexts/hooks/useAuth';
 
 export const OutdoorCardForm = ({
@@ -16,6 +20,7 @@ export const OutdoorCardForm = ({
 }) => {
   const [isHover, setIsHover] = useState(false);
   const [manager, setManager] = useState(true);
+  const [isLike, setIsLike] = useState(false);
 
   const auth = useAuth();
   const isLogin = localStorage.getItem('isLogin') || '';
@@ -30,6 +35,30 @@ export const OutdoorCardForm = ({
       window.location.replace('/outdoor');
     }
   };
+
+  const likeCheck = async () => {
+    try {
+      const result = await outdoorLikeCheck(outActID);
+      setIsLike(result.data);
+    } catch (error) {
+      setIsLike(false);
+      console.log(error);
+    }
+  };
+
+  const likeClick = async () => {
+    setIsLike(!isLike);
+    try {
+      const result = await outdoorLikeService(outActID);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    likeCheck();
+  }, []);
+
   return (
     <Card
       style={
@@ -106,7 +135,15 @@ export const OutdoorCardForm = ({
                     }}
                   >
                     <p>View: {outActView}</p>
-                    <Button color="danger">Like: {outActLike}</Button>
+                    {isLike ? (
+                      <Button color="danger" onClick={likeClick}>
+                        Like: {outActLike}
+                      </Button>
+                    ) : (
+                      <Button color="warning" onClick={likeClick}>
+                        Like: {outActLike}
+                      </Button>
+                    )}
                   </div>
                 )}
               </>

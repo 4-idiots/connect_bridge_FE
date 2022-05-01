@@ -3,7 +3,7 @@ import axios from 'axios';
 // axios timeout 설정
 // 통신 시 서버가 응담 결과를 너무 늦게 주는 경우가 있어서 최대 응답 소요 시간을 10초로 제한
 // 10초를 넘어갈 경우 에러로 판별
-const customAxios = axios.create({ timeout: 10000 });
+export const customAxios = axios.create({ timeout: 10000 });
 
 export const loginService = (userID, userPW) => {
   return customAxios.post(
@@ -77,9 +77,15 @@ export const outdoorDeleteService = outActID => {
   );
 };
 
-export const outdoorLikeService = (outActID, userID) => {
+export const outdoorLikeService = outActID => {
   return customAxios.get(
-    `${process.env.REACT_APP_MOON_URL}/outdoor/like?post=${outActID}&userID=${userID}`,
+    `${process.env.REACT_APP_MOON_URL}/outdoor/like?outActID=${outActID}`,
+  );
+};
+
+export const outdoorLikeCheck = outActID => {
+  return customAxios.get(
+    `${process.env.REACT_APP_MOON_URL}/outdoor/islike/${outActID}`,
   );
 };
 
@@ -186,5 +192,11 @@ export const proejctUpdateService = formData => {
         'content-type': 'multipart/form-data',
       },
     },
+  );
+};
+
+export const projectLikeCheck = projectID => {
+  return customAxios.get(
+    `${process.env.REACT_APP_MOON_URL}/islike/${projectID}`,
   );
 };

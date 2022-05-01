@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
-import axios from 'axios';
-import { validToken } from '../../service';
+import { customAxios, validToken } from '../../service';
 
 export const useProvideAuth = () => {
   const [token, setToken] = useState();
@@ -28,7 +27,7 @@ export const useProvideAuth = () => {
 
   const { data, error, isValidating } = useSWR(
     isLogin ? validToken : null,
-    url => axios.get(url).then(response => response.data),
+    url => customAxios.get(url).then(response => response.data),
     {
       refreshInterval: 1000000,
       revalidateOnFocus: false,
