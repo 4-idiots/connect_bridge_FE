@@ -32,10 +32,9 @@ export const findPWServcie = (userID, userName, userEmail) => {
   });
 };
 
-export const findIDService = (userName, userPhone, userEmail) => {
+export const findIDService = (userName, userEmail) => {
   return customAxios.post(`${process.env.REACT_APP_MOON_URL}/user/findID`, {
     userName,
-    userPhone,
     userEmail,
   });
 };
@@ -110,6 +109,30 @@ export const projectUploadService = formData => {
       },
     },
   );
+};
+
+export const studyUploadService = (
+  studyName,
+  studyKeyward,
+  studyField,
+  studyArea,
+  studyOnOff,
+  studyMember,
+  studyStart,
+  studyEnd,
+  content,
+) => {
+  return customAxios.post(`${process.env.REACT_APP_MOON_URL}/study`, {
+    studyName,
+    studyKeyward,
+    studyField,
+    studyArea,
+    studyOnOff,
+    studyMember,
+    studyStart,
+    studyEnd,
+    content,
+  });
 };
 
 export const projectDeleteService = projectID => {

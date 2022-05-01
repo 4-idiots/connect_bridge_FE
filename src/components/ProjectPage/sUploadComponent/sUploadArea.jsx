@@ -1,9 +1,9 @@
 import React from 'react';
 import { Form } from 'react-bulma-components';
 import PropTypes from 'prop-types';
-import { areaArray, onOffArray } from './uploadValue';
+import { areaArray, onOffArray } from '../uploadComponent/uploadValue';
 
-export const ProjectArea = ({ onChange }) => {
+export const StudyArea = ({ onChange }) => {
   return (
     <Form.Field>
       <Form.Label>* 지역</Form.Label>
@@ -11,7 +11,7 @@ export const ProjectArea = ({ onChange }) => {
       <Form.Control>
         <Form.Select
           style={{ width: '20%' }}
-          name="projectOnOff"
+          name="studyOnOff"
           onChange={onChange}
         >
           <option value="">-------</option>
@@ -23,7 +23,7 @@ export const ProjectArea = ({ onChange }) => {
         </Form.Select>
         <Form.Select
           style={{ width: '16%' }}
-          name="projectArea"
+          name="studyArea"
           onChange={onChange}
         >
           <option value="">-------</option>
@@ -38,6 +38,6 @@ export const ProjectArea = ({ onChange }) => {
   );
 };
 
-ProjectArea.propTypes = {
+StudyArea.propTypes = {
   onChange: PropTypes.func.isRequired,
 };

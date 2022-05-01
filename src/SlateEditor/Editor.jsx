@@ -143,8 +143,8 @@ const SlateEditor = ({ value, setValue }) => {
   return (
     <Slate
       editor={editor}
-      value={value.projectContent}
-      onChange={newValue => setValue({ ...value, projectContent: newValue })}
+      value={value.content}
+      onChange={newValue => setValue({ ...value, content: newValue })}
     >
       <Toolbar />
       <div

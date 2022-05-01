@@ -5,7 +5,7 @@ import { findIDService } from '../../service';
 export const FindIDForm = () => {
   const [userInfo, setUserInfo] = useState({});
 
-  const { userName, userPhone, userEmail } = userInfo;
+  const { userName, userEmail } = userInfo;
 
   const onChangeAccountEvent = useCallback(
     e => {
@@ -17,9 +17,9 @@ export const FindIDForm = () => {
     [userInfo],
   );
 
-  const findIDAxios = async (uName, uPhone, uEmail) => {
+  const findIDAxios = async (uName, uEmail) => {
     try {
-      const result = await findIDService(uName, uPhone, uEmail);
+      const result = await findIDService(uName, uEmail);
       alert(`아이디는 ${result.data.userID} 입니다.`);
     } catch (error) {
       alert('다시 시도해주세요');
@@ -29,7 +29,7 @@ export const FindIDForm = () => {
 
   const onSubmitEvent = e => {
     e.preventDefault();
-    findIDAxios(userName, userPhone, userEmail);
+    findIDAxios(userName, userEmail);
   };
 
   return (
@@ -45,18 +45,6 @@ export const FindIDForm = () => {
               name="userName"
               onChange={onChangeAccountEvent}
               placeholder="이름"
-            />
-          </Form.Control>
-        </Form.Field>
-        <Form.Field>
-          <Form.Label>휴대폰 번호</Form.Label>
-          <Form.Control>
-            <Form.Input
-              type="text"
-              value={userPhone || ''}
-              name="userPhone"
-              onChange={onChangeAccountEvent}
-              placeholder="ex) 01012345678"
             />
           </Form.Control>
         </Form.Field>

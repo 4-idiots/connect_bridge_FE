@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  ProjectUploadForm,
+  ProjectStudyUploadForm,
   NavbarForm,
   FooterForm,
 } from '../../components/cRoutes';
@@ -9,7 +9,7 @@ export const ProjectUpload = () => {
   return (
     <>
       <NavbarForm />
-      <ProjectUploadForm />
+      <ProjectStudyUploadForm />
       <FooterForm />
     </>
   );

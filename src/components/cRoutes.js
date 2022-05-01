@@ -21,10 +21,10 @@ export { TeamForm } from './TeamPage/Team';
 export { InfoForm } from './TeamPage/info';
 
 // ProjectPage
-export { ProjectUploadForm } from './ProjectPage/projectUploadModule';
 export { ProjectMainForm } from './ProjectPage/projectMainModule';
 export { ProjectUpdateForm } from './ProjectPage/projectUpdateModule';
 export { ProjectDetailForm } from './ProjectPage/projectDetailModule';
+export { ProjectStudyUploadForm } from './ProjectPage/prStUploadModule';
 
 // CommunityPage
 export { CommunityForm } from './CommunityPage/communityMain';
