@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Modal, Image, Button, Media, Box } from 'react-bulma-components';
 import PropTypes from 'prop-types';
+import { outdoorLikeService } from '../../service';
 
 export const OutdoorModalForm = ({
   close,
@@ -11,6 +12,16 @@ export const OutdoorModalForm = ({
   like,
   id,
 }) => {
+  const [dynLike, setDynLike] = useState(like);
+
+  const likeClick = async () => {
+    try {
+      const result = await outdoorLikeService(id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Modal show onClose={close} closeOnEsc closeOnBlur showClose={false}>
       <Modal.Card>
@@ -32,14 +43,6 @@ export const OutdoorModalForm = ({
           }}
         >
           <Box>
-            <Button
-              style={{ width: '8rem', pointerEvents: 'none' }}
-              color="success"
-            >
-              View: {view}
-            </Button>
-          </Box>
-          <Box>
             <Button color="info">
               <a
                 target="_blank"
@@ -49,11 +52,6 @@ export const OutdoorModalForm = ({
               >
                 공식 사이트로 이동
               </a>
-            </Button>
-          </Box>
-          <Box style={{ marginBottom: '1.5rem' }}>
-            <Button style={{ width: '8rem' }} color="danger">
-              Like: {like}
             </Button>
           </Box>
         </Modal.Card.Footer>

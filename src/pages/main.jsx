@@ -10,6 +10,7 @@ export const Main = () => {
   return (
     <>
       <NavbarForm />
+      {JSON.stringify(decodedToken)}
       <BannerForm />
       <h1 style={{ textAlign: 'center', fontSize: '40px' }}>Main Page</h1>
       <FooterForm />

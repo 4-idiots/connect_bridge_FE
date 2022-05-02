@@ -2,11 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Card, Media, Heading } from 'react-bulma-components';
 import PropTypes from 'prop-types';
+import { useJwt } from 'react-jwt';
 import { Link } from 'react-router-dom';
 import {
   outdoorDeleteService,
   outdoorLikeCheck,
   outdoorLikeService,
+  outdoorGetSomeService,
 } from '../../service';
 import { useAuth } from '../../contexts/hooks/useAuth';
 
@@ -19,10 +21,12 @@ export const OutdoorCardForm = ({
   outActImg,
 }) => {
   const [isHover, setIsHover] = useState(false);
-  const [manager, setManager] = useState(true);
   const [isLike, setIsLike] = useState(false);
+  const [dynLike, setDynLike] = useState(outActLike);
+  const [dynView, setDynView] = useState(outActView);
 
   const auth = useAuth();
+  const { decodedToken, isExpired } = useJwt(auth.token);
   const isLogin = localStorage.getItem('isLogin') || '';
 
   const deleteAxios = async id => {
@@ -47,12 +51,31 @@ export const OutdoorCardForm = ({
   };
 
   const likeClick = async () => {
+    if (isLike) {
+      setDynLike(dynLike - 1);
+    } else {
+      setDynLike(dynLike + 1);
+    }
     setIsLike(!isLike);
     try {
       const result = await outdoorLikeService(outActID);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const addView = async () => {
+    try {
+      const result = await outdoorGetSomeService(outActID);
+    } catch (err) {
+      console.log('error');
+    }
+  };
+
+  const onClickHandler = () => {
+    setDynView(dynView + 1);
+    addView();
+    onActClick();
   };
 
   useEffect(() => {
@@ -82,7 +105,7 @@ export const OutdoorCardForm = ({
       }}
     >
       <div style={{ height: 380, overflow: 'hidden' }}>
-        <Card.Image onClick={onActClick} src={outActImg} />
+        <Card.Image onClick={onClickHandler} src={outActImg} />
       </div>
 
       <Card.Content>
@@ -98,7 +121,7 @@ export const OutdoorCardForm = ({
           <Media.Item style={{ marginTop: 10 }}>
             {isLogin ? (
               <>
-                {manager ? (
+                {decodedToken && decodedToken.role ? (
                   <Button.Group
                     style={{
                       width: 232,
@@ -134,14 +157,14 @@ export const OutdoorCardForm = ({
                       width: 232,
                     }}
                   >
-                    <p>View: {outActView}</p>
+                    <p>View: {dynView}</p>
                     {isLike ? (
                       <Button color="danger" onClick={likeClick}>
-                        Like: {outActLike}
+                        Like: {dynLike}
                       </Button>
                     ) : (
                       <Button color="warning" onClick={likeClick}>
-                        Like: {outActLike}
+                        Like: {dynLike}
                       </Button>
                     )}
                   </div>

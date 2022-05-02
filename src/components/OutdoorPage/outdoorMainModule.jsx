@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { Container, Icon, Box, Heading } from 'react-bulma-components';
 import { Link } from 'react-router-dom';
+import { useJwt } from 'react-jwt';
 import { OutdoorModalForm } from './outdoorModalModule';
 import { OutdoorInfinite } from '../../swr/outdoorInfinite';
+import { useAuth } from '../../contexts/hooks/useAuth';
 
 export const OutdoorMainForm = () => {
+  const auth = useAuth();
   const [poster, setPoster] = useState({});
+  const { decodedToken, isExpired } = useJwt(auth.token);
 
   const { outID, check, title, image, link, view, like } = poster;
 
@@ -38,7 +42,7 @@ export const OutdoorMainForm = () => {
           id={outID}
         />
       )}
-      <NewPosterBtn />
+      {decodedToken && decodedToken.role && <NewPosterBtn />}
       <div
         style={{
           display: 'grid',
