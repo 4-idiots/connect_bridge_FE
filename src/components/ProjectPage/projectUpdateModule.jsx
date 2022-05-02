@@ -32,7 +32,7 @@ export const ProjectUpdateForm = () => {
     projectArea,
     projectSkill,
     projectReference,
-    projectContent,
+    content,
     projectStart,
     projectEnd,
     projectPlatform,
@@ -112,7 +112,7 @@ export const ProjectUpdateForm = () => {
   const updateAxios = async formdata => {
     try {
       const result = await proejctUpdateService(formdata);
-      alert('등록 되었습니다.');
+      alert('수정 되었습니다.');
       navigate('/project');
     } catch (error) {
       alert('다시 시도해주세요');
@@ -124,7 +124,6 @@ export const ProjectUpdateForm = () => {
       const result = await projectGetSomeService(prID);
       setPostInfo(result.data);
     } catch (error) {
-      console.log(error);
       navigate('/project');
     }
   };
@@ -141,7 +140,7 @@ export const ProjectUpdateForm = () => {
     formData.append('projectName', projectName);
     formData.append('projectMotive', projectMotive);
     formData.append('projectImg', projectImg);
-    formData.append('projectContent', JSON.stringify(projectContent));
+    formData.append('projectContent', JSON.stringify(content));
     formData.append('projectField', projectField);
     formData.append('projectArea', projectArea);
     formData.append('projectTotal', JSON.stringify(projectTotal));
@@ -179,7 +178,6 @@ export const ProjectUpdateForm = () => {
     formData.append('blogEtc', blogEtc);
     formData.append('influEtc', influEtc);
     formData.append('compEtc', compEtc);
-
     formData.append('uiuxPlanNow', uiuxPlanNow);
     formData.append('gamePlanNow', gamePlanNow);
     formData.append('managerPlanNow', managerPlanNow);
@@ -276,9 +274,7 @@ export const ProjectUpdateForm = () => {
                 지원율리 50% 높습니다.
               </Form.Help>
             </Form.Field>
-            {projectContent && (
-              <SlateEditor value={postInfo} setValue={setPostInfo} />
-            )}
+            {content && <SlateEditor value={postInfo} setValue={setPostInfo} />}
             {projectStart && projectEnd && (
               <ProjectDate
                 start={new Date(projectStart)}

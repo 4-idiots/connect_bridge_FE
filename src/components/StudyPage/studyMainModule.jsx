@@ -3,9 +3,9 @@ import { Container, Heading, Block } from 'react-bulma-components';
 import { NewCard } from './mainComponent/newCard';
 import { SuggestCard } from './mainComponent/suggestCard';
 import * as S from './mainComponent/style';
-import { ProjectInfinite } from '../../swr/projectInfinite';
+import { StudyInfinite } from '../../swr/studyInfinite';
 
-export const ProjectMainForm = () => {
+export const StudyMainForm = () => {
   const [a, setA] = useState([
     {
       type: 'paragaph',
@@ -25,7 +25,7 @@ export const ProjectMainForm = () => {
 
   return (
     <Container style={{ marginTop: 80 }}>
-      <Heading>프로젝트</Heading>
+      <Heading>스터디</Heading>
       <Block
         style={{
           backgroundColor: '#fbfbfb',
@@ -36,7 +36,7 @@ export const ProjectMainForm = () => {
         <S.newWrap>
           <S.textWrap>
             <Heading size={4} style={{ fontWeight: 'bold' }}>
-              신규 프로젝트
+              신규 스터디
             </Heading>
           </S.textWrap>
           <NewCard
@@ -56,7 +56,7 @@ export const ProjectMainForm = () => {
         <S.suggestWrap>
           <S.textWrap>
             <Heading size={4} style={{ fontWeight: 'bold' }}>
-              추천 프로젝트
+              추천 스터디
             </Heading>
           </S.textWrap>
           <SuggestCard />
@@ -65,9 +65,9 @@ export const ProjectMainForm = () => {
         </S.suggestWrap>
       </Block>
       <Block>
-        <Heading size={4}>전체 프로젝트</Heading>
+        <Heading size={4}>전체 스터디</Heading>
         <S.gridBox>
-          <ProjectInfinite />
+          <StudyInfinite />
         </S.gridBox>
       </Block>
     </Container>

@@ -10,8 +10,8 @@ import {
   DetailRightCard,
   DetailCommentLog,
   DetailCommentInput,
-} from './sDetailComponent/sDetailRoute';
-import * as S from './detailComponent/style';
+} from './detailComponent/detailRoute';
+import * as S from '../ProjectPage/detailComponent/style';
 import {
   studyGetSomeService,
   studyApplyService,

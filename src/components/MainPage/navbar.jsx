@@ -36,6 +36,13 @@ export const NavbarForm = () => {
           </Navbar.Item>
           <Navbar.Item
             renderAs={Link}
+            to="/study"
+            style={{ fontSize: 20, fontWeight: 'bold', marginRight: 30 }}
+          >
+            스터디
+          </Navbar.Item>
+          <Navbar.Item
+            renderAs={Link}
             to="/community"
             style={{ fontSize: 20, fontWeight: 'bold', marginRight: 30 }}
           >
@@ -64,7 +71,7 @@ export const NavbarForm = () => {
                 to="/project/upload"
                 style={{ fontSize: 20, fontWeight: 'bold' }}
               >
-                프로젝트 생성
+                프로젝트/스터디 생성
               </Navbar.Item>
               <Navbar.Item
                 renderAs={Link}

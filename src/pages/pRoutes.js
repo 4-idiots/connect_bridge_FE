@@ -23,6 +23,9 @@ export { ProjectUpload } from './project/projectUpload';
 export { ProjectMain } from './project/projectMain';
 export { ProjectUpdate } from './project/projectUpdate';
 export { ProjectDetail } from './project/projectDetail';
-export { StudyDetail } from './project/studyDetail';
+
+export { StudyDetail } from './study/studyDetail';
+export { StudyMain } from './study/studyMain';
+export { StudyUpdate } from './study/studyUpdate';
 
 export { MyPage } from './myPage/myPage';

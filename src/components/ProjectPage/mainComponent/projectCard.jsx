@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import * as S from './style';
 import { ReactComponent as Heart } from '../../../assets/svg/heart.svg';
 import { RecruitModal } from './recruitModal';
-import { projectLikeCheck } from '../../../service';
+import { projectLikeCheck, projectLikeService } from '../../../service';
 
 export const ProjectCard = ({
   projectImg,
@@ -80,7 +80,7 @@ export const ProjectCard = ({
   const [onHeart, setOnHeart] = useState(false);
   const [onRecruit, setOnRecruit] = useState(false);
   const [usLike, setUsLike] = useState(true);
-  const [likeCount, setLikeCount] = useState(projectLike);
+  const [dynLike, setDynLike] = useState(projectLike);
 
   const checkLike = async () => {
     try {
@@ -96,11 +96,18 @@ export const ProjectCard = ({
     checkLike();
   }, []);
 
-  const handleLike = now => {
-    return (
-      setUsLike(!usLike),
-      now ? setLikeCount(likeCount - 1) : setLikeCount(likeCount + 1)
-    );
+  const handleLike = async () => {
+    if (usLike) {
+      setDynLike(dynLike - 1);
+    } else {
+      setDynLike(dynLike + 1);
+    }
+    setUsLike(!usLike);
+    try {
+      const result = await projectLikeService(projectID);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -158,7 +165,7 @@ export const ProjectCard = ({
         사이드프로젝트
       </div>
       <S.CustomDiv
-        onClick={() => handleLike(!usLike)}
+        onClick={handleLike()}
         onMouseEnter={() => {
           setOnHeart(true);
         }}
@@ -198,7 +205,7 @@ export const ProjectCard = ({
               <Icon>
                 <i className="fas fa-heart" />
               </Icon>
-              <div>{likeCount}</div>
+              <div>{dynLike}</div>
             </div>
             <div
               style={{

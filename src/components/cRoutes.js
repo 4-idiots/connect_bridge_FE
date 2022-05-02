@@ -25,7 +25,11 @@ export { ProjectMainForm } from './ProjectPage/projectMainModule';
 export { ProjectUpdateForm } from './ProjectPage/projectUpdateModule';
 export { ProjectDetailForm } from './ProjectPage/projectDetailModule';
 export { ProjectStudyUploadForm } from './ProjectPage/prStUploadModule';
-export { StudyDetailForm } from './ProjectPage/studyDetailModule';
+
+// StudyPage
+export { StudyDetailForm } from './StudyPage/studyDetailModule';
+export { StudyUpdateForm } from './StudyPage/studyUpdateModule';
+export { StudyMainForm } from './StudyPage/studyMainModule';
 
 // CommunityPage
 export { CommunityForm } from './CommunityPage/communityMain';

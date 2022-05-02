@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Heading } from 'react-bulma-components';
 import * as S from './style';
 
 export const RecruitModal = ({

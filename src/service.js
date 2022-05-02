@@ -141,6 +141,48 @@ export const studyUploadService = (
   });
 };
 
+export const studyGetAllService = () => {
+  return `${process.env.REACT_APP_MOON_URL}/study`;
+};
+
+export const studyUpdateService = ({
+  studyName,
+  studyKeyward,
+  studyField,
+  studyArea,
+  studyOnOff,
+  studyMember,
+  studyStart,
+  studyEnd,
+  content,
+  studyID,
+}) => {
+  return customAxios.patch(`${process.env.REACT_APP_MOON_URL}/study`, {
+    studyName,
+    studyKeyward,
+    studyField,
+    studyArea,
+    studyOnOff,
+    studyMember,
+    studyStart,
+    studyEnd,
+    content,
+    studyID,
+  });
+};
+
+export const studyLikeCheck = studyID => {
+  return customAxios.get(
+    `${process.env.REACT_APP_MOON_URL}/study/islike/${studyID}`,
+  );
+};
+
+export const studyLikeService = studyID => {
+  return customAxios.get(
+    `${process.env.REACT_APP_MOON_URL}/study/like?studyID=${studyID}`,
+  );
+};
+
 export const studyGetSomeService = studyID => {
   return customAxios.get(`${process.env.REACT_APP_MOON_URL}/study/${studyID}`);
 };
@@ -179,8 +221,8 @@ export const projectApplyService = (projectID, userID, field) => {
   });
 };
 
-export const projectGetAllService = () => {
-  return customAxios.get(`${process.env.REACT_APP_MOON_URL}/project`);
+export const projectGetAllService = cursor => {
+  return `${process.env.REACT_APP_MOON_URL}/project/${cursor}`;
 };
 
 export const proejctUpdateService = formData => {
@@ -197,6 +239,12 @@ export const proejctUpdateService = formData => {
 
 export const projectLikeCheck = projectID => {
   return customAxios.get(
-    `${process.env.REACT_APP_MOON_URL}/islike/${projectID}`,
+    `${process.env.REACT_APP_MOON_URL}/project/islike/${projectID}`,
+  );
+};
+
+export const projectLikeService = projectID => {
+  return customAxios.get(
+    `${process.env.REACT_APP_MOON_URL}/project/like?projectID=${projectID}`,
   );
 };
