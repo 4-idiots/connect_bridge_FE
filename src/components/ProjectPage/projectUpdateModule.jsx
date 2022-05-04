@@ -140,7 +140,7 @@ export const ProjectUpdateForm = () => {
     formData.append('projectName', projectName);
     formData.append('projectMotive', projectMotive);
     formData.append('projectImg', projectImg);
-    formData.append('projectContent', JSON.stringify(content));
+    formData.append('content', JSON.stringify(content));
     formData.append('projectField', projectField);
     formData.append('projectArea', projectArea);
     formData.append('projectTotal', JSON.stringify(projectTotal));

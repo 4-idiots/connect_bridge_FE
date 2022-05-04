@@ -4,12 +4,12 @@ import useSWRInfinite from 'swr/infinite';
 import fetcher from './fetcher';
 import useOnScreen from './useOnScreen';
 import { ProjectCard } from '../components/ProjectPage/mainComponent/projectCard';
-import { studyGetAllService } from '../service';
+import { projectGetAllService } from '../service';
 
 const getKey = (pageIndex, previousPageData) => {
   if (previousPageData && !previousPageData.length) return null;
-  if (pageIndex === 0) return studyGetAllService(0);
-  return studyGetAllService(pageIndex);
+  if (pageIndex === 0) return projectGetAllService(0);
+  return projectGetAllService(pageIndex);
 };
 
 export const ProjectInfinite = () => {
@@ -41,7 +41,7 @@ export const ProjectInfinite = () => {
       {issues &&
         issues.map(item => (
           <ProjectCard
-            key={item.id}
+            key={item.projectID}
             uiuxPlan={item.uiuxPlan}
             gamePlan={item.gamePlan}
             managerPlan={item.managerPlan}
@@ -107,7 +107,7 @@ export const ProjectInfinite = () => {
             projectLike={item.projectLike}
             projectView={item.projectView}
             prUserID={item.userID}
-            projectID={item.id}
+            projectID={item.projectID}
           />
         ))}
       <div ref={ref}>

@@ -208,9 +208,10 @@ export const projectDeleteService = projectID => {
 };
 
 export const projectGetSomeService = projectID => {
-  return customAxios.get(
-    `${process.env.REACT_APP_MOON_URL}/project/${projectID}`,
-  );
+  // return customAxios.get(
+  //   `${process.env.REACT_APP_MOON_URL}/project/${projectID}`,
+  // );
+  return customAxios.get('http://localhost:4000/prd');
 };
 
 export const projectApplyService = (projectID, userID, field) => {
@@ -222,7 +223,8 @@ export const projectApplyService = (projectID, userID, field) => {
 };
 
 export const projectGetAllService = cursor => {
-  return `${process.env.REACT_APP_MOON_URL}/project/${cursor}`;
+  // return `${process.env.REACT_APP_MOON_URL}/project/page/${cursor}`;
+  return `http://localhost:4000/pr${cursor}`;
 };
 
 export const proejctUpdateService = formData => {

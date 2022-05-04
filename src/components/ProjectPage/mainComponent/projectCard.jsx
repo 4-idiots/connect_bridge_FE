@@ -165,7 +165,7 @@ export const ProjectCard = ({
         사이드프로젝트
       </div>
       <S.CustomDiv
-        onClick={handleLike()}
+        onClick={handleLike}
         onMouseEnter={() => {
           setOnHeart(true);
         }}

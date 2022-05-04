@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Container, Heading } from 'react-bulma-components';
+import { Container, Heading, Tabs } from 'react-bulma-components';
 import { useJwt } from 'react-jwt';
 import {
   DetailContent,
@@ -129,8 +129,8 @@ export const ProjectDetailForm = () => {
     compEtcNow,
   } = postData;
 
-  const [isInfo, setIsInfo] = useState(true);
   const [comment, setComment] = useState('');
+  const [where, setWhere] = useState('info');
 
   const applyService = async (prid, uid, field) => {
     try {
@@ -153,11 +153,41 @@ export const ProjectDetailForm = () => {
       )}
       <S.PageWrap>
         <S.PageLeft>
+          <Tabs size="medium" type="boxed" style={{ marginBottom: 60 }}>
+            <Tabs.Tab
+              active={where === 'info'}
+              onClick={() => setWhere('info')}
+            >
+              정보
+            </Tabs.Tab>
+            <Tabs.Tab active={where === 'qna'} onClick={() => setWhere('qna')}>
+              질문
+            </Tabs.Tab>
+            <Tabs.Tab
+              active={where === 'notice'}
+              onClick={() => setWhere('notice')}
+            >
+              공지
+            </Tabs.Tab>
+            <Tabs.Tab
+              active={where === 'apply'}
+              onClick={() => setWhere('apply')}
+            >
+              관리
+            </Tabs.Tab>
+            {decodedToken && userID === decodedToken.id ? (
+              <Tabs.Tab
+                active={where === 'apply'}
+                onClick={() => setWhere('apply')}
+              >
+                관리
+              </Tabs.Tab>
+            ) : (
+              ''
+              // <Tabs.Tab>관리 🔒</Tabs.Tab>
+            )}
+          </Tabs>
           <S.LeftTab>
-            <S.TalUl>
-              <S.TabLi onClick={() => setIsInfo(true)}>정보</S.TabLi>
-              <S.TabLi onClick={() => setIsInfo(false)}>질문</S.TabLi>
-            </S.TalUl>
             {decodedToken && userID === decodedToken.id ? (
               <S.TalUl>
                 <S.TabUpdate
@@ -177,7 +207,7 @@ export const ProjectDetailForm = () => {
               ''
             )}
           </S.LeftTab>
-          {isInfo &&
+          {where === 'info' &&
             projectPlatform &&
             content &&
             projectSkill &&
@@ -252,7 +282,7 @@ export const ProjectDetailForm = () => {
                 <DetailReference projectReference={projectReference} />
               </S.LeftDetail>
             )}
-          {!isInfo && (
+          {where === 'qna' && (
             <S.CommentWrap>
               <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
                 👍 이 모임에 응원 * 질문을 올려주세요!
@@ -262,6 +292,29 @@ export const ProjectDetailForm = () => {
               {/* 여기는 석환이랑 db 협의가 끝나면 개발 */}
               <S.MediaBox />
             </S.CommentWrap>
+          )}
+          {where === 'apply' && (
+            <div>
+              <S.TalUl>
+                <S.TabUpdate
+                  onClick={() => navigate(`/project/update/${projectID}`)}
+                >
+                  수정
+                </S.TabUpdate>
+                <S.TabUpdate
+                  onClick={() => {
+                    deleteAxios(projectID);
+                  }}
+                >
+                  삭제
+                </S.TabUpdate>
+              </S.TalUl>
+            </div>
+          )}
+          {where === 'notice' && (
+            <div>
+              <div>notice</div>
+            </div>
           )}
         </S.PageLeft>
         {projectField &&
