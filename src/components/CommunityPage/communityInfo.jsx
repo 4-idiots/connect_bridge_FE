@@ -44,7 +44,7 @@ export const CommunityInfoForm = () => {
     e.preventDefault();
     if (teID > 0) {
       axios
-        .post(`http://4idiot.ddns.net:8080/community/comment/${teID}`, {
+        .post(`https://4idiot.ddns.net:8080/api/community/comment/${teID}`, {
           comment,
           postID,
         })
@@ -90,7 +90,7 @@ export const CommunityInfoForm = () => {
     if (state === 1) {
       axios
         .get(
-          `http://4idiot.ddns.net:8080/community/like/${teID}/${communityID}`,
+          `https://4idiot.ddns.net:8080/api/community/like/${teID}/${communityID}`,
         )
         .then(response => {
           console.log(decodedToken.id);
@@ -104,7 +104,7 @@ export const CommunityInfoForm = () => {
     } else if (state === 2)
       axios
         .delete(
-          `http://4idiot.ddns.net:8080/community/like/${teID}/${communityID}`,
+          `https://4idiot.ddns.net:8080/api/community/like/${teID}/${communityID}`,
         )
         .then(response => {
           console.log(decodedToken.id);
@@ -122,7 +122,7 @@ export const CommunityInfoForm = () => {
     if (teID > 0) {
       axios
         .get(
-          `http://4idiot.ddns.net:8080/community/info/${teID}/${communityID}`,
+          `https://4idiot.ddns.net:8080/api/community/info/${teID}/${communityID}`,
         )
         .then(response => {
           console.log(response);
@@ -141,7 +141,7 @@ export const CommunityInfoForm = () => {
         });
     } else {
       axios
-        .get(`http://4idiot.ddns.net:8080/community/info/0/${communityID}`)
+        .get(`https://4idiot.ddns.net:8080/api/community/info/0/${communityID}`)
         .then(response => {
           console.log(response);
           setusers(response.data);

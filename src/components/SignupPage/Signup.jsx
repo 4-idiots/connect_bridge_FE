@@ -457,35 +457,43 @@ export const SignupForm = () => {
           </Form.Control>
         </Form.Field>
 
-        <Form.Field>
-          <Form.Label>흥미</Form.Label>
-          <Form.Control>
-            <Form.Select
-              onChange={userInterestMaindata}
-              value={userInterestMain}
-            >
-              <option value="">---------------------------</option>
-              {genOption(mainArray)}
-            </Form.Select>
-          </Form.Control>
-        </Form.Field>
+        <div style={{ display: 'inline-block' }}>
+          <Form.Field>
+            <Form.Label>흥미</Form.Label>
+            <Form.Control>
+              <Form.Select
+                onChange={userInterestMaindata}
+                value={userInterestMain}
+              >
+                <option value="">---------------------------</option>
+                {genOption(mainArray)}
+              </Form.Select>
+            </Form.Control>
+          </Form.Field>
+        </div>
+        <div style={{ display: 'inline-block' }}>
+          <Form.Field>
+            <Form.Control>
+              <Form.Select
+                onChange={userInterestSubdata}
+                value={userInterestSub}
+              >
+                <option value="">---------------------------</option>
+                {userInterestMain === '기획' && <>{genOption(planArray)}</>}
+                {userInterestMain === '디자인' && <>{genOption(designArray)}</>}
+                {userInterestMain === '프론트엔드개발' && (
+                  <>{genOption(frontArray)}</>
+                )}
+                {userInterestMain === '백엔드개발' && (
+                  <>{genOption(backArray)}</>
+                )}
+                {userInterestMain === '사업' && <>{genOption(coopArray)}</>}
+                {userInterestMain === '기타' && <>{genOption(etcArray)}</>}
+              </Form.Select>
+            </Form.Control>
+          </Form.Field>
+        </div>
 
-        <Form.Field>
-          <Form.Label>asd</Form.Label>
-          <Form.Control>
-            <Form.Select onChange={userInterestSubdata} value={userInterestSub}>
-              <option value="">---------------------------</option>
-              {userInterestMain === '기획' && <>{genOption(planArray)}</>}
-              {userInterestMain === '디자인' && <>{genOption(designArray)}</>}
-              {userInterestMain === '프론트엔드개발' && (
-                <>{genOption(frontArray)}</>
-              )}
-              {userInterestMain === '백엔드개발' && <>{genOption(backArray)}</>}
-              {userInterestMain === '사업' && <>{genOption(coopArray)}</>}
-              {userInterestMain === '기타' && <>{genOption(etcArray)}</>}
-            </Form.Select>
-          </Form.Control>
-        </Form.Field>
         <br />
         <br />
         <Button color="danger" size="medium" onClick={Click}>
