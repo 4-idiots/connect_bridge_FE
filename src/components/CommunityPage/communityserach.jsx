@@ -41,15 +41,12 @@ export const CommunityserachForm = ({ commentCount, onActClick, hashtag }) => {
   };
   const handleButton = async () => {
     try {
-      const res = await axios.get(
-        `https://4idiot.ddns.net:8080/api/serach/${querya}`,
-        {
-          params: {
-            // eslint-disable-next-line object-shorthand
-            querya: querya,
-          },
+      const res = await axios.get(`/api/serach/${querya}`, {
+        params: {
+          // eslint-disable-next-line object-shorthand
+          querya: querya,
         },
-      );
+      });
       if (res && res.status === 200) {
         const { data } = res;
         console.log(data);
@@ -63,7 +60,7 @@ export const CommunityserachForm = ({ commentCount, onActClick, hashtag }) => {
 
   useEffect(() => {
     // eslint-disable-next-line prefer-template
-    fetch('https://4idiot.ddns.net:8080/api/serach/' + query)
+    fetch('/api/serach/' + query)
       .then(res => res.json())
       .then(data => setPosts(data));
   }, []);

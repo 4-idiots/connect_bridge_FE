@@ -47,7 +47,7 @@ export const SignupForm = () => {
     );
   };
   const userData = () => {
-    return axios.get('http://4idiot.ddns.net:8080/users').then(response => {
+    return axios.get('/api/users').then(response => {
       console.log(response);
       setdata(response.data);
     });
@@ -111,28 +111,24 @@ export const SignupForm = () => {
   const sameIDButton = e => {
     e.preventDefault();
 
-    axios
-      .get(`http://4idiot.ddns.net:8080/users/check/userID?userID=${userID}`)
-      .then(response => {
-        console.log(response);
-        if (response.data.value === true) {
-          alert('중복입니다. 다시 입력해주세요');
+    axios.get(`/api/users/check/userID?userID=${userID}`).then(response => {
+      console.log(response);
+      if (response.data.value === true) {
+        alert('중복입니다. 다시 입력해주세요');
 
-          setsameID(false);
-        } else {
-          alert('중복이 아닙니다.');
-          setsameID(true);
-        }
-      });
+        setsameID(false);
+      } else {
+        alert('중복이 아닙니다.');
+        setsameID(true);
+      }
+    });
   };
 
   const sameNicknameButton = e => {
     e.preventDefault();
 
     axios
-      .get(
-        `http://4idiot.ddns.net:8080/users/check/userNickname?userNickname=${userNickname}`,
-      )
+      .get(`/api/users/check/userNickname?userNickname=${userNickname}`)
       .then(response => {
         console.log(response);
         if (response.data.value === true) {
@@ -150,9 +146,7 @@ export const SignupForm = () => {
     e.preventDefault();
 
     axios
-      .get(
-        `http://4idiot.ddns.net:8080/users/check/userEmail?userEmail=${userEmail}`,
-      )
+      .get(`/api/users/check/userEmail?userEmail=${userEmail}`)
       .then(response => {
         console.log(response);
         console.log(response.data.value);
@@ -172,7 +166,7 @@ export const SignupForm = () => {
     if (sameEmail === true) {
       // eslint-disable-next-line prefer-const
       axios
-        .post('http://4idiot.ddns.net:8080/users/check/Email', {
+        .post('/api/users/check/Email', {
           userEmail,
         })
         .then(response => {
@@ -194,7 +188,7 @@ export const SignupForm = () => {
     console.log(data);
     console.log(code);
     axios
-      .post('http://4idiot.ddns.net:8080/verifycode', {
+      .post('/api/verifycode', {
         code,
         userEmail,
       })
@@ -229,7 +223,7 @@ export const SignupForm = () => {
       sameEmail === true
     ) {
       axios
-        .post('http://4idiot.ddns.net:8080/users/register', {
+        .post('/api/users/register', {
           userID,
           userPW,
           userNickname,

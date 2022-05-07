@@ -53,12 +53,10 @@ export const CommunityWriteForm = () => {
   });
 
   const userData = () => {
-    return axios
-      .get('http://4idiot.ddns.net:8080/communityw')
-      .then(response => {
-        console.log(response);
-        setdata(response.data);
-      });
+    return axios.get('/api/communityw').then(response => {
+      console.log(response);
+      setdata(response.data);
+    });
   };
 
   useEffect(() => {
@@ -86,7 +84,7 @@ export const CommunityWriteForm = () => {
   const Write = e => {
     if (title) {
       axios
-        .post(`http://4idiot.ddns.net:8080/write/${decodedToken?.id}`, {
+        .post(`/api/write/${decodedToken?.id}`, {
           hashtag,
           title,
         })

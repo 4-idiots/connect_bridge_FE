@@ -39,38 +39,34 @@ export const InfoForm = () => {
 
   const userData = () => {
     if (teID > 0) {
-      axios
-        .get(`http://4idiot.ddns.net:8080/team/info/${teID}/${teamID}`)
-        .then(response => {
-          console.log(response);
-          setusers(response.data);
-          setmyid(response.data.myid);
-          setuserNickname(response.data.userNickname);
-          setuserName(response.data.userName);
-          setuserAbility(response.data.userAbility);
-          setuserArea(response.data.userArea);
-          setuserTime(response.data.userTime);
-          setuserInterest(response.data.userInterest);
-          setuserIntroduce(response.data.userIntroduce);
-          setfollow(response.data.follow);
-          setColor(response.data.color);
-        });
+      axios.get(`/api/team/info/${teID}/${teamID}`).then(response => {
+        console.log(response);
+        setusers(response.data);
+        setmyid(response.data.myid);
+        setuserNickname(response.data.userNickname);
+        setuserName(response.data.userName);
+        setuserAbility(response.data.userAbility);
+        setuserArea(response.data.userArea);
+        setuserTime(response.data.userTime);
+        setuserInterest(response.data.userInterest);
+        setuserIntroduce(response.data.userIntroduce);
+        setfollow(response.data.follow);
+        setColor(response.data.color);
+      });
     } else {
-      axios
-        .get(`http://4idiot.ddns.net:8080/team/info/0/${teamID}`)
-        .then(response => {
-          console.log(response);
-          setusers(response.data);
-          setmyid(response.data.myid);
-          setuserNickname(response.data.userNickname);
-          setuserName(response.data.userName);
-          setuserAbility(response.data.userAbility);
-          setuserArea(response.data.userArea);
-          setuserTime(response.data.userTime);
-          setuserInterest(response.data.userInterest);
-          setuserIntroduce(response.data.userIntroduce);
-          setfollow(response.data.follow);
-        });
+      axios.get(`/api/team/info/0/${teamID}`).then(response => {
+        console.log(response);
+        setusers(response.data);
+        setmyid(response.data.myid);
+        setuserNickname(response.data.userNickname);
+        setuserName(response.data.userName);
+        setuserAbility(response.data.userAbility);
+        setuserArea(response.data.userArea);
+        setuserTime(response.data.userTime);
+        setuserInterest(response.data.userInterest);
+        setuserIntroduce(response.data.userIntroduce);
+        setfollow(response.data.follow);
+      });
     }
   };
   const followdata = () => {
@@ -79,21 +75,17 @@ export const InfoForm = () => {
 
   const likeClick = () => {
     if (follow === 1) {
-      axios
-        .get(`http://4idiot.ddns.net:8080/follow/${decodedToken.id}/${teamID}`)
-        .then(response => {
-          console.log(decodedToken.id);
-          console.log(teamID);
-          console.log(response.data.follow);
-        });
+      axios.get(`/api/follow/${decodedToken.id}/${teamID}`).then(response => {
+        console.log(decodedToken.id);
+        console.log(teamID);
+        console.log(response.data.follow);
+      });
       // eslint-disable-next-line no-unused-expressions
       color === 'black' ? setColor('danger') : setColor('black');
       // eslint-disable-next-line no-unused-expressions
     } else if (follow === 2)
       axios
-        .delete(
-          `http://4idiot.ddns.net:8080/follow/${decodedToken.id}/${teamID}`,
-        )
+        .delete(`/api/follow/${decodedToken.id}/${teamID}`)
         .then(response => {
           console.log(decodedToken.id);
           console.log(teamID);

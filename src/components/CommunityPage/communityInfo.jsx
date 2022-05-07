@@ -44,7 +44,7 @@ export const CommunityInfoForm = () => {
     e.preventDefault();
     if (teID > 0) {
       axios
-        .post(`https://4idiot.ddns.net:8080/api/community/comment/${teID}`, {
+        .post(`/api/community/comment/${teID}`, {
           comment,
           postID,
         })
@@ -88,24 +88,18 @@ export const CommunityInfoForm = () => {
 
   const likesClick = () => {
     if (state === 1) {
-      axios
-        .get(
-          `https://4idiot.ddns.net:8080/api/community/like/${teID}/${communityID}`,
-        )
-        .then(response => {
-          console.log(decodedToken.id);
-          console.log(communityID);
-          console.log(response.data.state);
-        });
+      axios.get(`/api/community/like/${teID}/${communityID}`).then(response => {
+        console.log(decodedToken.id);
+        console.log(communityID);
+        console.log(response.data.state);
+      });
       // eslint-disable-next-line no-unused-expressions
       color === 'black'
         ? setlikeCounta(likeCount + 1) || setColor('danger')
         : setlikeCounta(likeCount - 1) || setColor('black');
     } else if (state === 2)
       axios
-        .delete(
-          `https://4idiot.ddns.net:8080/api/community/like/${teID}/${communityID}`,
-        )
+        .delete(`/api/community/like/${teID}/${communityID}`)
         .then(response => {
           console.log(decodedToken.id);
           console.log(communityID);
@@ -120,41 +114,35 @@ export const CommunityInfoForm = () => {
 
   const userData = () => {
     if (teID > 0) {
-      axios
-        .get(
-          `https://4idiot.ddns.net:8080/api/community/info/${teID}/${communityID}`,
-        )
-        .then(response => {
-          console.log(response);
-          setusers(response.data);
-          setpostID(response.data.postID);
-          setuserNickname(response.data.userNickname);
-          sethashtag(response.data.hashtag);
-          settitle(response.data.title);
-          setviewCount(response.data.viewCount);
-          setlikeCounta(response.data.likeCounta);
-          setlikeCount(response.data.likeCount);
-          setstate(response.data.state);
-          setColor(response.data.color);
-          setcommentCount(response.data.commentCount);
-          /* setCommentList(response.data.commentList); */
-        });
+      axios.get(`/api/community/info/${teID}/${communityID}`).then(response => {
+        console.log(response);
+        setusers(response.data);
+        setpostID(response.data.postID);
+        setuserNickname(response.data.userNickname);
+        sethashtag(response.data.hashtag);
+        settitle(response.data.title);
+        setviewCount(response.data.viewCount);
+        setlikeCounta(response.data.likeCounta);
+        setlikeCount(response.data.likeCount);
+        setstate(response.data.state);
+        setColor(response.data.color);
+        setcommentCount(response.data.commentCount);
+        /* setCommentList(response.data.commentList); */
+      });
     } else {
-      axios
-        .get(`https://4idiot.ddns.net:8080/api/community/info/0/${communityID}`)
-        .then(response => {
-          console.log(response);
-          setusers(response.data);
-          setpostID(response.data.postID);
-          setuserNickname(response.data.userNickname);
-          sethashtag(response.data.hashtag);
-          setlikeCounta(response.data.likeCounta);
-          settitle(response.data.title);
-          setviewCount(response.data.viewCount);
-          setlikeCount(response.data.likeCount);
-          setColor(response.data.color);
-          setcommentCount(response.data.commentCount);
-        });
+      axios.get(`/api/community/info/0/${communityID}`).then(response => {
+        console.log(response);
+        setusers(response.data);
+        setpostID(response.data.postID);
+        setuserNickname(response.data.userNickname);
+        sethashtag(response.data.hashtag);
+        setlikeCounta(response.data.likeCounta);
+        settitle(response.data.title);
+        setviewCount(response.data.viewCount);
+        setlikeCount(response.data.likeCount);
+        setColor(response.data.color);
+        setcommentCount(response.data.commentCount);
+      });
     }
   };
 

@@ -42,7 +42,7 @@ export const CommunityForm = ({ commentCount, onActClick, hashtag }) => {
   const handleButton = async () => {
     try {
       const res = await axios.get(
-        `https://4idiot.ddns.net:8080/api/serach/${query}`,
+        `/api/serach/${query}`,
         {
           params: {
             // eslint-disable-next-line object-shorthand
@@ -61,7 +61,7 @@ export const CommunityForm = ({ commentCount, onActClick, hashtag }) => {
     }
   };
   useEffect(() => {
-    fetch('https://4idiot.ddns.net:8080/api/community')
+    fetch('/api/community')
       .then(res => res.json())
       .then(data => setPosts(data));
   }, []);
