@@ -7,7 +7,7 @@ export const customAxios = axios.create({ timeout: 10000 });
 
 export const loginService = (userID, userPW) => {
   return customAxios.post(
-    `/api/user/login`,
+    `${process.env.REACT_APP_MOON_URL}/api/user/login`,
     {
       userID,
       userPW,
@@ -25,7 +25,7 @@ export const setAuthorizationToken = token => {
 };
 
 export const findPWServcie = (userID, userName, userEmail) => {
-  return customAxios.post(`/api/user/findPW`, {
+  return customAxios.post(`${process.env.REACT_APP_MOON_URL}/api/user/findPW`, {
     userID,
     userName,
     userEmail,
@@ -33,64 +33,84 @@ export const findPWServcie = (userID, userName, userEmail) => {
 };
 
 export const findIDService = (userName, userEmail) => {
-  return customAxios.post(`/api/user/findID`, {
+  return customAxios.post(`${process.env.REACT_APP_MOON_URL}/api/user/findID`, {
     userName,
     userEmail,
   });
 };
 
 export const outdoorUploadService = formData => {
-  return customAxios.post(`/api/outdoor/post`, formData, {
-    headers: {
-      'content-type': 'multipart/form-data',
+  return customAxios.post(
+    `${process.env.REACT_APP_MOON_URL}/api/outdoor/post`,
+    formData,
+    {
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
     },
-  });
+  );
 };
 
 export const outdoorUpdateService = formData => {
-  return customAxios.patch(`/api/outdoor/post`, formData, {
-    headers: { 'content-type': 'multipart/form-data' },
-  });
+  return customAxios.patch(
+    `${process.env.REACT_APP_MOON_URL}/api/outdoor/post`,
+    formData,
+    {
+      headers: { 'content-type': 'multipart/form-data' },
+    },
+  );
 };
 
 export const outdoorGetAllService = cursor => {
-  return `/api/outdoor/${cursor}`;
+  return `${process.env.REACT_APP_MOON_URL}/api/outdoor/${cursor}`;
 };
 
 export const outdoorGetSomeService = outActID => {
-  return customAxios.get(`/api/outdoor/post/${outActID}`);
+  return customAxios.get(
+    `${process.env.REACT_APP_MOON_URL}/api/outdoor/post/${outActID}`,
+  );
 };
 
 export const outdoorDeleteService = outActID => {
-  return customAxios.delete(`/api/outdoor/post/${outActID}`);
+  return customAxios.delete(
+    `${process.env.REACT_APP_MOON_URL}/api/outdoor/post/${outActID}`,
+  );
 };
 
 export const outdoorLikeService = outActID => {
-  return customAxios.get(`/api/outdoor/like?outActID=${outActID}`);
+  return customAxios.get(
+    `${process.env.REACT_APP_MOON_URL}/api/outdoor/like?outActID=${outActID}`,
+  );
 };
 
 export const outdoorLikeCheck = outActID => {
-  return customAxios.get(`/api/outdoor/islike/${outActID}`);
+  return customAxios.get(
+    `${process.env.REACT_APP_MOON_URL}/api/outdoor/islike/${outActID}`,
+  );
 };
 
 export const validToken = () => {
-  return `/api/valid`;
+  return `${process.env.REACT_APP_MOON_URL}/api/valid`;
 };
 
 export const teamGetAllService = team => {
-  return `/api/team${team}`;
+  return `${process.env.REACT_APP_MOON_URL}/api/team${team}`;
 };
 
 export const communityGetAllService = community => {
-  return `/api/community${community}`;
+  return `${process.env.REACT_APP_MOON_URL}/api/community${community}`;
 };
 
 export const projectUploadService = formData => {
-  return customAxios.post(`/api/project`, formData, {
-    headers: {
-      'content-type': 'multipart/form-data',
+  return customAxios.post(
+    `${process.env.REACT_APP_MOON_URL}/api/project`,
+    formData,
+    {
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
     },
-  });
+  );
 };
 
 export const studyUploadService = (
@@ -104,7 +124,7 @@ export const studyUploadService = (
   studyEnd,
   content,
 ) => {
-  return customAxios.post(`/api/study`, {
+  return customAxios.post(`${process.env.REACT_APP_MOON_URL}/api/study`, {
     studyName,
     studyKeyward,
     studyField,
@@ -118,7 +138,7 @@ export const studyUploadService = (
 };
 
 export const studyGetAllService = () => {
-  return `/api/study`;
+  return `${process.env.REACT_APP_MOON_URL}/api/study`;
 };
 
 export const studyUpdateService = ({
@@ -133,7 +153,7 @@ export const studyUpdateService = ({
   content,
   studyID,
 }) => {
-  return customAxios.patch(`/api/study`, {
+  return customAxios.patch(`${process.env.REACT_APP_MOON_URL}/api/study`, {
     studyName,
     studyKeyward,
     studyField,
@@ -148,19 +168,25 @@ export const studyUpdateService = ({
 };
 
 export const studyLikeCheck = studyID => {
-  return customAxios.get(`/api/study/islike/${studyID}`);
+  return customAxios.get(
+    `${process.env.REACT_APP_MOON_URL}/api/study/islike/${studyID}`,
+  );
 };
 
 export const studyLikeService = studyID => {
-  return customAxios.get(`/api/study/like?studyID=${studyID}`);
+  return customAxios.get(
+    `${process.env.REACT_APP_MOON_URL}/api/study/like?studyID=${studyID}`,
+  );
 };
 
 export const studyGetSomeService = studyID => {
-  return customAxios.get(`/api/study/${studyID}`);
+  return customAxios.get(
+    `${process.env.REACT_APP_MOON_URL}/api/study/${studyID}`,
+  );
 };
 
 export const studyApplyService = (studyID, userID, field) => {
-  return customAxios.post(`/api/study/apply`, {
+  return customAxios.post(`${process.env.REACT_APP_MOON_URL}/api/study/apply`, {
     studyID,
     userID,
     field,
@@ -168,41 +194,58 @@ export const studyApplyService = (studyID, userID, field) => {
 };
 
 export const studyDeleteService = studyID => {
-  return customAxios.delete(`/api/study/${studyID}`);
+  return customAxios.delete(
+    `${process.env.REACT_APP_MOON_URL}/api/study/${studyID}`,
+  );
 };
 
 export const projectDeleteService = projectID => {
-  return customAxios.delete(`/api/project/${projectID}`);
+  return customAxios.delete(
+    `${process.env.REACT_APP_MOON_URL}/api/project/${projectID}`,
+  );
 };
 
 export const projectGetSomeService = projectID => {
-  return customAxios.get(`/api/project/${projectID}`);
+  return customAxios.get(
+    `${process.env.REACT_APP_MOON_URL}/api/project/${projectID}`,
+  );
 };
 
 export const projectApplyService = (projectID, userID, field) => {
-  return customAxios.post(`/api/project/apply`, {
-    projectID,
-    userID,
-    field,
-  });
+  return customAxios.post(
+    `${process.env.REACT_APP_MOON_URL}/api/project/apply`,
+    {
+      projectID,
+      userID,
+      field,
+    },
+  );
 };
 
 export const projectGetAllService = cursor => {
-  return `/api/project/page/${cursor}`;
+  return `${process.env.REACT_APP_MOON_URL}/api/project/page/${cursor}`;
 };
 
 export const proejctUpdateService = formData => {
-  return customAxios.patch(`/api/project`, formData, {
-    headers: {
-      'content-type': 'multipart/form-data',
+  return customAxios.patch(
+    `${process.env.REACT_APP_MOON_URL}/api/project`,
+    formData,
+    {
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
     },
-  });
+  );
 };
 
 export const projectLikeCheck = projectID => {
-  return customAxios.get(`/api/project/islike/${projectID}`);
+  return customAxios.get(
+    `${process.env.REACT_APP_MOON_URL}/api/project/islike/${projectID}`,
+  );
 };
 
 export const projectLikeService = projectID => {
-  return customAxios.get(`/api/project/like?projectID=${projectID}`);
+  return customAxios.get(
+    `${process.env.REACT_APP_MOON_URL}/api/project/like?projectID=${projectID}`,
+  );
 };

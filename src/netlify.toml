@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/proxy/*"
+  to = "https://4idiot.ddns.net:8080/:splat"
+  status = 200
+  force = true
