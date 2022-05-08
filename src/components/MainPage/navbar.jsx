@@ -13,7 +13,7 @@ export const NavbarForm = () => {
       <Navbar.Brand>
         <Navbar.Item renderAs={Link} to="/" style={{ marginRight: 60 }}>
           <img
-            src="https://bulma.io/images/bulma-logo.png"
+            src="https://cdn.discordapp.com/attachments/885739536301318172/972721445681651762/Frame_9.png"
             alt="img"
             width={140}
           />

@@ -206,3 +206,15 @@ export const projectLikeCheck = projectID => {
 export const projectLikeService = projectID => {
   return customAxios.get(`/api/project/like?projectID=${projectID}`);
 };
+
+export const projectGetNotiveServie = projectID => {
+  return customAxios.get(`/api/project/${projectID}/notice`);
+};
+
+export const projectNoticeUploadService = (projectID, content) => {
+  return customAxios.post(`/api/project/notice`, { projectID, content });
+};
+
+export const projectGetAdminService = projectID => {
+  return customAxios.get('');
+};

@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Card, Media, Content, Heading, Icon } from 'react-bulma-components';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useJwt } from 'react-jwt';
 import * as S from './style';
 import { ReactComponent as Heart } from '../../../assets/svg/heart.svg';
 import { RecruitModal } from './recruitModal';
 import { projectLikeCheck, projectLikeService } from '../../../service';
+import { useAuth } from '../../../contexts/hooks/useAuth';
 
 export const ProjectCard = ({
   projectImg,
@@ -75,6 +77,8 @@ export const ProjectCard = ({
   compEtcNow,
 }) => {
   const navigate = useNavigate();
+  const auth = useAuth();
+  const { decodedToken, isExpired } = useJwt(auth.token);
 
   const [isHover, setIsHover] = useState(false);
   const [onHeart, setOnHeart] = useState(false);
@@ -173,14 +177,22 @@ export const ProjectCard = ({
           setOnHeart(false);
         }}
       >
-        {usLike ? (
-          <Icon>
-            <Heart fill={onHeart ? 'rgb(255,192,203)' : 'rgb(215,90,74)'} />
-          </Icon>
+        {decodedToken ? (
+          <div>
+            {usLike ? (
+              <Icon>
+                <Heart fill={onHeart ? 'rgb(255,192,203)' : 'rgb(215,90,74)'} />
+              </Icon>
+            ) : (
+              <Icon>
+                <Heart
+                  fill={onHeart ? 'rgb(211,211,211)' : 'rgb(128,128,128)'}
+                />
+              </Icon>
+            )}
+          </div>
         ) : (
-          <Icon>
-            <Heart fill={onHeart ? 'rgb(211,211,211)' : 'rgb(128,128,128)'} />
-          </Icon>
+          ''
         )}
       </S.CustomDiv>
       <Card.Content onClick={() => navigate(`/project/${projectID}`)}>

@@ -2,6 +2,8 @@ Connect Bridge <br/>
 (프로젝트/스터디 팀원 모집 사이트)
 ===
 
+## [사이트 구경 하러 가기](https://cnbridge.netlify.app/)
+
 ## [작업 기록 - 노션](https://troubled-prawn-c1f.notion.site/64a3041d0be84bc790aad88598ccfe66)
 
 ---

@@ -127,7 +127,12 @@ export const ProjectDetailForm = () => {
     blogEtcNow,
     influEtcNow,
     compEtcNow,
+    leaderInfo,
+    memberID,
+    projectSub,
   } = postData;
+
+  const [notice, setNotice] = useState({});
 
   const [comment, setComment] = useState('');
   const [where, setWhere] = useState('info');
@@ -163,18 +168,17 @@ export const ProjectDetailForm = () => {
             <Tabs.Tab active={where === 'qna'} onClick={() => setWhere('qna')}>
               질문
             </Tabs.Tab>
-            <Tabs.Tab
-              active={where === 'notice'}
-              onClick={() => setWhere('notice')}
-            >
-              공지
-            </Tabs.Tab>
-            <Tabs.Tab
-              active={where === 'apply'}
-              onClick={() => setWhere('apply')}
-            >
-              관리
-            </Tabs.Tab>
+            {(memberID && memberID.includes(decodedToken.id)) ||
+            (decodedToken && userID === decodedToken.id) ? (
+              <Tabs.Tab
+                active={where === 'notice'}
+                onClick={() => setWhere('notice')}
+              >
+                공지
+              </Tabs.Tab>
+            ) : (
+              <Tabs.Tab>공지 🔒</Tabs.Tab>
+            )}
             {decodedToken && userID === decodedToken.id ? (
               <Tabs.Tab
                 active={where === 'apply'}
@@ -183,30 +187,10 @@ export const ProjectDetailForm = () => {
                 관리
               </Tabs.Tab>
             ) : (
-              ''
-              // <Tabs.Tab>관리 🔒</Tabs.Tab>
+              <Tabs.Tab>관리 🔒</Tabs.Tab>
             )}
           </Tabs>
-          <S.LeftTab>
-            {decodedToken && userID === decodedToken.id ? (
-              <S.TalUl>
-                <S.TabUpdate
-                  onClick={() => navigate(`/project/update/${projectID}`)}
-                >
-                  수정
-                </S.TabUpdate>
-                <S.TabUpdate
-                  onClick={() => {
-                    deleteAxios(projectID);
-                  }}
-                >
-                  삭제
-                </S.TabUpdate>
-              </S.TalUl>
-            ) : (
-              ''
-            )}
-          </S.LeftTab>
+
           {where === 'info' &&
             projectPlatform &&
             content &&
@@ -318,13 +302,14 @@ export const ProjectDetailForm = () => {
           )}
         </S.PageLeft>
         {projectField &&
+          leaderInfo &&
           typeof projectLike === typeof projectView &&
           projectStart &&
           projectEnd && (
             <DetailRightCard
               leaderImg="https://letspl.s3.ap-northeast-2.amazonaws.com/images/project_thumb_05.png"
               leaderName="name"
-              leaderInfo="asdasdsa"
+              leaderInfo={leaderInfo.introduce}
               projectField={projectField}
               projectLike={projectLike}
               projectView={projectView}

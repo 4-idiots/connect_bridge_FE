@@ -19,6 +19,9 @@ export const MyPageForm = () => {
     preview:
       'https://letspl.s3.ap-northeast-2.amazonaws.com/images/project_thumb_05.png',
     profileImg: '',
+    password: '',
+    password2: '',
+    uID: '',
   });
 
   const {
@@ -34,6 +37,9 @@ export const MyPageForm = () => {
     mSkill,
     mPro,
     profileImg,
+    password,
+    password2,
+    uID,
   } = user;
 
   const onChangeInput = e => {
@@ -59,10 +65,31 @@ export const MyPageForm = () => {
           disabled
         />
         <MyPageInput
+          label="아이디"
+          value={uID}
+          name="uID"
+          onChange={onChangeInput}
+          disabled
+        />
+        <MyPageInput
           label="닉네임"
           value={nickname}
           name="nickname"
           onChange={onChangeInput}
+        />
+        <MyPageInput
+          label="비밀번호"
+          value={password}
+          name="password"
+          onChange={onChangeInput}
+          isPW
+        />
+        <MyPageInput
+          label="비밀번호 확인"
+          value={password2}
+          name="password2"
+          onChange={onChangeInput}
+          isPW
         />
         <MyPageInput
           label="자기소개"
