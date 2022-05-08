@@ -21,7 +21,7 @@ import {
   Content,
   Panel,
 } from 'react-bulma-components';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useJwt } from 'react-jwt';
 import { useAuth } from '../../contexts/hooks/useAuth';
 import { Pagination } from '../../swr/Pagination';
@@ -30,12 +30,17 @@ export const CommunityForm = ({ commentCount, onActClick, hashtag }) => {
   const [posts, setPosts] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
+  const [id, setid] = useState(1);
   const auth = useAuth();
   const { decodedToken, isExpired } = useJwt(auth.token);
   const { teID } = useParams(`${decodedToken?.id}`);
   const offset = (page - 1) * limit;
   const [items, setItems] = useState();
   const [query, setquery] = useState('');
+  const navigate = useNavigate();
+  const onClickcom = postID => {
+    navigate(`/community/info/${decodedToken?.id}/${id}`);
+  };
   const handleQuery = e => {
     setquery(e.target.value);
   };
@@ -150,7 +155,6 @@ export const CommunityForm = ({ commentCount, onActClick, hashtag }) => {
                   .slice(offset, offset + limit)
                   .map(
                     ({
-                      id,
                       postID,
                       title,
                       userNickname,
@@ -158,7 +162,11 @@ export const CommunityForm = ({ commentCount, onActClick, hashtag }) => {
                       likeCount,
                       body,
                     }) => (
-                      <Bl2 key={postID}>
+                      <Bl2
+                        style={{ cursor: 'pointer' }}
+                        key={postID}
+                        onClick={onClickcom}
+                      >
                         <Bl3 style={{ fontSize: 'medium' }} className="size01">
                           {postID}
                         </Bl3>
