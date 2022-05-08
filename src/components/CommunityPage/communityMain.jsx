@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-undef */
 /* eslint-disable react/button-has-type */
@@ -30,17 +31,15 @@ export const CommunityForm = ({ commentCount, onActClick, hashtag }) => {
   const [posts, setPosts] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
-  const [id, setid] = useState(1);
+  const [postID, setpostID] = useState('');
+  const str = posts.toString();
   const auth = useAuth();
   const { decodedToken, isExpired } = useJwt(auth.token);
   const { teID } = useParams(`${decodedToken?.id}`);
   const offset = (page - 1) * limit;
   const [items, setItems] = useState();
   const [query, setquery] = useState('');
-  const navigate = useNavigate();
-  const onClickcom = postID => {
-    navigate(`/community/info/${decodedToken?.id}/${id}`);
-  };
+
   const handleQuery = e => {
     setquery(e.target.value);
   };
@@ -89,10 +88,14 @@ export const CommunityForm = ({ commentCount, onActClick, hashtag }) => {
         <Boardtop>
           <Layout3>
             <Layout2>
-              <a href="/community">전체</a>
+              <a style={{ color: 'black' }} href="/community">
+                전체
+              </a>
             </Layout2>
             <Layout2>
-              <a href="/community/popular">인기</a>
+              <a style={{ color: 'black' }} href="/community/popular">
+                인기
+              </a>
             </Layout2>
           </Layout3>
           <label>
@@ -162,11 +165,7 @@ export const CommunityForm = ({ commentCount, onActClick, hashtag }) => {
                       likeCount,
                       body,
                     }) => (
-                      <Bl2
-                        style={{ cursor: 'pointer' }}
-                        key={postID}
-                        onClick={onClickcom}
-                      >
+                      <Bl2 style={{ cursor: 'pointer' }} key={postID}>
                         <Bl3 style={{ fontSize: 'medium' }} className="size01">
                           {postID}
                         </Bl3>
@@ -176,7 +175,12 @@ export const CommunityForm = ({ commentCount, onActClick, hashtag }) => {
                           }}
                           className="size02"
                         >
-                          {title}
+                          <Link
+                            style={{ color: 'black' }}
+                            to={`/community/info/${decodedToken?.id}/${postID}`}
+                          >
+                            {title}
+                          </Link>
                         </Bl3>
                         <Bl3 style={{ fontSize: 'medium' }} className="size03">
                           {userNickname}
