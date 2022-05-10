@@ -233,7 +233,7 @@ export const CommunityInfoForm = () => {
         <div
           style={{ marginTop: '2%', marginBottom: 'auto', marginLeft: '8%' }}
         >
-          <ReadOnlySlate value={Contents.projectContent} />
+          <ReadOnlySlate value={Contents.contents} />
           <br />
           <br />
           {hashtag.map((item, id) => (

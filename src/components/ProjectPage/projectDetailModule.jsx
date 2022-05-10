@@ -32,7 +32,6 @@ export const ProjectDetailForm = () => {
   const getAxios = async id => {
     try {
       const result = await projectGetSomeService(id);
-      console.log(result.data);
       setPostData(result.data);
     } catch (error) {
       console.log(error);
@@ -114,76 +113,78 @@ export const ProjectDetailForm = () => {
                 <Tabs.Tab>관리 🔒</Tabs.Tab>
               )}
             </Tabs>
-            <S.LeftDetail>
-              <DetailRecurit
-                uiuxPlan={postData.uiuxPlan}
-                gamePlan={postData.gamePlan}
-                managerPlan={postData.managerPlan}
-                hwPlan={postData.hwPlan}
-                iosFr={postData.iosFr}
-                androidFr={postData.androidFr}
-                webFrontFr={postData.webFrontFr}
-                webPublicFr={postData.webPublicFr}
-                crossFr={postData.crossFr}
-                uiuxDe={postData.uiuxDe}
-                graphicDe={postData.graphicDe}
-                thrdDe={postData.thrdDe}
-                hwDe={postData.hwDe}
-                etcDe={postData.etcDe}
-                webBk={postData.webBk}
-                blchBk={postData.blchBk}
-                aiBk={postData.aiBk}
-                dsBk={postData.dsBk}
-                gameBk={postData.gameBk}
-                planBu={postData.planBu}
-                marketingBu={postData.marketingBu}
-                financeBu={postData.financeBu}
-                salesBu={postData.salesBu}
-                consultBu={postData.consultBu}
-                investBu={postData.investBu}
-                etcBu={postData.etcBu}
-                blogEtc={postData.blogEtc}
-                influEtc={postData.influEtc}
-                compEtc={postData.compEtc}
-                uiuxPlanNow={postData.uiuxPlanNow}
-                gamePlanNow={postData.gamePlanNow}
-                managerPlanNow={postData.managerPlanNow}
-                hwPlanNow={postData.hwPlanNow}
-                iosFrNow={postData.iosFrNow}
-                androidFrNow={postData.androidFrNow}
-                webFrontFrNow={postData.webFrontFrNow}
-                webPublicFrNow={postData.webPublicFrNow}
-                crossFrNow={postData.crossFrNow}
-                uiuxDeNow={postData.uiuxDeNow}
-                graphicDeNow={postData.graphicDeNow}
-                thrdDeNow={postData.thrdDeNow}
-                hwDeNow={postData.hwDeNow}
-                etcDeNow={postData.etcDeNow}
-                webBkNow={postData.webBkNow}
-                blchBkNow={postData.blchBkNow}
-                aiBkNow={postData.aiBkNow}
-                dsBkNow={postData.dsBkNow}
-                gameBkNow={postData.gameBkNow}
-                planBuNow={postData.planBuNow}
-                marketingBuNow={postData.marketingBuNow}
-                financeBuNow={postData.financeBuNow}
-                salesBuNow={postData.salesBuNow}
-                consultBuNow={postData.consultBuNow}
-                investBuNow={postData.investBuNow}
-                etcBuNow={postData.etcBuNow}
-                blogEtcNow={postData.blogEtcNow}
-                influEtcNow={postData.influEtcNow}
-                compEtcNow={postData.compEtcNow}
-                apply={applyService}
-                userID={postData.userID}
-                projectID={Number(projectID)}
-              />
-              <DetailPlatform projectPlatform={postData.projectPlatform} />
-              <DetailContent value={postData.content} />
-              <DetailSkill projectSkill={postData.projectSkill} />
-              <DetailReference projectReference={postData.projectReference} />
-            </S.LeftDetail>
-            {where === 'qna' && (
+            {where === 'info' && (
+              <S.LeftDetail>
+                <DetailRecurit
+                  uiuxPlan={postData.uiuxPlan}
+                  gamePlan={postData.gamePlan}
+                  managerPlan={postData.managerPlan}
+                  hwPlan={postData.hwPlan}
+                  iosFr={postData.iosFr}
+                  androidFr={postData.androidFr}
+                  webFrontFr={postData.webFrontFr}
+                  webPublicFr={postData.webPublicFr}
+                  crossFr={postData.crossFr}
+                  uiuxDe={postData.uiuxDe}
+                  graphicDe={postData.graphicDe}
+                  thrdDe={postData.thrdDe}
+                  hwDe={postData.hwDe}
+                  etcDe={postData.etcDe}
+                  webBk={postData.webBk}
+                  blchBk={postData.blchBk}
+                  aiBk={postData.aiBk}
+                  dsBk={postData.dsBk}
+                  gameBk={postData.gameBk}
+                  planBu={postData.planBu}
+                  marketingBu={postData.marketingBu}
+                  financeBu={postData.financeBu}
+                  salesBu={postData.salesBu}
+                  consultBu={postData.consultBu}
+                  investBu={postData.investBu}
+                  etcBu={postData.etcBu}
+                  blogEtc={postData.blogEtc}
+                  influEtc={postData.influEtc}
+                  compEtc={postData.compEtc}
+                  uiuxPlanNow={postData.uiuxPlanNow}
+                  gamePlanNow={postData.gamePlanNow}
+                  managerPlanNow={postData.managerPlanNow}
+                  hwPlanNow={postData.hwPlanNow}
+                  iosFrNow={postData.iosFrNow}
+                  androidFrNow={postData.androidFrNow}
+                  webFrontFrNow={postData.webFrontFrNow}
+                  webPublicFrNow={postData.webPublicFrNow}
+                  crossFrNow={postData.crossFrNow}
+                  uiuxDeNow={postData.uiuxDeNow}
+                  graphicDeNow={postData.graphicDeNow}
+                  thrdDeNow={postData.thrdDeNow}
+                  hwDeNow={postData.hwDeNow}
+                  etcDeNow={postData.etcDeNow}
+                  webBkNow={postData.webBkNow}
+                  blchBkNow={postData.blchBkNow}
+                  aiBkNow={postData.aiBkNow}
+                  dsBkNow={postData.dsBkNow}
+                  gameBkNow={postData.gameBkNow}
+                  planBuNow={postData.planBuNow}
+                  marketingBuNow={postData.marketingBuNow}
+                  financeBuNow={postData.financeBuNow}
+                  salesBuNow={postData.salesBuNow}
+                  consultBuNow={postData.consultBuNow}
+                  investBuNow={postData.investBuNow}
+                  etcBuNow={postData.etcBuNow}
+                  blogEtcNow={postData.blogEtcNow}
+                  influEtcNow={postData.influEtcNow}
+                  compEtcNow={postData.compEtcNow}
+                  apply={applyService}
+                  userID={postData.userID}
+                  projectID={Number(projectID)}
+                />
+                <DetailPlatform projectPlatform={postData.projectPlatform} />
+                <DetailContent value={postData.content} />
+                <DetailSkill projectSkill={postData.projectSkill} />
+                <DetailReference projectReference={postData.projectReference} />
+              </S.LeftDetail>
+            )}
+            {where === 'qna' ? (
               <S.CommentWrap>
                 <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
                   👍 이 모임에 응원 * 질문을 올려주세요!
@@ -193,6 +194,8 @@ export const ProjectDetailForm = () => {
                 {/* 여기는 석환이랑 db 협의가 끝나면 개발 */}
                 <S.MediaBox />
               </S.CommentWrap>
+            ) : (
+              ''
             )}
             {where === 'apply' && (
               <div>

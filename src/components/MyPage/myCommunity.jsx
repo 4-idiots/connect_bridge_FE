@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Heading } from 'react-bulma-components';
+import { useJwt } from 'react-jwt';
 import { myCommunityGetService, communityDelete } from '../../service';
 import { MyCmCard } from './community/myCmCard';
+import { useAuth } from '../../contexts/hooks/useAuth';
 
 export const MyCommunityForm = () => {
+  const auth = useAuth();
+  const { decodedToken } = useJwt(auth.token);
+
   const [community, setCommunity] = useState(null);
 
-  const getAxios = async () => {
+  const getAxios = async uid => {
     try {
-      const result = await myCommunityGetService(1);
+      const result = await myCommunityGetService(uid);
+      console.log(result.data);
       setCommunity(result.data);
     } catch (error) {
       console.log(error);
@@ -26,8 +32,10 @@ export const MyCommunityForm = () => {
   };
 
   useEffect(() => {
-    getAxios();
-  }, []);
+    if (decodedToken) {
+      getAxios(decodedToken.id);
+    }
+  }, [decodedToken]);
 
   if (community) {
     return (

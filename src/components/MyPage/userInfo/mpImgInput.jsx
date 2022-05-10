@@ -3,8 +3,9 @@ import { Form } from 'react-bulma-components';
 import PropTypes from 'prop-types';
 import * as S from './style';
 
-export const MyPageImg = ({ setUser, user }) => {
+export const MyPageImg = ({ setUser, user, setCheck, check }) => {
   const encodeFileToBase64 = fileBlob => {
+    setCheck({ ...check, imgChange: true });
     const reader = new FileReader();
     reader.readAsDataURL(fileBlob);
     return new Promise(resolve => {
@@ -46,4 +47,6 @@ export const MyPageImg = ({ setUser, user }) => {
 MyPageImg.propTypes = {
   setUser: PropTypes.func.isRequired,
   user: PropTypes.objectOf(PropTypes.any).isRequired,
+  setCheck: PropTypes.func.isRequired,
+  check: PropTypes.objectOf(PropTypes.any).isRequired,
 };

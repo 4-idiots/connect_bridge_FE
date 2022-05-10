@@ -17,8 +17,9 @@ export const CmTextBox = styled.div`
 
 export const CmContentBox = styled.div`
   overflow: hidden;
-  width: 80%;
-  height: 80px;
+  opacity: 0.8;
+  width: 90%;
+  height: 50px;
   margin-bottom: 10px;
 `;
 

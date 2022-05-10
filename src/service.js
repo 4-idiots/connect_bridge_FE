@@ -171,6 +171,10 @@ export const studyDeleteService = studyID => {
   return customAxios.delete(`/api/study/${studyID}`);
 };
 
+export const projectGetNewService = () => {
+  return customAxios.get('/api/project/page/new');
+};
+
 export const projectDeleteService = projectID => {
   return customAxios.delete(`/api/project/${projectID}`);
 };
@@ -234,6 +238,32 @@ export const mypageUpdate = formData => {
     headers: {
       'content-type': 'multipart/form-data',
     },
+  });
+};
+
+export const mypageUpdatePost = (
+  id,
+  userPW,
+  userNickname,
+  userIntroduce,
+  userAbility,
+  userArea,
+  userTime,
+  userInterestMain,
+  userInterestSub,
+  userPortfolio,
+) => {
+  return customAxios.post(`/api/my/info`, {
+    id,
+    userPW,
+    userNickname,
+    userIntroduce,
+    userAbility,
+    userArea,
+    userTime,
+    userInterestMain,
+    userInterestSub,
+    userPortfolio,
   });
 };
 

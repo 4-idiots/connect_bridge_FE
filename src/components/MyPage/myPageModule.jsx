@@ -8,6 +8,7 @@ import {
   mypageGetUserService,
   checkNicknameService,
   mypageUpdate,
+  mypageUpdatePost,
 } from '../../service';
 import { useAuth } from '../../contexts/hooks/useAuth';
 
@@ -20,7 +21,14 @@ export const MyPageForm = () => {
   const [check, setCheck] = useState({
     nickCheck: true,
     nickClick: false,
+    nickChange: false,
+    imgChange: false,
   });
+
+  const onNickChangeInput = e => {
+    setUser({ ...user, [e.currentTarget.name]: e.currentTarget.value });
+    setCheck({ ...check, nickChange: true });
+  };
 
   const onChangeInput = e => {
     setUser({ ...user, [e.currentTarget.name]: e.currentTarget.value });
@@ -33,7 +41,7 @@ export const MyPageForm = () => {
   const checkNickname = async nick => {
     try {
       const result = await checkNicknameService(nick);
-      setCheck({ ...check, nickCheck: result.data.value, nickClick: true });
+      setCheck({ ...check, nickCheck: result.data, nickClick: true });
     } catch (error) {
       alert('다시 시도해주세요');
     }
@@ -43,7 +51,6 @@ export const MyPageForm = () => {
     try {
       const result = await mypageGetUserService(uid);
       setUser(result.data);
-      console.log(result.data);
     } catch (error) {
       console.log(error);
     }
@@ -52,29 +59,57 @@ export const MyPageForm = () => {
   const updateAxios = async data => {
     try {
       const result = await mypageUpdate(data);
-      console.log(result);
+      window.location.replace('/my/info');
     } catch (error) {
       alert('다시 시도해주세요');
     }
   };
 
+  const updateNoImgAxios = async () => {
+    try {
+      const result = await mypageUpdatePost(
+        decodedToken.id,
+        pwInfo.userPW,
+        user.userNickname,
+        user.userIntroduce,
+        user.userAbility,
+        user.userArea,
+        user.userTime,
+        user.userInterestMain,
+        user.userInterestSub,
+        user.userPortfolio,
+      );
+      window.location.replace('/my/info');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const onSubmit = () => {
-    if (check.nickCheck === false && check.nickClick) {
-      const formData = new FormData();
-      formData.append('id', decodedToken.id);
-      formData.append('userPW', pwInfo.userPW);
-      formData.append('userNickname', user.userNickname);
-      formData.append('userIntroduce', user.userIntroduce);
-      formData.append('userAbility', user.userAbility);
-      formData.append('userArea', user.userArea);
-      formData.append('userTime', user.userTime);
-      formData.append('userInterestMain', user.userInterestMain);
-      formData.append('userInterestSub', user.userInterestSub);
-      formData.append('userPortfolio', user.userPortfolio);
-      formData.append('img', user.userPicture);
-      console.log(user);
-      console.log(pwInfo);
+    const formData = new FormData();
+    formData.append('id', decodedToken.id);
+    formData.append('userPW', pwInfo.userPW);
+    formData.append('userNickname', user.userNickname);
+    formData.append('userIntroduce', user.userIntroduce);
+    formData.append('userAbility', user.userAbility);
+    formData.append('userArea', user.userArea);
+    formData.append('userTime', user.userTime);
+    formData.append('userInterestMain', user.userInterestMain);
+    formData.append('userInterestSub', user.userInterestSub);
+    formData.append('userPortfolio', user.userPortfolio);
+    formData.append('img', user.userPicture);
+
+    if (
+      check.nickChange &&
+      check.nickCheck === false &&
+      check.nickClick &&
+      check.imgChange
+    ) {
       updateAxios(formData);
+    } else if (check.nickChange === false && check.imgChange) {
+      updateAxios(formData);
+    } else if (check.imgChange === false) {
+      updateNoImgAxios();
     } else {
       alert('입력을 확인해주세요');
     }
@@ -89,7 +124,12 @@ export const MyPageForm = () => {
   if (user) {
     return (
       <>
-        <MyPageImg user={user} setUser={setUser} />
+        <MyPageImg
+          user={user}
+          setUser={setUser}
+          setCheck={setCheck}
+          check={check}
+        />
         <S.InfoBox>
           <MyPageInput
             label="이메일"
@@ -112,7 +152,7 @@ export const MyPageForm = () => {
                 placeholder="닉네임"
                 value={user.userNickname}
                 name="userNickname"
-                onChange={onChangeInput}
+                onChange={onNickChangeInput}
               />
               {check.nickClick ? (
                 <div>
@@ -128,7 +168,7 @@ export const MyPageForm = () => {
                 </div>
               ) : (
                 <Form.Help style={{ color: 'red' }}>
-                  * 닉네임 중복을 확인해주세요
+                  * 변경하려면 닉네임 중복을 확인해주세요
                 </Form.Help>
               )}
               <Button
