@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable no-shadow */
 /* eslint-disable no-undef */
 /* eslint-disable react/jsx-no-undef */
@@ -16,7 +17,7 @@ import {
 } from '../ProjectPage/uploadComponent/uploadValue';
 
 export const SignupForm = () => {
-  const [data, setdata] = useState([]);
+  const [data, setdata] = useState('');
   const [userID, setuserID] = useState('');
   const [userPW, setuserPW] = useState('');
   const [userREPW, setuserREPW] = useState('');
@@ -197,11 +198,13 @@ export const SignupForm = () => {
         console.log(response.data.message);
         console.log(code);
       });
-    if (data === 'ok' && codeon === false) {
+    if (codeon === false || data === 'ok') {
       alert('인증완료');
       setcodeon(true);
-    } else alert('다시 확인해 주세요.');
-    setcodeon(false);
+    } else {
+      alert('다시 확인해 주세요.');
+      setcodeon(false);
+    }
   };
   const Click = e => {
     e.preventDefault();
