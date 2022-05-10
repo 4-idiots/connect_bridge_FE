@@ -1,127 +1,217 @@
-import React, { useState } from 'react';
-import { Heading, Button } from 'react-bulma-components';
+import React, { useState, useEffect } from 'react';
+import { Button, Form } from 'react-bulma-components';
+import validator from 'validator';
+import { useJwt } from 'react-jwt';
 import { MyPageInput, MyPageSelect, MyPageImg } from './userInfo/infoRoute';
 import * as S from './userInfo/style';
+import {
+  mypageGetUserService,
+  checkNicknameService,
+  mypageUpdate,
+} from '../../service';
+import { useAuth } from '../../contexts/hooks/useAuth';
 
 export const MyPageForm = () => {
-  const [user, setUser] = useState({
-    email: 'email',
-    phone: 'phone',
-    nickname: 'nickname',
-    introduce: 'introduce',
-    portfolio: 'portfolio',
-    onOff: '온라인/오프라인 모두가능',
-    area: '서울특별시',
-    time: '상관없음',
-    main: '',
-    mSkill: '',
-    mPro: '',
-    preview:
-      'https://letspl.s3.ap-northeast-2.amazonaws.com/images/project_thumb_05.png',
-    profileImg: '',
-    password: '',
-    password2: '',
-    uID: '',
-  });
+  const auth = useAuth();
+  const { decodedToken } = useJwt(auth.token);
 
-  const {
-    email,
-    phone,
-    nickname,
-    introduce,
-    portfolio,
-    onOff,
-    area,
-    time,
-    main,
-    mSkill,
-    mPro,
-    profileImg,
-    password,
-    password2,
-    uID,
-  } = user;
+  const [user, setUser] = useState(null);
+  const [pwInfo, setPwInfo] = useState({ userPW: '', pwCheck: '' });
+  const [check, setCheck] = useState({
+    nickCheck: true,
+    nickClick: false,
+  });
 
   const onChangeInput = e => {
     setUser({ ...user, [e.currentTarget.name]: e.currentTarget.value });
   };
 
-  return (
-    <>
-      <MyPageImg user={user} setUser={setUser} />
-      <S.InfoBox>
-        <MyPageInput
-          label="이메일"
-          value={email}
-          name="email"
-          onChange={onChangeInput}
-          disabled
-        />
-        <MyPageInput
-          label="휴대폰번호"
-          value={phone}
-          name="phone"
-          onChange={onChangeInput}
-          disabled
-        />
-        <MyPageInput
-          label="아이디"
-          value={uID}
-          name="uID"
-          onChange={onChangeInput}
-          disabled
-        />
-        <MyPageInput
-          label="닉네임"
-          value={nickname}
-          name="nickname"
-          onChange={onChangeInput}
-        />
-        <MyPageInput
-          label="비밀번호"
-          value={password}
-          name="password"
-          onChange={onChangeInput}
-          isPW
-        />
-        <MyPageInput
-          label="비밀번호 확인"
-          value={password2}
-          name="password2"
-          onChange={onChangeInput}
-          isPW
-        />
-        <MyPageInput
-          label="자기소개"
-          value={introduce}
-          name="introduce"
-          onChange={onChangeInput}
-        />
-        <MyPageInput
-          label="포트폴리오"
-          value={portfolio}
-          name="portfolio"
-          onChange={onChangeInput}
-        />
+  const onChangePW = e => {
+    setPwInfo({ ...pwInfo, [e.currentTarget.name]: e.currentTarget.value });
+  };
 
-        <MyPageSelect
-          type="본 캐릭터 직무/능력치"
-          onChange={setUser}
-          user={user}
-        />
-        <MyPageSelect type="지역 및 시간 설정" onChange={setUser} user={user} />
+  const checkNickname = async nick => {
+    try {
+      const result = await checkNicknameService(nick);
+      setCheck({ ...check, nickCheck: result.data.value, nickClick: true });
+    } catch (error) {
+      alert('다시 시도해주세요');
+    }
+  };
 
-        <Button.Group align="center">
-          <Button
-            color="success"
-            onClick={() => {
-              console.log(user);
-            }}
-          >
-            수정하기
-          </Button>
-        </Button.Group>
-      </S.InfoBox>
-    </>
-  );
+  const getAxios = async uid => {
+    try {
+      const result = await mypageGetUserService(uid);
+      setUser(result.data);
+      console.log(result.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateAxios = async data => {
+    try {
+      const result = await mypageUpdate(data);
+      console.log(result);
+    } catch (error) {
+      alert('다시 시도해주세요');
+    }
+  };
+
+  const onSubmit = () => {
+    if (check.nickCheck === false && check.nickClick) {
+      const formData = new FormData();
+      formData.append('id', decodedToken.id);
+      formData.append('userPW', pwInfo.userPW);
+      formData.append('userNickname', user.userNickname);
+      formData.append('userIntroduce', user.userIntroduce);
+      formData.append('userAbility', user.userAbility);
+      formData.append('userArea', user.userArea);
+      formData.append('userTime', user.userTime);
+      formData.append('userInterestMain', user.userInterestMain);
+      formData.append('userInterestSub', user.userInterestSub);
+      formData.append('userPortfolio', user.userPortfolio);
+      formData.append('img', user.userPicture);
+      console.log(user);
+      console.log(pwInfo);
+      updateAxios(formData);
+    } else {
+      alert('입력을 확인해주세요');
+    }
+  };
+
+  useEffect(() => {
+    if (decodedToken) {
+      getAxios(decodedToken.id);
+    }
+  }, [decodedToken]);
+
+  if (user) {
+    return (
+      <>
+        <MyPageImg user={user} setUser={setUser} />
+        <S.InfoBox>
+          <MyPageInput
+            label="이메일"
+            value={user.userEmail}
+            name="userEmail"
+            onChange={onChangeInput}
+            disabled
+          />
+          <MyPageInput
+            label="아이디"
+            value={user.userID}
+            name="userID"
+            onChange={onChangeInput}
+            disabled
+          />
+          <Form.Field>
+            <Form.Label>닉네임</Form.Label>
+            <Form.Control>
+              <Form.Input
+                placeholder="닉네임"
+                value={user.userNickname}
+                name="userNickname"
+                onChange={onChangeInput}
+              />
+              {check.nickClick ? (
+                <div>
+                  {check.nickCheck ? (
+                    <Form.Help style={{ color: 'red' }}>
+                      * 다른 닉네임을 사용해주세요
+                    </Form.Help>
+                  ) : (
+                    <Form.Help style={{ color: 'green' }}>
+                      * 사용 가능합니다.
+                    </Form.Help>
+                  )}
+                </div>
+              ) : (
+                <Form.Help style={{ color: 'red' }}>
+                  * 닉네임 중복을 확인해주세요
+                </Form.Help>
+              )}
+              <Button
+                style={{ width: 60, fontSize: 14, margin: '8px 0 4px 0' }}
+                color="danger"
+                onClick={() => checkNickname(user.userNickname)}
+              >
+                중복 확인
+              </Button>
+            </Form.Control>
+          </Form.Field>
+          <Form.Field>
+            <Form.Label>비밀번호</Form.Label>
+            <Form.Control>
+              <Form.Input
+                placeholder="비밀번호"
+                value={pwInfo.userPW}
+                name="userPW"
+                onChange={onChangePW}
+                type="password"
+              />
+              {validator.isLength(pwInfo.userPW, { min: 8, max: 20 }) ? (
+                <Form.Help style={{ color: 'green' }}>
+                  * 사용 가능한 비밀번호입니다.
+                </Form.Help>
+              ) : (
+                <Form.Help style={{ color: 'red' }}>
+                  * 8~20자로 사용해주세요
+                </Form.Help>
+              )}
+            </Form.Control>
+          </Form.Field>
+          <Form.Field>
+            <Form.Label>비밀번호 확인</Form.Label>
+            <Form.Control>
+              <Form.Input
+                placeholder="비밀번호 확인"
+                value={pwInfo.pwCheck}
+                name="pwCheck"
+                onChange={onChangePW}
+                type="password"
+              />
+              {validator.equals(pwInfo.userPW, pwInfo.pwCheck) ? (
+                <Form.Help style={{ color: 'green' }}>* 일치합니다.</Form.Help>
+              ) : (
+                <Form.Help style={{ color: 'red' }}>
+                  * 비밀번호가 일치하지 않습니다.
+                </Form.Help>
+              )}
+            </Form.Control>
+          </Form.Field>
+          <MyPageInput
+            label="자기소개"
+            value={user.userIntroduce}
+            name="userIntroduce"
+            onChange={onChangeInput}
+          />
+          <MyPageInput
+            label="포트폴리오"
+            value={user.userPortfolio}
+            name="userPortfolio"
+            onChange={onChangeInput}
+          />
+
+          <MyPageSelect
+            type="본 캐릭터 직무/능력치"
+            onChange={setUser}
+            user={user}
+          />
+          <MyPageSelect
+            type="지역 및 시간 설정"
+            onChange={setUser}
+            user={user}
+          />
+
+          <Button.Group align="center">
+            <Button color="success" onClick={onSubmit}>
+              수정하기
+            </Button>
+          </Button.Group>
+        </S.InfoBox>
+      </>
+    );
+  }
+  return null;
 };

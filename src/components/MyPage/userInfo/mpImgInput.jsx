@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button } from 'react-bulma-components';
+import { Form } from 'react-bulma-components';
 import PropTypes from 'prop-types';
 import * as S from './style';
 
@@ -12,7 +12,7 @@ export const MyPageImg = ({ setUser, user }) => {
         setUser({
           ...user,
           preview: reader.result,
-          profileImg: fileBlob,
+          userPicture: fileBlob,
         });
         resolve();
       };
@@ -25,7 +25,7 @@ export const MyPageImg = ({ setUser, user }) => {
         {user.preview ? (
           <S.MPImg alt="img" src={user.preview} />
         ) : (
-          <S.MPImg alt="img" src="" />
+          <S.MPImg alt="img" src={user.userPicture} />
         )}
         <Form.Control>
           <Form.InputFile

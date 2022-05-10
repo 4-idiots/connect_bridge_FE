@@ -1,7 +1,9 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useJwt } from 'react-jwt';
 import { Heading, Button } from 'react-bulma-components';
+import { useAuth } from '../../../contexts/hooks/useAuth';
 import * as S from './style';
 
 export const DetailRecurit = ({
@@ -67,22 +69,38 @@ export const DetailRecurit = ({
   userID,
   projectID,
 }) => {
+  const auth = useAuth();
+  const { decodedToken } = useJwt(auth.token);
+
   return (
     <S.DetailStatus>
       <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
         모집 현황
       </Heading>
       <S.StatusUl>
-        {uiuxPlan ? (
-          <S.StatusLi>
-            <S.StatusBigP>UI/UX 기획</S.StatusBigP>
-            <S.StatusSmallP>
-              {uiuxPlanNow} / {uiuxPlan}
-            </S.StatusSmallP>
-            {uiuxPlanNow !== 0 ? (
-              <>
-                {uiuxPlan === uiuxPlanNow ? (
-                  <Button color="danger">완료</Button>
+        {decodedToken && (
+          <div>
+            {uiuxPlan ? (
+              <S.StatusLi>
+                <S.StatusBigP>UI/UX 기획</S.StatusBigP>
+                <S.StatusSmallP>
+                  {uiuxPlanNow} / {uiuxPlan}
+                </S.StatusSmallP>
+                {uiuxPlanNow !== 0 ? (
+                  <>
+                    {uiuxPlan === uiuxPlanNow ? (
+                      <Button color="danger">완료</Button>
+                    ) : (
+                      <Button
+                        color="info"
+                        onClick={() => {
+                          apply(projectID, userID, 'uiux_plan_now');
+                        }}
+                      >
+                        신청
+                      </Button>
+                    )}
+                  </>
                 ) : (
                   <Button
                     color="info"
@@ -93,31 +111,31 @@ export const DetailRecurit = ({
                     신청
                   </Button>
                 )}
-              </>
+              </S.StatusLi>
             ) : (
-              <Button
-                color="info"
-                onClick={() => {
-                  apply(projectID, userID, 'uiux_plan_now');
-                }}
-              >
-                신청
-              </Button>
+              ''
             )}
-          </S.StatusLi>
-        ) : (
-          ''
-        )}
-        {gamePlan ? (
-          <S.StatusLi>
-            <S.StatusBigP>게임 기획</S.StatusBigP>
-            <S.StatusSmallP>
-              {gamePlanNow} / {gamePlan}
-            </S.StatusSmallP>
-            {gamePlanNow !== 0 ? (
-              <>
-                {gamePlan === gamePlanNow ? (
-                  <Button color="danger">완료</Button>
+            {gamePlan ? (
+              <S.StatusLi>
+                <S.StatusBigP>게임 기획</S.StatusBigP>
+                <S.StatusSmallP>
+                  {gamePlanNow} / {gamePlan}
+                </S.StatusSmallP>
+                {gamePlanNow !== 0 ? (
+                  <>
+                    {gamePlan === gamePlanNow ? (
+                      <Button color="danger">완료</Button>
+                    ) : (
+                      <Button
+                        color="info"
+                        onClick={() => {
+                          apply(projectID, userID, 'game_plan_now');
+                        }}
+                      >
+                        신청
+                      </Button>
+                    )}
+                  </>
                 ) : (
                   <Button
                     color="info"
@@ -128,31 +146,31 @@ export const DetailRecurit = ({
                     신청
                   </Button>
                 )}
-              </>
+              </S.StatusLi>
             ) : (
-              <Button
-                color="info"
-                onClick={() => {
-                  apply(projectID, userID, 'game_plan_now');
-                }}
-              >
-                신청
-              </Button>
+              ''
             )}
-          </S.StatusLi>
-        ) : (
-          ''
-        )}
-        {managerPlan ? (
-          <S.StatusLi>
-            <S.StatusBigP>프로젝트 매니저</S.StatusBigP>
-            <S.StatusSmallP>
-              {managerPlanNow} / {managerPlan}
-            </S.StatusSmallP>
-            {managerPlanNow !== 0 ? (
-              <>
-                {managerPlan === managerPlanNow ? (
-                  <Button color="danger">완료</Button>
+            {managerPlan ? (
+              <S.StatusLi>
+                <S.StatusBigP>프로젝트 매니저</S.StatusBigP>
+                <S.StatusSmallP>
+                  {managerPlanNow} / {managerPlan}
+                </S.StatusSmallP>
+                {managerPlanNow !== 0 ? (
+                  <>
+                    {managerPlan === managerPlanNow ? (
+                      <Button color="danger">완료</Button>
+                    ) : (
+                      <Button
+                        color="info"
+                        onClick={() => {
+                          apply(projectID, userID, 'manager_plan_now');
+                        }}
+                      >
+                        신청
+                      </Button>
+                    )}
+                  </>
                 ) : (
                   <Button
                     color="info"
@@ -163,31 +181,31 @@ export const DetailRecurit = ({
                     신청
                   </Button>
                 )}
-              </>
+              </S.StatusLi>
             ) : (
-              <Button
-                color="info"
-                onClick={() => {
-                  apply(projectID, userID, 'manager_plan_now');
-                }}
-              >
-                신청
-              </Button>
+              ''
             )}
-          </S.StatusLi>
-        ) : (
-          ''
-        )}
-        {hwPlan ? (
-          <S.StatusLi>
-            <S.StatusBigP>하드웨어(제품) 기획</S.StatusBigP>
-            <S.StatusSmallP>
-              {hwPlanNow} / {hwPlan}
-            </S.StatusSmallP>
-            {hwPlanNow !== 0 ? (
-              <>
-                {hwPlan === hwPlanNow ? (
-                  <Button color="danger">완료</Button>
+            {hwPlan ? (
+              <S.StatusLi>
+                <S.StatusBigP>하드웨어(제품) 기획</S.StatusBigP>
+                <S.StatusSmallP>
+                  {hwPlanNow} / {hwPlan}
+                </S.StatusSmallP>
+                {hwPlanNow !== 0 ? (
+                  <>
+                    {hwPlan === hwPlanNow ? (
+                      <Button color="danger">완료</Button>
+                    ) : (
+                      <Button
+                        color="info"
+                        onClick={() => {
+                          apply(projectID, userID, 'hw_plan_now');
+                        }}
+                      >
+                        신청
+                      </Button>
+                    )}
+                  </>
                 ) : (
                   <Button
                     color="info"
@@ -198,31 +216,31 @@ export const DetailRecurit = ({
                     신청
                   </Button>
                 )}
-              </>
+              </S.StatusLi>
             ) : (
-              <Button
-                color="info"
-                onClick={() => {
-                  apply(projectID, userID, 'hw_plan_now');
-                }}
-              >
-                신청
-              </Button>
+              ''
             )}
-          </S.StatusLi>
-        ) : (
-          ''
-        )}
-        {iosFr ? (
-          <S.StatusLi>
-            <S.StatusBigP>IOS</S.StatusBigP>
-            <S.StatusSmallP>
-              {iosFrNow} / {iosFr}
-            </S.StatusSmallP>
-            {iosFrNow !== 0 ? (
-              <>
-                {iosFr === iosFrNow ? (
-                  <Button color="danger">완료</Button>
+            {iosFr ? (
+              <S.StatusLi>
+                <S.StatusBigP>IOS</S.StatusBigP>
+                <S.StatusSmallP>
+                  {iosFrNow} / {iosFr}
+                </S.StatusSmallP>
+                {iosFrNow !== 0 ? (
+                  <>
+                    {iosFr === iosFrNow ? (
+                      <Button color="danger">완료</Button>
+                    ) : (
+                      <Button
+                        color="info"
+                        onClick={() => {
+                          apply(projectID, userID, 'ios_fr_now');
+                        }}
+                      >
+                        신청
+                      </Button>
+                    )}
+                  </>
                 ) : (
                   <Button
                     color="info"
@@ -233,31 +251,31 @@ export const DetailRecurit = ({
                     신청
                   </Button>
                 )}
-              </>
+              </S.StatusLi>
             ) : (
-              <Button
-                color="info"
-                onClick={() => {
-                  apply(projectID, userID, 'ios_fr_now');
-                }}
-              >
-                신청
-              </Button>
+              ''
             )}
-          </S.StatusLi>
-        ) : (
-          ''
-        )}
-        {androidFr ? (
-          <S.StatusLi>
-            <S.StatusBigP>안드로이드</S.StatusBigP>
-            <S.StatusSmallP>
-              {androidFrNow} / {androidFr}
-            </S.StatusSmallP>
-            {androidFrNow !== 0 ? (
-              <>
-                {androidFr === androidFrNow ? (
-                  <Button color="danger">완료</Button>
+            {androidFr ? (
+              <S.StatusLi>
+                <S.StatusBigP>안드로이드</S.StatusBigP>
+                <S.StatusSmallP>
+                  {androidFrNow} / {androidFr}
+                </S.StatusSmallP>
+                {androidFrNow !== 0 ? (
+                  <>
+                    {androidFr === androidFrNow ? (
+                      <Button color="danger">완료</Button>
+                    ) : (
+                      <Button
+                        color="info"
+                        onClick={() => {
+                          apply(projectID, userID, 'android_fr_now');
+                        }}
+                      >
+                        신청
+                      </Button>
+                    )}
+                  </>
                 ) : (
                   <Button
                     color="info"
@@ -268,31 +286,31 @@ export const DetailRecurit = ({
                     신청
                   </Button>
                 )}
-              </>
+              </S.StatusLi>
             ) : (
-              <Button
-                color="info"
-                onClick={() => {
-                  apply(projectID, userID, 'android_fr_now');
-                }}
-              >
-                신청
-              </Button>
+              ''
             )}
-          </S.StatusLi>
-        ) : (
-          ''
-        )}
-        {webFrontFr ? (
-          <S.StatusLi>
-            <S.StatusBigP>웹프론트엔드</S.StatusBigP>
-            <S.StatusSmallP>
-              {webFrontFrNow} / {webFrontFr}
-            </S.StatusSmallP>
-            {webFrontFrNow !== 0 ? (
-              <>
-                {webFrontFr === webFrontFrNow ? (
-                  <Button color="danger">완료</Button>
+            {webFrontFr ? (
+              <S.StatusLi>
+                <S.StatusBigP>웹프론트엔드</S.StatusBigP>
+                <S.StatusSmallP>
+                  {webFrontFrNow} / {webFrontFr}
+                </S.StatusSmallP>
+                {webFrontFrNow !== 0 ? (
+                  <>
+                    {webFrontFr === webFrontFrNow ? (
+                      <Button color="danger">완료</Button>
+                    ) : (
+                      <Button
+                        color="info"
+                        onClick={() => {
+                          apply(projectID, userID, 'webfront_fr_now');
+                        }}
+                      >
+                        신청
+                      </Button>
+                    )}
+                  </>
                 ) : (
                   <Button
                     color="info"
@@ -303,31 +321,31 @@ export const DetailRecurit = ({
                     신청
                   </Button>
                 )}
-              </>
+              </S.StatusLi>
             ) : (
-              <Button
-                color="info"
-                onClick={() => {
-                  apply(projectID, userID, 'webfront_fr_now');
-                }}
-              >
-                신청
-              </Button>
+              ''
             )}
-          </S.StatusLi>
-        ) : (
-          ''
-        )}
-        {webPublicFr ? (
-          <S.StatusLi>
-            <S.StatusBigP>웹퍼블리셔</S.StatusBigP>
-            <S.StatusSmallP>
-              {webPublicFrNow} / {webPublicFr}
-            </S.StatusSmallP>
-            {webPublicFrNow !== 0 ? (
-              <>
-                {webPublicFr === webPublicFrNow ? (
-                  <Button color="danger">완료</Button>
+            {webPublicFr ? (
+              <S.StatusLi>
+                <S.StatusBigP>웹퍼블리셔</S.StatusBigP>
+                <S.StatusSmallP>
+                  {webPublicFrNow} / {webPublicFr}
+                </S.StatusSmallP>
+                {webPublicFrNow !== 0 ? (
+                  <>
+                    {webPublicFr === webPublicFrNow ? (
+                      <Button color="danger">완료</Button>
+                    ) : (
+                      <Button
+                        color="info"
+                        onClick={() => {
+                          apply(projectID, userID, 'webpublick_fr_now');
+                        }}
+                      >
+                        신청
+                      </Button>
+                    )}
+                  </>
                 ) : (
                   <Button
                     color="info"
@@ -338,31 +356,31 @@ export const DetailRecurit = ({
                     신청
                   </Button>
                 )}
-              </>
+              </S.StatusLi>
             ) : (
-              <Button
-                color="info"
-                onClick={() => {
-                  apply(projectID, userID, 'webpublick_fr_now');
-                }}
-              >
-                신청
-              </Button>
+              ''
             )}
-          </S.StatusLi>
-        ) : (
-          ''
-        )}
-        {crossFr ? (
-          <S.StatusLi>
-            <S.StatusBigP>크로스플랫폼</S.StatusBigP>
-            <S.StatusSmallP>
-              {crossFrNow} / {crossFr}
-            </S.StatusSmallP>
-            {crossFrNow !== 0 ? (
-              <>
-                {crossFr === crossFrNow ? (
-                  <Button color="danger">완료</Button>
+            {crossFr ? (
+              <S.StatusLi>
+                <S.StatusBigP>크로스플랫폼</S.StatusBigP>
+                <S.StatusSmallP>
+                  {crossFrNow} / {crossFr}
+                </S.StatusSmallP>
+                {crossFrNow !== 0 ? (
+                  <>
+                    {crossFr === crossFrNow ? (
+                      <Button color="danger">완료</Button>
+                    ) : (
+                      <Button
+                        color="info"
+                        onClick={() => {
+                          apply(projectID, userID, 'cross_fr_now');
+                        }}
+                      >
+                        신청
+                      </Button>
+                    )}
+                  </>
                 ) : (
                   <Button
                     color="info"
@@ -373,31 +391,31 @@ export const DetailRecurit = ({
                     신청
                   </Button>
                 )}
-              </>
+              </S.StatusLi>
             ) : (
-              <Button
-                color="info"
-                onClick={() => {
-                  apply(projectID, userID, 'cross_fr_now');
-                }}
-              >
-                신청
-              </Button>
+              ''
             )}
-          </S.StatusLi>
-        ) : (
-          ''
-        )}
-        {graphicDe ? (
-          <S.StatusLi>
-            <S.StatusBigP>그래픽디자인</S.StatusBigP>
-            <S.StatusSmallP>
-              {graphicDeNow} / {graphicDe}
-            </S.StatusSmallP>
-            {graphicDeNow !== 0 ? (
-              <>
-                {graphicDe === graphicDeNow ? (
-                  <Button color="danger">완료</Button>
+            {graphicDe ? (
+              <S.StatusLi>
+                <S.StatusBigP>그래픽디자인</S.StatusBigP>
+                <S.StatusSmallP>
+                  {graphicDeNow} / {graphicDe}
+                </S.StatusSmallP>
+                {graphicDeNow !== 0 ? (
+                  <>
+                    {graphicDe === graphicDeNow ? (
+                      <Button color="danger">완료</Button>
+                    ) : (
+                      <Button
+                        color="info"
+                        onClick={() => {
+                          apply(projectID, userID, 'graphic_de_now');
+                        }}
+                      >
+                        신청
+                      </Button>
+                    )}
+                  </>
                 ) : (
                   <Button
                     color="info"
@@ -408,31 +426,31 @@ export const DetailRecurit = ({
                     신청
                   </Button>
                 )}
-              </>
+              </S.StatusLi>
             ) : (
-              <Button
-                color="info"
-                onClick={() => {
-                  apply(projectID, userID, 'graphic_de_now');
-                }}
-              >
-                신청
-              </Button>
+              ''
             )}
-          </S.StatusLi>
-        ) : (
-          ''
-        )}
-        {uiuxDe ? (
-          <S.StatusLi>
-            <S.StatusBigP>UI/UX디자인</S.StatusBigP>
-            <S.StatusSmallP>
-              {uiuxDeNow} / {uiuxDe}
-            </S.StatusSmallP>
-            {uiuxDeNow !== 0 ? (
-              <>
-                {uiuxDe === uiuxDeNow ? (
-                  <Button color="danger">완료</Button>
+            {uiuxDe ? (
+              <S.StatusLi>
+                <S.StatusBigP>UI/UX디자인</S.StatusBigP>
+                <S.StatusSmallP>
+                  {uiuxDeNow} / {uiuxDe}
+                </S.StatusSmallP>
+                {uiuxDeNow !== 0 ? (
+                  <>
+                    {uiuxDe === uiuxDeNow ? (
+                      <Button color="danger">완료</Button>
+                    ) : (
+                      <Button
+                        color="info"
+                        onClick={() => {
+                          apply(projectID, userID, 'uiux_de_now');
+                        }}
+                      >
+                        신청
+                      </Button>
+                    )}
+                  </>
                 ) : (
                   <Button
                     color="info"
@@ -443,31 +461,31 @@ export const DetailRecurit = ({
                     신청
                   </Button>
                 )}
-              </>
+              </S.StatusLi>
             ) : (
-              <Button
-                color="info"
-                onClick={() => {
-                  apply(projectID, userID, 'uiux_de_now');
-                }}
-              >
-                신청
-              </Button>
+              ''
             )}
-          </S.StatusLi>
-        ) : (
-          ''
-        )}
-        {thrdDe ? (
-          <S.StatusLi>
-            <S.StatusBigP>3D디자인</S.StatusBigP>
-            <S.StatusSmallP>
-              {thrdDeNow} / {thrdDe}
-            </S.StatusSmallP>
-            {thrdDeNow !== 0 ? (
-              <>
-                {thrdDe === thrdDeNow ? (
-                  <Button color="danger">완료</Button>
+            {thrdDe ? (
+              <S.StatusLi>
+                <S.StatusBigP>3D디자인</S.StatusBigP>
+                <S.StatusSmallP>
+                  {thrdDeNow} / {thrdDe}
+                </S.StatusSmallP>
+                {thrdDeNow !== 0 ? (
+                  <>
+                    {thrdDe === thrdDeNow ? (
+                      <Button color="danger">완료</Button>
+                    ) : (
+                      <Button
+                        color="info"
+                        onClick={() => {
+                          apply(projectID, userID, 'thr_de_now');
+                        }}
+                      >
+                        신청
+                      </Button>
+                    )}
+                  </>
                 ) : (
                   <Button
                     color="info"
@@ -478,31 +496,31 @@ export const DetailRecurit = ({
                     신청
                   </Button>
                 )}
-              </>
+              </S.StatusLi>
             ) : (
-              <Button
-                color="info"
-                onClick={() => {
-                  apply(projectID, userID, 'thr_de_now');
-                }}
-              >
-                신청
-              </Button>
+              ''
             )}
-          </S.StatusLi>
-        ) : (
-          ''
-        )}
-        {hwDe ? (
-          <S.StatusLi>
-            <S.StatusBigP>하드웨어(제품)디자인</S.StatusBigP>
-            <S.StatusSmallP>
-              {hwDeNow} / {hwDe}
-            </S.StatusSmallP>
-            {hwDeNow !== 0 ? (
-              <>
-                {hwDe === hwDeNow ? (
-                  <Button color="danger">완료</Button>
+            {hwDe ? (
+              <S.StatusLi>
+                <S.StatusBigP>하드웨어(제품)디자인</S.StatusBigP>
+                <S.StatusSmallP>
+                  {hwDeNow} / {hwDe}
+                </S.StatusSmallP>
+                {hwDeNow !== 0 ? (
+                  <>
+                    {hwDe === hwDeNow ? (
+                      <Button color="danger">완료</Button>
+                    ) : (
+                      <Button
+                        color="info"
+                        onClick={() => {
+                          apply(projectID, userID, 'hw_de_now');
+                        }}
+                      >
+                        신청
+                      </Button>
+                    )}
+                  </>
                 ) : (
                   <Button
                     color="info"
@@ -513,31 +531,31 @@ export const DetailRecurit = ({
                     신청
                   </Button>
                 )}
-              </>
+              </S.StatusLi>
             ) : (
-              <Button
-                color="info"
-                onClick={() => {
-                  apply(projectID, userID, 'hw_de_now');
-                }}
-              >
-                신청
-              </Button>
+              ''
             )}
-          </S.StatusLi>
-        ) : (
-          ''
-        )}
-        {etcDe ? (
-          <S.StatusLi>
-            <S.StatusBigP>(디자인)기타</S.StatusBigP>
-            <S.StatusSmallP>
-              {etcDeNow} / {etcDe}
-            </S.StatusSmallP>
-            {etcDeNow !== 0 ? (
-              <>
-                {etcDe === etcDeNow ? (
-                  <Button color="danger">완료</Button>
+            {etcDe ? (
+              <S.StatusLi>
+                <S.StatusBigP>(디자인)기타</S.StatusBigP>
+                <S.StatusSmallP>
+                  {etcDeNow} / {etcDe}
+                </S.StatusSmallP>
+                {etcDeNow !== 0 ? (
+                  <>
+                    {etcDe === etcDeNow ? (
+                      <Button color="danger">완료</Button>
+                    ) : (
+                      <Button
+                        color="info"
+                        onClick={() => {
+                          apply(projectID, userID, 'etc_de_now');
+                        }}
+                      >
+                        신청
+                      </Button>
+                    )}
+                  </>
                 ) : (
                   <Button
                     color="info"
@@ -548,31 +566,31 @@ export const DetailRecurit = ({
                     신청
                   </Button>
                 )}
-              </>
+              </S.StatusLi>
             ) : (
-              <Button
-                color="info"
-                onClick={() => {
-                  apply(projectID, userID, 'etc_de_now');
-                }}
-              >
-                신청
-              </Button>
+              ''
             )}
-          </S.StatusLi>
-        ) : (
-          ''
-        )}
-        {webBk ? (
-          <S.StatusLi>
-            <S.StatusBigP>웹서버</S.StatusBigP>
-            <S.StatusSmallP>
-              {webBkNow} / {webBk}
-            </S.StatusSmallP>
-            {webBkNow !== 0 ? (
-              <>
-                {webBk === webBkNow ? (
-                  <Button color="danger">완료</Button>
+            {webBk ? (
+              <S.StatusLi>
+                <S.StatusBigP>웹서버</S.StatusBigP>
+                <S.StatusSmallP>
+                  {webBkNow} / {webBk}
+                </S.StatusSmallP>
+                {webBkNow !== 0 ? (
+                  <>
+                    {webBk === webBkNow ? (
+                      <Button color="danger">완료</Button>
+                    ) : (
+                      <Button
+                        color="info"
+                        onClick={() => {
+                          apply(projectID, userID, 'web_bk_now');
+                        }}
+                      >
+                        신청
+                      </Button>
+                    )}
+                  </>
                 ) : (
                   <Button
                     color="info"
@@ -583,31 +601,31 @@ export const DetailRecurit = ({
                     신청
                   </Button>
                 )}
-              </>
+              </S.StatusLi>
             ) : (
-              <Button
-                color="info"
-                onClick={() => {
-                  apply(projectID, userID, 'web_bk_now');
-                }}
-              >
-                신청
-              </Button>
+              ''
             )}
-          </S.StatusLi>
-        ) : (
-          ''
-        )}
-        {blchBk ? (
-          <S.StatusLi>
-            <S.StatusBigP>블록체인</S.StatusBigP>
-            <S.StatusSmallP>
-              {blchBkNow} / {blchBk}
-            </S.StatusSmallP>
-            {blchBkNow !== 0 ? (
-              <>
-                {blchBk === blchBkNow ? (
-                  <Button color="danger">완료</Button>
+            {blchBk ? (
+              <S.StatusLi>
+                <S.StatusBigP>블록체인</S.StatusBigP>
+                <S.StatusSmallP>
+                  {blchBkNow} / {blchBk}
+                </S.StatusSmallP>
+                {blchBkNow !== 0 ? (
+                  <>
+                    {blchBk === blchBkNow ? (
+                      <Button color="danger">완료</Button>
+                    ) : (
+                      <Button
+                        color="info"
+                        onClick={() => {
+                          apply(projectID, userID, 'blch_bk_now');
+                        }}
+                      >
+                        신청
+                      </Button>
+                    )}
+                  </>
                 ) : (
                   <Button
                     color="info"
@@ -618,31 +636,31 @@ export const DetailRecurit = ({
                     신청
                   </Button>
                 )}
-              </>
+              </S.StatusLi>
             ) : (
-              <Button
-                color="info"
-                onClick={() => {
-                  apply(projectID, userID, 'blch_bk_now');
-                }}
-              >
-                신청
-              </Button>
+              ''
             )}
-          </S.StatusLi>
-        ) : (
-          ''
-        )}
-        {aiBk ? (
-          <S.StatusLi>
-            <S.StatusBigP>AI</S.StatusBigP>
-            <S.StatusSmallP>
-              {aiBkNow} / {aiBk}
-            </S.StatusSmallP>
-            {aiBkNow !== 0 ? (
-              <>
-                {aiBk === aiBkNow ? (
-                  <Button color="danger">완료</Button>
+            {aiBk ? (
+              <S.StatusLi>
+                <S.StatusBigP>AI</S.StatusBigP>
+                <S.StatusSmallP>
+                  {aiBkNow} / {aiBk}
+                </S.StatusSmallP>
+                {aiBkNow !== 0 ? (
+                  <>
+                    {aiBk === aiBkNow ? (
+                      <Button color="danger">완료</Button>
+                    ) : (
+                      <Button
+                        color="info"
+                        onClick={() => {
+                          apply(projectID, userID, 'ai_bk_now');
+                        }}
+                      >
+                        신청
+                      </Button>
+                    )}
+                  </>
                 ) : (
                   <Button
                     color="info"
@@ -653,31 +671,31 @@ export const DetailRecurit = ({
                     신청
                   </Button>
                 )}
-              </>
+              </S.StatusLi>
             ) : (
-              <Button
-                color="info"
-                onClick={() => {
-                  apply(projectID, userID, 'ai_bk_now');
-                }}
-              >
-                신청
-              </Button>
+              ''
             )}
-          </S.StatusLi>
-        ) : (
-          ''
-        )}
-        {dsBk ? (
-          <S.StatusLi>
-            <S.StatusBigP>DB/빅데이터/DS</S.StatusBigP>
-            <S.StatusSmallP>
-              {dsBkNow} / {dsBk}
-            </S.StatusSmallP>
-            {dsBkNow !== 0 ? (
-              <>
-                {dsBk === dsBkNow ? (
-                  <Button color="danger">완료</Button>
+            {dsBk ? (
+              <S.StatusLi>
+                <S.StatusBigP>DB/빅데이터/DS</S.StatusBigP>
+                <S.StatusSmallP>
+                  {dsBkNow} / {dsBk}
+                </S.StatusSmallP>
+                {dsBkNow !== 0 ? (
+                  <>
+                    {dsBk === dsBkNow ? (
+                      <Button color="danger">완료</Button>
+                    ) : (
+                      <Button
+                        color="info"
+                        onClick={() => {
+                          apply(projectID, userID, 'ds_bk_now');
+                        }}
+                      >
+                        신청
+                      </Button>
+                    )}
+                  </>
                 ) : (
                   <Button
                     color="info"
@@ -688,31 +706,31 @@ export const DetailRecurit = ({
                     신청
                   </Button>
                 )}
-              </>
+              </S.StatusLi>
             ) : (
-              <Button
-                color="info"
-                onClick={() => {
-                  apply(projectID, userID, 'ds_bk_now');
-                }}
-              >
-                신청
-              </Button>
+              ''
             )}
-          </S.StatusLi>
-        ) : (
-          ''
-        )}
-        {gameBk ? (
-          <S.StatusLi>
-            <S.StatusBigP>게임서버</S.StatusBigP>
-            <S.StatusSmallP>
-              {gameBkNow} / {gameBk}
-            </S.StatusSmallP>
-            {gameBkNow !== 0 ? (
-              <>
-                {gameBk === gameBkNow ? (
-                  <Button color="danger">완료</Button>
+            {gameBk ? (
+              <S.StatusLi>
+                <S.StatusBigP>게임서버</S.StatusBigP>
+                <S.StatusSmallP>
+                  {gameBkNow} / {gameBk}
+                </S.StatusSmallP>
+                {gameBkNow !== 0 ? (
+                  <>
+                    {gameBk === gameBkNow ? (
+                      <Button color="danger">완료</Button>
+                    ) : (
+                      <Button
+                        color="info"
+                        onClick={() => {
+                          apply(projectID, userID, 'game_bk_now');
+                        }}
+                      >
+                        신청
+                      </Button>
+                    )}
+                  </>
                 ) : (
                   <Button
                     color="info"
@@ -723,31 +741,31 @@ export const DetailRecurit = ({
                     신청
                   </Button>
                 )}
-              </>
+              </S.StatusLi>
             ) : (
-              <Button
-                color="info"
-                onClick={() => {
-                  apply(projectID, userID, 'game_bk_now');
-                }}
-              >
-                신청
-              </Button>
+              ''
             )}
-          </S.StatusLi>
-        ) : (
-          ''
-        )}
-        {planBu ? (
-          <S.StatusLi>
-            <S.StatusBigP>사업기획</S.StatusBigP>
-            <S.StatusSmallP>
-              {planBuNow} / {planBu}
-            </S.StatusSmallP>
-            {planBuNow !== 0 ? (
-              <>
-                {planBu === planBuNow ? (
-                  <Button color="danger">완료</Button>
+            {planBu ? (
+              <S.StatusLi>
+                <S.StatusBigP>사업기획</S.StatusBigP>
+                <S.StatusSmallP>
+                  {planBuNow} / {planBu}
+                </S.StatusSmallP>
+                {planBuNow !== 0 ? (
+                  <>
+                    {planBu === planBuNow ? (
+                      <Button color="danger">완료</Button>
+                    ) : (
+                      <Button
+                        color="info"
+                        onClick={() => {
+                          apply(projectID, userID, 'plan_bu_now');
+                        }}
+                      >
+                        신청
+                      </Button>
+                    )}
+                  </>
                 ) : (
                   <Button
                     color="info"
@@ -758,31 +776,31 @@ export const DetailRecurit = ({
                     신청
                   </Button>
                 )}
-              </>
+              </S.StatusLi>
             ) : (
-              <Button
-                color="info"
-                onClick={() => {
-                  apply(projectID, userID, 'plan_bu_now');
-                }}
-              >
-                신청
-              </Button>
+              ''
             )}
-          </S.StatusLi>
-        ) : (
-          ''
-        )}
-        {marketingBu ? (
-          <S.StatusLi>
-            <S.StatusBigP>마케팅</S.StatusBigP>
-            <S.StatusSmallP>
-              {marketingBuNow} / {marketingBu}
-            </S.StatusSmallP>
-            {marketingBuNow !== 0 ? (
-              <>
-                {marketingBu === marketingBuNow ? (
-                  <Button color="danger">완료</Button>
+            {marketingBu ? (
+              <S.StatusLi>
+                <S.StatusBigP>마케팅</S.StatusBigP>
+                <S.StatusSmallP>
+                  {marketingBuNow} / {marketingBu}
+                </S.StatusSmallP>
+                {marketingBuNow !== 0 ? (
+                  <>
+                    {marketingBu === marketingBuNow ? (
+                      <Button color="danger">완료</Button>
+                    ) : (
+                      <Button
+                        color="info"
+                        onClick={() => {
+                          apply(projectID, userID, 'marketing_bu_now');
+                        }}
+                      >
+                        신청
+                      </Button>
+                    )}
+                  </>
                 ) : (
                   <Button
                     color="info"
@@ -793,31 +811,31 @@ export const DetailRecurit = ({
                     신청
                   </Button>
                 )}
-              </>
+              </S.StatusLi>
             ) : (
-              <Button
-                color="info"
-                onClick={() => {
-                  apply(projectID, userID, 'marketing_bu_now');
-                }}
-              >
-                신청
-              </Button>
+              ''
             )}
-          </S.StatusLi>
-        ) : (
-          ''
-        )}
-        {financeBu ? (
-          <S.StatusLi>
-            <S.StatusBigP>재무/회계</S.StatusBigP>
-            <S.StatusSmallP>
-              {financeBuNow} / {financeBu}
-            </S.StatusSmallP>
-            {financeBuNow !== 0 ? (
-              <>
-                {financeBu === financeBuNow ? (
-                  <Button color="danger">완료</Button>
+            {financeBu ? (
+              <S.StatusLi>
+                <S.StatusBigP>재무/회계</S.StatusBigP>
+                <S.StatusSmallP>
+                  {financeBuNow} / {financeBu}
+                </S.StatusSmallP>
+                {financeBuNow !== 0 ? (
+                  <>
+                    {financeBu === financeBuNow ? (
+                      <Button color="danger">완료</Button>
+                    ) : (
+                      <Button
+                        color="info"
+                        onClick={() => {
+                          apply(projectID, userID, 'finance_bu_now');
+                        }}
+                      >
+                        신청
+                      </Button>
+                    )}
+                  </>
                 ) : (
                   <Button
                     color="info"
@@ -828,31 +846,31 @@ export const DetailRecurit = ({
                     신청
                   </Button>
                 )}
-              </>
+              </S.StatusLi>
             ) : (
-              <Button
-                color="info"
-                onClick={() => {
-                  apply(projectID, userID, 'finance_bu_now');
-                }}
-              >
-                신청
-              </Button>
+              ''
             )}
-          </S.StatusLi>
-        ) : (
-          ''
-        )}
-        {salesBu ? (
-          <S.StatusLi>
-            <S.StatusBigP>영업</S.StatusBigP>
-            <S.StatusSmallP>
-              {salesBuNow} / {salesBu}
-            </S.StatusSmallP>
-            {salesBuNow !== 0 ? (
-              <>
-                {salesBu === salesBuNow ? (
-                  <Button color="danger">완료</Button>
+            {salesBu ? (
+              <S.StatusLi>
+                <S.StatusBigP>영업</S.StatusBigP>
+                <S.StatusSmallP>
+                  {salesBuNow} / {salesBu}
+                </S.StatusSmallP>
+                {salesBuNow !== 0 ? (
+                  <>
+                    {salesBu === salesBuNow ? (
+                      <Button color="danger">완료</Button>
+                    ) : (
+                      <Button
+                        color="info"
+                        onClick={() => {
+                          apply(projectID, userID, 'sales_bu_now');
+                        }}
+                      >
+                        신청
+                      </Button>
+                    )}
+                  </>
                 ) : (
                   <Button
                     color="info"
@@ -863,31 +881,31 @@ export const DetailRecurit = ({
                     신청
                   </Button>
                 )}
-              </>
+              </S.StatusLi>
             ) : (
-              <Button
-                color="info"
-                onClick={() => {
-                  apply(projectID, userID, 'sales_bu_now');
-                }}
-              >
-                신청
-              </Button>
+              ''
             )}
-          </S.StatusLi>
-        ) : (
-          ''
-        )}
-        {consultBu ? (
-          <S.StatusLi>
-            <S.StatusBigP>전략/컨설팅</S.StatusBigP>
-            <S.StatusSmallP>
-              {consultBuNow} / {consultBu}
-            </S.StatusSmallP>
-            {consultBuNow !== 0 ? (
-              <>
-                {consultBu === consultBuNow ? (
-                  <Button color="danger">완료</Button>
+            {consultBu ? (
+              <S.StatusLi>
+                <S.StatusBigP>전략/컨설팅</S.StatusBigP>
+                <S.StatusSmallP>
+                  {consultBuNow} / {consultBu}
+                </S.StatusSmallP>
+                {consultBuNow !== 0 ? (
+                  <>
+                    {consultBu === consultBuNow ? (
+                      <Button color="danger">완료</Button>
+                    ) : (
+                      <Button
+                        color="info"
+                        onClick={() => {
+                          apply(projectID, userID, 'consult_bu_now');
+                        }}
+                      >
+                        신청
+                      </Button>
+                    )}
+                  </>
                 ) : (
                   <Button
                     color="info"
@@ -898,31 +916,31 @@ export const DetailRecurit = ({
                     신청
                   </Button>
                 )}
-              </>
+              </S.StatusLi>
             ) : (
-              <Button
-                color="info"
-                onClick={() => {
-                  apply(projectID, userID, 'consult_bu_now');
-                }}
-              >
-                신청
-              </Button>
+              ''
             )}
-          </S.StatusLi>
-        ) : (
-          ''
-        )}
-        {investBu ? (
-          <S.StatusLi>
-            <S.StatusBigP>투자/고문</S.StatusBigP>
-            <S.StatusSmallP>
-              {investBuNow} / {investBu}
-            </S.StatusSmallP>
-            {investBuNow !== 0 ? (
-              <>
-                {investBu === investBuNow ? (
-                  <Button color="danger">완료</Button>
+            {investBu ? (
+              <S.StatusLi>
+                <S.StatusBigP>투자/고문</S.StatusBigP>
+                <S.StatusSmallP>
+                  {investBuNow} / {investBu}
+                </S.StatusSmallP>
+                {investBuNow !== 0 ? (
+                  <>
+                    {investBu === investBuNow ? (
+                      <Button color="danger">완료</Button>
+                    ) : (
+                      <Button
+                        color="info"
+                        onClick={() => {
+                          apply(projectID, userID, 'invest_bu_now');
+                        }}
+                      >
+                        신청
+                      </Button>
+                    )}
+                  </>
                 ) : (
                   <Button
                     color="info"
@@ -933,31 +951,31 @@ export const DetailRecurit = ({
                     신청
                   </Button>
                 )}
-              </>
+              </S.StatusLi>
             ) : (
-              <Button
-                color="info"
-                onClick={() => {
-                  apply(projectID, userID, 'invest_bu_now');
-                }}
-              >
-                신청
-              </Button>
+              ''
             )}
-          </S.StatusLi>
-        ) : (
-          ''
-        )}
-        {etcBu ? (
-          <S.StatusLi>
-            <S.StatusBigP>(사업)그외</S.StatusBigP>
-            <S.StatusSmallP>
-              {etcBuNow} / {etcBu}
-            </S.StatusSmallP>
-            {etcBuNow !== 0 ? (
-              <>
-                {etcBu === etcBuNow ? (
-                  <Button color="danger">완료</Button>
+            {etcBu ? (
+              <S.StatusLi>
+                <S.StatusBigP>(사업)그외</S.StatusBigP>
+                <S.StatusSmallP>
+                  {etcBuNow} / {etcBu}
+                </S.StatusSmallP>
+                {etcBuNow !== 0 ? (
+                  <>
+                    {etcBu === etcBuNow ? (
+                      <Button color="danger">완료</Button>
+                    ) : (
+                      <Button
+                        color="info"
+                        onClick={() => {
+                          apply(projectID, userID, 'etc_bu_now');
+                        }}
+                      >
+                        신청
+                      </Button>
+                    )}
+                  </>
                 ) : (
                   <Button
                     color="info"
@@ -968,31 +986,31 @@ export const DetailRecurit = ({
                     신청
                   </Button>
                 )}
-              </>
+              </S.StatusLi>
             ) : (
-              <Button
-                color="info"
-                onClick={() => {
-                  apply(projectID, userID, 'etc_bu_now');
-                }}
-              >
-                신청
-              </Button>
+              ''
             )}
-          </S.StatusLi>
-        ) : (
-          ''
-        )}
-        {blogEtc ? (
-          <S.StatusLi>
-            <S.StatusBigP>작가/블로거</S.StatusBigP>
-            <S.StatusSmallP>
-              {blogEtcNow} / {blogEtc}
-            </S.StatusSmallP>
-            {blogEtcNow !== 0 ? (
-              <>
-                {blogEtc === blogEtcNow ? (
-                  <Button color="danger">완료</Button>
+            {blogEtc ? (
+              <S.StatusLi>
+                <S.StatusBigP>작가/블로거</S.StatusBigP>
+                <S.StatusSmallP>
+                  {blogEtcNow} / {blogEtc}
+                </S.StatusSmallP>
+                {blogEtcNow !== 0 ? (
+                  <>
+                    {blogEtc === blogEtcNow ? (
+                      <Button color="danger">완료</Button>
+                    ) : (
+                      <Button
+                        color="info"
+                        onClick={() => {
+                          apply(projectID, userID, 'blog_etc_now');
+                        }}
+                      >
+                        신청
+                      </Button>
+                    )}
+                  </>
                 ) : (
                   <Button
                     color="info"
@@ -1003,31 +1021,31 @@ export const DetailRecurit = ({
                     신청
                   </Button>
                 )}
-              </>
+              </S.StatusLi>
             ) : (
-              <Button
-                color="info"
-                onClick={() => {
-                  apply(projectID, userID, 'blog_etc_now');
-                }}
-              >
-                신청
-              </Button>
+              ''
             )}
-          </S.StatusLi>
-        ) : (
-          ''
-        )}
-        {influEtc ? (
-          <S.StatusLi>
-            <S.StatusBigP>인플루언서/유튜버</S.StatusBigP>
-            <S.StatusSmallP>
-              {influEtcNow} / {influEtc}
-            </S.StatusSmallP>
-            {influEtcNow !== 0 ? (
-              <>
-                {influEtc === influEtcNow ? (
-                  <Button color="danger">완료</Button>
+            {influEtc ? (
+              <S.StatusLi>
+                <S.StatusBigP>인플루언서/유튜버</S.StatusBigP>
+                <S.StatusSmallP>
+                  {influEtcNow} / {influEtc}
+                </S.StatusSmallP>
+                {influEtcNow !== 0 ? (
+                  <>
+                    {influEtc === influEtcNow ? (
+                      <Button color="danger">완료</Button>
+                    ) : (
+                      <Button
+                        color="info"
+                        onClick={() => {
+                          apply(projectID, userID, 'influ_etc_now');
+                        }}
+                      >
+                        신청
+                      </Button>
+                    )}
+                  </>
                 ) : (
                   <Button
                     color="info"
@@ -1038,31 +1056,31 @@ export const DetailRecurit = ({
                     신청
                   </Button>
                 )}
-              </>
+              </S.StatusLi>
             ) : (
-              <Button
-                color="info"
-                onClick={() => {
-                  apply(projectID, userID, 'influ_etc_now');
-                }}
-              >
-                신청
-              </Button>
+              ''
             )}
-          </S.StatusLi>
-        ) : (
-          ''
-        )}
-        {compEtc ? (
-          <S.StatusLi>
-            <S.StatusBigP>작곡(사운드)</S.StatusBigP>
-            <S.StatusSmallP>
-              {compEtcNow} / {compEtc}
-            </S.StatusSmallP>
-            {compEtcNow !== 0 ? (
-              <>
-                {compEtc === compEtcNow ? (
-                  <Button color="danger">완료</Button>
+            {compEtc ? (
+              <S.StatusLi>
+                <S.StatusBigP>작곡(사운드)</S.StatusBigP>
+                <S.StatusSmallP>
+                  {compEtcNow} / {compEtc}
+                </S.StatusSmallP>
+                {compEtcNow !== 0 ? (
+                  <>
+                    {compEtc === compEtcNow ? (
+                      <Button color="danger">완료</Button>
+                    ) : (
+                      <Button
+                        color="info"
+                        onClick={() => {
+                          apply(projectID, userID, 'comp_etc_now');
+                        }}
+                      >
+                        신청
+                      </Button>
+                    )}
+                  </>
                 ) : (
                   <Button
                     color="info"
@@ -1073,20 +1091,11 @@ export const DetailRecurit = ({
                     신청
                   </Button>
                 )}
-              </>
+              </S.StatusLi>
             ) : (
-              <Button
-                color="info"
-                onClick={() => {
-                  apply(projectID, userID, 'comp_etc_now');
-                }}
-              >
-                신청
-              </Button>
+              ''
             )}
-          </S.StatusLi>
-        ) : (
-          ''
+          </div>
         )}
       </S.StatusUl>
     </S.DetailStatus>

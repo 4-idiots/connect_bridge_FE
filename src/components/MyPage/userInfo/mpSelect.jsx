@@ -39,32 +39,44 @@ export const MyPageSelect = ({ type, onChange, user }) => {
         <Form.Control>
           <Form.Select
             style={{ width: '14%' }}
-            name="main"
-            onChange={e => onChange({ ...user, main: e.currentTarget.value })}
-            defaultValue={user.main}
+            name="userInterestMain"
+            onChange={e =>
+              onChange({ ...user, userInterestMain: e.currentTarget.value })
+            }
+            defaultValue={user.userInterestMain}
           >
             <option value="">-------</option>
             {genOption(mainArray)}
           </Form.Select>
           <Form.Select
             style={{ width: '16%' }}
-            name="mSkill"
-            onChange={e => onChange({ ...user, mSkill: e.currentTarget.value })}
-            defaultValue={user.mSkill}
+            name="userInterestSub"
+            onChange={e =>
+              onChange({ ...user, userInterestSub: e.currentTarget.value })
+            }
+            defaultValue={user.userInterestSub}
           >
             <option value="">-------</option>
-            {user.main === '기획' && <>{genOption(planArray)}</>}
-            {user.main === '디자인' && <>{genOption(designArray)}</>}
-            {user.main === '프론트엔드개발' && <>{genOption(frontArray)}</>}
-            {user.main === '백엔드개발' && <>{genOption(backArray)}</>}
-            {user.main === '사업' && <>{genOption(coopArray)}</>}
-            {user.main === '기타' && <>{genOption(etcArray)}</>}
+            {user.userInterestMain === '기획' && <>{genOption(planArray)}</>}
+            {user.userInterestMain === '디자인' && (
+              <>{genOption(designArray)}</>
+            )}
+            {user.userInterestMain === '프론트엔드개발' && (
+              <>{genOption(frontArray)}</>
+            )}
+            {user.userInterestMain === '백엔드개발' && (
+              <>{genOption(backArray)}</>
+            )}
+            {user.userInterestMain === '사업' && <>{genOption(coopArray)}</>}
+            {user.userInterestMain === '기타' && <>{genOption(etcArray)}</>}
           </Form.Select>
           <Form.Select
             style={{ width: '14%' }}
-            name="mPro"
-            defaultValue={user.mPro}
-            onChange={e => onChange({ ...user, mPro: e.currentTarget.value })}
+            name="userAbility"
+            defaultValue={user.userAbility}
+            onChange={e =>
+              onChange({ ...user, userAbility: e.currentTarget.value })
+            }
           >
             <option value="">-------</option>
             {genOption(skillArray)}
@@ -75,27 +87,19 @@ export const MyPageSelect = ({ type, onChange, user }) => {
         <Form.Control>
           <Form.Select
             style={{ width: '20%' }}
-            name="onOff"
+            name="userTime"
             onChange={onChangeInput}
-            defaultValue={user.onOff}
+            defaultValue={user.userTime}
           >
             {genOption(onOffArray)}
           </Form.Select>
           <Form.Select
             style={{ width: '16%' }}
-            name="area"
+            name="userArea"
             onChange={onChangeInput}
-            defaultValue={user.area}
+            defaultValue={user.userArea}
           >
             {genOption(areaArray)}
-          </Form.Select>
-          <Form.Select
-            style={{ width: '16%' }}
-            name="time"
-            onChange={onChangeInput}
-            defaultValue={user.time}
-          >
-            {genOption(timeArray)}
           </Form.Select>
         </Form.Control>
       )}

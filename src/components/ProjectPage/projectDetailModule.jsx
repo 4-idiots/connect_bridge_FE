@@ -23,11 +23,11 @@ import { useAuth } from '../../contexts/hooks/useAuth';
 
 export const ProjectDetailForm = () => {
   const auth = useAuth();
-  const { decodedToken, isExpired } = useJwt(auth.token);
+  const { decodedToken } = useJwt(auth.token);
   const navigate = useNavigate();
 
   const { projectID } = useParams();
-  const [postData, setPostData] = useState({});
+  const [postData, setPostData] = useState(null);
 
   const getAxios = async id => {
     try {
@@ -53,87 +53,7 @@ export const ProjectDetailForm = () => {
     getAxios(projectID);
   }, []);
 
-  const {
-    userID,
-    projectTotal,
-    projectImg,
-    projectArea,
-    projectOnOff,
-    projectName,
-    projectField,
-    projectSkill,
-    projectReference,
-    content,
-    projectStart,
-    projectEnd,
-    projectPlatform,
-    projectLike,
-    projectView,
-    uiuxPlan,
-    gamePlan,
-    managerPlan,
-    hwPlan,
-    iosFr,
-    androidFr,
-    webFrontFr,
-    webPublicFr,
-    crossFr,
-    uiuxDe,
-    graphicDe,
-    thrdDe,
-    hwDe,
-    etcDe,
-    webBk,
-    blchBk,
-    aiBk,
-    dsBk,
-    gameBk,
-    planBu,
-    marketingBu,
-    financeBu,
-    salesBu,
-    consultBu,
-    investBu,
-    etcBu,
-    blogEtc,
-    influEtc,
-    compEtc,
-    uiuxPlanNow,
-    gamePlanNow,
-    managerPlanNow,
-    hwPlanNow,
-    iosFrNow,
-    androidFrNow,
-    webFrontFrNow,
-    webPublicFrNow,
-    crossFrNow,
-    uiuxDeNow,
-    graphicDeNow,
-    thrdDeNow,
-    hwDeNow,
-    etcDeNow,
-    webBkNow,
-    blchBkNow,
-    aiBkNow,
-    dsBkNow,
-    gameBkNow,
-    planBuNow,
-    marketingBuNow,
-    financeBuNow,
-    salesBuNow,
-    consultBuNow,
-    investBuNow,
-    etcBuNow,
-    blogEtcNow,
-    influEtcNow,
-    compEtcNow,
-    leaderInfo,
-    memberID,
-    projectSub,
-  } = postData;
-
-  const [notice, setNotice] = useState({});
-
+  const [notice, setNotice] = useState(null);
   const [comment, setComment] = useState('');
   const [where, setWhere] = useState('info');
 
@@ -145,180 +65,173 @@ export const ProjectDetailForm = () => {
       alert('이미 신청하셨습니다.');
     }
   };
-
-  return (
-    <Container style={{ marginTop: 80 }}>
-      {projectName && (
-        <DetailHeader
-          projectOnOff={projectOnOff}
-          projectName={projectName}
-          leaderImg="https://letspl.s3.ap-northeast-2.amazonaws.com/images/project_thumb_05.png"
-          leaderName="name"
-        />
-      )}
-      <S.PageWrap>
-        <S.PageLeft>
-          <Tabs size="medium" type="boxed" style={{ marginBottom: 60 }}>
-            <Tabs.Tab
-              active={where === 'info'}
-              onClick={() => setWhere('info')}
-            >
-              정보
-            </Tabs.Tab>
-            <Tabs.Tab active={where === 'qna'} onClick={() => setWhere('qna')}>
-              질문
-            </Tabs.Tab>
-            {(memberID && memberID.includes(decodedToken.id)) ||
-            (decodedToken && userID === decodedToken.id) ? (
+  if (postData) {
+    return (
+      <Container style={{ marginTop: 80 }}>
+        {postData.projectName && (
+          <DetailHeader
+            projectOnOff={postData.projectOnOff}
+            projectName={postData.projectName}
+            leaderImg="https://letspl.s3.ap-northeast-2.amazonaws.com/images/project_thumb_05.png"
+            leaderName="name"
+          />
+        )}
+        <S.PageWrap>
+          <S.PageLeft>
+            <Tabs size="medium" type="boxed" style={{ marginBottom: 60 }}>
               <Tabs.Tab
-                active={where === 'notice'}
-                onClick={() => setWhere('notice')}
+                active={where === 'info'}
+                onClick={() => setWhere('info')}
               >
-                공지
+                정보
               </Tabs.Tab>
-            ) : (
-              <Tabs.Tab>공지 🔒</Tabs.Tab>
-            )}
-            {decodedToken && userID === decodedToken.id ? (
               <Tabs.Tab
-                active={where === 'apply'}
-                onClick={() => setWhere('apply')}
+                active={where === 'qna'}
+                onClick={() => setWhere('qna')}
               >
-                관리
+                질문
               </Tabs.Tab>
-            ) : (
-              <Tabs.Tab>관리 🔒</Tabs.Tab>
-            )}
-          </Tabs>
-
-          {where === 'info' &&
-            projectPlatform &&
-            content &&
-            projectSkill &&
-            projectReference && (
-              <S.LeftDetail>
-                <DetailRecurit
-                  uiuxPlan={uiuxPlan}
-                  gamePlan={gamePlan}
-                  managerPlan={managerPlan}
-                  hwPlan={hwPlan}
-                  iosFr={iosFr}
-                  androidFr={androidFr}
-                  webFrontFr={webFrontFr}
-                  webPublicFr={webPublicFr}
-                  crossFr={crossFr}
-                  uiuxDe={uiuxDe}
-                  graphicDe={graphicDe}
-                  thrdDe={thrdDe}
-                  hwDe={hwDe}
-                  etcDe={etcDe}
-                  webBk={webBk}
-                  blchBk={blchBk}
-                  aiBk={aiBk}
-                  dsBk={dsBk}
-                  gameBk={gameBk}
-                  planBu={planBu}
-                  marketingBu={marketingBu}
-                  financeBu={financeBu}
-                  salesBu={salesBu}
-                  consultBu={consultBu}
-                  investBu={investBu}
-                  etcBu={etcBu}
-                  blogEtc={blogEtc}
-                  influEtc={influEtc}
-                  compEtc={compEtc}
-                  uiuxPlanNow={uiuxPlanNow}
-                  gamePlanNow={gamePlanNow}
-                  managerPlanNow={managerPlanNow}
-                  hwPlanNow={hwPlanNow}
-                  iosFrNow={iosFrNow}
-                  androidFrNow={androidFrNow}
-                  webFrontFrNow={webFrontFrNow}
-                  webPublicFrNow={webPublicFrNow}
-                  crossFrNow={crossFrNow}
-                  uiuxDeNow={uiuxDeNow}
-                  graphicDeNow={graphicDeNow}
-                  thrdDeNow={thrdDeNow}
-                  hwDeNow={hwDeNow}
-                  etcDeNow={etcDeNow}
-                  webBkNow={webBkNow}
-                  blchBkNow={blchBkNow}
-                  aiBkNow={aiBkNow}
-                  dsBkNow={dsBkNow}
-                  gameBkNow={gameBkNow}
-                  planBuNow={planBuNow}
-                  marketingBuNow={marketingBuNow}
-                  financeBuNow={financeBuNow}
-                  salesBuNow={salesBuNow}
-                  consultBuNow={consultBuNow}
-                  investBuNow={investBuNow}
-                  etcBuNow={etcBuNow}
-                  blogEtcNow={blogEtcNow}
-                  influEtcNow={influEtcNow}
-                  compEtcNow={compEtcNow}
-                  apply={applyService}
-                  userID={3}
-                  projectID={Number(projectID)}
-                />
-                <DetailPlatform projectPlatform={projectPlatform} />
-                <DetailContent value={content} />
-                <DetailSkill projectSkill={projectSkill} />
-                <DetailReference projectReference={projectReference} />
-              </S.LeftDetail>
-            )}
-          {where === 'qna' && (
-            <S.CommentWrap>
-              <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
-                👍 이 모임에 응원 * 질문을 올려주세요!
-              </Heading>
-              <DetailCommentInput comment={comment} setComment={setComment} />
-              <DetailCommentLog />
-              {/* 여기는 석환이랑 db 협의가 끝나면 개발 */}
-              <S.MediaBox />
-            </S.CommentWrap>
-          )}
-          {where === 'apply' && (
-            <div>
-              <S.TalUl>
-                <S.TabUpdate
-                  onClick={() => navigate(`/project/update/${projectID}`)}
+              {(postData.memberID &&
+                postData.memberID.includes(decodedToken.id)) ||
+              (decodedToken && postData.userID === decodedToken.id) ? (
+                <Tabs.Tab
+                  active={where === 'notice'}
+                  onClick={() => setWhere('notice')}
                 >
-                  수정
-                </S.TabUpdate>
-                <S.TabUpdate
-                  onClick={() => {
-                    deleteAxios(projectID);
-                  }}
+                  공지
+                </Tabs.Tab>
+              ) : (
+                <Tabs.Tab>공지 🔒</Tabs.Tab>
+              )}
+              {decodedToken && postData.userID === decodedToken.id ? (
+                <Tabs.Tab
+                  active={where === 'apply'}
+                  onClick={() => setWhere('apply')}
                 >
-                  삭제
-                </S.TabUpdate>
-              </S.TalUl>
-            </div>
-          )}
-          {where === 'notice' && (
-            <div>
-              <div>notice</div>
-            </div>
-          )}
-        </S.PageLeft>
-        {projectField &&
-          leaderInfo &&
-          typeof projectLike === typeof projectView &&
-          projectStart &&
-          projectEnd && (
-            <DetailRightCard
-              leaderImg="https://letspl.s3.ap-northeast-2.amazonaws.com/images/project_thumb_05.png"
-              leaderName="name"
-              leaderInfo={leaderInfo.introduce}
-              projectField={projectField}
-              projectLike={projectLike}
-              projectView={projectView}
-              projectStart={projectStart}
-              projectEnd={projectEnd}
-              projectSub={false}
-            />
-          )}
-      </S.PageWrap>
-    </Container>
-  );
+                  관리
+                </Tabs.Tab>
+              ) : (
+                <Tabs.Tab>관리 🔒</Tabs.Tab>
+              )}
+            </Tabs>
+            <S.LeftDetail>
+              <DetailRecurit
+                uiuxPlan={postData.uiuxPlan}
+                gamePlan={postData.gamePlan}
+                managerPlan={postData.managerPlan}
+                hwPlan={postData.hwPlan}
+                iosFr={postData.iosFr}
+                androidFr={postData.androidFr}
+                webFrontFr={postData.webFrontFr}
+                webPublicFr={postData.webPublicFr}
+                crossFr={postData.crossFr}
+                uiuxDe={postData.uiuxDe}
+                graphicDe={postData.graphicDe}
+                thrdDe={postData.thrdDe}
+                hwDe={postData.hwDe}
+                etcDe={postData.etcDe}
+                webBk={postData.webBk}
+                blchBk={postData.blchBk}
+                aiBk={postData.aiBk}
+                dsBk={postData.dsBk}
+                gameBk={postData.gameBk}
+                planBu={postData.planBu}
+                marketingBu={postData.marketingBu}
+                financeBu={postData.financeBu}
+                salesBu={postData.salesBu}
+                consultBu={postData.consultBu}
+                investBu={postData.investBu}
+                etcBu={postData.etcBu}
+                blogEtc={postData.blogEtc}
+                influEtc={postData.influEtc}
+                compEtc={postData.compEtc}
+                uiuxPlanNow={postData.uiuxPlanNow}
+                gamePlanNow={postData.gamePlanNow}
+                managerPlanNow={postData.managerPlanNow}
+                hwPlanNow={postData.hwPlanNow}
+                iosFrNow={postData.iosFrNow}
+                androidFrNow={postData.androidFrNow}
+                webFrontFrNow={postData.webFrontFrNow}
+                webPublicFrNow={postData.webPublicFrNow}
+                crossFrNow={postData.crossFrNow}
+                uiuxDeNow={postData.uiuxDeNow}
+                graphicDeNow={postData.graphicDeNow}
+                thrdDeNow={postData.thrdDeNow}
+                hwDeNow={postData.hwDeNow}
+                etcDeNow={postData.etcDeNow}
+                webBkNow={postData.webBkNow}
+                blchBkNow={postData.blchBkNow}
+                aiBkNow={postData.aiBkNow}
+                dsBkNow={postData.dsBkNow}
+                gameBkNow={postData.gameBkNow}
+                planBuNow={postData.planBuNow}
+                marketingBuNow={postData.marketingBuNow}
+                financeBuNow={postData.financeBuNow}
+                salesBuNow={postData.salesBuNow}
+                consultBuNow={postData.consultBuNow}
+                investBuNow={postData.investBuNow}
+                etcBuNow={postData.etcBuNow}
+                blogEtcNow={postData.blogEtcNow}
+                influEtcNow={postData.influEtcNow}
+                compEtcNow={postData.compEtcNow}
+                apply={applyService}
+                userID={postData.userID}
+                projectID={Number(projectID)}
+              />
+              <DetailPlatform projectPlatform={postData.projectPlatform} />
+              <DetailContent value={postData.content} />
+              <DetailSkill projectSkill={postData.projectSkill} />
+              <DetailReference projectReference={postData.projectReference} />
+            </S.LeftDetail>
+            {where === 'qna' && (
+              <S.CommentWrap>
+                <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
+                  👍 이 모임에 응원 * 질문을 올려주세요!
+                </Heading>
+                <DetailCommentInput comment={comment} setComment={setComment} />
+                <DetailCommentLog />
+                {/* 여기는 석환이랑 db 협의가 끝나면 개발 */}
+                <S.MediaBox />
+              </S.CommentWrap>
+            )}
+            {where === 'apply' && (
+              <div>
+                <S.TalUl>
+                  <S.TabUpdate
+                    onClick={() => navigate(`/project/update/${projectID}`)}
+                  >
+                    수정
+                  </S.TabUpdate>
+                  <S.TabUpdate
+                    onClick={() => {
+                      deleteAxios(projectID);
+                    }}
+                  >
+                    삭제
+                  </S.TabUpdate>
+                </S.TalUl>
+              </div>
+            )}
+            {where === 'notice' && (
+              <div>
+                <div>notice</div>
+              </div>
+            )}
+          </S.PageLeft>
+          <DetailRightCard
+            leaderImg="https://letspl.s3.ap-northeast-2.amazonaws.com/images/project_thumb_05.png"
+            leaderName="name"
+            leaderInfo={postData.leaderInfo.introduce}
+            projectField={postData.projectField}
+            projectLike={postData.projectLike}
+            projectView={postData.projectView}
+            projectStart={postData.projectStart}
+            projectEnd={postData.projectEnd}
+            projectSub={false}
+          />
+        </S.PageWrap>
+      </Container>
+    );
+  }
+  return null;
 };

@@ -42,3 +42,4 @@ export { CommunityWriteForm } from './CommunityPage/communityWrite';
 // MyPage
 export { MyPageForm } from './MyPage/myPageModule';
 export { MyProjectStudyForm } from './MyPage/myProjectStudy';
+export { MyCommunityForm } from './MyPage/myCommunity';

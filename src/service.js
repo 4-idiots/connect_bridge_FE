@@ -218,3 +218,29 @@ export const projectNoticeUploadService = (projectID, content) => {
 export const projectGetAdminService = projectID => {
   return customAxios.get('');
 };
+
+export const mypageGetUserService = userID => {
+  return customAxios.get(`/api/my/info/${userID}`);
+};
+
+export const checkNicknameService = userNickname => {
+  return customAxios.get(
+    `/api/users/check/userNickname?userNickname=${userNickname}`,
+  );
+};
+
+export const mypageUpdate = formData => {
+  return customAxios.patch(`/api/my/info`, formData, {
+    headers: {
+      'content-type': 'multipart/form-data',
+    },
+  });
+};
+
+export const myCommunityGetService = userID => {
+  return customAxios.get(`/api/mycommunity/${userID}`);
+};
+
+export const communityDelete = communityID => {
+  return customAxios.delete(`/api/community/${communityID}`);
+};
