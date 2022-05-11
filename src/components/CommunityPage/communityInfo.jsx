@@ -40,6 +40,10 @@ export const CommunityInfoForm = () => {
   const [comment, setComment] = useState('');
   const onChange = event => setComment(event.target.value);
   const [commentList, setCommentList] = useState([]);
+  const [userAbility, setuserAbility] = useState('');
+  const [userInterestMain, setuserInterestMain] = useState('');
+  const [userInterestSub, setuserInterestSub] = useState('');
+  const [userID, setuserID] = useState('');
   const onSubmit = e => {
     e.preventDefault();
     if (teID > 0) {
@@ -58,34 +62,20 @@ export const CommunityInfoForm = () => {
     }
   };
 
-  const [Contents, setContent] = useState({
-    projectContent: [
-      {
-        type: 'paragaph',
-        children: [
-          { text: 'asdasd ' },
-          { text: ' sadasd....asdasd', bold: true },
-        ],
-      },
-      {
-        type: 'paragaph',
-        children: [
-          { text: 'bbbb', color: '#a10000', bold: true },
-          { color: '#a10000', text: 'sdasd' },
-        ],
-      },
-      { type: 'paragaph', children: [{ text: 'asdasd', color: '#a10000' }] },
-      { type: 'blockquote', children: [{ text: 'asdas' }] },
-      { type: 'paragaph', children: [{ text: 'das', underline: true }] },
-      { type: 'paragaph', children: [{ text: 'dasd' }] },
-      { type: 'paragaph', children: [{ text: 'asd' }] },
-    ],
-  });
+  const [contents, setcontents] = useState(null);
 
   const statedata = () => {
     setstate(current => !current);
   };
-
+  const ChangeClick = () => {
+    window.location = `/community/change/${communityID}`;
+  };
+  const DeleteClick = () => {
+    axios.delete(`/api/community/${communityID}`).then(response => {
+      window.location = '/community';
+      console.log(communityID);
+    });
+  };
   const likesClick = () => {
     if (state === 1) {
       axios.get(`/api/community/like/${teID}/${communityID}`).then(response => {
@@ -126,7 +116,12 @@ export const CommunityInfoForm = () => {
         setlikeCount(response.data.likeCount);
         setstate(response.data.state);
         setColor(response.data.color);
+        setuserAbility(response.data.userAbility);
+        setuserInterestMain(response.data.userInterestMain);
+        setuserInterestSub(response.data.userInterestSub);
         setcommentCount(response.data.commentCount);
+        setcontents(response.data.contents);
+        setuserID(response.data.userID);
         /* setCommentList(response.data.commentList); */
       });
     } else {
@@ -141,7 +136,12 @@ export const CommunityInfoForm = () => {
         setviewCount(response.data.viewCount);
         setlikeCount(response.data.likeCount);
         setColor(response.data.color);
+        setuserAbility(response.data.userAbility);
+        setuserInterestMain(response.data.userInterestMain);
+        setuserInterestSub(response.data.userInterestSub);
         setcommentCount(response.data.commentCount);
+        setcontents(response.data.contents);
+        setuserID(response.data.userID);
       });
     }
   };
@@ -186,7 +186,7 @@ export const CommunityInfoForm = () => {
             fontSize: '0.7em',
           }}
         >
-          실력 : 초보자
+          실력 : {userAbility}
         </p>
         <p
           style={{
@@ -196,7 +196,7 @@ export const CommunityInfoForm = () => {
             fontSize: '0.7em',
           }}
         >
-          관심분야 : 프론트엔드
+          관심분야 : {userInterestMain}/ {userInterestSub}
         </p>
         <p
           style={{
@@ -233,7 +233,12 @@ export const CommunityInfoForm = () => {
         <div
           style={{ marginTop: '2%', marginBottom: 'auto', marginLeft: '8%' }}
         >
+<<<<<<< HEAD
           <ReadOnlySlate value={Contents.contents} />
+=======
+          {contents && <ReadOnlySlate value={contents} />}
+
+>>>>>>> community_six
           <br />
           <br />
           {hashtag.map((item, id) => (
@@ -261,6 +266,23 @@ export const CommunityInfoForm = () => {
               <button className="commetBtn">등록</button>
             </form>
           </div>
+          {JSON.stringify(decodedToken?.id)}
+          {JSON.stringify()}
+          <div style={{ textAlign: 'center' }}>
+            {userID === decodedToken?.id ? (
+              <Button.Group align="center">
+                <Button color="success" onClick={ChangeClick}>
+                  수정하기
+                </Button>
+                <Button color="success" onClick={DeleteClick}>
+                  삭제하기
+                </Button>
+              </Button.Group>
+            ) : (
+              <> </>
+            )}
+          </div>
+          {JSON.stringify(userNickname)}
 
           <ul className="comment">
             {commentList.map((value, id) => (

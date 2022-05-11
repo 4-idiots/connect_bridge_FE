@@ -38,6 +38,7 @@ export { CommunityserachForm } from './CommunityPage/communityserach';
 
 export { CommunityInfoForm } from './CommunityPage/communityInfo';
 export { CommunityWriteForm } from './CommunityPage/communityWrite';
+export { CommunityChangeForm } from './CommunityPage/communityChange';
 
 // MyPage
 export { MyPageForm } from './MyPage/myPageModule';

@@ -24,43 +24,27 @@ import { useJwt } from 'react-jwt';
 import { useAuth } from '../../contexts/hooks/useAuth';
 import SlateEditor from '../../SlateEditor/Editor';
 
-export const CommunityWriteForm = () => {
+export const CommunityChangeForm = () => {
   const [data, setdata] = useState([]);
   const [tagInput, setTagInput] = useState('');
   const [hashtag, sethashtag] = useState([]);
   const [title, settitle] = useState('');
   const auth = useAuth();
   const { decodedToken, isExpired } = useJwt(auth.token);
-  const { fromUserId } = useParams(`${decodedToken?.id}`);
-
-  const [postInfo, setPostInfo] = useState({
-    indata: [
-      {
-        type: 'paragaph',
-        children: [{ text: '커뮤니티' }],
-      },
-    ],
-  });
-
-  const [contents, setcontents] = useState({
-    content: [
-      {
-        type: 'paragaph',
-        children: [{ text: '글작성' }],
-      },
-    ],
-  });
+  const { teID } = useParams(`${decodedToken?.id}`);
+  const [users, setusers] = useState([]);
+  const [postID, setpostID] = useState(0);
+  const { communityID } = useParams();
+  const [contents, setcontents] = useState({});
 
   const userData = () => {
-    return axios.get('/api/communityw').then(response => {
+    axios.get(`/api/communitychange/${communityID}`).then(response => {
       console.log(response);
-      setdata(response.data);
+      sethashtag(response.data.hashtag);
+      settitle(response.data.title);
+      setcontents({ content: response.data.contents });
     });
   };
-
-  useEffect(() => {
-    userData();
-  }, []);
 
   const titledata = e => {
     settitle(e.target.value);
@@ -80,10 +64,11 @@ export const CommunityWriteForm = () => {
     sethashtag(hashtag.filter(item => item !== id));
   };
 
-  const Write = e => {
+  const Change = e => {
     if (title) {
       axios
-        .post(`/api/write/${decodedToken?.id}`, {
+        .patch('/api/community/write', {
+          postID,
           hashtag,
           title,
           contents: JSON.stringify(contents.content),
@@ -104,12 +89,13 @@ export const CommunityWriteForm = () => {
     e.preventDefault();
   };
 
+  useEffect(() => {
+    userData();
+  }, []);
   return (
     <Container>
-      {JSON.stringify(fromUserId)}
-
       <Heading style={{ textAlign: 'center', margin: 35 }}>
-        커뮤니티 글쓰기
+        커뮤니티 수정하기
       </Heading>
       <Box style={{ margin: 100, Box: 'center' }}>
         <Form.Field>
@@ -120,8 +106,10 @@ export const CommunityWriteForm = () => {
         </Form.Field>
 
         <Form.Label>내용</Form.Label>
-        <SlateEditor value={contents} setValue={setcontents} />
 
+        {contents.content && (
+          <SlateEditor value={contents} setValue={setcontents} />
+        )}
         <br />
         {JSON.stringify(contents)}
         <br />
@@ -155,8 +143,8 @@ export const CommunityWriteForm = () => {
         </Form.Field>
 
         <div style={{ textAlign: 'center' }}>
-          <Button color="danger" size="small" onClick={Write}>
-            작성
+          <Button color="danger" size="small" onClick={Change}>
+            수정
           </Button>
         </div>
       </Box>
