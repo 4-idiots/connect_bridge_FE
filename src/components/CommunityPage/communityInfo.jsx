@@ -233,12 +233,8 @@ export const CommunityInfoForm = () => {
         <div
           style={{ marginTop: '2%', marginBottom: 'auto', marginLeft: '8%' }}
         >
-<<<<<<< HEAD
-          <ReadOnlySlate value={Contents.contents} />
-=======
           {contents && <ReadOnlySlate value={contents} />}
 
->>>>>>> community_six
           <br />
           <br />
           {hashtag.map((item, id) => (
