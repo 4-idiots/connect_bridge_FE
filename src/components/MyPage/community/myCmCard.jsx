@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Heading, Tag, Icon, Button } from 'react-bulma-components';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import * as S from './style';
 import ReadOnlySlate from '../../../SlateEditor/ReadOnly';
 
-export const MyCmCard = ({ item, deleteAxios }) => {
+export const MyCmCard = ({ item, deleteAxios, userID }) => {
   const [content, setContent] = useState('');
+  const navigate = useNavigate();
 
   const getAll = () => {
     let te = '';
@@ -29,7 +31,9 @@ export const MyCmCard = ({ item, deleteAxios }) => {
 
   return (
     <S.CmContainer>
-      <S.CmTextBox>
+      <S.CmTextBox
+        onClick={() => navigate(`/community/info/${userID}/${item.postID}`)}
+      >
         <Heading size={5}>{item.title}</Heading>
         <S.CmContentBox>
           {content && <ReadOnlySlate value={content} />}
@@ -64,7 +68,11 @@ export const MyCmCard = ({ item, deleteAxios }) => {
           </S.CmIconWrap>
         </S.CmCountBox>
         <Button.Group>
-          <Button style={{ fontSize: 14 }} color="warning">
+          <Button
+            style={{ fontSize: 14 }}
+            color="warning"
+            onClick={() => navigate(`/community/change/${item.postID}`)}
+          >
             수정
           </Button>
           <Button
@@ -83,4 +91,5 @@ export const MyCmCard = ({ item, deleteAxios }) => {
 MyCmCard.propTypes = {
   item: PropTypes.objectOf(PropTypes.any).isRequired,
   deleteAxios: PropTypes.func.isRequired,
+  userID: PropTypes.number.isRequired,
 };

@@ -5,19 +5,30 @@ import { useAuth } from '../../contexts/hooks/useAuth';
 
 export const NavbarForm = () => {
   const [burger, setBurger] = useState(false);
+  const [isHover, setIsHover] = useState(false);
   const auth = useAuth();
   const isLogin = localStorage.getItem('isLogin') || '';
 
   return (
     <Navbar fixed="top" color="white" style={{ padding: 10 }}>
       <Navbar.Brand>
-        <Navbar.Item renderAs={Link} to="/" style={{ marginRight: 60 }}>
+        <Link
+          to="/"
+          onMouseEnter={() => {
+            setIsHover(true);
+          }}
+          onMouseLeave={() => {
+            setIsHover(false);
+          }}
+          style={isHover ? { backgroundColor: '#e5e5e5' } : {}}
+        >
           <img
-            src="https://cdn.discordapp.com/attachments/885739536301318172/972721445681651762/Frame_9.png"
+            style={{ margin: '0 30px 0 30px' }}
+            src="https://cdn.discordapp.com/attachments/885739536301318172/973944679563399208/connectbridge.png"
             alt="img"
             width={140}
           />
-        </Navbar.Item>
+        </Link>
         <Navbar.Burger
           onClick={() => {
             setBurger(!burger);

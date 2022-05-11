@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Media, Button, Image, Content, Icon } from 'react-bulma-components';
+import { projectLikeService } from '../../../service';
 import * as S from './style';
 
 export const DetailRightCard = ({
@@ -13,7 +14,19 @@ export const DetailRightCard = ({
   projectEnd,
   projectField,
   projectSub,
+  projectID,
 }) => {
+  const [like, setLike] = useState(projectSub);
+
+  const onLikeClick = async () => {
+    try {
+      const result = await projectLikeService(projectID);
+      setLike(!like);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <S.PageRight>
       <S.RightInfo>
@@ -64,14 +77,14 @@ export const DetailRightCard = ({
         <S.RightPSmall>{projectField}</S.RightPSmall>
       </S.RightMid>
 
-      {projectSub ? (
+      {like ? (
         <S.RightFollow>
           <S.RightPBig>프로젝트 구독 취소</S.RightPBig>
           <Button.Group align="center">
             <Button
               className="is-light"
               color="danger"
-              onClick={() => {}}
+              onClick={onLikeClick}
               size="medium"
               style={{ width: '100%' }}
             >
@@ -86,7 +99,7 @@ export const DetailRightCard = ({
             <Button
               className="is-light"
               color="danger"
-              onClick={() => {}}
+              onClick={onLikeClick}
               size="medium"
               style={{ width: '100%' }}
             >
@@ -109,4 +122,5 @@ DetailRightCard.propTypes = {
   projectEnd: PropTypes.string.isRequired,
   projectField: PropTypes.string.isRequired,
   projectSub: PropTypes.bool.isRequired,
+  projectID: PropTypes.string.isRequired,
 };

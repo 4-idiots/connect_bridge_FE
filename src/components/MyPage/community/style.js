@@ -13,6 +13,7 @@ export const CmContainer = styled.div`
 export const CmTextBox = styled.div`
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 `;
 
 export const CmContentBox = styled.div`

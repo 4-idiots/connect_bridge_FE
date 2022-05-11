@@ -7,3 +7,4 @@ export { DetailReference } from './detailReference';
 export { DetailCommentInput } from './detailCommentInput';
 export { DetailCommentLog } from './detailCommentLog';
 export { DetailRightCard } from './detailRightCard';
+export { DetailMember } from './detailMember';

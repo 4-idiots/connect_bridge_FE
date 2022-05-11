@@ -217,3 +217,26 @@ export const CustomFormWrap = styled.div`
 `;
 
 export const MediaBox = styled.div``;
+
+export const DetailMember = styled.div`
+  border-bottom: 1px solid #e6e6e6;
+  margin-bottom: 35px;
+  box-sizing: border-box;
+  padding: 15px 24px 15px 0;
+`;
+
+export const MemberGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  row-gap: 3rem;
+`;
+
+export const MemberCardText = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+`;
+
+export const MemberCardLeft = styled.div``;
+
+export const MemberCardRight = styled.div``;

@@ -12,6 +12,7 @@ import {
   DetailCommentInput,
   DetailCommentLog,
   DetailRightCard,
+  DetailMember,
 } from './detailComponent/detailRoutes';
 import * as S from './detailComponent/style';
 import {
@@ -34,6 +35,7 @@ export const ProjectDetailForm = () => {
   const getAxios = async id => {
     try {
       const result = await projectGetSomeService(id);
+      console.log(result);
       setPostData(result.data);
     } catch (error) {
       console.log(error);
@@ -185,6 +187,7 @@ export const ProjectDetailForm = () => {
                 <DetailContent value={postData.content} />
                 <DetailSkill projectSkill={postData.projectSkill} />
                 <DetailReference projectReference={postData.projectReference} />
+                <DetailMember item={postData.memberID} />
               </S.LeftDetail>
             )}
             {where === 'qna' ? (
@@ -236,6 +239,7 @@ export const ProjectDetailForm = () => {
             projectStart={postData.projectStart}
             projectEnd={postData.projectEnd}
             projectSub={postData.projectSub}
+            projectID={projectID}
           />
         </S.PageWrap>
       </Container>
