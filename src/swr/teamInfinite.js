@@ -10,7 +10,10 @@ const getKey = (pageIndex, previousPageData) => {
   if (previousPageData && !previousPageData.length) return null;
 
   if (pageIndex === 0) return `/api/team${0}`;
+<<<<<<< HEAD
 
+=======
+>>>>>>> community_sev
   return `/api/team${pageIndex}`;
 };
 

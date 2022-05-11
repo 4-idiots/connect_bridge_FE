@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-nested-ternary */
 import axios from 'axios';
@@ -37,13 +38,14 @@ export const CommunityInfoForm = () => {
   const { teID } = useParams(`${decodedToken?.id}`);
   const [color, setColor] = useState('');
   const [state, setstate] = useState(0);
-  const [comment, setComment] = useState('');
-  const onChange = event => setComment(event.target.value);
-  const [commentList, setCommentList] = useState([]);
+  const [comment, setcomment] = useState('');
+  const onChange = event => setcomment(event.target.value);
+  const [commentList, setcommentList] = useState();
   const [userAbility, setuserAbility] = useState('');
   const [userInterestMain, setuserInterestMain] = useState('');
   const [userInterestSub, setuserInterestSub] = useState('');
   const [userID, setuserID] = useState('');
+  const [ida, setida] = useState({});
   const onSubmit = e => {
     e.preventDefault();
     if (teID > 0) {
@@ -56,8 +58,9 @@ export const CommunityInfoForm = () => {
           if (comment === '') {
             return;
           }
-          setCommentList(commentValueList => [comment, ...commentValueList]);
-          setComment('');
+          setcommentList(commentValueList => [comment, ...commentValueList]);
+          setcomment('');
+          window.location.reload();
         });
     }
   };
@@ -76,6 +79,7 @@ export const CommunityInfoForm = () => {
       console.log(communityID);
     });
   };
+
   const likesClick = () => {
     if (state === 1) {
       axios.get(`/api/community/like/${teID}/${communityID}`).then(response => {
@@ -122,7 +126,8 @@ export const CommunityInfoForm = () => {
         setcommentCount(response.data.commentCount);
         setcontents(response.data.contents);
         setuserID(response.data.userID);
-        /* setCommentList(response.data.commentList); */
+        setcommentList(response.data.commentList);
+        setcomment(response.data.commentList.comment);
       });
     } else {
       axios.get(`/api/community/info/0/${communityID}`).then(response => {
@@ -142,8 +147,20 @@ export const CommunityInfoForm = () => {
         setcommentCount(response.data.commentCount);
         setcontents(response.data.contents);
         setuserID(response.data.userID);
+        setcommentList(response.data.commentList);
+        setcomment(response.data.commentList.comment);
       });
     }
+  };
+  const CommentChangeClick = (cmID, cmComment) => {
+    axios.patch(`/api/community/comment`, cmID, cmComment).then(response => {
+      window.location.reload();
+    });
+  };
+  const CommentDeleteClick = cmID => {
+    axios.delete(`/api/community/comment/${cmID}/${postID}`).then(response => {
+      window.location.reload();
+    });
   };
 
   useEffect(() => {
@@ -262,8 +279,6 @@ export const CommunityInfoForm = () => {
               <button className="commetBtn">등록</button>
             </form>
           </div>
-          {JSON.stringify(decodedToken?.id)}
-          {JSON.stringify()}
           <div style={{ textAlign: 'center' }}>
             {userID === decodedToken?.id ? (
               <Button.Group align="center">
@@ -278,23 +293,34 @@ export const CommunityInfoForm = () => {
               <> </>
             )}
           </div>
-          {JSON.stringify(userNickname)}
-
-          <ul className="comment">
-            {commentList.map((value, id) => (
-              // eslint-disable-next-line react/no-array-index-key
-              <li key={id} className="commentText">
-                <div className="commentMargin">
-                  <span className="commentNameBold">{userNickname} </span>
-                  {value}
+          {commentList &&
+            commentList.map((item, id) => (
+              <div key={id}>
+                닉:{item.userNickname} 내용:{item.comment}{' '}
+                <div style={{ textAlign: 'center' }}>
+                  {item.userID === decodedToken?.id ? (
+                    <Button.Group align="center">
+                      <Button
+                        color="black"
+                        onClick={() =>
+                          CommentChangeClick(item.id, item.comment)
+                        }
+                      >
+                        수정
+                      </Button>
+                      <Button
+                        color="black"
+                        onClick={() => CommentDeleteClick(item.id)}
+                      >
+                        삭제
+                      </Button>
+                    </Button.Group>
+                  ) : (
+                    <> </>
+                  )}
                 </div>
-
-                <div className="commentStart">
-                  <i className="far fa-trash-alt" />
-                </div>
-              </li>
+              </div>
             ))}
-          </ul>
         </div>
       </Box>
     </Container>
