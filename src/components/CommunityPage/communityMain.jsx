@@ -83,6 +83,20 @@ export const CommunityForm = ({ commentCount, onActClick, hashtag }) => {
               전체 게시물 목록
             </h1>
             <br />
+            <div style={{ textAlign: 'right' }}>
+              {isExpired === false ? (
+                <Button
+                  color="danger"
+                  size="small"
+                  renderAs={Link}
+                  to="/community/write"
+                >
+                  글쓰기
+                </Button>
+              ) : (
+                <> </>
+              )}
+            </div>
           </div>
         </Layout>
         <Boardtop>
@@ -163,7 +177,7 @@ export const CommunityForm = ({ commentCount, onActClick, hashtag }) => {
                       userNickname,
                       viewCount,
                       likeCount,
-                      body,
+                      commentCount,
                     }) => (
                       <Bl2 style={{ cursor: 'pointer' }} key={postID}>
                         <Bl3 style={{ fontSize: 'medium' }} className="size01">
@@ -179,7 +193,10 @@ export const CommunityForm = ({ commentCount, onActClick, hashtag }) => {
                             style={{ color: 'black' }}
                             to={`/community/info/${decodedToken?.id}/${postID}`}
                           >
-                            {title}
+                            {title}{' '}
+                            <span style={{ color: 'red' }}>
+                              ({commentCount})
+                            </span>
                           </Link>
                         </Bl3>
                         <Bl3 style={{ fontSize: 'medium' }} className="size03">

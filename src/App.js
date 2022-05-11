@@ -25,6 +25,7 @@ import {
   StudyDetail,
   StudyMain,
   StudyUpdate,
+  CommunityChange,
 } from './pages/pRoutes';
 import { AuthContext } from './contexts/store/auth';
 import { useProvideAuth } from './contexts/hooks/useProvideAuth';
@@ -63,6 +64,10 @@ const App = () => {
           <Route path="/community/popular" element={<CommunityP />} />
           <Route path="/serach/:query" element={<Communityserach />} />
           <Route path="/community/write" element={<CommunityWrite />} />
+          <Route
+            path="/community/change/:communityID"
+            element={<CommunityChange />}
+          />
           <Route
             path="/community/info/:teID/:communityID"
             element={<CommunityInfo />}
