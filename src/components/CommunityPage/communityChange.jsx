@@ -33,7 +33,6 @@ export const CommunityChangeForm = () => {
   const { decodedToken, isExpired } = useJwt(auth.token);
   const { teID } = useParams(`${decodedToken?.id}`);
   const [users, setusers] = useState([]);
-  const [postID, setpostID] = useState(0);
   const { communityID } = useParams();
   const [contents, setcontents] = useState({});
 
@@ -68,7 +67,7 @@ export const CommunityChangeForm = () => {
     if (title) {
       axios
         .patch('/api/community/write', {
-          postID,
+          postID: communityID,
           hashtag,
           title,
           contents: JSON.stringify(contents.content),
@@ -76,7 +75,7 @@ export const CommunityChangeForm = () => {
 
         .then(response => {
           console.log(response.data.message);
-          userData();
+
           alert('작성이 완료하였습니다.');
           window.location = '/community';
         })

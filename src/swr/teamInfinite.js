@@ -5,14 +5,12 @@ import PropTypes from 'prop-types';
 import fetcher from './fetcher';
 import useOnScreen from './useOnScreen';
 import { TeamCardForm } from '../components/TeamPage/cardTeam';
-import { teamGetAllService } from '../service';
 
 const getKey = (pageIndex, previousPageData) => {
   if (previousPageData && !previousPageData.length) return null;
 
-  if (pageIndex === 0) return teamGetAllService(0);
-
-  return teamGetAllService(pageIndex);
+  if (pageIndex === 0) return `/api/team${0}`;
+  return `/api/team${pageIndex}`;
 };
 
 export const TeamInfinite = ({ outActClick }) => {

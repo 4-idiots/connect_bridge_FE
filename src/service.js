@@ -81,10 +81,6 @@ export const teamGetAllService = team => {
   return `/api/team${team}`;
 };
 
-export const communityGetAllService = community => {
-  return `/api/community${community}`;
-};
-
 export const projectUploadService = formData => {
   return customAxios.post(`/api/project`, formData, {
     headers: {
@@ -184,7 +180,7 @@ export const projectGetSomeService = projectID => {
 };
 
 export const projectApplyService = (projectID, userID, field) => {
-  return customAxios.post(`/api/project/apply`, {
+  return customAxios.patch(`/api/project/apply`, {
     projectID,
     userID,
     field,
