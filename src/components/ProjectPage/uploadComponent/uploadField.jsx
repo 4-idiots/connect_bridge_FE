@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form } from 'react-bulma-components';
 import PropTypes from 'prop-types';
-import { CustomCheckbox } from './uploadCustom';
+import { CustomCheckbox } from './style';
 import { checekArray } from './uploadValue';
 
 export const ProjectField = ({ checked, onChange }) => {

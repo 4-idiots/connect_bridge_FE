@@ -6,5 +6,4 @@ export { ProjectArea } from './uploadArea';
 export { ProjectRecruit } from './uploadRecruit';
 export { ProjectPlatform } from './uploadPlatform';
 export { ProjectDate } from './uploadDate';
-
 export { UpdateImg } from './updateImg';

@@ -1,32 +1,6 @@
 import React from 'react';
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import {
-  Login,
-  FindID,
-  FindPW,
-  Sign,
-  OutdoorMain,
-  OutdoorUpload,
-  OutdoorUpdate,
-  Team,
-  ProjectUpload,
-  ProjectMain,
-  ProjectUpdate,
-  ProjectDetail,
-  Main,
-  Info,
-  Community,
-  CommunityWrite,
-  CommunityInfo,
-  MyPage,
-  CommunityP,
-  Communityserach,
-  StudyDetail,
-  StudyMain,
-  StudyUpdate,
-  CommunityChange,
-} from './pages/pRoutes';
+import * as P from './pages/pRoutes';
 import { AuthContext } from './contexts/store/auth';
 import { useProvideAuth } from './contexts/hooks/useProvideAuth';
 
@@ -37,42 +11,42 @@ const App = () => {
     <AuthContext.Provider value={auth}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/login/findID" element={<FindID />} />
-          <Route path="/login/findPW" element={<FindPW />} />
-          <Route path="/sign" element={<Sign />} />
-          <Route path="/outdoor" element={<OutdoorMain />} />
-          <Route path="/outdoor/upload" element={<OutdoorUpload />} />
+          <Route path="/" element={<P.Main />} />
+          <Route path="/login" element={<P.Login />} />
+          <Route path="/login/findID" element={<P.FindID />} />
+          <Route path="/login/findPW" element={<P.FindPW />} />
+          <Route path="/sign" element={<P.Sign />} />
+          <Route path="/outdoor" element={<P.OutdoorMain />} />
+          <Route path="/outdoor/upload" element={<P.OutdoorUpload />} />
           <Route
             path="/outdoor/update/:outdoorID"
-            element={<OutdoorUpdate />}
+            element={<P.OutdoorUpdate />}
           />
-          <Route path="/team" element={<Team />} />
-          <Route path="/team/info/:teID/:teamID" element={<Info />} />
-          <Route path="/study" element={<StudyMain />} />
-          <Route path="/study/update/:studyID" element={<StudyUpdate />} />
-          <Route path="/study/:studyID" element={<StudyDetail />} />
-          <Route path="/project" element={<ProjectMain />} />
-          <Route path="/project/:projectID" element={<ProjectDetail />} />
-          <Route path="/project/upload" element={<ProjectUpload />} />
+          <Route path="/team" element={<P.Team />} />
+          <Route path="/team/info/:teID/:teamID" element={<P.Info />} />
+          <Route path="/study" element={<P.StudyMain />} />
+          <Route path="/study/update/:studyID" element={<P.StudyUpdate />} />
+          <Route path="/study/:studyID" element={<P.StudyDetail />} />
+          <Route path="/project" element={<P.ProjectMain />} />
+          <Route path="/project/:projectID" element={<P.ProjectDetail />} />
+          <Route path="/project/upload" element={<P.ProjectUpload />} />
           <Route
             path="/project/update/:projectID"
-            element={<ProjectUpdate />}
+            element={<P.ProjectUpdate />}
           />
-          <Route path="/community" element={<Community />} />
-          <Route path="/community/popular" element={<CommunityP />} />
-          <Route path="/serach/:query" element={<Communityserach />} />
-          <Route path="/community/write" element={<CommunityWrite />} />
+          <Route path="/community" element={<P.Community />} />
+          <Route path="/community/popular" element={<P.CommunityP />} />
+          <Route path="/serach/:query" element={<P.Communityserach />} />
+          <Route path="/community/write" element={<P.CommunityWrite />} />
           <Route
             path="/community/change/:communityID"
-            element={<CommunityChange />}
+            element={<P.CommunityChange />}
           />
           <Route
             path="/community/info/:teID/:communityID"
-            element={<CommunityInfo />}
+            element={<P.CommunityInfo />}
           />
-          <Route path="/my/info" element={<MyPage />} />
+          <Route path="/my/info" element={<P.MyPage />} />
         </Routes>
       </BrowserRouter>
     </AuthContext.Provider>

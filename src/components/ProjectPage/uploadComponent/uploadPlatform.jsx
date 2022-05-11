@@ -2,7 +2,7 @@ import React from 'react';
 import { Form } from 'react-bulma-components';
 import PropTypes from 'prop-types';
 import { platArray } from './uploadValue';
-import { CustomCheckbox } from './uploadCustom';
+import { CustomCheckbox } from './style';
 
 export const ProjectPlatform = ({ checked, onChange }) => {
   const onChangePlatform = e => {

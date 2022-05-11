@@ -1,22 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Media, Button, Image, Content, Icon } from 'react-bulma-components';
-import { projectLikeService } from '../../../service';
+import { projectLikeService } from '../../../services/projectService';
 import * as S from './style';
 
-export const DetailRightCard = ({
-  leaderImg,
-  leaderName,
-  leaderInfo,
-  projectLike,
-  projectView,
-  projectStart,
-  projectEnd,
-  projectField,
-  projectSub,
-  projectID,
-}) => {
-  const [like, setLike] = useState(projectSub);
+export const DetailRightCard = ({ item, projectID }) => {
+  const [like, setLike] = useState(item.projectSub);
 
   const onLikeClick = async () => {
     try {
@@ -33,14 +22,14 @@ export const DetailRightCard = ({
         <S.RightPBig>리더 정보</S.RightPBig>
         <Media>
           <Media.Item align="left">
-            <Image src={leaderImg} size={64} />
+            <Image src={item.leaderInfo.leaderImg} size={64} />
           </Media.Item>
           <Media.Item align="center">
             <Content>
               <p>
-                <strong>{leaderName}</strong>
+                <strong>{item.leaderInfo.leaderName}</strong>
                 <br />
-                {leaderInfo}
+                {item.leaderInfo.leaderInfo}
                 <br />
                 <small
                   style={{
@@ -52,12 +41,12 @@ export const DetailRightCard = ({
                     <i className="fas fa-eye" />
                   </Icon>
                   <span style={{ display: 'block', marginRight: 20 }}>
-                    {projectView}
+                    {item.projectView}
                   </span>
                   <Icon>
                     <i className="fas fa-heart" />
                   </Icon>
-                  <span>{projectLike}</span>
+                  <span>{item.projectLike}</span>
                 </small>
               </p>
             </Content>
@@ -68,13 +57,13 @@ export const DetailRightCard = ({
       <S.RightMid>
         <S.RightPBig>프로젝트 기간</S.RightPBig>
         <S.RightPSmall>
-          {projectStart} ~ {projectEnd}
+          {item.projectStart} ~ {item.projectEnd}
         </S.RightPSmall>
       </S.RightMid>
 
       <S.RightMid>
         <S.RightPBig>프로젝트 분야</S.RightPBig>
-        <S.RightPSmall>{projectField}</S.RightPSmall>
+        <S.RightPSmall>{item.projectField}</S.RightPSmall>
       </S.RightMid>
 
       {like ? (
@@ -113,14 +102,6 @@ export const DetailRightCard = ({
 };
 
 DetailRightCard.propTypes = {
-  leaderImg: PropTypes.string.isRequired,
-  leaderName: PropTypes.string.isRequired,
-  leaderInfo: PropTypes.string.isRequired,
-  projectLike: PropTypes.number.isRequired,
-  projectView: PropTypes.number.isRequired,
-  projectStart: PropTypes.string.isRequired,
-  projectEnd: PropTypes.string.isRequired,
-  projectField: PropTypes.string.isRequired,
-  projectSub: PropTypes.bool.isRequired,
+  item: PropTypes.objectOf(PropTypes.any).isRequired,
   projectID: PropTypes.string.isRequired,
 };

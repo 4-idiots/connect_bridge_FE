@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { Container, Heading, Button, Box, Form } from 'react-bulma-components';
-import { findIDService } from '../../service';
+import { findIDService } from '../../services/loginService';
 
 export const FindIDForm = () => {
   const [userInfo, setUserInfo] = useState({});
@@ -17,9 +17,9 @@ export const FindIDForm = () => {
     [userInfo],
   );
 
-  const findIDAxios = async (uName, uEmail) => {
+  const findIDAxios = async () => {
     try {
-      const result = await findIDService(uName, uEmail);
+      const result = await findIDService(userName, userEmail);
       alert(`아이디는 ${result.data.userID} 입니다.`);
     } catch (error) {
       alert('다시 시도해주세요');
@@ -29,7 +29,7 @@ export const FindIDForm = () => {
 
   const onSubmitEvent = e => {
     e.preventDefault();
-    findIDAxios(userName, userEmail);
+    findIDAxios();
   };
 
   return (

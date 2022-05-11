@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import fetcher from './fetcher';
 import useOnScreen from './useOnScreen';
 import { OutdoorCardForm } from '../components/OutdoorPage/outdoorCardModule';
-import { outdoorGetAllService } from '../service';
+import { outdoorGetAllService } from '../services/outdoorService';
 
 const getKey = (pageIndex, previousPageData) => {
   if (previousPageData && !previousPageData.length) return null;
@@ -17,7 +17,7 @@ export const OutdoorInfinite = ({ outActClick }) => {
   const ref = useRef();
   const isVisible = useOnScreen(ref);
 
-  const { data, error, mutate, size, setSize, isValidating } = useSWRInfinite(
+  const { data, error, size, setSize, isValidating } = useSWRInfinite(
     getKey,
     fetcher,
   );
@@ -43,10 +43,7 @@ export const OutdoorInfinite = ({ outActClick }) => {
         issues.map(item => (
           <OutdoorCardForm
             key={item.outActID}
-            outActLike={item.outActLike}
-            outActName={item.outActName}
-            outActView={item.outActView}
-            outActImg={item.outActImg}
+            item={item}
             onActClick={() => {
               outActClick(
                 item.outActName,

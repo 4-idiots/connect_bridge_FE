@@ -1,23 +1,21 @@
 import React, { useState } from 'react';
-import { Container, Icon, Box, Heading } from 'react-bulma-components';
+import { Container, Icon, Heading } from 'react-bulma-components';
 import { Link } from 'react-router-dom';
 import { useJwt } from 'react-jwt';
 import { OutdoorModalForm } from './outdoorModalModule';
 import { OutdoorInfinite } from '../../swr/outdoorInfinite';
 import { useAuth } from '../../contexts/hooks/useAuth';
+import * as S from './style';
 
 export const OutdoorMainForm = () => {
   const auth = useAuth();
   const [poster, setPoster] = useState({});
-  const { decodedToken, isExpired } = useJwt(auth.token);
-
-  const { outID, check, title, image, link, view, like } = poster;
+  const { decodedToken } = useJwt(auth.token);
 
   const changePoster = (otitle, oimage, olink, oview, olike, ooutID) => {
     setPoster({
-      ...poster,
       outID: ooutID,
-      check: !check,
+      check: !poster.check,
       title: otitle,
       image: oimage,
       link: olink,
@@ -29,29 +27,18 @@ export const OutdoorMainForm = () => {
   return (
     <Container style={{ marginTop: 80 }}>
       <Heading>대외활동 둘러보기</Heading>
-      {check && (
+      {poster.check && (
         <OutdoorModalForm
           close={() => {
             changePoster('', '', '');
           }}
-          title={title}
-          image={image}
-          link={link}
-          view={view}
-          like={like}
-          id={outID}
+          item={poster}
         />
       )}
       {decodedToken && decodedToken.role && <NewPosterBtn />}
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr 1fr 1fr',
-          rowGap: '3rem',
-        }}
-      >
+      <S.OdMainGrid>
         <OutdoorInfinite outActClick={changePoster} />
-      </div>
+      </S.OdMainGrid>
     </Container>
   );
 };
@@ -59,20 +46,11 @@ export const OutdoorMainForm = () => {
 const NewPosterBtn = () => {
   return (
     <Link to="/outdoor/upload">
-      <Box
-        style={{
-          borderRadius: '50%',
-          backgroundColor: 'brown',
-          position: 'fixed',
-          bottom: '8rem',
-          right: '10rem',
-          zIndex: 1,
-        }}
-      >
+      <S.OdMainBox>
         <Icon style={{ display: 'flex' }}>
           <i className="fa fa-plus fa-2x" style={{ color: 'white' }} />
         </Icon>
-      </Box>
+      </S.OdMainBox>
     </Link>
   );
 };

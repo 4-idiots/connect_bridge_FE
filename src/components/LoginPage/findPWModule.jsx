@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { Container, Heading, Button, Box, Form } from 'react-bulma-components';
-import { findPWServcie } from '../../service';
+import { findPWServcie } from '../../services/loginService';
 
 export const FindPWForm = () => {
   const [userInfo, setUserInfo] = useState({});
@@ -17,9 +17,9 @@ export const FindPWForm = () => {
     [userInfo],
   );
 
-  const findPWAxios = async (uID, uName, uEmail) => {
+  const findPWAxios = async () => {
     try {
-      const result = await findPWServcie(uID, uName, uEmail);
+      const result = await findPWServcie(userID, userName, userEmail);
       alert('임시 비밀번호가 발급 되었습니다. 메일을 확인하세요');
     } catch (error) {
       alert('다시 시도해주세요');
@@ -27,7 +27,7 @@ export const FindPWForm = () => {
   };
   const onSubmitEvent = e => {
     e.preventDefault();
-    findPWAxios(userID, userName, userEmail);
+    findPWAxios();
   };
 
   return (

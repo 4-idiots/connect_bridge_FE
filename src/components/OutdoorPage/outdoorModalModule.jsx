@@ -1,37 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Modal, Image, Button, Media, Box } from 'react-bulma-components';
 import PropTypes from 'prop-types';
-import { outdoorLikeService } from '../../service';
 
-export const OutdoorModalForm = ({
-  close,
-  title,
-  image,
-  link,
-  view,
-  like,
-  id,
-}) => {
-  const [dynLike, setDynLike] = useState(like);
-
-  const likeClick = async () => {
-    try {
-      const result = await outdoorLikeService(id);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+export const OutdoorModalForm = ({ close, item }) => {
   return (
     <Modal show onClose={close} closeOnEsc closeOnBlur showClose={false}>
       <Modal.Card>
         <Modal.Card.Header>
-          <Modal.Card.Title>{title}</Modal.Card.Title>
+          <Modal.Card.Title>{item.title}</Modal.Card.Title>
         </Modal.Card.Header>
         <Modal.Card.Body>
           <Media style={{ display: 'flex', flexDirection: 'column' }}>
             <Media.Item style={{ margin: 'auto' }}>
-              <Image src={image} />
+              <Image src={item.image} />
             </Media.Item>
           </Media>
         </Modal.Card.Body>
@@ -46,7 +27,7 @@ export const OutdoorModalForm = ({
             <Button color="info">
               <a
                 target="_blank"
-                href={link}
+                href={item.link}
                 rel="noopener noreferrer"
                 style={{ textDecorationLine: 'none', color: 'white' }}
               >
@@ -61,23 +42,6 @@ export const OutdoorModalForm = ({
 };
 
 OutdoorModalForm.propTypes = {
-  close: PropTypes.func,
-  title: PropTypes.string,
-  image: PropTypes.string,
-  link: PropTypes.string,
-  view: PropTypes.number,
-  like: PropTypes.number,
-  id: PropTypes.number,
-};
-
-OutdoorModalForm.defaultProps = {
-  close: () => {
-    console.log('modal');
-  },
-  title: 'Title',
-  image: 'image',
-  link: 'link',
-  view: 0,
-  like: 0,
-  id: 0,
+  close: PropTypes.func.isRequired,
+  item: PropTypes.objectOf(PropTypes.any).isRequired,
 };

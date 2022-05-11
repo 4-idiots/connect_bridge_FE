@@ -3,16 +3,8 @@ import { Button, Form } from 'react-bulma-components';
 import { useNavigate } from 'react-router-dom';
 import './uploadComponent/datepicker.css';
 import { useJwt } from 'react-jwt';
-import {
-  ProjectRecruit,
-  ProjectInput,
-  ProjectField,
-  ProjectPlatform,
-  ProjectArea,
-  ProjectImg,
-  ProjectDate,
-} from './uploadComponent/uploadRoutes';
-import { projectUploadService } from '../../service';
+import * as UR from './uploadComponent/uploadRoutes';
+import { projectUploadService } from '../../services/projectService';
 import SlateEditor from '../../SlateEditor/Editor';
 import { useAuth } from '../../contexts/hooks/useAuth';
 
@@ -179,7 +171,7 @@ export const ProjectUploadForm = () => {
 
   return (
     <>
-      <ProjectInput
+      <UR.ProjectInput
         label="* 프로젝트명"
         help="! 직관적인 프로젝트명을 사용하시면 클릭률이 올라갑니다."
         placeholder="3~20글자로 적어주세요 ex)승차거부 신고앱"
@@ -187,7 +179,7 @@ export const ProjectUploadForm = () => {
         name="projectName"
         onChange={onChangeProjectEvent}
       />
-      <ProjectField
+      <UR.ProjectField
         checked={projectField}
         onChange={e =>
           setPostInfo({
@@ -196,10 +188,10 @@ export const ProjectUploadForm = () => {
           })
         }
       />
-      <ProjectImg postInfo={postInfo} setPostInfo={setPostInfo} />
-      <ProjectArea onChange={onChangeProjectEvent} />
-      <ProjectRecruit member={postInfo} setMember={setPostInfo} />
-      <ProjectPlatform checked={postInfo} onChange={setPostInfo} />
+      <UR.ProjectImg postInfo={postInfo} setPostInfo={setPostInfo} />
+      <UR.ProjectArea onChange={onChangeProjectEvent} />
+      <UR.ProjectRecruit member={postInfo} setMember={setPostInfo} />
+      <UR.ProjectPlatform checked={postInfo} onChange={setPostInfo} />
 
       <Form.Field>
         <Form.Label>* 프로젝트 설명</Form.Label>
@@ -209,7 +201,7 @@ export const ProjectUploadForm = () => {
         </Form.Help>
       </Form.Field>
       <SlateEditor value={postInfo} setValue={setPostInfo} />
-      <ProjectDate
+      <UR.ProjectDate
         start={projectStart}
         end={projectEnd}
         startChange={date => {
@@ -219,7 +211,7 @@ export const ProjectUploadForm = () => {
           setPostInfo({ ...postInfo, projectEnd: date });
         }}
       />
-      <ProjectInput
+      <UR.ProjectInput
         label="* 기술/언어 (최대 10개)"
         help="! 프로젝트에 적용된/적용하고자 하는 기술/디자인 플랫폼을 적어주세요."
         placeholder="ex) java, react, figma, photoshop"
@@ -227,7 +219,7 @@ export const ProjectUploadForm = () => {
         name="projectSkill"
         onChange={onChangeProjectEvent}
       />
-      <ProjectInput
+      <UR.ProjectInput
         label="* 참고자료"
         help="! 벤치마킹하는 서비스나, 프로젝트를 정리하신 자료의 웹주소를 등록해주세요."
         placeholder="https://4idiot.com"

@@ -4,100 +4,17 @@ import { Container, Heading, Button, Box, Form } from 'react-bulma-components';
 import { useNavigate, useParams } from 'react-router-dom';
 import './uploadComponent/datepicker.css';
 import { useJwt } from 'react-jwt';
-import {
-  ProjectRecruit,
-  ProjectInput,
-  ProjectField,
-  ProjectPlatform,
-  ProjectArea,
-  UpdateImg,
-  ProjectDate,
-} from './uploadComponent/uploadRoutes';
-import { projectGetSomeService, proejctUpdateService } from '../../service';
+import * as UR from './uploadComponent/uploadRoutes';
+import * as Send from '../../services/projectService';
 import SlateEditor from '../../SlateEditor/Editor';
 import { useAuth } from '../../contexts/hooks/useAuth';
 
 export const ProjectUpdateForm = () => {
   const auth = useAuth();
-  const { decodedToken, isExpired } = useJwt(auth.token);
+  const { decodedToken } = useJwt(auth.token);
   const navigate = useNavigate();
-  const [postInfo, setPostInfo] = useState({});
+  const [postInfo, setPostInfo] = useState(null);
   const { projectID } = useParams();
-
-  const {
-    projectMotive,
-    projectName,
-    projectField,
-    projectImg,
-    projectArea,
-    projectSkill,
-    projectReference,
-    content,
-    projectStart,
-    projectEnd,
-    projectPlatform,
-    projectTotal,
-    uiuxPlan,
-    gamePlan,
-    managerPlan,
-    hwPlan,
-    iosFr,
-    androidFr,
-    webFrontFr,
-    webPublicFr,
-    crossFr,
-    uiuxDe,
-    graphicDe,
-    thrdDe,
-    hwDe,
-    etcDe,
-    webBk,
-    blchBk,
-    aiBk,
-    dsBk,
-    gameBk,
-    planBu,
-    marketingBu,
-    financeBu,
-    salesBu,
-    consultBu,
-    investBu,
-    etcBu,
-    blogEtc,
-    influEtc,
-    compEtc,
-    uiuxPlanNow,
-    gamePlanNow,
-    managerPlanNow,
-    hwPlanNow,
-    iosFrNow,
-    androidFrNow,
-    webFrontFrNow,
-    webPublicFrNow,
-    crossFrNow,
-    uiuxDeNow,
-    graphicDeNow,
-    thrdDeNow,
-    hwDeNow,
-    etcDeNow,
-    webBkNow,
-    blchBkNow,
-    aiBkNow,
-    dsBkNow,
-    gameBkNow,
-    planBuNow,
-    marketingBuNow,
-    financeBuNow,
-    salesBuNow,
-    consultBuNow,
-    investBuNow,
-    etcBuNow,
-    blogEtcNow,
-    influEtcNow,
-    compEtcNow,
-    projectOnOff,
-    userID,
-  } = postInfo;
 
   const onChangeProjectEvent = useCallback(
     e => {
@@ -111,7 +28,7 @@ export const ProjectUpdateForm = () => {
 
   const updateAxios = async formdata => {
     try {
-      const result = await proejctUpdateService(formdata);
+      const result = await Send.proejctUpdateService(formdata);
       alert('수정 되었습니다.');
       navigate('/project');
     } catch (error) {
@@ -121,7 +38,8 @@ export const ProjectUpdateForm = () => {
 
   const getSomeAxios = async prID => {
     try {
-      const result = await projectGetSomeService(prID);
+      const result = await Send.projectGetSomeService(prID);
+      console.log(result);
       setPostInfo(result.data);
     } catch (error) {
       navigate('/project');
@@ -137,99 +55,99 @@ export const ProjectUpdateForm = () => {
     formData.append('userID', decodedToken.id);
     formData.append('projectOnOff', true); // 이거 바꾸는 버튼 만들어야 함
     formData.append('projectID', projectID);
-    formData.append('projectName', projectName);
-    formData.append('projectMotive', projectMotive);
-    formData.append('projectImg', projectImg);
-    formData.append('content', JSON.stringify(content));
-    formData.append('projectField', projectField);
-    formData.append('projectArea', projectArea);
-    formData.append('projectTotal', JSON.stringify(projectTotal));
-    formData.append('projectReference', projectReference);
-    formData.append('projectPlatform', projectPlatform);
-    formData.append('projectSkill', projectSkill);
-    formData.append('projectStart', projectStart);
-    formData.append('projectEnd', projectEnd);
-    formData.append('uiuxPlan', uiuxPlan);
-    formData.append('gamePlan', gamePlan);
-    formData.append('managerPlan', managerPlan);
-    formData.append('hwPlan', hwPlan);
-    formData.append('iosFr', iosFr);
-    formData.append('androidFr', androidFr);
-    formData.append('webFrontFr', webFrontFr);
-    formData.append('webPublicFr', webPublicFr);
-    formData.append('crossFr', crossFr);
-    formData.append('uiuxDe', uiuxDe);
-    formData.append('graphicDe', graphicDe);
-    formData.append('thrdDe', thrdDe);
-    formData.append('hwDe', hwDe);
-    formData.append('etcDe', etcDe);
-    formData.append('webBk', webBk);
-    formData.append('blchBk', blchBk);
-    formData.append('aiBk', aiBk);
-    formData.append('dsBk', dsBk);
-    formData.append('gameBk', gameBk);
-    formData.append('planBu', planBu);
-    formData.append('marketingBu', marketingBu);
-    formData.append('financeBu', financeBu);
-    formData.append('salesBu', salesBu);
-    formData.append('consultBu', consultBu);
-    formData.append('investBu', investBu);
-    formData.append('etcBu', etcBu);
-    formData.append('blogEtc', blogEtc);
-    formData.append('influEtc', influEtc);
-    formData.append('compEtc', compEtc);
-    formData.append('uiuxPlanNow', uiuxPlanNow);
-    formData.append('gamePlanNow', gamePlanNow);
-    formData.append('managerPlanNow', managerPlanNow);
-    formData.append('hwPlanNow', hwPlanNow);
-    formData.append('iosFrNow', iosFrNow);
-    formData.append('androidFrNow', androidFrNow);
-    formData.append('webFrontFrNow', webFrontFrNow);
-    formData.append('webPublicFrNow', webPublicFrNow);
-    formData.append('crossFrNow', crossFrNow);
-    formData.append('uiuxDeNow', uiuxDeNow);
-    formData.append('graphicDeNow', graphicDeNow);
-    formData.append('thrdDeNow', thrdDeNow);
-    formData.append('hwDeNow', hwDeNow);
-    formData.append('etcDeNow', etcDeNow);
-    formData.append('webBkNow', webBkNow);
-    formData.append('blchBkNow', blchBkNow);
-    formData.append('aiBkNow', aiBkNow);
-    formData.append('dsBkNow', dsBkNow);
-    formData.append('gameBkNow', gameBkNow);
-    formData.append('planBuNow', planBuNow);
-    formData.append('marketingBuNow', marketingBuNow);
-    formData.append('financeBuNow', financeBuNow);
-    formData.append('salesBuNow', salesBuNow);
-    formData.append('consultBuNow', consultBuNow);
-    formData.append('investBuNow', investBuNow);
-    formData.append('etcBuNow', etcBuNow);
-    formData.append('blogEtcNow', blogEtcNow);
-    formData.append('influEtcNow', influEtcNow);
-    formData.append('compEtcNow', compEtcNow);
+    formData.append('projectName', postInfo.projectName);
+    formData.append('projectMotive', postInfo.projectMotive);
+    formData.append('projectImg', postInfo.projectImg);
+    formData.append('content', JSON.stringify(postInfo.content));
+    formData.append('projectField', postInfo.projectField);
+    formData.append('projectArea', postInfo.projectArea);
+    formData.append('projectTotal', JSON.stringify(postInfo.projectTotal));
+    formData.append('projectReference', postInfo.projectReference);
+    formData.append('projectPlatform', postInfo.projectPlatform);
+    formData.append('projectSkill', postInfo.projectSkill);
+    formData.append('projectStart', postInfo.projectStart);
+    formData.append('projectEnd', postInfo.projectEnd);
+    formData.append('uiuxPlan', postInfo.uiuxPlan);
+    formData.append('gamePlan', postInfo.gamePlan);
+    formData.append('managerPlan', postInfo.managerPlan);
+    formData.append('hwPlan', postInfo.hwPlan);
+    formData.append('iosFr', postInfo.iosFr);
+    formData.append('androidFr', postInfo.androidFr);
+    formData.append('webFrontFr', postInfo.webFrontFr);
+    formData.append('webPublicFr', postInfo.webPublicFr);
+    formData.append('crossFr', postInfo.crossFr);
+    formData.append('uiuxDe', postInfo.uiuxDe);
+    formData.append('graphicDe', postInfo.graphicDe);
+    formData.append('thrdDe', postInfo.thrdDe);
+    formData.append('hwDe', postInfo.hwDe);
+    formData.append('etcDe', postInfo.etcDe);
+    formData.append('webBk', postInfo.webBk);
+    formData.append('blchBk', postInfo.blchBk);
+    formData.append('aiBk', postInfo.aiBk);
+    formData.append('dsBk', postInfo.dsBk);
+    formData.append('gameBk', postInfo.gameBk);
+    formData.append('planBu', postInfo.planBu);
+    formData.append('marketingBu', postInfo.marketingBu);
+    formData.append('financeBu', postInfo.financeBu);
+    formData.append('salesBu', postInfo.salesBu);
+    formData.append('consultBu', postInfo.consultBu);
+    formData.append('investBu', postInfo.investBu);
+    formData.append('etcBu', postInfo.etcBu);
+    formData.append('blogEtc', postInfo.blogEtc);
+    formData.append('influEtc', postInfo.influEtc);
+    formData.append('compEtc', postInfo.compEtc);
+    formData.append('uiuxPlanNow', postInfo.uiuxPlanNow);
+    formData.append('gamePlanNow', postInfo.gamePlanNow);
+    formData.append('managerPlanNow', postInfo.managerPlanNow);
+    formData.append('hwPlanNow', postInfo.hwPlanNow);
+    formData.append('iosFrNow', postInfo.iosFrNow);
+    formData.append('androidFrNow', postInfo.androidFrNow);
+    formData.append('webFrontFrNow', postInfo.webFrontFrNow);
+    formData.append('webPublicFrNow', postInfo.webPublicFrNow);
+    formData.append('crossFrNow', postInfo.crossFrNow);
+    formData.append('uiuxDeNow', postInfo.uiuxDeNow);
+    formData.append('graphicDeNow', postInfo.graphicDeNow);
+    formData.append('thrdDeNow', postInfo.thrdDeNow);
+    formData.append('hwDeNow', postInfo.hwDeNow);
+    formData.append('etcDeNow', postInfo.etcDeNow);
+    formData.append('webBkNow', postInfo.webBkNow);
+    formData.append('blchBkNow', postInfo.blchBkNow);
+    formData.append('aiBkNow', postInfo.aiBkNow);
+    formData.append('dsBkNow', postInfo.dsBkNow);
+    formData.append('gameBkNow', postInfo.gameBkNow);
+    formData.append('planBuNow', postInfo.planBuNow);
+    formData.append('marketingBuNow', postInfo.marketingBuNow);
+    formData.append('financeBuNow', postInfo.financeBuNow);
+    formData.append('salesBuNow', postInfo.salesBuNow);
+    formData.append('consultBuNow', postInfo.consultBuNow);
+    formData.append('investBuNow', postInfo.investBuNow);
+    formData.append('etcBuNow', postInfo.etcBuNow);
+    formData.append('blogEtcNow', postInfo.blogEtcNow);
+    formData.append('influEtcNow', postInfo.influEtcNow);
+    formData.append('compEtcNow', postInfo.compEtcNow);
 
     updateAxios(formData);
   };
 
-  return (
-    <Container style={{ marginTop: 80 }}>
-      {decodedToken && decodedToken.id === userID ? (
-        <>
-          <Heading style={{ textAlign: 'center' }}>모임 수정 하기</Heading>
-          <Box style={{ width: '90%', margin: 'auto' }}>
-            {projectName && (
-              <ProjectInput
-                label="* 프로젝트명"
-                help="! 직관적인 프로젝트명을 사용하시면 클릭률이 올라갑니다."
-                placeholder="3~20글자로 적어주세요 ex)승차거부 신고앱"
-                value={projectName || ''}
-                name="projectName"
-                onChange={onChangeProjectEvent}
-              />
-            )}
-            {projectField && (
-              <ProjectField
-                checked={projectField}
+  if (postInfo) {
+    return (
+      <Container style={{ marginTop: 80 }}>
+        {decodedToken && decodedToken.id === postInfo.userID ? (
+          <>
+            <Heading style={{ textAlign: 'center' }}>모임 수정 하기</Heading>
+            <Box style={{ width: '90%', margin: 'auto' }}>
+              {postInfo.projectName && (
+                <UR.ProjectInput
+                  label="* 프로젝트명"
+                  help="! 직관적인 프로젝트명을 사용하시면 클릭률이 올라갑니다."
+                  placeholder="3~20글자로 적어주세요 ex)승차거부 신고앱"
+                  value={postInfo.projectName}
+                  name="projectName"
+                  onChange={onChangeProjectEvent}
+                />
+              )}
+              <UR.ProjectField
+                checked={postInfo.projectField}
                 onChange={e =>
                   setPostInfo({
                     ...postInfo,
@@ -237,48 +155,27 @@ export const ProjectUpdateForm = () => {
                   })
                 }
               />
-            )}
-            {projectImg && (
-              <UpdateImg
+              <UR.UpdateImg
                 postInfo={postInfo}
                 setPostInfo={setPostInfo}
-                nowImg={projectImg.toString()}
+                nowImg={postInfo.projectImg.toString()}
               />
-            )}
-            {projectArea && <ProjectArea onChange={onChangeProjectEvent} />}
-            {typeof uiuxPlan === typeof gamePlan &&
-              typeof managerPlan === typeof hwPlan &&
-              typeof iosFr === typeof androidFr &&
-              typeof webFrontFr === typeof webPublicFr &&
-              typeof crossFr === typeof uiuxDe &&
-              typeof graphicDe === typeof thrdDe &&
-              typeof hwDe === typeof etcDe &&
-              typeof webBk === typeof blchBk &&
-              typeof aiBk === typeof dsBk &&
-              typeof gameBk === typeof planBu &&
-              typeof marketingBu === typeof financeBu &&
-              typeof salesBu === typeof consultBu &&
-              typeof investBu === typeof etcBu &&
-              typeof blogEtc === typeof influEtc &&
-              compEtc === 0 && (
-                <ProjectRecruit member={postInfo} setMember={setPostInfo} />
+              <UR.ProjectArea onChange={onChangeProjectEvent} />
+              <UR.ProjectRecruit member={postInfo} setMember={setPostInfo} />
+              <UR.ProjectPlatform checked={postInfo} onChange={setPostInfo} />
+              <Form.Field>
+                <Form.Label>* 프로젝트 설명</Form.Label>
+                <Form.Help>
+                  ! 설명이 풍부한 프로젝트는 풍부하지 않은 프로젝트에 비해
+                  지원율리 50% 높습니다.
+                </Form.Help>
+              </Form.Field>
+              {postInfo.content && (
+                <SlateEditor value={postInfo} setValue={setPostInfo} />
               )}
-            {projectPlatform && (
-              <ProjectPlatform checked={postInfo} onChange={setPostInfo} />
-            )}
-
-            <Form.Field>
-              <Form.Label>* 프로젝트 설명</Form.Label>
-              <Form.Help>
-                ! 설명이 풍부한 프로젝트는 풍부하지 않은 프로젝트에 비해
-                지원율리 50% 높습니다.
-              </Form.Help>
-            </Form.Field>
-            {content && <SlateEditor value={postInfo} setValue={setPostInfo} />}
-            {projectStart && projectEnd && (
-              <ProjectDate
-                start={new Date(projectStart)}
-                end={new Date(projectEnd)}
+              <UR.ProjectDate
+                start={new Date(postInfo.projectStart)}
+                end={new Date(postInfo.projectEnd)}
                 startChange={date => {
                   setPostInfo({ ...postInfo, projectStart: date });
                 }}
@@ -286,37 +183,34 @@ export const ProjectUpdateForm = () => {
                   setPostInfo({ ...postInfo, projectEnd: date });
                 }}
               />
-            )}
-            {projectSkill && projectReference && (
-              <>
-                <ProjectInput
-                  label="* 기술/언어 (최대 10개)"
-                  help="! 프로젝트에 적용된/적용하고자 하는 기술/디자인 플랫폼을 적어주세요."
-                  placeholder="ex) java, react, figma, photoshop"
-                  value={projectSkill}
-                  name="projectSkill"
-                  onChange={onChangeProjectEvent}
-                />
-                <ProjectInput
-                  label="* 참고자료"
-                  help="! 벤치마킹하는 서비스나, 프로젝트를 정리하신 자료의 웹주소를 등록해주세요."
-                  placeholder="https://4idiot.com"
-                  value={projectReference}
-                  name="projectReference"
-                  onChange={onChangeProjectEvent}
-                />
-              </>
-            )}
-            <Button.Group align="center">
-              <Button color="success" onClick={onSubmitEvent}>
-                수정하기
-              </Button>
-            </Button.Group>
-          </Box>
-        </>
-      ) : (
-        <Heading style={{ textAlign: 'center' }}>권한이 없습니다.</Heading>
-      )}
-    </Container>
-  );
+              <UR.ProjectInput
+                label="* 기술/언어 (최대 10개)"
+                help="! 프로젝트에 적용된/적용하고자 하는 기술/디자인 플랫폼을 적어주세요."
+                placeholder="ex) java, react, figma, photoshop"
+                value={postInfo.projectSkill}
+                name="projectSkill"
+                onChange={onChangeProjectEvent}
+              />
+              <UR.ProjectInput
+                label="* 참고자료"
+                help="! 벤치마킹하는 서비스나, 프로젝트를 정리하신 자료의 웹주소를 등록해주세요."
+                placeholder="https://4idiot.com"
+                value={postInfo.projectReference}
+                name="projectReference"
+                onChange={onChangeProjectEvent}
+              />
+              <Button.Group align="center">
+                <Button color="success" onClick={onSubmitEvent}>
+                  수정하기
+                </Button>
+              </Button.Group>
+            </Box>
+          </>
+        ) : (
+          <Heading style={{ textAlign: 'center' }}>권한이 없습니다.</Heading>
+        )}
+      </Container>
+    );
+  }
+  return null;
 };

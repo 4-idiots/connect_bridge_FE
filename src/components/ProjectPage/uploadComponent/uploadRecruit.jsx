@@ -1,19 +1,8 @@
-/* eslint-disable consistent-return */
-/* eslint-disable array-callback-return */
-/* eslint-disable no-param-reassign */
 /* eslint-disable react/no-array-index-key */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button, Icon } from 'react-bulma-components';
-import {
-  mainArray,
-  planArray,
-  frontArray,
-  designArray,
-  backArray,
-  coopArray,
-  etcArray,
-} from './uploadValue';
+import * as A from './uploadValue';
 
 export const ProjectRecruit = ({ member, setMember }) => {
   const [fieldMember, setFieldMember] = useState({
@@ -672,7 +661,7 @@ export const ProjectRecruit = ({ member, setMember }) => {
                 value={m.main}
               >
                 <option value="">-------</option>
-                {genOption(mainArray)}
+                {genOption(A.mainArray)}
               </Form.Select>
               <Form.Select
                 style={{ width: '16%' }}
@@ -681,12 +670,12 @@ export const ProjectRecruit = ({ member, setMember }) => {
                 value={m.sub}
               >
                 <option value="">-------</option>
-                {m.main === '기획' && <>{genOption(planArray)}</>}
-                {m.main === '디자인' && <>{genOption(designArray)}</>}
-                {m.main === '프론트엔드개발' && <>{genOption(frontArray)}</>}
-                {m.main === '백엔드개발' && <>{genOption(backArray)}</>}
-                {m.main === '사업' && <>{genOption(coopArray)}</>}
-                {m.main === '기타' && <>{genOption(etcArray)}</>}
+                {m.main === '기획' && <>{genOption(A.planArray)}</>}
+                {m.main === '디자인' && <>{genOption(A.designArray)}</>}
+                {m.main === '프론트엔드개발' && <>{genOption(A.frontArray)}</>}
+                {m.main === '백엔드개발' && <>{genOption(A.backArray)}</>}
+                {m.main === '사업' && <>{genOption(A.coopArray)}</>}
+                {m.main === '기타' && <>{genOption(A.etcArray)}</>}
               </Form.Select>
 
               {m.sub === 'UI/UX 기획' && (

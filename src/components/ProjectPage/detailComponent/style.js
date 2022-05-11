@@ -234,9 +234,15 @@ export const MemberGrid = styled.div`
 export const MemberCardText = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  margin-bottom: 14px;
 `;
 
-export const MemberCardLeft = styled.div``;
+export const MemberCardLeft = styled.div`
+  font-size: 18px;
+`;
 
-export const MemberCardRight = styled.div``;
+export const MemberCardRight = styled.div`
+  font-size: 18px;
+  opacity: 0.7;
+`;

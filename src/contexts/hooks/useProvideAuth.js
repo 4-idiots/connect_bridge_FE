@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
-import { customAxios, validToken } from '../../service';
+import customAxios from '../../services/customAxios';
+import { validToken } from '../../services/loginService';
 
 export const useProvideAuth = () => {
   const [token, setToken] = useState();

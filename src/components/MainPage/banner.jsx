@@ -1,5 +1,4 @@
 import React from 'react';
-// import axios from 'axios';
 import { Hero } from 'react-bulma-components';
 
 export const BannerForm = () => {

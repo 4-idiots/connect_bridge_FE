@@ -1,5 +1,4 @@
 import React from 'react';
-// import axios from 'axios';
 import { Footer, Container, Content } from 'react-bulma-components';
 
 export const FooterForm = () => {

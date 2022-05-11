@@ -6,89 +6,23 @@ import { useJwt } from 'react-jwt';
 import * as S from './style';
 import { ReactComponent as Heart } from '../../../assets/svg/heart.svg';
 import { RecruitModal } from './recruitModal';
-import { projectLikeCheck, projectLikeService } from '../../../service';
+import * as Send from '../../../services/projectService';
 import { useAuth } from '../../../contexts/hooks/useAuth';
 
-export const ProjectCard = ({
-  projectImg,
-  projectField,
-  projectName,
-  projectLike,
-  projectView,
-  prUserID,
-  projectID,
-  uiuxPlan,
-  gamePlan,
-  managerPlan,
-  hwPlan,
-  iosFr,
-  androidFr,
-  webFrontFr,
-  webPublicFr,
-  crossFr,
-  uiuxDe,
-  graphicDe,
-  thrdDe,
-  hwDe,
-  etcDe,
-  webBk,
-  blchBk,
-  aiBk,
-  dsBk,
-  gameBk,
-  planBu,
-  marketingBu,
-  financeBu,
-  salesBu,
-  consultBu,
-  investBu,
-  etcBu,
-  blogEtc,
-  influEtc,
-  compEtc,
-  uiuxPlanNow,
-  gamePlanNow,
-  managerPlanNow,
-  hwPlanNow,
-  iosFrNow,
-  androidFrNow,
-  webFrontFrNow,
-  webPublicFrNow,
-  crossFrNow,
-  uiuxDeNow,
-  graphicDeNow,
-  thrdDeNow,
-  hwDeNow,
-  etcDeNow,
-  webBkNow,
-  blchBkNow,
-  aiBkNow,
-  dsBkNow,
-  gameBkNow,
-  planBuNow,
-  marketingBuNow,
-  financeBuNow,
-  salesBuNow,
-  consultBuNow,
-  investBuNow,
-  etcBuNow,
-  blogEtcNow,
-  influEtcNow,
-  compEtcNow,
-}) => {
+export const ProjectCard = ({ item }) => {
   const navigate = useNavigate();
   const auth = useAuth();
-  const { decodedToken, isExpired } = useJwt(auth.token);
+  const { decodedToken } = useJwt(auth.token);
 
   const [isHover, setIsHover] = useState(false);
   const [onHeart, setOnHeart] = useState(false);
   const [onRecruit, setOnRecruit] = useState(false);
   const [usLike, setUsLike] = useState(true);
-  const [dynLike, setDynLike] = useState(projectLike);
+  const [dynLike, setDynLike] = useState(item.projectLike);
 
   const checkLike = async () => {
     try {
-      const result = await projectLikeCheck(projectID);
+      const result = await Send.projectLikeCheck(item.projectID);
       setUsLike(result.data);
     } catch (error) {
       setUsLike(false);
@@ -108,7 +42,7 @@ export const ProjectCard = ({
     }
     setUsLike(!usLike);
     try {
-      const result = await projectLikeService(projectID);
+      const result = await Send.projectLikeService(item.projectID);
     } catch (error) {
       console.log(error);
     }
@@ -140,12 +74,12 @@ export const ProjectCard = ({
       }}
     >
       <div
-        onClick={() => navigate(`/project/${projectID}`)}
+        onClick={() => navigate(`/project/${item.projectID}`)}
         className="imgclick"
         role="presentation"
       >
         <img
-          src={projectImg}
+          src={item.projectImg}
           style={{
             width: '100%',
             height: '160px',
@@ -195,13 +129,13 @@ export const ProjectCard = ({
           ''
         )}
       </S.CustomDiv>
-      <Card.Content onClick={() => navigate(`/project/${projectID}`)}>
+      <Card.Content onClick={() => navigate(`/project/${item.projectID}`)}>
         <Media style={{ marginBottom: 0 }}>
           <Media.Item>
             <Heading subtitle size={7}>
-              {projectField}
+              {item.projectField}
             </Heading>
-            <Heading size={6}>{projectName}</Heading>
+            <Heading size={6}>{item.projectName}</Heading>
           </Media.Item>
         </Media>
         <Media style={{ marginBottom: '0.8rem' }}>
@@ -229,7 +163,7 @@ export const ProjectCard = ({
               <Icon>
                 <i className="fas fa-eye" />
               </Icon>
-              <div>{projectView}</div>
+              <div>{item.projectView}</div>
             </div>
           </Content>
         </Media>
@@ -247,70 +181,7 @@ export const ProjectCard = ({
               <i className="fas fa-arrow-up" />
             </Icon>
           </S.mainRecruitBox>
-          {onRecruit ? (
-            <RecruitModal
-              uiuxPlan={uiuxPlan}
-              gamePlan={gamePlan}
-              managerPlan={managerPlan}
-              hwPlan={hwPlan}
-              iosFr={iosFr}
-              androidFr={androidFr}
-              webFrontFr={webFrontFr}
-              webPublicFr={webPublicFr}
-              crossFr={crossFr}
-              uiuxDe={uiuxDe}
-              graphicDe={graphicDe}
-              thrdDe={thrdDe}
-              hwDe={hwDe}
-              etcDe={etcDe}
-              webBk={webBk}
-              blchBk={blchBk}
-              aiBk={aiBk}
-              dsBk={dsBk}
-              gameBk={gameBk}
-              planBu={planBu}
-              marketingBu={marketingBu}
-              financeBu={financeBu}
-              salesBu={salesBu}
-              consultBu={consultBu}
-              investBu={investBu}
-              etcBu={etcBu}
-              blogEtc={blogEtc}
-              influEtc={influEtc}
-              compEtc={compEtc}
-              uiuxPlanNow={uiuxPlanNow}
-              gamePlanNow={gamePlanNow}
-              managerPlanNow={managerPlanNow}
-              hwPlanNow={hwPlanNow}
-              iosFrNow={iosFrNow}
-              androidFrNow={androidFrNow}
-              webFrontFrNow={webFrontFrNow}
-              webPublicFrNow={webPublicFrNow}
-              crossFrNow={crossFrNow}
-              uiuxDeNow={uiuxDeNow}
-              graphicDeNow={graphicDeNow}
-              thrdDeNow={thrdDeNow}
-              hwDeNow={hwDeNow}
-              etcDeNow={etcDeNow}
-              webBkNow={webBkNow}
-              blchBkNow={blchBkNow}
-              aiBkNow={aiBkNow}
-              dsBkNow={dsBkNow}
-              gameBkNow={gameBkNow}
-              planBuNow={planBuNow}
-              marketingBuNow={marketingBuNow}
-              financeBuNow={financeBuNow}
-              salesBuNow={salesBuNow}
-              consultBuNow={consultBuNow}
-              investBuNow={investBuNow}
-              etcBuNow={etcBuNow}
-              blogEtcNow={blogEtcNow}
-              influEtcNow={influEtcNow}
-              compEtcNow={compEtcNow}
-            />
-          ) : (
-            ''
-          )}
+          {onRecruit ? <RecruitModal item={item} /> : ''}
         </S.mainRecruitWrap>
       </Card.Content>
     </Card>
@@ -318,69 +189,5 @@ export const ProjectCard = ({
 };
 
 ProjectCard.propTypes = {
-  projectImg: PropTypes.string.isRequired,
-  projectField: PropTypes.string.isRequired,
-  projectName: PropTypes.string.isRequired,
-  projectLike: PropTypes.number.isRequired,
-  projectView: PropTypes.number.isRequired,
-  prUserID: PropTypes.number.isRequired,
-  projectID: PropTypes.number.isRequired,
-  uiuxPlan: PropTypes.number.isRequired,
-  gamePlan: PropTypes.number.isRequired,
-  managerPlan: PropTypes.number.isRequired,
-  hwPlan: PropTypes.number.isRequired,
-  iosFr: PropTypes.number.isRequired,
-  androidFr: PropTypes.number.isRequired,
-  webFrontFr: PropTypes.number.isRequired,
-  webPublicFr: PropTypes.number.isRequired,
-  crossFr: PropTypes.number.isRequired,
-  uiuxDe: PropTypes.number.isRequired,
-  graphicDe: PropTypes.number.isRequired,
-  thrdDe: PropTypes.number.isRequired,
-  hwDe: PropTypes.number.isRequired,
-  etcDe: PropTypes.number.isRequired,
-  webBk: PropTypes.number.isRequired,
-  blchBk: PropTypes.number.isRequired,
-  aiBk: PropTypes.number.isRequired,
-  dsBk: PropTypes.number.isRequired,
-  gameBk: PropTypes.number.isRequired,
-  planBu: PropTypes.number.isRequired,
-  marketingBu: PropTypes.number.isRequired,
-  financeBu: PropTypes.number.isRequired,
-  salesBu: PropTypes.number.isRequired,
-  consultBu: PropTypes.number.isRequired,
-  investBu: PropTypes.number.isRequired,
-  etcBu: PropTypes.number.isRequired,
-  blogEtc: PropTypes.number.isRequired,
-  influEtc: PropTypes.number.isRequired,
-  compEtc: PropTypes.number.isRequired,
-  uiuxPlanNow: PropTypes.number.isRequired,
-  gamePlanNow: PropTypes.number.isRequired,
-  managerPlanNow: PropTypes.number.isRequired,
-  hwPlanNow: PropTypes.number.isRequired,
-  iosFrNow: PropTypes.number.isRequired,
-  androidFrNow: PropTypes.number.isRequired,
-  webFrontFrNow: PropTypes.number.isRequired,
-  webPublicFrNow: PropTypes.number.isRequired,
-  crossFrNow: PropTypes.number.isRequired,
-  uiuxDeNow: PropTypes.number.isRequired,
-  graphicDeNow: PropTypes.number.isRequired,
-  thrdDeNow: PropTypes.number.isRequired,
-  hwDeNow: PropTypes.number.isRequired,
-  etcDeNow: PropTypes.number.isRequired,
-  webBkNow: PropTypes.number.isRequired,
-  blchBkNow: PropTypes.number.isRequired,
-  aiBkNow: PropTypes.number.isRequired,
-  dsBkNow: PropTypes.number.isRequired,
-  gameBkNow: PropTypes.number.isRequired,
-  planBuNow: PropTypes.number.isRequired,
-  marketingBuNow: PropTypes.number.isRequired,
-  financeBuNow: PropTypes.number.isRequired,
-  salesBuNow: PropTypes.number.isRequired,
-  consultBuNow: PropTypes.number.isRequired,
-  investBuNow: PropTypes.number.isRequired,
-  etcBuNow: PropTypes.number.isRequired,
-  blogEtcNow: PropTypes.number.isRequired,
-  influEtcNow: PropTypes.number.isRequired,
-  compEtcNow: PropTypes.number.isRequired,
+  item: PropTypes.objectOf(PropTypes.any).isRequired,
 };

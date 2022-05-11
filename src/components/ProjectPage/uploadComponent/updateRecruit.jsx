@@ -1,19 +1,8 @@
-/* eslint-disable consistent-return */
-/* eslint-disable array-callback-return */
-/* eslint-disable no-param-reassign */
 /* eslint-disable react/no-array-index-key */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button, Icon } from 'react-bulma-components';
-import {
-  mainArray,
-  planArray,
-  frontArray,
-  designArray,
-  backArray,
-  coopArray,
-  etcArray,
-} from './uploadValue';
+import * as A from './uploadValue';
 
 export const UpdateRecruit = ({ member, setMember }) => {
   const [fieldMember, setFieldMember] = useState({
@@ -72,66 +61,6 @@ export const UpdateRecruit = ({ member, setMember }) => {
       list[index].sub = '작가/블로거';
       setMember({ ...member, projectTotal: list, blogEtc: 1 });
     }
-
-    // if (sub === 'UI/UX 기획') {
-    //   setMember({ ...member, uiuxPlan: 0 });
-    // } else if (sub === '게임 기획') {
-    //   setMember({ ...member, gamePlan: 0 });
-    // } else if (sub === '프로젝트 매니저') {
-    //   setMember({ ...member, managerPlan: 0 });
-    // } else if (sub === '하드웨어(제품) 기획') {
-    //   setMember({ ...member, hwPlan: 0 });
-    // } else if (sub === 'IOS') {
-    //   setMember({ ...member, iosFr: 0 });
-    // } else if (sub === '안드로이드') {
-    //   setMember({ ...member, androidFr: 0 });
-    // } else if (sub === '웹프론트엔드') {
-    //   setMember({ ...member, webFrontFr: 0 });
-    // } else if (sub === '웹퍼블리셔') {
-    //   setMember({ ...member, webPublicFr: 0 });
-    // } else if (sub === '크로스플랫폼') {
-    //   setMember({ ...member, crossFr: 0 });
-    // } else if (sub === '그래픽디자인') {
-    //   setMember({ ...member, graphicDe: 0 });
-    // } else if (sub === 'UI/UX디자인') {
-    //   setMember({ ...member, uiuxDe: 0 });
-    // } else if (sub === '3D디자인') {
-    //   setMember({ ...member, thrdDe: 0 });
-    // } else if (sub === '하드웨어(제품)디자인') {
-    //   setMember({ ...member, hwDe: 0 });
-    // } else if (sub === '(디자인)기타') {
-    //   setMember({ ...member, etcDe: 0 });
-    // } else if (sub === '웹서버') {
-    //   setMember({ ...member, webBk: 0 });
-    // } else if (sub === '블록체인') {
-    //   setMember({ ...member, blchBk: 0 });
-    // } else if (sub === 'AI') {
-    //   setMember({ ...member, aiBk: 0 });
-    // } else if (sub === 'DB/빅데이터/DS') {
-    //   setMember({ ...member, dsBk: 0 });
-    // } else if (sub === '게임서버') {
-    //   setMember({ ...member, gameBk: 0 });
-    // } else if (sub === '사업기획') {
-    //   setMember({ ...member, planBu: 0 });
-    // } else if (sub === '마케팅') {
-    //   setMember({ ...member, marketingBu: 0 });
-    // } else if (sub === '재무/회계') {
-    //   setMember({ ...member, financeBu: 0 });
-    // } else if (sub === '영업') {
-    //   setMember({ ...member, salesBu: 0 });
-    // } else if (sub === '전략/컨설팅') {
-    //   setMember({ ...member, consultBu: 0 });
-    // } else if (sub === '투자/고문') {
-    //   setMember({ ...member, investBu: 0 });
-    // } else if (sub === '(사업)그외') {
-    //   setMember({ ...member, etcBu: 0 });
-    // } else if (sub === '작가/블로거') {
-    //   setMember({ ...member, blogEtc: 0 });
-    // } else if (sub === '인플루언서/유튜버') {
-    //   setMember({ ...member, influEtc: 0 });
-    // } else if (sub === '작곡(사운드)') {
-    //   setMember({ ...member, compEtc: 0 });
-    // }
 
     if (e.target.value === 'UI/UX 기획') {
       setMember({ ...member, uiuxPlan: fieldMember.nuiuxPlan });
@@ -731,7 +660,7 @@ export const UpdateRecruit = ({ member, setMember }) => {
                 onChange={e => handleInputChange(e, index, m.sub)}
                 value={m.main}
               >
-                {genOption(mainArray)}
+                {genOption(A.mainArray)}
               </Form.Select>
               <Form.Select
                 style={{ width: '16%' }}
@@ -739,12 +668,12 @@ export const UpdateRecruit = ({ member, setMember }) => {
                 onChange={e => handleInputChange(e, index, m.sub)}
                 value={m.sub}
               >
-                {m.main === '기획' && <>{genOption(planArray)}</>}
-                {m.main === '디자인' && <>{genOption(designArray)}</>}
-                {m.main === '프론트엔드개발' && <>{genOption(frontArray)}</>}
-                {m.main === '백엔드개발' && <>{genOption(backArray)}</>}
-                {m.main === '사업' && <>{genOption(coopArray)}</>}
-                {m.main === '기타' && <>{genOption(etcArray)}</>}
+                {m.main === '기획' && <>{genOption(A.planArray)}</>}
+                {m.main === '디자인' && <>{genOption(A.designArray)}</>}
+                {m.main === '프론트엔드개발' && <>{genOption(A.frontArray)}</>}
+                {m.main === '백엔드개발' && <>{genOption(A.backArray)}</>}
+                {m.main === '사업' && <>{genOption(A.coopArray)}</>}
+                {m.main === '기타' && <>{genOption(A.etcArray)}</>}
               </Form.Select>
 
               {m.sub === 'UI/UX 기획' && (

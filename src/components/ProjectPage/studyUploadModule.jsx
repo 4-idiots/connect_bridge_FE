@@ -8,7 +8,7 @@ import {
   StudyRecruit,
 } from './sUploadComponent/sUploadValue';
 import SlateEditor from '../../SlateEditor/Editor';
-import { studyUploadService } from '../../service';
+import { studyUploadService } from '../../services/studyService';
 
 export const StudyUploadForm = () => {
   const [study, setStudy] = useState({

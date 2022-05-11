@@ -4,7 +4,7 @@ import { NewCard } from './mainComponent/newCard';
 import { SuggestCard } from './mainComponent/suggestCard';
 import * as S from './mainComponent/style';
 import { ProjectInfinite } from '../../swr/projectInfinite';
-import { projectGetNewService } from '../../service';
+import { projectGetNewService } from '../../services/projectService';
 
 export const ProjectMainForm = () => {
   const [newPr, setNewPr] = useState(null);

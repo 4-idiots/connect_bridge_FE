@@ -2,7 +2,7 @@ import React from 'react';
 import { Form } from 'react-bulma-components';
 import PropTypes from 'prop-types';
 import { ko } from 'date-fns/esm/locale';
-import { CustomDatePicker, DateBox } from '../uploadComponent/uploadCustom';
+import { CustomDatePicker, DateBox } from '../uploadComponent/style';
 
 export const StudyDate = ({ start, end, startChange, endChange }) => {
   return (

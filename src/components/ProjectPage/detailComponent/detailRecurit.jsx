@@ -6,69 +6,7 @@ import { Heading, Button } from 'react-bulma-components';
 import { useAuth } from '../../../contexts/hooks/useAuth';
 import * as S from './style';
 
-export const DetailRecurit = ({
-  uiuxPlan,
-  gamePlan,
-  managerPlan,
-  hwPlan,
-  iosFr,
-  androidFr,
-  webFrontFr,
-  webPublicFr,
-  crossFr,
-  uiuxDe,
-  graphicDe,
-  thrdDe,
-  hwDe,
-  etcDe,
-  webBk,
-  blchBk,
-  aiBk,
-  dsBk,
-  gameBk,
-  planBu,
-  marketingBu,
-  financeBu,
-  salesBu,
-  consultBu,
-  investBu,
-  etcBu,
-  blogEtc,
-  influEtc,
-  compEtc,
-  uiuxPlanNow,
-  gamePlanNow,
-  managerPlanNow,
-  hwPlanNow,
-  iosFrNow,
-  androidFrNow,
-  webFrontFrNow,
-  webPublicFrNow,
-  crossFrNow,
-  uiuxDeNow,
-  graphicDeNow,
-  thrdDeNow,
-  hwDeNow,
-  etcDeNow,
-  webBkNow,
-  blchBkNow,
-  aiBkNow,
-  dsBkNow,
-  gameBkNow,
-  planBuNow,
-  marketingBuNow,
-  financeBuNow,
-  salesBuNow,
-  consultBuNow,
-  investBuNow,
-  etcBuNow,
-  blogEtcNow,
-  influEtcNow,
-  compEtcNow,
-  apply,
-  userID,
-  projectID,
-}) => {
+export const DetailRecurit = ({ item, apply, projectID }) => {
   const auth = useAuth();
   const { decodedToken } = useJwt(auth.token);
 
@@ -80,21 +18,21 @@ export const DetailRecurit = ({
       <S.StatusUl>
         {decodedToken && (
           <div>
-            {uiuxPlan ? (
+            {item.uiuxPlan ? (
               <S.StatusLi>
                 <S.StatusBigP>UI/UX 기획</S.StatusBigP>
                 <S.StatusSmallP>
-                  {uiuxPlanNow} / {uiuxPlan}
+                  {item.uiuxPlanNow} / {item.uiuxPlan}
                 </S.StatusSmallP>
-                {uiuxPlanNow !== 0 ? (
+                {item.uiuxPlanNow !== 0 ? (
                   <>
-                    {uiuxPlan === uiuxPlanNow ? (
+                    {item.uiuxPlan === item.uiuxPlanNow ? (
                       <Button color="danger">완료</Button>
                     ) : (
                       <Button
                         color="info"
                         onClick={() => {
-                          apply(projectID, userID, 'uiux_plan_now');
+                          apply(projectID, decodedToken.id, 'uiux_plan');
                         }}
                       >
                         신청
@@ -105,7 +43,7 @@ export const DetailRecurit = ({
                   <Button
                     color="info"
                     onClick={() => {
-                      apply(projectID, userID, 'uiux_plan_now');
+                      apply(projectID, decodedToken.id, 'uiux_plan');
                     }}
                   >
                     신청
@@ -115,21 +53,21 @@ export const DetailRecurit = ({
             ) : (
               ''
             )}
-            {gamePlan ? (
+            {item.gamePlan ? (
               <S.StatusLi>
                 <S.StatusBigP>게임 기획</S.StatusBigP>
                 <S.StatusSmallP>
-                  {gamePlanNow} / {gamePlan}
+                  {item.gamePlanNow} / {item.gamePlan}
                 </S.StatusSmallP>
-                {gamePlanNow !== 0 ? (
+                {item.gamePlanNow !== 0 ? (
                   <>
-                    {gamePlan === gamePlanNow ? (
+                    {item.gamePlan === item.gamePlanNow ? (
                       <Button color="danger">완료</Button>
                     ) : (
                       <Button
                         color="info"
                         onClick={() => {
-                          apply(projectID, userID, 'game_plan_now');
+                          apply(projectID, decodedToken.id, 'game_plan');
                         }}
                       >
                         신청
@@ -140,7 +78,7 @@ export const DetailRecurit = ({
                   <Button
                     color="info"
                     onClick={() => {
-                      apply(projectID, userID, 'game_plan_now');
+                      apply(projectID, decodedToken.id, 'game_plan');
                     }}
                   >
                     신청
@@ -150,21 +88,21 @@ export const DetailRecurit = ({
             ) : (
               ''
             )}
-            {managerPlan ? (
+            {item.managerPlan ? (
               <S.StatusLi>
                 <S.StatusBigP>프로젝트 매니저</S.StatusBigP>
                 <S.StatusSmallP>
-                  {managerPlanNow} / {managerPlan}
+                  {item.managerPlanNow} / {item.managerPlan}
                 </S.StatusSmallP>
-                {managerPlanNow !== 0 ? (
+                {item.managerPlanNow !== 0 ? (
                   <>
-                    {managerPlan === managerPlanNow ? (
+                    {item.managerPlan === item.managerPlanNow ? (
                       <Button color="danger">완료</Button>
                     ) : (
                       <Button
                         color="info"
                         onClick={() => {
-                          apply(projectID, userID, 'manager_plan_now');
+                          apply(projectID, decodedToken.id, 'manager_plan');
                         }}
                       >
                         신청
@@ -175,7 +113,7 @@ export const DetailRecurit = ({
                   <Button
                     color="info"
                     onClick={() => {
-                      apply(projectID, userID, 'manager_plan_now');
+                      apply(projectID, decodedToken.id, 'manager_plan');
                     }}
                   >
                     신청
@@ -185,21 +123,21 @@ export const DetailRecurit = ({
             ) : (
               ''
             )}
-            {hwPlan ? (
+            {item.hwPlan ? (
               <S.StatusLi>
                 <S.StatusBigP>하드웨어(제품) 기획</S.StatusBigP>
                 <S.StatusSmallP>
-                  {hwPlanNow} / {hwPlan}
+                  {item.hwPlanNow} / {item.hwPlan}
                 </S.StatusSmallP>
-                {hwPlanNow !== 0 ? (
+                {item.hwPlanNow !== 0 ? (
                   <>
-                    {hwPlan === hwPlanNow ? (
+                    {item.hwPlan === item.hwPlanNow ? (
                       <Button color="danger">완료</Button>
                     ) : (
                       <Button
                         color="info"
                         onClick={() => {
-                          apply(projectID, userID, 'hw_plan_now');
+                          apply(projectID, decodedToken.id, 'hw_plan');
                         }}
                       >
                         신청
@@ -210,7 +148,7 @@ export const DetailRecurit = ({
                   <Button
                     color="info"
                     onClick={() => {
-                      apply(projectID, userID, 'hw_plan_now');
+                      apply(projectID, decodedToken.id, 'hw_plan');
                     }}
                   >
                     신청
@@ -220,21 +158,21 @@ export const DetailRecurit = ({
             ) : (
               ''
             )}
-            {iosFr ? (
+            {item.iosFr ? (
               <S.StatusLi>
                 <S.StatusBigP>IOS</S.StatusBigP>
                 <S.StatusSmallP>
-                  {iosFrNow} / {iosFr}
+                  {item.iosFrNow} / {item.iosFr}
                 </S.StatusSmallP>
-                {iosFrNow !== 0 ? (
+                {item.iosFrNow !== 0 ? (
                   <>
-                    {iosFr === iosFrNow ? (
+                    {item.iosFr === item.iosFrNow ? (
                       <Button color="danger">완료</Button>
                     ) : (
                       <Button
                         color="info"
                         onClick={() => {
-                          apply(projectID, userID, 'ios_fr_now');
+                          apply(projectID, decodedToken.id, 'ios_fr');
                         }}
                       >
                         신청
@@ -245,7 +183,7 @@ export const DetailRecurit = ({
                   <Button
                     color="info"
                     onClick={() => {
-                      apply(projectID, userID, 'ios_fr_now');
+                      apply(projectID, decodedToken.id, 'ios_fr');
                     }}
                   >
                     신청
@@ -255,21 +193,21 @@ export const DetailRecurit = ({
             ) : (
               ''
             )}
-            {androidFr ? (
+            {item.androidFr ? (
               <S.StatusLi>
                 <S.StatusBigP>안드로이드</S.StatusBigP>
                 <S.StatusSmallP>
-                  {androidFrNow} / {androidFr}
+                  {item.androidFrNow} / {item.androidFr}
                 </S.StatusSmallP>
-                {androidFrNow !== 0 ? (
+                {item.androidFrNow !== 0 ? (
                   <>
-                    {androidFr === androidFrNow ? (
+                    {item.androidFr === item.androidFrNow ? (
                       <Button color="danger">완료</Button>
                     ) : (
                       <Button
                         color="info"
                         onClick={() => {
-                          apply(projectID, userID, 'android_fr_now');
+                          apply(projectID, decodedToken.id, 'android_fr');
                         }}
                       >
                         신청
@@ -280,7 +218,7 @@ export const DetailRecurit = ({
                   <Button
                     color="info"
                     onClick={() => {
-                      apply(projectID, userID, 'android_fr_now');
+                      apply(projectID, decodedToken.id, 'android_fr');
                     }}
                   >
                     신청
@@ -290,21 +228,21 @@ export const DetailRecurit = ({
             ) : (
               ''
             )}
-            {webFrontFr ? (
+            {item.webFrontFr ? (
               <S.StatusLi>
                 <S.StatusBigP>웹프론트엔드</S.StatusBigP>
                 <S.StatusSmallP>
-                  {webFrontFrNow} / {webFrontFr}
+                  {item.webFrontFrNow} / {item.webFrontFr}
                 </S.StatusSmallP>
-                {webFrontFrNow !== 0 ? (
+                {item.webFrontFrNow !== 0 ? (
                   <>
-                    {webFrontFr === webFrontFrNow ? (
+                    {item.webFrontFr === item.webFrontFrNow ? (
                       <Button color="danger">완료</Button>
                     ) : (
                       <Button
                         color="info"
                         onClick={() => {
-                          apply(projectID, userID, 'webfront_fr_now');
+                          apply(projectID, decodedToken.id, 'webfront_fr');
                         }}
                       >
                         신청
@@ -315,7 +253,7 @@ export const DetailRecurit = ({
                   <Button
                     color="info"
                     onClick={() => {
-                      apply(projectID, userID, 'webfront_fr_now');
+                      apply(projectID, decodedToken.id, 'webfront_fr');
                     }}
                   >
                     신청
@@ -325,21 +263,21 @@ export const DetailRecurit = ({
             ) : (
               ''
             )}
-            {webPublicFr ? (
+            {item.webPublicFr ? (
               <S.StatusLi>
                 <S.StatusBigP>웹퍼블리셔</S.StatusBigP>
                 <S.StatusSmallP>
-                  {webPublicFrNow} / {webPublicFr}
+                  {item.webPublicFrNow} / {item.webPublicFr}
                 </S.StatusSmallP>
-                {webPublicFrNow !== 0 ? (
+                {item.webPublicFrNow !== 0 ? (
                   <>
-                    {webPublicFr === webPublicFrNow ? (
+                    {item.webPublicFr === item.webPublicFrNow ? (
                       <Button color="danger">완료</Button>
                     ) : (
                       <Button
                         color="info"
                         onClick={() => {
-                          apply(projectID, userID, 'webpublick_fr_now');
+                          apply(projectID, decodedToken.id, 'webpublick_fr');
                         }}
                       >
                         신청
@@ -350,7 +288,7 @@ export const DetailRecurit = ({
                   <Button
                     color="info"
                     onClick={() => {
-                      apply(projectID, userID, 'webpublick_fr_now');
+                      apply(projectID, decodedToken.id, 'webpublick_fr');
                     }}
                   >
                     신청
@@ -360,21 +298,21 @@ export const DetailRecurit = ({
             ) : (
               ''
             )}
-            {crossFr ? (
+            {item.crossFr ? (
               <S.StatusLi>
                 <S.StatusBigP>크로스플랫폼</S.StatusBigP>
                 <S.StatusSmallP>
-                  {crossFrNow} / {crossFr}
+                  {item.crossFrNow} / {item.crossFr}
                 </S.StatusSmallP>
-                {crossFrNow !== 0 ? (
+                {item.crossFrNow !== 0 ? (
                   <>
-                    {crossFr === crossFrNow ? (
+                    {item.crossFr === item.crossFrNow ? (
                       <Button color="danger">완료</Button>
                     ) : (
                       <Button
                         color="info"
                         onClick={() => {
-                          apply(projectID, userID, 'cross_fr_now');
+                          apply(projectID, decodedToken.id, 'cross_fr');
                         }}
                       >
                         신청
@@ -385,7 +323,7 @@ export const DetailRecurit = ({
                   <Button
                     color="info"
                     onClick={() => {
-                      apply(projectID, userID, 'cross_fr_now');
+                      apply(projectID, decodedToken.id, 'cross_fr');
                     }}
                   >
                     신청
@@ -395,21 +333,21 @@ export const DetailRecurit = ({
             ) : (
               ''
             )}
-            {graphicDe ? (
+            {item.graphicDe ? (
               <S.StatusLi>
                 <S.StatusBigP>그래픽디자인</S.StatusBigP>
                 <S.StatusSmallP>
-                  {graphicDeNow} / {graphicDe}
+                  {item.graphicDeNow} / {item.graphicDe}
                 </S.StatusSmallP>
-                {graphicDeNow !== 0 ? (
+                {item.graphicDeNow !== 0 ? (
                   <>
-                    {graphicDe === graphicDeNow ? (
+                    {item.graphicDe === item.graphicDeNow ? (
                       <Button color="danger">완료</Button>
                     ) : (
                       <Button
                         color="info"
                         onClick={() => {
-                          apply(projectID, userID, 'graphic_de_now');
+                          apply(projectID, decodedToken.id, 'graphic_de');
                         }}
                       >
                         신청
@@ -420,7 +358,7 @@ export const DetailRecurit = ({
                   <Button
                     color="info"
                     onClick={() => {
-                      apply(projectID, userID, 'graphic_de_now');
+                      apply(projectID, decodedToken.id, 'graphic_de');
                     }}
                   >
                     신청
@@ -430,21 +368,21 @@ export const DetailRecurit = ({
             ) : (
               ''
             )}
-            {uiuxDe ? (
+            {item.uiuxDe ? (
               <S.StatusLi>
                 <S.StatusBigP>UI/UX디자인</S.StatusBigP>
                 <S.StatusSmallP>
-                  {uiuxDeNow} / {uiuxDe}
+                  {item.uiuxDeNow} / {item.uiuxDe}
                 </S.StatusSmallP>
-                {uiuxDeNow !== 0 ? (
+                {item.uiuxDeNow !== 0 ? (
                   <>
-                    {uiuxDe === uiuxDeNow ? (
+                    {item.uiuxDe === item.uiuxDeNow ? (
                       <Button color="danger">완료</Button>
                     ) : (
                       <Button
                         color="info"
                         onClick={() => {
-                          apply(projectID, userID, 'uiux_de_now');
+                          apply(projectID, decodedToken.id, 'uiux_de');
                         }}
                       >
                         신청
@@ -455,7 +393,7 @@ export const DetailRecurit = ({
                   <Button
                     color="info"
                     onClick={() => {
-                      apply(projectID, userID, 'uiux_de_now');
+                      apply(projectID, decodedToken.id, 'uiux_de');
                     }}
                   >
                     신청
@@ -465,21 +403,21 @@ export const DetailRecurit = ({
             ) : (
               ''
             )}
-            {thrdDe ? (
+            {item.thrdDe ? (
               <S.StatusLi>
                 <S.StatusBigP>3D디자인</S.StatusBigP>
                 <S.StatusSmallP>
-                  {thrdDeNow} / {thrdDe}
+                  {item.thrdDeNow} / {item.thrdDe}
                 </S.StatusSmallP>
-                {thrdDeNow !== 0 ? (
+                {item.thrdDeNow !== 0 ? (
                   <>
-                    {thrdDe === thrdDeNow ? (
+                    {item.thrdDe === item.thrdDeNow ? (
                       <Button color="danger">완료</Button>
                     ) : (
                       <Button
                         color="info"
                         onClick={() => {
-                          apply(projectID, userID, 'thr_de_now');
+                          apply(projectID, decodedToken.id, 'thr_de');
                         }}
                       >
                         신청
@@ -490,7 +428,7 @@ export const DetailRecurit = ({
                   <Button
                     color="info"
                     onClick={() => {
-                      apply(projectID, userID, 'thr_de_now');
+                      apply(projectID, decodedToken.id, 'thr_de');
                     }}
                   >
                     신청
@@ -500,21 +438,21 @@ export const DetailRecurit = ({
             ) : (
               ''
             )}
-            {hwDe ? (
+            {item.hwDe ? (
               <S.StatusLi>
                 <S.StatusBigP>하드웨어(제품)디자인</S.StatusBigP>
                 <S.StatusSmallP>
-                  {hwDeNow} / {hwDe}
+                  {item.hwDeNow} / {item.hwDe}
                 </S.StatusSmallP>
-                {hwDeNow !== 0 ? (
+                {item.hwDeNow !== 0 ? (
                   <>
-                    {hwDe === hwDeNow ? (
+                    {item.hwDe === item.hwDeNow ? (
                       <Button color="danger">완료</Button>
                     ) : (
                       <Button
                         color="info"
                         onClick={() => {
-                          apply(projectID, userID, 'hw_de_now');
+                          apply(projectID, decodedToken.id, 'hw_de');
                         }}
                       >
                         신청
@@ -525,7 +463,7 @@ export const DetailRecurit = ({
                   <Button
                     color="info"
                     onClick={() => {
-                      apply(projectID, userID, 'hw_de_now');
+                      apply(projectID, decodedToken.id, 'hw_de');
                     }}
                   >
                     신청
@@ -535,21 +473,21 @@ export const DetailRecurit = ({
             ) : (
               ''
             )}
-            {etcDe ? (
+            {item.etcDe ? (
               <S.StatusLi>
                 <S.StatusBigP>(디자인)기타</S.StatusBigP>
                 <S.StatusSmallP>
-                  {etcDeNow} / {etcDe}
+                  {item.etcDeNow} / {item.etcDe}
                 </S.StatusSmallP>
-                {etcDeNow !== 0 ? (
+                {item.etcDeNow !== 0 ? (
                   <>
-                    {etcDe === etcDeNow ? (
+                    {item.etcDe === item.etcDeNow ? (
                       <Button color="danger">완료</Button>
                     ) : (
                       <Button
                         color="info"
                         onClick={() => {
-                          apply(projectID, userID, 'etc_de_now');
+                          apply(projectID, decodedToken.id, 'etc_de');
                         }}
                       >
                         신청
@@ -560,7 +498,7 @@ export const DetailRecurit = ({
                   <Button
                     color="info"
                     onClick={() => {
-                      apply(projectID, userID, 'etc_de_now');
+                      apply(projectID, decodedToken.id, 'etc_de');
                     }}
                   >
                     신청
@@ -570,21 +508,21 @@ export const DetailRecurit = ({
             ) : (
               ''
             )}
-            {webBk ? (
+            {item.webBk ? (
               <S.StatusLi>
                 <S.StatusBigP>웹서버</S.StatusBigP>
                 <S.StatusSmallP>
-                  {webBkNow} / {webBk}
+                  {item.webBkNow} / {item.webBk}
                 </S.StatusSmallP>
-                {webBkNow !== 0 ? (
+                {item.webBkNow !== 0 ? (
                   <>
-                    {webBk === webBkNow ? (
+                    {item.webBk === item.webBkNow ? (
                       <Button color="danger">완료</Button>
                     ) : (
                       <Button
                         color="info"
                         onClick={() => {
-                          apply(projectID, userID, 'web_bk_now');
+                          apply(projectID, decodedToken.id, 'web_bk');
                         }}
                       >
                         신청
@@ -595,7 +533,7 @@ export const DetailRecurit = ({
                   <Button
                     color="info"
                     onClick={() => {
-                      apply(projectID, userID, 'web_bk_now');
+                      apply(projectID, decodedToken.id, 'web_bk');
                     }}
                   >
                     신청
@@ -605,21 +543,21 @@ export const DetailRecurit = ({
             ) : (
               ''
             )}
-            {blchBk ? (
+            {item.blchBk ? (
               <S.StatusLi>
                 <S.StatusBigP>블록체인</S.StatusBigP>
                 <S.StatusSmallP>
-                  {blchBkNow} / {blchBk}
+                  {item.blchBkNow} / {item.blchBk}
                 </S.StatusSmallP>
-                {blchBkNow !== 0 ? (
+                {item.blchBkNow !== 0 ? (
                   <>
-                    {blchBk === blchBkNow ? (
+                    {item.blchBk === item.blchBkNow ? (
                       <Button color="danger">완료</Button>
                     ) : (
                       <Button
                         color="info"
                         onClick={() => {
-                          apply(projectID, userID, 'blch_bk_now');
+                          apply(projectID, decodedToken.id, 'blch_bk');
                         }}
                       >
                         신청
@@ -630,7 +568,7 @@ export const DetailRecurit = ({
                   <Button
                     color="info"
                     onClick={() => {
-                      apply(projectID, userID, 'blch_bk_now');
+                      apply(projectID, decodedToken.id, 'blch_bk');
                     }}
                   >
                     신청
@@ -640,21 +578,21 @@ export const DetailRecurit = ({
             ) : (
               ''
             )}
-            {aiBk ? (
+            {item.aiBk ? (
               <S.StatusLi>
                 <S.StatusBigP>AI</S.StatusBigP>
                 <S.StatusSmallP>
-                  {aiBkNow} / {aiBk}
+                  {item.aiBkNow} / {item.aiBk}
                 </S.StatusSmallP>
-                {aiBkNow !== 0 ? (
+                {item.aiBkNow !== 0 ? (
                   <>
-                    {aiBk === aiBkNow ? (
+                    {item.aiBk === item.aiBkNow ? (
                       <Button color="danger">완료</Button>
                     ) : (
                       <Button
                         color="info"
                         onClick={() => {
-                          apply(projectID, userID, 'ai_bk_now');
+                          apply(projectID, decodedToken.id, 'ai_bk');
                         }}
                       >
                         신청
@@ -665,7 +603,7 @@ export const DetailRecurit = ({
                   <Button
                     color="info"
                     onClick={() => {
-                      apply(projectID, userID, 'ai_bk_now');
+                      apply(projectID, decodedToken.id, 'ai_bk');
                     }}
                   >
                     신청
@@ -675,21 +613,21 @@ export const DetailRecurit = ({
             ) : (
               ''
             )}
-            {dsBk ? (
+            {item.dsBk ? (
               <S.StatusLi>
                 <S.StatusBigP>DB/빅데이터/DS</S.StatusBigP>
                 <S.StatusSmallP>
-                  {dsBkNow} / {dsBk}
+                  {item.dsBkNow} / {item.dsBk}
                 </S.StatusSmallP>
-                {dsBkNow !== 0 ? (
+                {item.dsBkNow !== 0 ? (
                   <>
-                    {dsBk === dsBkNow ? (
+                    {item.dsBk === item.dsBkNow ? (
                       <Button color="danger">완료</Button>
                     ) : (
                       <Button
                         color="info"
                         onClick={() => {
-                          apply(projectID, userID, 'ds_bk_now');
+                          apply(projectID, decodedToken.id, 'ds_bk');
                         }}
                       >
                         신청
@@ -700,7 +638,7 @@ export const DetailRecurit = ({
                   <Button
                     color="info"
                     onClick={() => {
-                      apply(projectID, userID, 'ds_bk_now');
+                      apply(projectID, decodedToken.id, 'ds_bk');
                     }}
                   >
                     신청
@@ -710,21 +648,21 @@ export const DetailRecurit = ({
             ) : (
               ''
             )}
-            {gameBk ? (
+            {item.gameBk ? (
               <S.StatusLi>
                 <S.StatusBigP>게임서버</S.StatusBigP>
                 <S.StatusSmallP>
-                  {gameBkNow} / {gameBk}
+                  {item.gameBkNow} / {item.gameBk}
                 </S.StatusSmallP>
-                {gameBkNow !== 0 ? (
+                {item.gameBkNow !== 0 ? (
                   <>
-                    {gameBk === gameBkNow ? (
+                    {item.gameBk === item.gameBkNow ? (
                       <Button color="danger">완료</Button>
                     ) : (
                       <Button
                         color="info"
                         onClick={() => {
-                          apply(projectID, userID, 'game_bk_now');
+                          apply(projectID, decodedToken.id, 'game_bk');
                         }}
                       >
                         신청
@@ -735,7 +673,7 @@ export const DetailRecurit = ({
                   <Button
                     color="info"
                     onClick={() => {
-                      apply(projectID, userID, 'game_bk_now');
+                      apply(projectID, decodedToken.id, 'game_bk');
                     }}
                   >
                     신청
@@ -745,21 +683,21 @@ export const DetailRecurit = ({
             ) : (
               ''
             )}
-            {planBu ? (
+            {item.planBu ? (
               <S.StatusLi>
                 <S.StatusBigP>사업기획</S.StatusBigP>
                 <S.StatusSmallP>
-                  {planBuNow} / {planBu}
+                  {item.planBuNow} / {item.planBu}
                 </S.StatusSmallP>
-                {planBuNow !== 0 ? (
+                {item.planBuNow !== 0 ? (
                   <>
-                    {planBu === planBuNow ? (
+                    {item.planBu === item.planBuNow ? (
                       <Button color="danger">완료</Button>
                     ) : (
                       <Button
                         color="info"
                         onClick={() => {
-                          apply(projectID, userID, 'plan_bu_now');
+                          apply(projectID, decodedToken.id, 'plan_bu');
                         }}
                       >
                         신청
@@ -770,7 +708,7 @@ export const DetailRecurit = ({
                   <Button
                     color="info"
                     onClick={() => {
-                      apply(projectID, userID, 'plan_bu_now');
+                      apply(projectID, decodedToken.id, 'plan_bu');
                     }}
                   >
                     신청
@@ -780,21 +718,21 @@ export const DetailRecurit = ({
             ) : (
               ''
             )}
-            {marketingBu ? (
+            {item.marketingBu ? (
               <S.StatusLi>
                 <S.StatusBigP>마케팅</S.StatusBigP>
                 <S.StatusSmallP>
-                  {marketingBuNow} / {marketingBu}
+                  {item.marketingBuNow} / {item.marketingBu}
                 </S.StatusSmallP>
-                {marketingBuNow !== 0 ? (
+                {item.marketingBuNow !== 0 ? (
                   <>
-                    {marketingBu === marketingBuNow ? (
+                    {item.marketingBu === item.marketingBuNow ? (
                       <Button color="danger">완료</Button>
                     ) : (
                       <Button
                         color="info"
                         onClick={() => {
-                          apply(projectID, userID, 'marketing_bu_now');
+                          apply(projectID, decodedToken.id, 'marketing_bu');
                         }}
                       >
                         신청
@@ -805,7 +743,7 @@ export const DetailRecurit = ({
                   <Button
                     color="info"
                     onClick={() => {
-                      apply(projectID, userID, 'marketing_bu_now');
+                      apply(projectID, decodedToken.id, 'marketing_bu');
                     }}
                   >
                     신청
@@ -815,21 +753,21 @@ export const DetailRecurit = ({
             ) : (
               ''
             )}
-            {financeBu ? (
+            {item.financeBu ? (
               <S.StatusLi>
                 <S.StatusBigP>재무/회계</S.StatusBigP>
                 <S.StatusSmallP>
-                  {financeBuNow} / {financeBu}
+                  {item.financeBuNow} / {item.financeBu}
                 </S.StatusSmallP>
-                {financeBuNow !== 0 ? (
+                {item.financeBuNow !== 0 ? (
                   <>
-                    {financeBu === financeBuNow ? (
+                    {item.financeBu === item.financeBuNow ? (
                       <Button color="danger">완료</Button>
                     ) : (
                       <Button
                         color="info"
                         onClick={() => {
-                          apply(projectID, userID, 'finance_bu_now');
+                          apply(projectID, decodedToken.id, 'finance_bu');
                         }}
                       >
                         신청
@@ -840,7 +778,7 @@ export const DetailRecurit = ({
                   <Button
                     color="info"
                     onClick={() => {
-                      apply(projectID, userID, 'finance_bu_now');
+                      apply(projectID, decodedToken.id, 'finance_bu');
                     }}
                   >
                     신청
@@ -850,21 +788,21 @@ export const DetailRecurit = ({
             ) : (
               ''
             )}
-            {salesBu ? (
+            {item.salesBu ? (
               <S.StatusLi>
                 <S.StatusBigP>영업</S.StatusBigP>
                 <S.StatusSmallP>
-                  {salesBuNow} / {salesBu}
+                  {item.salesBuNow} / {item.salesBu}
                 </S.StatusSmallP>
-                {salesBuNow !== 0 ? (
+                {item.salesBuNow !== 0 ? (
                   <>
-                    {salesBu === salesBuNow ? (
+                    {item.salesBu === item.salesBuNow ? (
                       <Button color="danger">완료</Button>
                     ) : (
                       <Button
                         color="info"
                         onClick={() => {
-                          apply(projectID, userID, 'sales_bu_now');
+                          apply(projectID, decodedToken.id, 'sales_bu');
                         }}
                       >
                         신청
@@ -875,7 +813,7 @@ export const DetailRecurit = ({
                   <Button
                     color="info"
                     onClick={() => {
-                      apply(projectID, userID, 'sales_bu_now');
+                      apply(projectID, decodedToken.id, 'sales_bu');
                     }}
                   >
                     신청
@@ -885,21 +823,21 @@ export const DetailRecurit = ({
             ) : (
               ''
             )}
-            {consultBu ? (
+            {item.consultBu ? (
               <S.StatusLi>
                 <S.StatusBigP>전략/컨설팅</S.StatusBigP>
                 <S.StatusSmallP>
-                  {consultBuNow} / {consultBu}
+                  {item.consultBuNow} / {item.consultBu}
                 </S.StatusSmallP>
-                {consultBuNow !== 0 ? (
+                {item.consultBuNow !== 0 ? (
                   <>
-                    {consultBu === consultBuNow ? (
+                    {item.consultBu === item.consultBuNow ? (
                       <Button color="danger">완료</Button>
                     ) : (
                       <Button
                         color="info"
                         onClick={() => {
-                          apply(projectID, userID, 'consult_bu_now');
+                          apply(projectID, decodedToken.id, 'consult_bu');
                         }}
                       >
                         신청
@@ -910,7 +848,7 @@ export const DetailRecurit = ({
                   <Button
                     color="info"
                     onClick={() => {
-                      apply(projectID, userID, 'consult_bu_now');
+                      apply(projectID, decodedToken.id, 'consult_bu');
                     }}
                   >
                     신청
@@ -920,21 +858,21 @@ export const DetailRecurit = ({
             ) : (
               ''
             )}
-            {investBu ? (
+            {item.investBu ? (
               <S.StatusLi>
                 <S.StatusBigP>투자/고문</S.StatusBigP>
                 <S.StatusSmallP>
-                  {investBuNow} / {investBu}
+                  {item.investBuNow} / {item.investBu}
                 </S.StatusSmallP>
-                {investBuNow !== 0 ? (
+                {item.investBuNow !== 0 ? (
                   <>
-                    {investBu === investBuNow ? (
+                    {item.investBu === item.investBuNow ? (
                       <Button color="danger">완료</Button>
                     ) : (
                       <Button
                         color="info"
                         onClick={() => {
-                          apply(projectID, userID, 'invest_bu_now');
+                          apply(projectID, decodedToken.id, 'invest_bu');
                         }}
                       >
                         신청
@@ -945,7 +883,7 @@ export const DetailRecurit = ({
                   <Button
                     color="info"
                     onClick={() => {
-                      apply(projectID, userID, 'invest_bu_now');
+                      apply(projectID, decodedToken.id, 'invest_bu');
                     }}
                   >
                     신청
@@ -955,21 +893,21 @@ export const DetailRecurit = ({
             ) : (
               ''
             )}
-            {etcBu ? (
+            {item.etcBu ? (
               <S.StatusLi>
                 <S.StatusBigP>(사업)그외</S.StatusBigP>
                 <S.StatusSmallP>
-                  {etcBuNow} / {etcBu}
+                  {item.etcBuNow} / {item.etcBu}
                 </S.StatusSmallP>
-                {etcBuNow !== 0 ? (
+                {item.etcBuNow !== 0 ? (
                   <>
-                    {etcBu === etcBuNow ? (
+                    {item.etcBu === item.etcBuNow ? (
                       <Button color="danger">완료</Button>
                     ) : (
                       <Button
                         color="info"
                         onClick={() => {
-                          apply(projectID, userID, 'etc_bu_now');
+                          apply(projectID, decodedToken.id, 'etc_bu');
                         }}
                       >
                         신청
@@ -980,7 +918,7 @@ export const DetailRecurit = ({
                   <Button
                     color="info"
                     onClick={() => {
-                      apply(projectID, userID, 'etc_bu_now');
+                      apply(projectID, decodedToken.id, 'etc_bu');
                     }}
                   >
                     신청
@@ -990,21 +928,21 @@ export const DetailRecurit = ({
             ) : (
               ''
             )}
-            {blogEtc ? (
+            {item.blogEtc ? (
               <S.StatusLi>
                 <S.StatusBigP>작가/블로거</S.StatusBigP>
                 <S.StatusSmallP>
-                  {blogEtcNow} / {blogEtc}
+                  {item.blogEtcNow} / {item.blogEtc}
                 </S.StatusSmallP>
-                {blogEtcNow !== 0 ? (
+                {item.blogEtcNow !== 0 ? (
                   <>
-                    {blogEtc === blogEtcNow ? (
+                    {item.blogEtc === item.blogEtcNow ? (
                       <Button color="danger">완료</Button>
                     ) : (
                       <Button
                         color="info"
                         onClick={() => {
-                          apply(projectID, userID, 'blog_etc_now');
+                          apply(projectID, decodedToken.id, 'blog_etc');
                         }}
                       >
                         신청
@@ -1015,7 +953,7 @@ export const DetailRecurit = ({
                   <Button
                     color="info"
                     onClick={() => {
-                      apply(projectID, userID, 'blog_etc_now');
+                      apply(projectID, decodedToken.id, 'blog_etc');
                     }}
                   >
                     신청
@@ -1025,21 +963,21 @@ export const DetailRecurit = ({
             ) : (
               ''
             )}
-            {influEtc ? (
+            {item.influEtc ? (
               <S.StatusLi>
                 <S.StatusBigP>인플루언서/유튜버</S.StatusBigP>
                 <S.StatusSmallP>
-                  {influEtcNow} / {influEtc}
+                  {item.influEtcNow} / {item.influEtc}
                 </S.StatusSmallP>
-                {influEtcNow !== 0 ? (
+                {item.influEtcNow !== 0 ? (
                   <>
-                    {influEtc === influEtcNow ? (
+                    {item.influEtc === item.influEtcNow ? (
                       <Button color="danger">완료</Button>
                     ) : (
                       <Button
                         color="info"
                         onClick={() => {
-                          apply(projectID, userID, 'influ_etc_now');
+                          apply(projectID, decodedToken.id, 'influ_etc');
                         }}
                       >
                         신청
@@ -1050,7 +988,7 @@ export const DetailRecurit = ({
                   <Button
                     color="info"
                     onClick={() => {
-                      apply(projectID, userID, 'influ_etc_now');
+                      apply(projectID, decodedToken.id, 'influ_etc');
                     }}
                   >
                     신청
@@ -1060,21 +998,21 @@ export const DetailRecurit = ({
             ) : (
               ''
             )}
-            {compEtc ? (
+            {item.compEtc ? (
               <S.StatusLi>
                 <S.StatusBigP>작곡(사운드)</S.StatusBigP>
                 <S.StatusSmallP>
-                  {compEtcNow} / {compEtc}
+                  {item.compEtcNow} / {item.compEtc}
                 </S.StatusSmallP>
-                {compEtcNow !== 0 ? (
+                {item.compEtcNow !== 0 ? (
                   <>
-                    {compEtc === compEtcNow ? (
+                    {item.compEtc === item.compEtcNow ? (
                       <Button color="danger">완료</Button>
                     ) : (
                       <Button
                         color="info"
                         onClick={() => {
-                          apply(projectID, userID, 'comp_etc_now');
+                          apply(projectID, decodedToken.id, 'comp_etc');
                         }}
                       >
                         신청
@@ -1085,7 +1023,7 @@ export const DetailRecurit = ({
                   <Button
                     color="info"
                     onClick={() => {
-                      apply(projectID, userID, 'comp_etc_now');
+                      apply(projectID, decodedToken.id, 'comp_etc');
                     }}
                   >
                     신청
@@ -1103,65 +1041,7 @@ export const DetailRecurit = ({
 };
 
 DetailRecurit.propTypes = {
-  uiuxPlan: PropTypes.number.isRequired,
-  gamePlan: PropTypes.number.isRequired,
-  managerPlan: PropTypes.number.isRequired,
-  hwPlan: PropTypes.number.isRequired,
-  iosFr: PropTypes.number.isRequired,
-  androidFr: PropTypes.number.isRequired,
-  webFrontFr: PropTypes.number.isRequired,
-  webPublicFr: PropTypes.number.isRequired,
-  crossFr: PropTypes.number.isRequired,
-  uiuxDe: PropTypes.number.isRequired,
-  graphicDe: PropTypes.number.isRequired,
-  thrdDe: PropTypes.number.isRequired,
-  hwDe: PropTypes.number.isRequired,
-  etcDe: PropTypes.number.isRequired,
-  webBk: PropTypes.number.isRequired,
-  blchBk: PropTypes.number.isRequired,
-  aiBk: PropTypes.number.isRequired,
-  dsBk: PropTypes.number.isRequired,
-  gameBk: PropTypes.number.isRequired,
-  planBu: PropTypes.number.isRequired,
-  marketingBu: PropTypes.number.isRequired,
-  financeBu: PropTypes.number.isRequired,
-  salesBu: PropTypes.number.isRequired,
-  consultBu: PropTypes.number.isRequired,
-  investBu: PropTypes.number.isRequired,
-  etcBu: PropTypes.number.isRequired,
-  blogEtc: PropTypes.number.isRequired,
-  influEtc: PropTypes.number.isRequired,
-  compEtc: PropTypes.number.isRequired,
-  uiuxPlanNow: PropTypes.number.isRequired,
-  gamePlanNow: PropTypes.number.isRequired,
-  managerPlanNow: PropTypes.number.isRequired,
-  hwPlanNow: PropTypes.number.isRequired,
-  iosFrNow: PropTypes.number.isRequired,
-  androidFrNow: PropTypes.number.isRequired,
-  webFrontFrNow: PropTypes.number.isRequired,
-  webPublicFrNow: PropTypes.number.isRequired,
-  crossFrNow: PropTypes.number.isRequired,
-  uiuxDeNow: PropTypes.number.isRequired,
-  graphicDeNow: PropTypes.number.isRequired,
-  thrdDeNow: PropTypes.number.isRequired,
-  hwDeNow: PropTypes.number.isRequired,
-  etcDeNow: PropTypes.number.isRequired,
-  webBkNow: PropTypes.number.isRequired,
-  blchBkNow: PropTypes.number.isRequired,
-  aiBkNow: PropTypes.number.isRequired,
-  dsBkNow: PropTypes.number.isRequired,
-  gameBkNow: PropTypes.number.isRequired,
-  planBuNow: PropTypes.number.isRequired,
-  marketingBuNow: PropTypes.number.isRequired,
-  financeBuNow: PropTypes.number.isRequired,
-  salesBuNow: PropTypes.number.isRequired,
-  consultBuNow: PropTypes.number.isRequired,
-  investBuNow: PropTypes.number.isRequired,
-  etcBuNow: PropTypes.number.isRequired,
-  blogEtcNow: PropTypes.number.isRequired,
-  influEtcNow: PropTypes.number.isRequired,
-  compEtcNow: PropTypes.number.isRequired,
+  item: PropTypes.objectOf(PropTypes.any).isRequired,
   apply: PropTypes.func.isRequired,
-  userID: PropTypes.number.isRequired,
   projectID: PropTypes.number.isRequired,
 };

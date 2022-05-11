@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Media, Image, Content } from 'react-bulma-components';
 import * as S from './style';
 

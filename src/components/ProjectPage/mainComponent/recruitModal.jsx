@@ -3,354 +3,295 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as S from './style';
 
-export const RecruitModal = ({
-  uiuxPlan,
-  gamePlan,
-  managerPlan,
-  hwPlan,
-  iosFr,
-  androidFr,
-  webFrontFr,
-  webPublicFr,
-  crossFr,
-  uiuxDe,
-  graphicDe,
-  thrdDe,
-  hwDe,
-  etcDe,
-  webBk,
-  blchBk,
-  aiBk,
-  dsBk,
-  gameBk,
-  planBu,
-  marketingBu,
-  financeBu,
-  salesBu,
-  consultBu,
-  investBu,
-  etcBu,
-  blogEtc,
-  influEtc,
-  compEtc,
-  uiuxPlanNow,
-  gamePlanNow,
-  managerPlanNow,
-  hwPlanNow,
-  iosFrNow,
-  androidFrNow,
-  webFrontFrNow,
-  webPublicFrNow,
-  crossFrNow,
-  uiuxDeNow,
-  graphicDeNow,
-  thrdDeNow,
-  hwDeNow,
-  etcDeNow,
-  webBkNow,
-  blchBkNow,
-  aiBkNow,
-  dsBkNow,
-  gameBkNow,
-  planBuNow,
-  marketingBuNow,
-  financeBuNow,
-  salesBuNow,
-  consultBuNow,
-  investBuNow,
-  etcBuNow,
-  blogEtcNow,
-  influEtcNow,
-  compEtcNow,
-}) => {
+export const RecruitModal = ({ item }) => {
   return (
     <S.DetailStatus>
       <S.StatusUl>
-        {uiuxPlan ? (
+        {item.uiuxPlan ? (
           <S.StatusLi>
             <S.StatusBigP>UI/UX 기획</S.StatusBigP>
             <S.StatusSmallP>
-              {uiuxPlanNow} / {uiuxPlan}
+              {item.uiuxPlanNow} / {item.uiuxPlan}
             </S.StatusSmallP>
           </S.StatusLi>
         ) : (
           ''
         )}
-        {gamePlan ? (
+        {item.gamePlan ? (
           <S.StatusLi>
             <S.StatusBigP>게임 기획</S.StatusBigP>
             <S.StatusSmallP>
-              {gamePlanNow} / {gamePlan}
+              {item.gamePlanNow} / {item.gamePlan}
             </S.StatusSmallP>
           </S.StatusLi>
         ) : (
           ''
         )}
-        {managerPlan ? (
+        {item.managerPlan ? (
           <S.StatusLi>
             <S.StatusBigP>프로젝트 매니저</S.StatusBigP>
             <S.StatusSmallP>
-              {managerPlanNow} / {managerPlan}
+              {item.managerPlanNow} / {item.managerPlan}
             </S.StatusSmallP>
           </S.StatusLi>
         ) : (
           ''
         )}
-        {hwPlan ? (
+        {item.hwPlan ? (
           <S.StatusLi>
             <S.StatusBigP>하드웨어(제품) 기획</S.StatusBigP>
             <S.StatusSmallP>
-              {hwPlanNow} / {hwPlan}
+              {item.hwPlanNow} / {item.hwPlan}
             </S.StatusSmallP>
           </S.StatusLi>
         ) : (
           ''
         )}
-        {iosFr ? (
+        {item.iosFr ? (
           <S.StatusLi>
             <S.StatusBigP>IOS</S.StatusBigP>
             <S.StatusSmallP>
-              {iosFrNow} / {iosFr}
+              {item.iosFrNow} / {item.iosFr}
             </S.StatusSmallP>
           </S.StatusLi>
         ) : (
           ''
         )}
-        {androidFr ? (
+        {item.androidFr ? (
           <S.StatusLi>
             <S.StatusBigP>안드로이드</S.StatusBigP>
             <S.StatusSmallP>
-              {androidFrNow} / {androidFr}
+              {item.androidFrNow} / {item.androidFr}
             </S.StatusSmallP>
           </S.StatusLi>
         ) : (
           ''
         )}
-        {webFrontFr ? (
+        {item.webFrontFr ? (
           <S.StatusLi>
             <S.StatusBigP>웹프론트엔드</S.StatusBigP>
             <S.StatusSmallP>
-              {webFrontFrNow} / {webFrontFr}
+              {item.webFrontFrNow} / {item.webFrontFr}
             </S.StatusSmallP>
           </S.StatusLi>
         ) : (
           ''
         )}
-        {webPublicFr ? (
+        {item.webPublicFr ? (
           <S.StatusLi>
             <S.StatusBigP>웹퍼블리셔</S.StatusBigP>
             <S.StatusSmallP>
-              {webPublicFrNow} / {webPublicFr}
+              {item.webPublicFrNow} / {item.webPublicFr}
             </S.StatusSmallP>
           </S.StatusLi>
         ) : (
           ''
         )}
-        {crossFr ? (
+        {item.crossFr ? (
           <S.StatusLi>
             <S.StatusBigP>크로스플랫폼</S.StatusBigP>
             <S.StatusSmallP>
-              {crossFrNow} / {crossFr}
+              {item.crossFrNow} / {item.crossFr}
             </S.StatusSmallP>
           </S.StatusLi>
         ) : (
           ''
         )}
-        {graphicDe ? (
+        {item.graphicDe ? (
           <S.StatusLi>
             <S.StatusBigP>그래픽디자인</S.StatusBigP>
             <S.StatusSmallP>
-              {graphicDeNow} / {graphicDe}
+              {item.graphicDeNow} / {item.graphicDe}
             </S.StatusSmallP>
           </S.StatusLi>
         ) : (
           ''
         )}
-        {uiuxDe ? (
+        {item.uiuxDe ? (
           <S.StatusLi>
             <S.StatusBigP>UI/UX디자인</S.StatusBigP>
             <S.StatusSmallP>
-              {uiuxDeNow} / {uiuxDe}
+              {item.uiuxDeNow} / {item.uiuxDe}
             </S.StatusSmallP>
           </S.StatusLi>
         ) : (
           ''
         )}
-        {thrdDe ? (
+        {item.thrdDe ? (
           <S.StatusLi>
             <S.StatusBigP>3D디자인</S.StatusBigP>
             <S.StatusSmallP>
-              {thrdDeNow} / {thrdDe}
+              {item.thrdDeNow} / {item.thrdDe}
             </S.StatusSmallP>
           </S.StatusLi>
         ) : (
           ''
         )}
-        {hwDe ? (
+        {item.hwDe ? (
           <S.StatusLi>
             <S.StatusBigP>하드웨어(제품)디자인</S.StatusBigP>
             <S.StatusSmallP>
-              {hwDeNow} / {hwDe}
+              {item.hwDeNow} / {item.hwDe}
             </S.StatusSmallP>
           </S.StatusLi>
         ) : (
           ''
         )}
-        {etcDe ? (
+        {item.etcDe ? (
           <S.StatusLi>
             <S.StatusBigP>(디자인)기타</S.StatusBigP>
             <S.StatusSmallP>
-              {etcDeNow} / {etcDe}
+              {item.etcDeNow} / {item.etcDe}
             </S.StatusSmallP>
           </S.StatusLi>
         ) : (
           ''
         )}
-        {webBk ? (
+        {item.webBk ? (
           <S.StatusLi>
             <S.StatusBigP>웹서버</S.StatusBigP>
             <S.StatusSmallP>
-              {webBkNow} / {webBk}
+              {item.webBkNow} / {item.webBk}
             </S.StatusSmallP>
           </S.StatusLi>
         ) : (
           ''
         )}
-        {blchBk ? (
+        {item.blchBk ? (
           <S.StatusLi>
             <S.StatusBigP>블록체인</S.StatusBigP>
             <S.StatusSmallP>
-              {blchBkNow} / {blchBk}
+              {item.blchBkNow} / {item.blchBk}
             </S.StatusSmallP>
           </S.StatusLi>
         ) : (
           ''
         )}
-        {aiBk ? (
+        {item.aiBk ? (
           <S.StatusLi>
             <S.StatusBigP>AI</S.StatusBigP>
             <S.StatusSmallP>
-              {aiBkNow} / {aiBk}
+              {item.aiBkNow} / {item.aiBk}
             </S.StatusSmallP>
           </S.StatusLi>
         ) : (
           ''
         )}
-        {dsBk ? (
+        {item.dsBk ? (
           <S.StatusLi>
             <S.StatusBigP>DB/빅데이터/DS</S.StatusBigP>
             <S.StatusSmallP>
-              {dsBkNow} / {dsBk}
+              {item.dsBkNow} / {item.dsBk}
             </S.StatusSmallP>
           </S.StatusLi>
         ) : (
           ''
         )}
-        {gameBk ? (
+        {item.gameBk ? (
           <S.StatusLi>
             <S.StatusBigP>게임서버</S.StatusBigP>
             <S.StatusSmallP>
-              {gameBkNow} / {gameBk}
+              {item.gameBkNow} / {item.gameBk}
             </S.StatusSmallP>
           </S.StatusLi>
         ) : (
           ''
         )}
-        {planBu ? (
+        {item.planBu ? (
           <S.StatusLi>
             <S.StatusBigP>사업기획</S.StatusBigP>
             <S.StatusSmallP>
-              {planBuNow} / {planBu}
+              {item.planBuNow} / {item.planBu}
             </S.StatusSmallP>
           </S.StatusLi>
         ) : (
           ''
         )}
-        {marketingBu ? (
+        {item.marketingBu ? (
           <S.StatusLi>
             <S.StatusBigP>마케팅</S.StatusBigP>
             <S.StatusSmallP>
-              {marketingBuNow} / {marketingBu}
+              {item.marketingBuNow} / {item.marketingBu}
             </S.StatusSmallP>
           </S.StatusLi>
         ) : (
           ''
         )}
-        {financeBu ? (
+        {item.financeBu ? (
           <S.StatusLi>
             <S.StatusBigP>재무/회계</S.StatusBigP>
             <S.StatusSmallP>
-              {financeBuNow} / {financeBu}
+              {item.financeBuNow} / {item.financeBu}
             </S.StatusSmallP>
           </S.StatusLi>
         ) : (
           ''
         )}
-        {salesBu ? (
+        {item.salesBu ? (
           <S.StatusLi>
             <S.StatusBigP>영업</S.StatusBigP>
             <S.StatusSmallP>
-              {salesBuNow} / {salesBu}
+              {item.salesBuNow} / {item.salesBu}
             </S.StatusSmallP>
           </S.StatusLi>
         ) : (
           ''
         )}
-        {consultBu ? (
+        {item.consultBu ? (
           <S.StatusLi>
             <S.StatusBigP>전략/컨설팅</S.StatusBigP>
             <S.StatusSmallP>
-              {consultBuNow} / {consultBu}
+              {item.consultBuNow} / {item.consultBu}
             </S.StatusSmallP>
           </S.StatusLi>
         ) : (
           ''
         )}
-        {investBu ? (
+        {item.investBu ? (
           <S.StatusLi>
             <S.StatusBigP>투자/고문</S.StatusBigP>
             <S.StatusSmallP>
-              {investBuNow} / {investBu}
+              {item.investBuNow} / {item.investBu}
             </S.StatusSmallP>
           </S.StatusLi>
         ) : (
           ''
         )}
-        {etcBu ? (
+        {item.etcBu ? (
           <S.StatusLi>
             <S.StatusBigP>(사업)그외</S.StatusBigP>
             <S.StatusSmallP>
-              {etcBuNow} / {etcBu}
+              {item.etcBuNow} / {item.etcBu}
             </S.StatusSmallP>
           </S.StatusLi>
         ) : (
           ''
         )}
-        {blogEtc ? (
+        {item.blogEtc ? (
           <S.StatusLi>
             <S.StatusBigP>작가/블로거</S.StatusBigP>
             <S.StatusSmallP>
-              {blogEtcNow} / {blogEtc}
+              {item.blogEtcNow} / {item.blogEtc}
             </S.StatusSmallP>
           </S.StatusLi>
         ) : (
           ''
         )}
-        {influEtc ? (
+        {item.influEtc ? (
           <S.StatusLi>
             <S.StatusBigP>인플루언서/유튜버</S.StatusBigP>
             <S.StatusSmallP>
-              {influEtcNow} / {influEtc}
+              {item.influEtcNow} / {item.influEtc}
             </S.StatusSmallP>
           </S.StatusLi>
         ) : (
           ''
         )}
-        {compEtc ? (
+        {item.compEtc ? (
           <S.StatusLi>
             <S.StatusBigP>작곡(사운드)</S.StatusBigP>
             <S.StatusSmallP>
-              {compEtcNow} / {compEtc}
+              {item.compEtcNow} / {item.compEtc}
             </S.StatusSmallP>
           </S.StatusLi>
         ) : (
@@ -362,62 +303,5 @@ export const RecruitModal = ({
 };
 
 RecruitModal.propTypes = {
-  uiuxPlan: PropTypes.number.isRequired,
-  gamePlan: PropTypes.number.isRequired,
-  managerPlan: PropTypes.number.isRequired,
-  hwPlan: PropTypes.number.isRequired,
-  iosFr: PropTypes.number.isRequired,
-  androidFr: PropTypes.number.isRequired,
-  webFrontFr: PropTypes.number.isRequired,
-  webPublicFr: PropTypes.number.isRequired,
-  crossFr: PropTypes.number.isRequired,
-  uiuxDe: PropTypes.number.isRequired,
-  graphicDe: PropTypes.number.isRequired,
-  thrdDe: PropTypes.number.isRequired,
-  hwDe: PropTypes.number.isRequired,
-  etcDe: PropTypes.number.isRequired,
-  webBk: PropTypes.number.isRequired,
-  blchBk: PropTypes.number.isRequired,
-  aiBk: PropTypes.number.isRequired,
-  dsBk: PropTypes.number.isRequired,
-  gameBk: PropTypes.number.isRequired,
-  planBu: PropTypes.number.isRequired,
-  marketingBu: PropTypes.number.isRequired,
-  financeBu: PropTypes.number.isRequired,
-  salesBu: PropTypes.number.isRequired,
-  consultBu: PropTypes.number.isRequired,
-  investBu: PropTypes.number.isRequired,
-  etcBu: PropTypes.number.isRequired,
-  blogEtc: PropTypes.number.isRequired,
-  influEtc: PropTypes.number.isRequired,
-  compEtc: PropTypes.number.isRequired,
-  uiuxPlanNow: PropTypes.number.isRequired,
-  gamePlanNow: PropTypes.number.isRequired,
-  managerPlanNow: PropTypes.number.isRequired,
-  hwPlanNow: PropTypes.number.isRequired,
-  iosFrNow: PropTypes.number.isRequired,
-  androidFrNow: PropTypes.number.isRequired,
-  webFrontFrNow: PropTypes.number.isRequired,
-  webPublicFrNow: PropTypes.number.isRequired,
-  crossFrNow: PropTypes.number.isRequired,
-  uiuxDeNow: PropTypes.number.isRequired,
-  graphicDeNow: PropTypes.number.isRequired,
-  thrdDeNow: PropTypes.number.isRequired,
-  hwDeNow: PropTypes.number.isRequired,
-  etcDeNow: PropTypes.number.isRequired,
-  webBkNow: PropTypes.number.isRequired,
-  blchBkNow: PropTypes.number.isRequired,
-  aiBkNow: PropTypes.number.isRequired,
-  dsBkNow: PropTypes.number.isRequired,
-  gameBkNow: PropTypes.number.isRequired,
-  planBuNow: PropTypes.number.isRequired,
-  marketingBuNow: PropTypes.number.isRequired,
-  financeBuNow: PropTypes.number.isRequired,
-  salesBuNow: PropTypes.number.isRequired,
-  consultBuNow: PropTypes.number.isRequired,
-  investBuNow: PropTypes.number.isRequired,
-  etcBuNow: PropTypes.number.isRequired,
-  blogEtcNow: PropTypes.number.isRequired,
-  influEtcNow: PropTypes.number.isRequired,
-  compEtcNow: PropTypes.number.isRequired,
+  item: PropTypes.objectOf(PropTypes.any).isRequired,
 };

@@ -30,7 +30,8 @@ export const ApplyGrid = styled.div`
 export const ApplyCardText = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  margin-bottom: 14px;
 `;
 
 export const ApplyCardLeft = styled.div``;

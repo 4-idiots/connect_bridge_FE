@@ -30,7 +30,7 @@ export const DetailRecruit = ({
                 <Button
                   color="info"
                   onClick={() => {
-                    apply(studyID, userID, 'study_member_now');
+                    apply(studyID, userID, 'study_member');
                   }}
                 >
                   신청
@@ -41,7 +41,7 @@ export const DetailRecruit = ({
             <Button
               color="info"
               onClick={() => {
-                apply(studyID, userID, 'study_member_now');
+                apply(studyID, userID, 'study_member');
               }}
             >
               신청

@@ -107,8 +107,6 @@ export const platArray = [
 
 export const skillArray = ['초심자', '초보', '중수', '고수', '구루'];
 
-export const timeArray = ['상관없음', '오전위주', '오후위주', '저녁위주'];
-
 export const proficiency = [
   {
     label: '기획',

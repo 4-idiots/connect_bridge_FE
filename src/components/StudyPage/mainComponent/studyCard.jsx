@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import * as S from './style';
 import { ReactComponent as Heart } from '../../../assets/svg/heart.svg';
 import { RecruitModal } from './recruitModal';
-import { studyLikeCheck, studyLikeService } from '../../../service';
+import * as Send from '../../../services/studyService';
 
 export const StudyCard = ({
   studyField,
@@ -25,7 +25,7 @@ export const StudyCard = ({
 
   const checkLike = async () => {
     try {
-      const result = await studyLikeCheck(studyID);
+      const result = await Send.studyLikeCheck(studyID);
       setUsLike(result.data);
     } catch (error) {
       setUsLike(false);
@@ -45,7 +45,7 @@ export const StudyCard = ({
     }
     setUsLike(!usLike);
     try {
-      const result = await studyLikeService(studyID);
+      const result = await Send.studyLikeService(studyID);
     } catch (error) {
       console.log(error);
     }

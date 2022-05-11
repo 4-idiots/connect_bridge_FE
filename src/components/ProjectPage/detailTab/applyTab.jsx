@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Heading } from 'react-bulma-components';
-import { projectGetAdminService } from '../../../service';
+import { projectGetAdminService } from '../../../services/projectService';
 import * as S from './style';
 import { ApplyCard } from './applyCard';
 

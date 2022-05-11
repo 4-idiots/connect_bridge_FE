@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button } from 'react-bulma-components';
-import { projectNoticeUploadService } from '../../../service';
+import { projectNoticeUploadService } from '../../../services/projectService';
 import * as S from './style';
 
 export const NoticeUpload = ({ projectID }) => {

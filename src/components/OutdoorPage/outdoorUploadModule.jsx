@@ -1,14 +1,8 @@
 import React, { useState, useCallback } from 'react';
-import {
-  Container,
-  Heading,
-  Button,
-  Box,
-  Form,
-  Card,
-} from 'react-bulma-components';
+import * as B from 'react-bulma-components';
 import { useNavigate } from 'react-router-dom';
-import { outdoorUploadService } from '../../service';
+import { outdoorUploadService } from '../../services/outdoorService';
+import * as S from './style';
 
 export const OutdoorUploadForm = () => {
   const navigate = useNavigate();
@@ -45,7 +39,6 @@ export const OutdoorUploadForm = () => {
       alert('등록 되었습니다.');
       navigate('/outdoor');
     } catch (error) {
-      console.log(error);
       alert('다시 시도해주세요');
     }
   };
@@ -55,41 +48,38 @@ export const OutdoorUploadForm = () => {
     formData.append('outActName', outActName);
     formData.append('outActImg', imgSrc);
     formData.append('outActLink', outActLink);
-
     uploadAxios(formData);
   };
 
   return (
-    <Container>
-      <Heading style={{ textAlign: 'center' }}>대외 활동 올리기</Heading>
-      <Box style={{ width: '90%', margin: 'auto' }}>
-        <Form.Field>
-          <Form.Label>대외 활동 제목</Form.Label>
-          <Form.Control>
-            <Form.Input
+    <B.Container>
+      <B.Heading style={{ textAlign: 'center' }}>대외 활동 올리기</B.Heading>
+      <B.Box style={{ width: '90%', margin: 'auto' }}>
+        <B.Form.Field>
+          <B.Form.Label>대외 활동 제목</B.Form.Label>
+          <B.Form.Control>
+            <B.Form.Input
               type="text"
               value={outActName || ''}
               name="outActName"
               onChange={onChangeOutdoorEvent}
               placeholder="대외 활동 제목"
             />
-          </Form.Control>
-        </Form.Field>
-        <Form.Field>
-          <Form.Label>포스터 이미지</Form.Label>
-          <Box
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <Card style={{ width: 800 }}>
-              {preview ? <Card.Image src={preview} /> : <Card.Image src="" />}
-            </Card>
-          </Box>
-          <Form.Control>
-            <Form.InputFile
+          </B.Form.Control>
+        </B.Form.Field>
+        <B.Form.Field>
+          <B.Form.Label>포스터 이미지</B.Form.Label>
+          <S.OdUploadBox>
+            <B.Card style={{ width: 800 }}>
+              {preview ? (
+                <B.Card.Image src={preview} />
+              ) : (
+                <B.Card.Image src="" />
+              )}
+            </B.Card>
+          </S.OdUploadBox>
+          <B.Form.Control>
+            <B.Form.InputFile
               name="outActImg"
               onChange={e => {
                 encodeFileToBase64(e.target.files[0]);
@@ -101,26 +91,26 @@ export const OutdoorUploadForm = () => {
               filename={outActName}
               boxed
             />
-          </Form.Control>
-        </Form.Field>
-        <Form.Field>
-          <Form.Label>관련 링크</Form.Label>
-          <Form.Control>
-            <Form.Input
+          </B.Form.Control>
+        </B.Form.Field>
+        <B.Form.Field>
+          <B.Form.Label>관련 링크</B.Form.Label>
+          <B.Form.Control>
+            <B.Form.Input
               type="text"
               value={outActLink || ''}
               name="outActLink"
               onChange={onChangeOutdoorEvent}
               placeholder="관련 링크"
             />
-          </Form.Control>
-        </Form.Field>
-        <Button.Group align="center">
-          <Button color="success" onClick={onSubmitEvent}>
+          </B.Form.Control>
+        </B.Form.Field>
+        <B.Button.Group align="center">
+          <B.Button color="success" onClick={onSubmitEvent}>
             올리기
-          </Button>
-        </Button.Group>
-      </Box>
-    </Container>
+          </B.Button>
+        </B.Button.Group>
+      </B.Box>
+    </B.Container>
   );
 };

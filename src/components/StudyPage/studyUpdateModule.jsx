@@ -12,29 +12,15 @@ import {
   StudyRecruit,
 } from '../ProjectPage/sUploadComponent/sUploadValue';
 import SlateEditor from '../../SlateEditor/Editor';
-import { studyUpdateService, studyGetSomeService } from '../../service';
+import * as Send from '../../services/studyService';
 import { useAuth } from '../../contexts/hooks/useAuth';
 
 export const StudyUpdateForm = () => {
   const auth = useAuth();
-  const { decodedToken, isExpired } = useJwt(auth.token);
+  const { decodedToken } = useJwt(auth.token);
   const navigate = useNavigate();
   const { studyID } = useParams();
-  const [study, setStudy] = useState({});
-
-  const {
-    studyName,
-    studyKeyward,
-    studyField,
-    studyArea,
-    studyOnOff,
-    studyMember,
-    studyMemberNow,
-    studyEnd,
-    studyStart,
-    content,
-    userID,
-  } = study;
+  const [study, setStudy] = useState(null);
 
   const onChangeStudyEvent = useCallback(
     e => {
@@ -48,17 +34,17 @@ export const StudyUpdateForm = () => {
 
   const updateAxios = async () => {
     try {
-      const result = await studyUpdateService(
+      const result = await Send.studyUpdateService(
         studyID,
-        studyName,
-        studyKeyward,
-        studyField,
-        studyArea,
-        studyOnOff,
-        studyMember,
-        studyEnd,
-        studyStart,
-        JSON.stringify(content),
+        study.studyName,
+        study.studyKeyward,
+        study.studyField,
+        study.studyArea,
+        study.studyOnOff,
+        study.studyMember,
+        study.studyEnd,
+        study.studyStart,
+        JSON.stringify(study.content),
       );
       alert('수정 되었습니다.');
       navigate('/study');
@@ -69,7 +55,7 @@ export const StudyUpdateForm = () => {
 
   const getSomeAxios = async prID => {
     try {
-      const result = await studyGetSomeService(prID);
+      const result = await Send.studyGetSomeService(prID);
       setStudy(result.data);
     } catch (error) {
       navigate('/study');
@@ -85,46 +71,41 @@ export const StudyUpdateForm = () => {
     // updateAxios();
   };
 
-  return (
-    <Container style={{ marginTop: 80 }}>
-      {decodedToken && decodedToken.id === userID ? (
-        <>
-          <Heading style={{ textAlign: 'center' }}>모임 수정 하기</Heading>
-          <Box style={{ width: '90%', margin: 'auto' }}>
-            {studyName && (
+  if (study) {
+    return (
+      <Container style={{ marginTop: 80 }}>
+        {decodedToken && decodedToken.id === study.userID ? (
+          <>
+            <Heading style={{ textAlign: 'center' }}>모임 수정 하기</Heading>
+            <Box style={{ width: '90%', margin: 'auto' }}>
               <StudyInput
                 label="* 스터디/네트워킹 주제"
                 help="! 진행하고자 하는 스터디 주제를 제목으로 정해주세요"
                 placeholder="웹 개발 같이 공부하실분~"
-                value={studyName || ''}
+                value={study.studyName}
                 name="studyName"
                 onChange={onChangeStudyEvent}
               />
-            )}
-            {studyKeyward && (
               <StudyInput
                 label="* 스터디 분야/키워드"
                 help="! 스터디의 키워드를 , 로 끊어주세요"
                 placeholder="공부, 온라인"
-                value={studyKeyward || ''}
+                value={study.studyKeyward}
                 name="studyKeyward"
                 onChange={onChangeStudyEvent}
               />
-            )}
-            {studyField && (
-              <StudyField field={studyField} onChange={onChangeStudyEvent} />
-            )}
-            {typeof studyMember === typeof studyMemberNow && (
-              <StudyRecruit
-                member={studyMember}
+              <StudyField
+                field={study.studyField}
                 onChange={onChangeStudyEvent}
               />
-            )}
-            {studyArea && <StudyArea onChange={onChangeStudyEvent} />}
-            {studyStart && studyEnd && (
+              <StudyRecruit
+                member={study.studyMember}
+                onChange={onChangeStudyEvent}
+              />
+              <StudyArea onChange={onChangeStudyEvent} />
               <StudyDate
-                start={studyStart}
-                end={studyEnd}
+                start={study.studyStart}
+                end={study.studyEnd}
                 startChange={date => {
                   setStudy({ ...study, studyStart: date });
                 }}
@@ -132,26 +113,29 @@ export const StudyUpdateForm = () => {
                   setStudy({ ...study, studyEnd: date });
                 }}
               />
-            )}
-            {content && (
-              <>
-                <Form.Field>
-                  <Form.Label>* 스터디 설명</Form.Label>
-                  <Form.Help>! 스터디 참여조건에 대해서 기재해주세요</Form.Help>
-                </Form.Field>
-                <SlateEditor value={study} setValue={setStudy} />
-              </>
-            )}
-            <Button.Group align="center">
-              <Button color="success" onClick={onSubmitEvent}>
-                수정하기
-              </Button>
-            </Button.Group>
-          </Box>
-        </>
-      ) : (
-        <Heading style={{ textAlign: 'center' }}>권한이 없습니다.</Heading>
-      )}
-    </Container>
-  );
+              {study.content && (
+                <>
+                  <Form.Field>
+                    <Form.Label>* 스터디 설명</Form.Label>
+                    <Form.Help>
+                      ! 스터디 참여조건에 대해서 기재해주세요
+                    </Form.Help>
+                  </Form.Field>
+                  <SlateEditor value={study} setValue={setStudy} />
+                </>
+              )}
+              <Button.Group align="center">
+                <Button color="success" onClick={onSubmitEvent}>
+                  수정하기
+                </Button>
+              </Button.Group>
+            </Box>
+          </>
+        ) : (
+          <Heading style={{ textAlign: 'center' }}>권한이 없습니다.</Heading>
+        )}
+      </Container>
+    );
+  }
+  return null;
 };

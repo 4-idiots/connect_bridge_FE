@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Heading } from 'react-bulma-components';
 import { useJwt } from 'react-jwt';
-import { myCommunityGetService, communityDelete } from '../../service';
+import * as Send from '../../services/mypageService';
 import { MyCmCard } from './community/myCmCard';
 import { useAuth } from '../../contexts/hooks/useAuth';
 
@@ -13,8 +13,7 @@ export const MyCommunityForm = () => {
 
   const getAxios = async uid => {
     try {
-      const result = await myCommunityGetService(uid);
-      console.log(result.data);
+      const result = await Send.myCommunityGetService(uid);
       setCommunity(result.data);
     } catch (error) {
       console.log(error);
@@ -23,7 +22,7 @@ export const MyCommunityForm = () => {
 
   const deleteAxios = async cid => {
     try {
-      const result = await communityDelete(cid);
+      const result = await Send.myCommunityDelete(cid);
       alert('삭제 되었습니다.');
       window.location.replace('/my/info');
     } catch (error) {

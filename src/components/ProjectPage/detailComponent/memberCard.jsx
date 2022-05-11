@@ -5,24 +5,30 @@ import * as S from './style';
 
 export const MemberCard = ({ item }) => {
   return (
-    <Card style={{ width: 300, margin: 'auto' }}>
+    <Card style={{ width: 280, margin: 'auto', borderRadius: 15 }}>
       <Card.Content>
         <Media>
           <Media.Item align="left">
             <Image size={64} src={item.memberImg} />
           </Media.Item>
           <Media.Item>
-            <Heading size={5}>{item.memberNickname}</Heading>
+            <Heading size={5}>{item.memberName}</Heading>
             <Heading subtitle size={6}>
-              보러가기
+              프로필 보러가기
             </Heading>
           </Media.Item>
         </Media>
         <S.MemberCardText>
-          <S.MemberCardLeft>{item.memberInterestSub}</S.MemberCardLeft>
-          <S.MemberCardRight>{item.memberAbility}</S.MemberCardRight>
+          <S.MemberCardLeft>
+            [관심 분야] {item.memberInterestSub}
+          </S.MemberCardLeft>
+          <S.MemberCardRight>[능력] {item.memberAbility}</S.MemberCardRight>
         </S.MemberCardText>
-        <Content>{item.memberIntroduce}</Content>
+        <Content
+          style={{ fontSize: '18px', height: '60px', overflow: 'hidden' }}
+        >
+          {item.memberIntroduce}
+        </Content>
       </Card.Content>
     </Card>
   );

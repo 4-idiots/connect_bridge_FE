@@ -12,11 +12,7 @@ import {
   DetailCommentInput,
 } from './detailComponent/detailRoute';
 import * as S from '../ProjectPage/detailComponent/style';
-import {
-  studyGetSomeService,
-  studyApplyService,
-  studyDeleteService,
-} from '../../service';
+import * as Send from '../../services/studyService';
 import { useAuth } from '../../contexts/hooks/useAuth';
 
 export const StudyDetailForm = () => {
@@ -25,28 +21,13 @@ export const StudyDetailForm = () => {
   const navigate = useNavigate();
 
   const { studyID } = useParams();
-  const [study, setStudy] = useState({});
+  const [study, setStudy] = useState(null);
   const [isInfo, setIsInfo] = useState(true);
   const [comment, setComment] = useState('');
 
-  const {
-    studyName,
-    studyOnOff,
-    userID,
-    content,
-    studyKeyward,
-    studyMember,
-    studyMemberNow,
-    studyField,
-    studyLike,
-    studyView,
-    studyStart,
-    studyEnd,
-  } = study;
-
   const getAxios = async id => {
     try {
-      const result = await studyGetSomeService(id);
+      const result = await Send.studyGetSomeService(id);
       console.log(result.data);
       setStudy(result.data);
     } catch (error) {
@@ -56,7 +37,7 @@ export const StudyDetailForm = () => {
 
   const applyService = async (stid, uid, field) => {
     try {
-      const result = await studyApplyService(stid, uid, field);
+      const result = await Send.studyApplyService(stid, uid, field);
       alert('정상적으로 신청이 되었습니다.');
     } catch (error) {
       alert('이미 신청하셨습니다.');
@@ -65,7 +46,7 @@ export const StudyDetailForm = () => {
 
   const deleteAxios = async id => {
     try {
-      const result = await studyDeleteService(id);
+      const result = await Send.studyDeleteService(id);
       alert('삭제되었습니다.');
       navigate('/study');
     } catch (error) {
@@ -77,84 +58,78 @@ export const StudyDetailForm = () => {
     getAxios(studyID);
   }, []);
 
-  return (
-    <Container style={{ marginTop: 80 }}>
-      {studyName && (
+  if (study) {
+    return (
+      <Container style={{ marginTop: 80 }}>
         <DetailHeader
-          studyOnOff={studyOnOff}
-          studyName={studyName}
+          studyOnOff={study.studyOnOff}
+          studyName={study.studyName}
           leaderImg="https://letspl.s3.ap-northeast-2.amazonaws.com/images/project_thumb_05.png"
           leaderName="name"
         />
-      )}
-      <S.PageWrap>
-        <S.PageLeft>
-          <S.LeftTab>
-            <S.TalUl>
-              <S.TabLi onClick={() => setIsInfo(true)}>정보</S.TabLi>
-              <S.TabLi onClick={() => setIsInfo(false)}>질문</S.TabLi>
-            </S.TalUl>
-            {decodedToken && userID === decodedToken.id ? (
+        <S.PageWrap>
+          <S.PageLeft>
+            <S.LeftTab>
               <S.TalUl>
-                <S.TabUpdate
-                  onClick={() => navigate(`/study/update/${studyID}`)}
-                >
-                  수정
-                </S.TabUpdate>
-                <S.TabUpdate
-                  onClick={() => {
-                    deleteAxios(studyID);
-                  }}
-                >
-                  삭제
-                </S.TabUpdate>
+                <S.TabLi onClick={() => setIsInfo(true)}>정보</S.TabLi>
+                <S.TabLi onClick={() => setIsInfo(false)}>질문</S.TabLi>
               </S.TalUl>
-            ) : (
-              ''
-            )}
-          </S.LeftTab>
-          {isInfo && content && studyKeyward && (
+              {decodedToken && study.userID === decodedToken.id ? (
+                <S.TalUl>
+                  <S.TabUpdate
+                    onClick={() => navigate(`/study/update/${studyID}`)}
+                  >
+                    수정
+                  </S.TabUpdate>
+                  <S.TabUpdate
+                    onClick={() => {
+                      deleteAxios(studyID);
+                    }}
+                  >
+                    삭제
+                  </S.TabUpdate>
+                </S.TalUl>
+              ) : (
+                ''
+              )}
+            </S.LeftTab>
             <S.LeftDetail>
-              <DetailKeyward studyKeyward={studyKeyward} />
+              <DetailKeyward studyKeyward={study.studyKeyward} />
               <DetailRecruit
-                studyMember={studyMember}
-                studyMemberNow={studyMemberNow}
+                studyMember={study.studyMember}
+                studyMemberNow={study.studyMemberNow}
                 apply={applyService}
-                userID={userID}
+                userID={study.userID}
                 studyID={Number(studyID)}
               />
-              <DetailContent value={content} />
+              <DetailContent value={study.content} />
             </S.LeftDetail>
-          )}
-          {!isInfo && (
-            <S.CommentWrap>
-              <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
-                👍 이 모임에 응원 * 질문을 올려주세요!
-              </Heading>
-              <DetailCommentInput comment={comment} setComment={setComment} />
-              <DetailCommentLog />
-              {/* 여기는 석환이랑 db 협의가 끝나면 개발 */}
-              <S.MediaBox />
-            </S.CommentWrap>
-          )}
-        </S.PageLeft>
-        {studyField &&
-          typeof studyLike === typeof studyView &&
-          studyStart &&
-          studyEnd && (
-            <DetailRightCard
-              leaderImg="https://letspl.s3.ap-northeast-2.amazonaws.com/images/project_thumb_05.png"
-              leaderName="name"
-              leaderInfo="asdasdsa"
-              projectField={studyField}
-              projectLike={studyLike}
-              projectView={studyView}
-              projectStart={studyStart}
-              projectEnd={studyEnd}
-              projectSub={false}
-            />
-          )}
-      </S.PageWrap>
-    </Container>
-  );
+            {!isInfo && (
+              <S.CommentWrap>
+                <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
+                  👍 이 모임에 응원 * 질문을 올려주세요!
+                </Heading>
+                <DetailCommentInput comment={comment} setComment={setComment} />
+                <DetailCommentLog />
+                {/* 여기는 석환이랑 db 협의가 끝나면 개발 */}
+                <S.MediaBox />
+              </S.CommentWrap>
+            )}
+          </S.PageLeft>
+          <DetailRightCard
+            leaderImg="https://letspl.s3.ap-northeast-2.amazonaws.com/images/project_thumb_05.png"
+            leaderName="name"
+            leaderInfo="asdasdsa"
+            projectField={study.studyField}
+            projectLike={study.studyLike}
+            projectView={study.studyView}
+            projectStart={study.studyStart}
+            projectEnd={study.studyEnd}
+            projectSub={false}
+          />
+        </S.PageWrap>
+      </Container>
+    );
+  }
+  return null;
 };

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Icon } from 'react-bulma-components';
-import { projectGetNoticeServie } from '../../../service';
+import { projectGetNoticeServie } from '../../../services/projectService';
 import * as S from './style';
 import { NoticeUpload } from './noticeUpload';
 

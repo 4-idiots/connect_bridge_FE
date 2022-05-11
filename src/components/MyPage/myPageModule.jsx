@@ -4,12 +4,7 @@ import validator from 'validator';
 import { useJwt } from 'react-jwt';
 import { MyPageInput, MyPageSelect, MyPageImg } from './userInfo/infoRoute';
 import * as S from './userInfo/style';
-import {
-  mypageGetUserService,
-  checkNicknameService,
-  mypageUpdate,
-  mypageUpdatePost,
-} from '../../service';
+import * as Send from '../../services/mypageService';
 import { useAuth } from '../../contexts/hooks/useAuth';
 
 export const MyPageForm = () => {
@@ -40,7 +35,7 @@ export const MyPageForm = () => {
 
   const checkNickname = async nick => {
     try {
-      const result = await checkNicknameService(nick);
+      const result = await Send.myCheckNickname(nick);
       setCheck({ ...check, nickCheck: result.data, nickClick: true });
     } catch (error) {
       alert('다시 시도해주세요');
@@ -49,7 +44,7 @@ export const MyPageForm = () => {
 
   const getAxios = async uid => {
     try {
-      const result = await mypageGetUserService(uid);
+      const result = await Send.myGetUser(uid);
       setUser(result.data);
     } catch (error) {
       console.log(error);
@@ -58,7 +53,7 @@ export const MyPageForm = () => {
 
   const updateAxios = async data => {
     try {
-      const result = await mypageUpdate(data);
+      const result = await Send.mypageUpdate(data);
       window.location.replace('/my/info');
     } catch (error) {
       alert('다시 시도해주세요');
@@ -67,7 +62,7 @@ export const MyPageForm = () => {
 
   const updateNoImgAxios = async () => {
     try {
-      const result = await mypageUpdatePost(
+      const result = await Send.mypageUpdatePost(
         decodedToken.id,
         pwInfo.userPW,
         user.userNickname,

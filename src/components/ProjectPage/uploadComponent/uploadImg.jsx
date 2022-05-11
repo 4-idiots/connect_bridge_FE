@@ -17,6 +17,7 @@ export const ProjectImg = ({ postInfo, setPostInfo }) => {
       };
     });
   };
+
   return (
     <Form.Field>
       <Form.Label>* 대표 이미지</Form.Label>

@@ -1,7 +1,8 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { Box, Button, Container, Form, Heading } from 'react-bulma-components';
 import { Link, useNavigate } from 'react-router-dom';
-import { customAxios, loginService } from '../../service';
+import { loginService } from '../../services/loginService';
+import customAxios from '../../services/customAxios';
 import { useAuth } from '../../contexts/hooks/useAuth';
 
 export const LoginForm = () => {
@@ -40,8 +41,6 @@ export const LoginForm = () => {
   };
 
   const onSubmitEvent = e => {
-    e.preventDefault();
-
     loginAxios(userID, userPW);
   };
 

@@ -4,34 +4,23 @@ import { Button, Card, Media, Heading } from 'react-bulma-components';
 import PropTypes from 'prop-types';
 import { useJwt } from 'react-jwt';
 import { Link } from 'react-router-dom';
-import {
-  outdoorDeleteService,
-  outdoorLikeCheck,
-  outdoorLikeService,
-  outdoorGetSomeService,
-} from '../../service';
+import * as Send from '../../services/outdoorService';
 import { useAuth } from '../../contexts/hooks/useAuth';
+import * as S from './style';
 
-export const OutdoorCardForm = ({
-  outActID,
-  outActName,
-  outActView,
-  outActLike,
-  onActClick,
-  outActImg,
-}) => {
+export const OutdoorCardForm = ({ item, onActClick }) => {
   const [isHover, setIsHover] = useState(false);
   const [isLike, setIsLike] = useState(false);
-  const [dynLike, setDynLike] = useState(outActLike);
-  const [dynView, setDynView] = useState(outActView);
+  const [dynLike, setDynLike] = useState(item.outActLike);
+  const [dynView, setDynView] = useState(item.outActView);
 
   const auth = useAuth();
-  const { decodedToken, isExpired } = useJwt(auth.token);
+  const { decodedToken } = useJwt(auth.token);
   const isLogin = localStorage.getItem('isLogin') || '';
 
   const deleteAxios = async id => {
     try {
-      const result = await outdoorDeleteService(id);
+      const result = await Send.outdoorDeleteService(id);
       alert('삭제 완료');
       window.location.replace('/outdoor');
     } catch (error) {
@@ -42,7 +31,7 @@ export const OutdoorCardForm = ({
 
   const likeCheck = async () => {
     try {
-      const result = await outdoorLikeCheck(outActID);
+      const result = await Send.outdoorLikeCheck(item.outActID);
       setIsLike(result.data);
     } catch (error) {
       setIsLike(false);
@@ -58,7 +47,7 @@ export const OutdoorCardForm = ({
     }
     setIsLike(!isLike);
     try {
-      const result = await outdoorLikeService(outActID);
+      const result = await Send.outdoorLikeService(item.outActID);
     } catch (error) {
       console.log(error);
     }
@@ -66,7 +55,7 @@ export const OutdoorCardForm = ({
 
   const addView = async () => {
     try {
-      const result = await outdoorGetSomeService(outActID);
+      const result = await Send.outdoorGetSomeService(item.outActID);
     } catch (err) {
       console.log('error');
     }
@@ -104,9 +93,9 @@ export const OutdoorCardForm = ({
         setIsHover(false);
       }}
     >
-      <div style={{ height: 380, overflow: 'hidden' }}>
-        <Card.Image onClick={onClickHandler} src={outActImg} />
-      </div>
+      <S.OdCardImgBox>
+        <Card.Image onClick={onClickHandler} src={item.outActImg} />
+      </S.OdCardImgBox>
 
       <Card.Content>
         <Media
@@ -116,24 +105,16 @@ export const OutdoorCardForm = ({
           }}
         >
           <Media.Item style={{ height: 36, textOverflow: 'ellipsis' }}>
-            <Heading size={isLogin ? 6 : 5}>{outActName}</Heading>
+            <Heading size={isLogin ? 6 : 5}>{item.outActName}</Heading>
           </Media.Item>
           <Media.Item style={{ marginTop: 10 }}>
             {isLogin ? (
               <>
                 {decodedToken && decodedToken.role ? (
-                  <Button.Group
-                    style={{
-                      width: 232,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'flex-end',
-                      marginTop: 4,
-                    }}
-                  >
+                  <S.OdCardBtnGroup>
                     <Button
                       renderAs={Link}
-                      to={`/outdoor/update/${outActID}`}
+                      to={`/outdoor/update/${item.outActID}`}
                       color="link"
                       style={{ marginRight: 6 }}
                     >
@@ -141,22 +122,15 @@ export const OutdoorCardForm = ({
                     </Button>
                     <Button
                       onClick={() => {
-                        deleteAxios(outActID);
+                        deleteAxios(item.outActID);
                       }}
                       color="danger"
                     >
                       삭제
                     </Button>
-                  </Button.Group>
+                  </S.OdCardBtnGroup>
                 ) : (
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      width: 232,
-                    }}
-                  >
+                  <S.OdCardUserBtndBox>
                     <p>View: {dynView}</p>
                     {isLike ? (
                       <Button color="danger" onClick={likeClick}>
@@ -167,7 +141,7 @@ export const OutdoorCardForm = ({
                         Like: {dynLike}
                       </Button>
                     )}
-                  </div>
+                  </S.OdCardUserBtndBox>
                 )}
               </>
             ) : (
@@ -181,21 +155,6 @@ export const OutdoorCardForm = ({
 };
 
 OutdoorCardForm.propTypes = {
-  outActID: PropTypes.number,
-  outActName: PropTypes.string,
-  outActView: PropTypes.number,
-  outActLike: PropTypes.number,
-  onActClick: PropTypes.func,
-  outActImg: PropTypes.string,
-};
-
-OutdoorCardForm.defaultProps = {
-  outActID: 0,
-  outActName: 'Title',
-  outActView: 0,
-  outActLike: 0,
-  onActClick: () => {
-    console.log('hh');
-  },
-  outActImg: 'Image',
+  item: PropTypes.objectOf(PropTypes.any).isRequired,
+  onActClick: PropTypes.func.isRequired,
 };

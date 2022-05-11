@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { customAxios } from './service';
+import customAxios from './services/customAxios';
 import App from './App';
 import './assets/custom.css';
 

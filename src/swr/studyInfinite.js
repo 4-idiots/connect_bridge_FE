@@ -4,7 +4,7 @@ import useSWRInfinite from 'swr/infinite';
 import fetcher from './fetcher';
 import useOnScreen from './useOnScreen';
 import { StudyCard } from '../components/StudyPage/mainComponent/studyCard';
-import { studyGetAllService } from '../service';
+import { studyGetAllService } from '../services/studyService';
 
 const getKey = (pageIndex, previousPageData) => {
   if (previousPageData && !previousPageData.length) return null;
@@ -16,7 +16,7 @@ export const StudyInfinite = () => {
   const ref = useRef();
   const isVisible = useOnScreen(ref);
 
-  const { data, error, mutate, size, setSize, isValidating } = useSWRInfinite(
+  const { data, error, size, setSize, isValidating } = useSWRInfinite(
     getKey,
     fetcher,
   );
