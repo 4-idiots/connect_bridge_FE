@@ -211,7 +211,7 @@ export const projectLikeService = projectID => {
   return customAxios.get(`/api/project/like?projectID=${projectID}`);
 };
 
-export const projectGetNotiveServie = projectID => {
+export const projectGetNoticeServie = projectID => {
   return customAxios.get(`/api/project/${projectID}/notice`);
 };
 
@@ -220,7 +220,15 @@ export const projectNoticeUploadService = (projectID, content) => {
 };
 
 export const projectGetAdminService = projectID => {
-  return customAxios.get('');
+  return customAxios.get(`/api/project/${projectID}/manage`);
+};
+
+export const projectYesService = (projectID, submitID) => {
+  return customAxios.get(`/api/project/${projectID}/apply/${submitID}`);
+};
+
+export const projectNoService = (projectID, submitID) => {
+  return customAxios.get(`/api/project/${projectID}/reject/${submitID}`);
 };
 
 export const mypageGetUserService = userID => {

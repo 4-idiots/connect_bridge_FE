@@ -65,7 +65,20 @@ export const DetailRightCard = ({
       </S.RightMid>
 
       {projectSub ? (
-        ''
+        <S.RightFollow>
+          <S.RightPBig>프로젝트 구독 취소</S.RightPBig>
+          <Button.Group align="center">
+            <Button
+              className="is-light"
+              color="danger"
+              onClick={() => {}}
+              size="medium"
+              style={{ width: '100%' }}
+            >
+              구독 취소
+            </Button>
+          </Button.Group>
+        </S.RightFollow>
       ) : (
         <S.RightFollow>
           <S.RightPBig>프로젝트 구독하기</S.RightPBig>

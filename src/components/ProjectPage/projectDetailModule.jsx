@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Container, Heading, Tabs } from 'react-bulma-components';
+import { Container, Heading, Tabs, Button } from 'react-bulma-components';
 import { useJwt } from 'react-jwt';
 import {
   DetailContent,
@@ -20,6 +20,8 @@ import {
   projectDeleteService,
 } from '../../service';
 import { useAuth } from '../../contexts/hooks/useAuth';
+import { NoticeTab } from './detailTab/noticeTab';
+import { ApplyTab } from './detailTab/applyTab';
 
 export const ProjectDetailForm = () => {
   const auth = useAuth();
@@ -71,8 +73,8 @@ export const ProjectDetailForm = () => {
           <DetailHeader
             projectOnOff={postData.projectOnOff}
             projectName={postData.projectName}
-            leaderImg="https://letspl.s3.ap-northeast-2.amazonaws.com/images/project_thumb_05.png"
-            leaderName="name"
+            leaderImg={postData.leaderInfo.leaderImg}
+            leaderName={postData.leaderInfo.leaderName}
           />
         )}
         <S.PageWrap>
@@ -90,8 +92,9 @@ export const ProjectDetailForm = () => {
               >
                 질문
               </Tabs.Tab>
-              {(postData.memberID &&
-                postData.memberID.includes(decodedToken.id)) ||
+              {(postData.memberList &&
+                decodedToken &&
+                postData.memberList.includes(decodedToken.id)) ||
               (decodedToken && postData.userID === decodedToken.id) ? (
                 <Tabs.Tab
                   active={where === 'notice'}
@@ -198,39 +201,41 @@ export const ProjectDetailForm = () => {
               ''
             )}
             {where === 'apply' && (
-              <div>
-                <S.TalUl>
-                  <S.TabUpdate
+              <>
+                <Button.Group>
+                  <Button
                     onClick={() => navigate(`/project/update/${projectID}`)}
                   >
                     수정
-                  </S.TabUpdate>
-                  <S.TabUpdate
+                  </Button>
+                  <Button
                     onClick={() => {
                       deleteAxios(projectID);
                     }}
                   >
                     삭제
-                  </S.TabUpdate>
-                </S.TalUl>
-              </div>
+                  </Button>
+                </Button.Group>
+                <ApplyTab projectID={projectID} />
+              </>
             )}
-            {where === 'notice' && (
-              <div>
-                <div>notice</div>
-              </div>
+            {where === 'notice' && decodedToken && (
+              <NoticeTab
+                projectID={projectID}
+                isMaster={postData.userID === decodedToken.id}
+              />
             )}
           </S.PageLeft>
           <DetailRightCard
-            leaderImg="https://letspl.s3.ap-northeast-2.amazonaws.com/images/project_thumb_05.png"
-            leaderName="name"
+            leaderImg={postData.leaderInfo.leaderImg}
+            leaderName={postData.leaderInfo.leaderName}
             leaderInfo={postData.leaderInfo.introduce}
             projectField={postData.projectField}
             projectLike={postData.projectLike}
             projectView={postData.projectView}
             projectStart={postData.projectStart}
             projectEnd={postData.projectEnd}
-            projectSub={false}
+            projectSub={postData.projectSub}
           />
         </S.PageWrap>
       </Container>
