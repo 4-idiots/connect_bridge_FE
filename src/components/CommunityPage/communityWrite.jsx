@@ -23,6 +23,7 @@ import {
 import { useJwt } from 'react-jwt';
 import { useAuth } from '../../contexts/hooks/useAuth';
 import SlateEditor from '../../SlateEditor/Editor';
+import customAxios from '../../services/customAxios';
 
 export const CommunityWriteForm = () => {
   const [data, setdata] = useState([]);
@@ -32,15 +33,6 @@ export const CommunityWriteForm = () => {
   const auth = useAuth();
   const { decodedToken, isExpired } = useJwt(auth.token);
   const { fromUserId } = useParams(`${decodedToken?.id}`);
-
-  const [postInfo, setPostInfo] = useState({
-    indata: [
-      {
-        type: 'paragaph',
-        children: [{ text: '커뮤니티' }],
-      },
-    ],
-  });
 
   const [contents, setcontents] = useState({
     content: [
@@ -52,7 +44,7 @@ export const CommunityWriteForm = () => {
   });
 
   const userData = () => {
-    return axios.get('/api/communityw').then(response => {
+    return customAxios.get('/api/communityw').then(response => {
       console.log(response);
       setdata(response.data);
     });
@@ -82,8 +74,8 @@ export const CommunityWriteForm = () => {
 
   const Write = e => {
     if (title) {
-      axios
-        .post(`/api/write/${decodedToken?.id}`, {
+      customAxios
+        .post(`/api/write`, {
           hashtag,
           title,
           contents: JSON.stringify(contents.content),
@@ -106,8 +98,6 @@ export const CommunityWriteForm = () => {
 
   return (
     <Container>
-      {JSON.stringify(fromUserId)}
-
       <Heading style={{ textAlign: 'center', margin: 35 }}>
         커뮤니티 글쓰기
       </Heading>
@@ -123,7 +113,6 @@ export const CommunityWriteForm = () => {
         <SlateEditor value={contents} setValue={setcontents} />
 
         <br />
-        {JSON.stringify(contents)}
         <br />
 
         <Form.Field>

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect } from 'react';
@@ -6,7 +7,7 @@ import PropTypes from 'prop-types';
 import { Tag, Icon } from 'react-bulma-components';
 import { useNavigate } from 'react-router-dom';
 
-export const CommunityCard = ({ item, userID }) => {
+export const CommunityCard = ({ item }) => {
   const navigate = useNavigate();
   const [text, setText] = useState(null);
 
@@ -28,16 +29,16 @@ export const CommunityCard = ({ item, userID }) => {
   return (
     <div
       className="blog-card spring-fever"
-      onClick={() => navigate(`/community/info/${userID}/${item.postID}`)}
+      onClick={() => navigate(`/community/info/${item.postID}`)}
     >
       <div className="title-content">
         <div className="title-text">{item.title}</div>
         <hr />
         <div className="intro">
           {item.hashtag &&
-            item.hashtag.map(tg => (
+            item.hashtag.map((tg, id) => (
               <Tag
-                key={tg}
+                key={id}
                 style={{ backgroundColor: '#dedede', marginRight: 10 }}
               >
                 #{tg}
@@ -74,5 +75,4 @@ export const CommunityCard = ({ item, userID }) => {
 
 CommunityCard.propTypes = {
   item: PropTypes.objectOf(PropTypes.any).isRequired,
-  userID: PropTypes.number.isRequired,
 };

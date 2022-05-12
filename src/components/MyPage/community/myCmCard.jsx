@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import * as S from './style';
 import ReadOnlySlate from '../../../SlateEditor/ReadOnly';
 
-export const MyCmCard = ({ item, deleteAxios, userID }) => {
+export const MyCmCard = ({ item, deleteAxios }) => {
   const [content, setContent] = useState('');
   const navigate = useNavigate();
 
@@ -31,9 +31,7 @@ export const MyCmCard = ({ item, deleteAxios, userID }) => {
 
   return (
     <S.CmContainer>
-      <S.CmTextBox
-        onClick={() => navigate(`/community/info/${userID}/${item.postID}`)}
-      >
+      <S.CmTextBox onClick={() => navigate(`/community/info/${item.postID}`)}>
         <Heading size={5}>{item.title}</Heading>
         <S.CmContentBox>
           {content && <ReadOnlySlate value={content} />}
@@ -91,5 +89,4 @@ export const MyCmCard = ({ item, deleteAxios, userID }) => {
 MyCmCard.propTypes = {
   item: PropTypes.objectOf(PropTypes.any).isRequired,
   deleteAxios: PropTypes.func.isRequired,
-  userID: PropTypes.number.isRequired,
 };

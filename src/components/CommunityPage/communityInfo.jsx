@@ -1,5 +1,4 @@
 /* eslint-disable react/no-array-index-key */
-/* eslint-disable react/button-has-type */
 /* eslint-disable no-nested-ternary */
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
@@ -21,6 +20,7 @@ import { useParams } from 'react-router-dom';
 import { useJwt } from 'react-jwt';
 import { useAuth } from '../../contexts/hooks/useAuth';
 import ReadOnlySlate from '../../SlateEditor/ReadOnly';
+import customAxios from '../../services/customAxios';
 
 export const CommunityInfoForm = () => {
   const [users, setusers] = useState([]);
@@ -46,23 +46,22 @@ export const CommunityInfoForm = () => {
   const [userInterestSub, setuserInterestSub] = useState('');
   const [userID, setuserID] = useState('');
   const [ida, setida] = useState({});
+
   const onSubmit = e => {
     e.preventDefault();
-    if (teID > 0) {
-      axios
-        .post(`/api/community/comment/${teID}`, {
-          comment,
-          postID,
-        })
-        .then(response => {
-          if (comment === '') {
-            return;
-          }
-          setcommentList(commentValueList => [comment, ...commentValueList]);
-          setcomment('');
-          window.location.reload();
-        });
-    }
+    customAxios
+      .post(`/api/community/comment`, {
+        comment,
+        postID,
+      })
+      .then(response => {
+        if (comment === '') {
+          return;
+        }
+        setcommentList(commentValueList => [comment, ...commentValueList]);
+        setcomment('');
+        window.location.reload();
+      });
   };
 
   const [contents, setcontents] = useState(null);
@@ -74,7 +73,7 @@ export const CommunityInfoForm = () => {
     window.location = `/community/change/${communityID}`;
   };
   const DeleteClick = () => {
-    axios.delete(`/api/community/${communityID}`).then(response => {
+    customAxios.delete(`/api/community/${communityID}`).then(response => {
       window.location = '/community';
       console.log(communityID);
     });
@@ -82,8 +81,7 @@ export const CommunityInfoForm = () => {
 
   const likesClick = () => {
     if (state === 1) {
-      axios.get(`/api/community/like/${teID}/${communityID}`).then(response => {
-        console.log(decodedToken.id);
+      customAxios.get(`/api/community/like/${communityID}`).then(response => {
         console.log(communityID);
         console.log(response.data.state);
       });
@@ -92,10 +90,9 @@ export const CommunityInfoForm = () => {
         ? setlikeCounta(likeCount + 1) || setColor('danger')
         : setlikeCounta(likeCount - 1) || setColor('black');
     } else if (state === 2)
-      axios
-        .delete(`/api/community/like/${teID}/${communityID}`)
+      customAxios
+        .delete(`/api/community/like/${communityID}`)
         .then(response => {
-          console.log(decodedToken.id);
           console.log(communityID);
           console.log(response.data.state);
         });
@@ -107,60 +104,43 @@ export const CommunityInfoForm = () => {
   };
 
   const userData = () => {
-    if (teID > 0) {
-      axios.get(`/api/community/info/${teID}/${communityID}`).then(response => {
-        console.log(response);
-        setusers(response.data);
-        setpostID(response.data.postID);
-        setuserNickname(response.data.userNickname);
-        sethashtag(response.data.hashtag);
-        settitle(response.data.title);
-        setviewCount(response.data.viewCount);
-        setlikeCounta(response.data.likeCounta);
-        setlikeCount(response.data.likeCount);
-        setstate(response.data.state);
-        setColor(response.data.color);
-        setuserAbility(response.data.userAbility);
-        setuserInterestMain(response.data.userInterestMain);
-        setuserInterestSub(response.data.userInterestSub);
-        setcommentCount(response.data.commentCount);
-        setcontents(response.data.contents);
-        setuserID(response.data.userID);
-        setcommentList(response.data.commentList);
-        setcomment(response.data.commentList.comment);
-      });
-    } else {
-      axios.get(`/api/community/info/0/${communityID}`).then(response => {
-        console.log(response);
-        setusers(response.data);
-        setpostID(response.data.postID);
-        setuserNickname(response.data.userNickname);
-        sethashtag(response.data.hashtag);
-        setlikeCounta(response.data.likeCounta);
-        settitle(response.data.title);
-        setviewCount(response.data.viewCount);
-        setlikeCount(response.data.likeCount);
-        setColor(response.data.color);
-        setuserAbility(response.data.userAbility);
-        setuserInterestMain(response.data.userInterestMain);
-        setuserInterestSub(response.data.userInterestSub);
-        setcommentCount(response.data.commentCount);
-        setcontents(response.data.contents);
-        setuserID(response.data.userID);
-        setcommentList(response.data.commentList);
-        setcomment(response.data.commentList.comment);
-      });
-    }
+    customAxios.get(`/api/community/info/${communityID}`).then(response => {
+      console.log(response);
+      setusers(response.data);
+      setpostID(response.data.postID);
+      setuserNickname(response.data.userNickname);
+      sethashtag(response.data.hashtag);
+      settitle(response.data.title);
+      setviewCount(response.data.viewCount);
+      setlikeCounta(response.data.likeCounta);
+      setlikeCount(response.data.likeCount);
+      setstate(response.data.state);
+      setColor(response.data.color);
+      setuserAbility(response.data.userAbility);
+      setuserInterestMain(response.data.userInterestMain);
+      setuserInterestSub(response.data.userInterestSub);
+      setcommentCount(response.data.commentCount);
+      setcontents(response.data.contents);
+      setuserID(response.data.userID);
+      setcommentList(response.data.commentList);
+      setcomment(response.data.commentList.comment);
+    });
   };
+
   const CommentChangeClick = (cmID, cmComment) => {
-    axios.patch(`/api/community/comment`, cmID, cmComment).then(response => {
-      window.location.reload();
-    });
+    customAxios
+      .patch(`/api/community/comment`, cmID, cmComment)
+      .then(response => {
+        window.location.reload();
+      });
   };
+
   const CommentDeleteClick = cmID => {
-    axios.delete(`/api/community/comment/${cmID}/${postID}`).then(response => {
-      window.location.reload();
-    });
+    customAxios
+      .delete(`/api/community/comment/${cmID}/${postID}`)
+      .then(response => {
+        window.location.reload();
+      });
   };
 
   useEffect(() => {
@@ -169,7 +149,6 @@ export const CommunityInfoForm = () => {
 
   return (
     <Container>
-      {JSON.stringify(state)}
       <Heading style={{ textAlign: 'center' }}>{title}</Heading>
       <Box
         style={{
@@ -268,7 +247,7 @@ export const CommunityInfoForm = () => {
           <br />
           <br />
           <br />
-          <div className="commentContainer" onSubmit={onSubmit}>
+          <div className="commentContainer">
             <form className="commentWrap">
               <input
                 type="text"
@@ -276,7 +255,9 @@ export const CommunityInfoForm = () => {
                 value={comment || ''}
                 onChange={onChange}
               />
-              <button className="commetBtn">등록</button>
+              <button type="button" className="commetBtn" onClick={onSubmit}>
+                등록
+              </button>
             </form>
           </div>
           <div style={{ textAlign: 'center' }}>

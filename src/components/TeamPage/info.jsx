@@ -1,5 +1,4 @@
 /* eslint-disable no-nested-ternary */
-/* eslint-disable import/no-unresolved */
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import validator from 'validator';
@@ -15,8 +14,7 @@ import {
   Content,
 } from 'react-bulma-components';
 import { useParams } from 'react-router-dom';
-import { useJwt } from 'react-jwt';
-import { useAuth } from '../../contexts/hooks/useAuth';
+import customAxios from '../../services/customAxios';
 
 export const InfoForm = () => {
   const [users, setusers] = useState([]);
@@ -32,51 +30,32 @@ export const InfoForm = () => {
   const [off, setoff] = useState(0);
   const [like, setlike] = useState(0);
   const [follow, setfollow] = useState(0);
-  const auth = useAuth();
-  const { decodedToken, isExpired } = useJwt(auth.token);
-  const { teID } = useParams(`${decodedToken?.id}`);
   const [color, setColor] = useState('');
 
   const userData = () => {
-    if (teID > 0) {
-      axios.get(`/api/team/info/${teID}/${teamID}`).then(response => {
-        console.log(response);
-        setusers(response.data);
-        setmyid(response.data.myid);
-        setuserNickname(response.data.userNickname);
-        setuserName(response.data.userName);
-        setuserAbility(response.data.userAbility);
-        setuserArea(response.data.userArea);
-        setuserTime(response.data.userTime);
-        setuserInterest(response.data.userInterest);
-        setuserIntroduce(response.data.userIntroduce);
-        setfollow(response.data.follow);
-        setColor(response.data.color);
-      });
-    } else {
-      axios.get(`/api/team/info/0/${teamID}`).then(response => {
-        console.log(response);
-        setusers(response.data);
-        setmyid(response.data.myid);
-        setuserNickname(response.data.userNickname);
-        setuserName(response.data.userName);
-        setuserAbility(response.data.userAbility);
-        setuserArea(response.data.userArea);
-        setuserTime(response.data.userTime);
-        setuserInterest(response.data.userInterest);
-        setuserIntroduce(response.data.userIntroduce);
-        setfollow(response.data.follow);
-      });
-    }
+    customAxios.get(`/api/team/info/${teamID}`).then(response => {
+      console.log(response);
+      setusers(response.data);
+      setmyid(response.data.myid);
+      setuserNickname(response.data.userNickname);
+      setuserName(response.data.userName);
+      setuserAbility(response.data.userAbility);
+      setuserArea(response.data.userArea);
+      setuserTime(response.data.userTime);
+      setuserInterest(response.data.userInterest);
+      setuserIntroduce(response.data.userIntroduce);
+      setfollow(response.data.follow);
+      setColor(response.data.color);
+    });
   };
+
   const followdata = () => {
     setfollow(current => !current);
   };
 
   const likeClick = () => {
     if (follow === 1) {
-      axios.get(`/api/follow/${decodedToken.id}/${teamID}`).then(response => {
-        console.log(decodedToken.id);
+      customAxios.get(`/api/follow/${teamID}`).then(response => {
         console.log(teamID);
         console.log(response.data.follow);
       });
@@ -84,13 +63,10 @@ export const InfoForm = () => {
       color === 'black' ? setColor('danger') : setColor('black');
       // eslint-disable-next-line no-unused-expressions
     } else if (follow === 2)
-      axios
-        .delete(`/api/follow/${decodedToken.id}/${teamID}`)
-        .then(response => {
-          console.log(decodedToken.id);
-          console.log(teamID);
-          console.log(response.data.follow);
-        });
+      customAxios.delete(`/api/follow/${teamID}`).then(response => {
+        console.log(teamID);
+        console.log(response.data.follow);
+      });
     // eslint-disable-next-line no-unused-expressions
     color === 'danger' ? setColor('black') : setColor('danger');
   };
@@ -106,7 +82,6 @@ export const InfoForm = () => {
 
   return (
     <Container>
-      {JSON.stringify(follow)}
       <Heading
         style={{
           textAlign: 'center',

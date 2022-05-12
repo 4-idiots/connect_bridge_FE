@@ -23,7 +23,7 @@ const App = () => {
             element={<P.OutdoorUpdate />}
           />
           <Route path="/team" element={<P.Team />} />
-          <Route path="/team/info/:teID/:teamID" element={<P.Info />} />
+          <Route path="/team/info/:teamID" element={<P.Info />} />
           <Route path="/study" element={<P.StudyMain />} />
           <Route path="/study/update/:studyID" element={<P.StudyUpdate />} />
           <Route path="/study/:studyID" element={<P.StudyDetail />} />
@@ -43,7 +43,7 @@ const App = () => {
             element={<P.CommunityChange />}
           />
           <Route
-            path="/community/info/:teID/:communityID"
+            path="/community/info/:communityID"
             element={<P.CommunityInfo />}
           />
           <Route path="/my/info" element={<P.MyPage />} />

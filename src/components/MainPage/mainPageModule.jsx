@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Heading, Container } from 'react-bulma-components';
-import { useJwt } from 'react-jwt';
 import { getMainService } from '../../services/mainService';
 import { ProjectCard } from '../ProjectPage/mainComponent/projectCard';
 import { CommunityCard } from './mainCard/comCard';
 import * as S from './style';
-import { useAuth } from '../../contexts/hooks/useAuth';
 
 export const MainPageForm = () => {
-  const auth = useAuth();
-  const { decodedToken } = useJwt(auth.token);
   const [main, setMain] = useState(null);
 
   const getAxios = async () => {
@@ -47,13 +43,8 @@ export const MainPageForm = () => {
         </Heading>
         <S.MainGrid>
           {main.community &&
-            decodedToken &&
             main.community.map(item => (
-              <CommunityCard
-                item={item}
-                key={item.postID}
-                userID={decodedToken.id}
-              />
+              <CommunityCard item={item} key={item.postID} />
             ))}
         </S.MainGrid>
         <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>

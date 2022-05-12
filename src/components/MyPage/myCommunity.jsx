@@ -41,14 +41,8 @@ export const MyCommunityForm = () => {
       <>
         <Heading size={4}>작성한 글</Heading>
         {community &&
-          decodedToken &&
           community.map(item => (
-            <MyCmCard
-              item={item}
-              deleteAxios={deleteAxios}
-              key={item.postID}
-              userID={decodedToken.id}
-            />
+            <MyCmCard item={item} deleteAxios={deleteAxios} key={item.postID} />
           ))}
       </>
     );
