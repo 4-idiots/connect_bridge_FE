@@ -30,7 +30,11 @@ ProjectInput.propTypes = {
   label: PropTypes.string.isRequired,
   help: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+};
+
+ProjectInput.defaultProps = {
+  value: '',
 };

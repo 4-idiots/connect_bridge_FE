@@ -191,7 +191,7 @@ export const CommunityForm = ({ commentCount, onActClick, hashtag }) => {
                         >
                           <Link
                             style={{ color: 'black' }}
-                            to={`/community/info/${decodedToken?.id}/${postID}`}
+                            to={`/community/info/${postID}`}
                           >
                             {title}{' '}
                             <span style={{ color: 'red' }}>

@@ -21,7 +21,7 @@ $txt-color: #dce3e7;
   height: $card-height;
   overflow: hidden;
   border-radius: 10px;
-  box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
   text-align: center;
 
   &.spring-fever {
@@ -111,7 +111,6 @@ hr {
   justify-content: space-evenly;
   z-index: 20;
   width: 60%;
-  background-color: white;
   border-radius: 15px;
-  opacity: 0.8;
+  opacity: 0.7;
 }

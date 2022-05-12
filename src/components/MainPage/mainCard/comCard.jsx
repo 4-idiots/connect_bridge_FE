@@ -50,21 +50,21 @@ export const CommunityCard = ({ item }) => {
       <div className="utility-info">
         <div>
           <Icon>
-            <i className="fas fa-comment" />
+            <i className="fas fa-comment" style={{ color: 'white' }} />
           </Icon>
-          {item.commentCount}
+          <span style={{ color: 'white' }}>{item.commentCount}</span>
         </div>
         <div>
           <Icon>
-            <i className="fas fa-thumbs-up" />
+            <i className="fas fa-thumbs-up" style={{ color: 'white' }} />
           </Icon>
-          {item.likeCount}
+          <span style={{ color: 'white' }}>{item.likeCount}</span>
         </div>
         <div>
           <Icon>
-            <i className="fas fa-eye" />
+            <i className="fas fa-eye" style={{ color: 'white' }} />
           </Icon>
-          {item.viewCount}
+          <span style={{ color: 'white' }}>{item.viewCount}</span>
         </div>
       </div>
       <div className="gradient-overlay" />

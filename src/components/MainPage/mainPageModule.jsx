@@ -3,6 +3,7 @@ import { Heading, Container } from 'react-bulma-components';
 import { getMainService } from '../../services/mainService';
 import { ProjectCard } from '../ProjectPage/mainComponent/projectCard';
 import { CommunityCard } from './mainCard/comCard';
+import { TeamCard } from './mainCard/teamCard';
 import * as S from './style';
 
 export const MainPageForm = () => {
@@ -35,10 +36,6 @@ export const MainPageForm = () => {
             ))}
         </S.MainGrid>
         <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
-          스터디
-        </Heading>
-        <S.MainGrid>a</S.MainGrid>
-        <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
           커뮤니티
         </Heading>
         <S.MainGrid>
@@ -49,6 +46,15 @@ export const MainPageForm = () => {
         </S.MainGrid>
         <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
           팀원들
+        </Heading>
+        <S.MainGrid>
+          <TeamCard item={main.register[0]} cnt={0} />
+          <TeamCard item={main.register[1]} cnt={1} />
+          <TeamCard item={main.register[2]} cnt={2} />
+          <TeamCard item={main.register[3]} cnt={3} />
+        </S.MainGrid>
+        <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
+          스터디
         </Heading>
         <S.MainGrid>a</S.MainGrid>
       </Container>
