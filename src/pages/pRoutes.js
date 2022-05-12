@@ -1,4 +1,4 @@
-export { Main } from './main';
+export { Main } from './main/main';
 
 export { Login } from './login/login';
 export { FindID } from './login/findID';

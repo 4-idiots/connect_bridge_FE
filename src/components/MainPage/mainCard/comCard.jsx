@@ -1,0 +1,78 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import React, { useState, useEffect } from 'react';
+import './comStyle.scss';
+import PropTypes from 'prop-types';
+import { Tag, Icon } from 'react-bulma-components';
+import { useNavigate } from 'react-router-dom';
+
+export const CommunityCard = ({ item, userID }) => {
+  const navigate = useNavigate();
+  const [text, setText] = useState(null);
+
+  const getAll = () => {
+    let te = '';
+    item.contents.map(itext => {
+      return itext.children.map(info => {
+        // eslint-disable-next-line no-return-assign
+        return (te = te.concat(' ', info.text));
+      });
+    });
+    setText(te);
+  };
+
+  useEffect(() => {
+    getAll();
+  }, []);
+
+  return (
+    <div
+      className="blog-card spring-fever"
+      onClick={() => navigate(`/community/info/${userID}/${item.postID}`)}
+    >
+      <div className="title-content">
+        <div className="title-text">{item.title}</div>
+        <hr />
+        <div className="intro">
+          {item.hashtag &&
+            item.hashtag.map(tg => (
+              <Tag
+                key={tg}
+                style={{ backgroundColor: '#dedede', marginRight: 10 }}
+              >
+                #{tg}
+              </Tag>
+            ))}
+        </div>
+      </div>
+      <div className="card-info">{text}</div>
+      <div className="utility-info">
+        <div>
+          <Icon>
+            <i className="fas fa-comment" />
+          </Icon>
+          {item.commentCount}
+        </div>
+        <div>
+          <Icon>
+            <i className="fas fa-thumbs-up" />
+          </Icon>
+          {item.likeCount}
+        </div>
+        <div>
+          <Icon>
+            <i className="fas fa-eye" />
+          </Icon>
+          {item.viewCount}
+        </div>
+      </div>
+      <div className="gradient-overlay" />
+      <div className="color-overlay" />
+    </div>
+  );
+};
+
+CommunityCard.propTypes = {
+  item: PropTypes.objectOf(PropTypes.any).isRequired,
+  userID: PropTypes.number.isRequired,
+};

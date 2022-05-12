@@ -1,7 +1,12 @@
 import React from 'react';
 import { useJwt } from 'react-jwt';
-import { NavbarForm, FooterForm, BannerForm } from '../components/cRoutes';
-import { useAuth } from '../contexts/hooks/useAuth';
+import {
+  NavbarForm,
+  FooterForm,
+  BannerForm,
+  MainPageForm,
+} from '../../components/cRoutes';
+import { useAuth } from '../../contexts/hooks/useAuth';
 
 export const Main = () => {
   const auth = useAuth();
@@ -11,7 +16,7 @@ export const Main = () => {
     <>
       <NavbarForm />
       <BannerForm />
-      <h1 style={{ textAlign: 'center', fontSize: '40px' }}>Main Page</h1>
+      <MainPageForm />
       <FooterForm />
     </>
   );

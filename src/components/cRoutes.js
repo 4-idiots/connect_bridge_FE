@@ -2,6 +2,7 @@
 export { NavbarForm } from './MainPage/navbar';
 export { FooterForm } from './MainPage/footer';
 export { BannerForm } from './MainPage/banner';
+export { MainPageForm } from './MainPage/mainPageModule';
 
 // LoginPage
 export { LoginForm } from './LoginPage/loginModule';
