@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Media, Button, Image, Content, Icon } from 'react-bulma-components';
+import { useNavigate } from 'react-router-dom';
 import { projectLikeService } from '../../../services/projectService';
 import * as S from './style';
 
 export const DetailRightCard = ({ item, projectID }) => {
+  const navigate = useNavigate();
   const [like, setLike] = useState(item.projectSub);
+  const [day, setDay] = useState({});
 
   const onLikeClick = async () => {
     try {
@@ -16,9 +19,34 @@ export const DetailRightCard = ({ item, projectID }) => {
     }
   };
 
+  const getDate = () => {
+    const start = new Date(item.projectStart);
+    const sYear = start.getFullYear();
+    const sMonth = `0${start.getMonth() + 1}`.slice(-2);
+    const sDay = `0${start.getDate()}`.slice(-2);
+    const startString = `${sYear}.${sMonth}.${sDay}`;
+
+    const end = new Date(item.projectEnd);
+    const eYear = end.getFullYear();
+    const eMonth = `0${end.getMonth() + 1}`.slice(-2);
+    const eDay = `0${end.getDate()}`.slice(-2);
+    const endString = `${eYear}.${eMonth}.${eDay}`;
+
+    const btMs = end.getTime() - start.getTime();
+    const btDay = btMs / (1000 * 60 * 60 * 24);
+
+    setDay({ startDate: startString, endDate: endString, btDay });
+  };
+
+  useEffect(() => {
+    getDate();
+  }, []);
+
   return (
     <S.PageRight>
-      <S.RightInfo>
+      <S.RightInfo
+        onClick={() => navigate(`/team/info/${item.leaderInfo.leaderID}`)}
+      >
         <S.RightPBig>리더 정보</S.RightPBig>
         <Media>
           <Media.Item align="left">
@@ -57,7 +85,7 @@ export const DetailRightCard = ({ item, projectID }) => {
       <S.RightMid>
         <S.RightPBig>프로젝트 기간</S.RightPBig>
         <S.RightPSmall>
-          {item.projectStart} ~ {item.projectEnd}
+          {day.startDate} ~ {day.endDate} ({day.btDay} 일)
         </S.RightPSmall>
       </S.RightMid>
 

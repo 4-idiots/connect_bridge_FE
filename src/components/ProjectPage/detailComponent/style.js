@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const HeaderWrap = styled.div`
   padding: 40px 0 44px;
@@ -65,6 +65,7 @@ export const PageRight = styled.div`
 export const RightInfo = styled.div`
   padding: 0 0 20px 0;
   border-bottom: 1px solid #e6e6e6;
+  cursor: pointer;
 `;
 
 export const RightMid = styled.div`
@@ -227,8 +228,9 @@ export const DetailMember = styled.div`
 
 export const MemberGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   row-gap: 3rem;
+  place-items: center;
 `;
 
 export const MemberCardText = styled.div`

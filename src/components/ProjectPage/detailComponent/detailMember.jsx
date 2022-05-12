@@ -11,7 +11,14 @@ export const DetailMember = ({ item }) => {
         멤버
       </Heading>
       <S.MemberGrid>
-        {item && item.map(it => <MemberCard key={it.memberID} item={it} />)}
+        {item &&
+          item.map(it => (
+            <MemberCard
+              key={it.memberID}
+              item={it}
+              cnt={Math.floor(Math.random() * 4)}
+            />
+          ))}
       </S.MemberGrid>
     </S.DetailMember>
   );

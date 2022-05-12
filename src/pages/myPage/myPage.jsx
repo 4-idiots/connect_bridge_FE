@@ -6,6 +6,7 @@ import {
   MyPageForm,
   MyProjectStudyForm,
   MyCommunityForm,
+  MySubscribeForm,
 } from '../../components/cRoutes';
 
 export const MyPage = () => {
@@ -36,12 +37,18 @@ export const MyPage = () => {
           >
             커뮤니티
           </Tabs.Tab>
-          <Tabs.Tab>구독</Tabs.Tab>
+          <Tabs.Tab
+            active={where === 'subscribe'}
+            onClick={() => setWhere('subscribe')}
+          >
+            구독
+          </Tabs.Tab>
           <Tabs.Tab>알림</Tabs.Tab>
         </Tabs>
         {where === 'my' && <MyPageForm />}
         {where === 'project' && <MyProjectStudyForm />}
         {where === 'community' && <MyCommunityForm />}
+        {where === 'subscribe' && <MySubscribeForm />}
       </Container>
       <FooterForm />
     </>

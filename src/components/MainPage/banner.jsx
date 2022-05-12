@@ -1,15 +1,15 @@
 import React from 'react';
-import { Hero } from 'react-bulma-components';
+import { ReactComponent as Main } from '../../assets/svg/main.svg';
+import * as S from './style';
 
 export const BannerForm = () => {
   return (
-    <Hero color="info" size="small" style={{ marginBottom: 30, marginTop: 80 }}>
-      <Hero.Header>header</Hero.Header>
-      <Hero.Body>
-        <p className="title">title</p>
-        <p className="subtitle">sub</p>
-      </Hero.Body>
-      <Hero.Footer>footer</Hero.Footer>
-    </Hero>
+    <S.BannerBox>
+      <S.BnTextBox>
+        <S.BnMainText>좋은 프로젝트의 시작</S.BnMainText>
+        <S.BnSubText>CONNECT BRIDGE</S.BnSubText>
+      </S.BnTextBox>
+      <Main />
+    </S.BannerBox>
   );
 };

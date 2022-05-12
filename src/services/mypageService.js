@@ -1,7 +1,7 @@
 import customAxios from './customAxios';
 
-export const myGetUser = userID => {
-  return customAxios.get(`/api/my/info/${userID}`);
+export const myGetUser = () => {
+  return customAxios.get(`/api/my/info`);
 };
 
 export const myCheckNickname = userNickname => {
@@ -44,10 +44,14 @@ export const mypageUpdatePost = (
   });
 };
 
-export const myCommunityGetService = userID => {
-  return customAxios.get(`/api/mycommunity/${userID}`);
+export const myCommunityGetService = () => {
+  return customAxios.get(`/api/mycommunity`);
 };
 
 export const myCommunityDelete = communityID => {
   return customAxios.delete(`/api/community/${communityID}`);
+};
+
+export const mySubscribeGetService = () => {
+  return customAxios.get(`/api/myfollow`);
 };

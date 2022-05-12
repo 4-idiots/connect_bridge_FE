@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import customAxios from './services/customAxios';
 import App from './App';
 import './assets/custom.css';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const axiosHeader = localStorage.getItem('token');
 

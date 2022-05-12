@@ -29,7 +29,9 @@ export const NoticeUpload = ({ projectID }) => {
           />
         </Form.Control>
       </Form.Field>
-      <Button onClick={submit}>작성</Button>
+      <Button style={{ marginLeft: 20 }} onClick={submit} color="success">
+        작성
+      </Button>
     </S.NoticeUploadWrap>
   );
 };

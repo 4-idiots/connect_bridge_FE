@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React, { useState, useEffect } from 'react';
 import { Heading, Tag, Icon, Button } from 'react-bulma-components';
 import PropTypes from 'prop-types';
@@ -37,8 +38,8 @@ export const MyCmCard = ({ item, deleteAxios }) => {
           {content && <ReadOnlySlate value={content} />}
         </S.CmContentBox>
         <S.CmHashTagBox>
-          {item.hashtag.map(htag => (
-            <Tag key={htag} style={{ marginRight: 10 }}>
+          {item.hashtag.map((htag, id) => (
+            <Tag key={id} style={{ marginRight: 10 }}>
               {htag}
             </Tag>
           ))}

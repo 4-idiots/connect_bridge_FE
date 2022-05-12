@@ -130,7 +130,7 @@ export const ProjectDetailForm = () => {
                 <Button.Group align="center">
                   <Button
                     style={{ marginRight: 100 }}
-                    color="warning"
+                    color="link"
                     onClick={() => navigate(`/project/update/${projectID}`)}
                   >
                     프로젝트 수정
@@ -144,7 +144,7 @@ export const ProjectDetailForm = () => {
                     프로젝트 삭제
                   </Button>
                 </Button.Group>
-                <ApplyTab projectID={projectID} />
+                <ApplyTab projectID={projectID} member={postData.memberID} />
               </>
             )}
             {where === 'notice' && decodedToken && (

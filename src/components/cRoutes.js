@@ -45,3 +45,4 @@ export { CommunityChangeForm } from './CommunityPage/communityChange';
 export { MyPageForm } from './MyPage/myPageModule';
 export { MyProjectStudyForm } from './MyPage/myProjectStudy';
 export { MyCommunityForm } from './MyPage/myCommunity';
+export { MySubscribeForm } from './MyPage/mySubscribe';

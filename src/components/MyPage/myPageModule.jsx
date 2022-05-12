@@ -42,9 +42,9 @@ export const MyPageForm = () => {
     }
   };
 
-  const getAxios = async uid => {
+  const getAxios = async () => {
     try {
-      const result = await Send.myGetUser(uid);
+      const result = await Send.myGetUser();
       setUser(result.data);
     } catch (error) {
       console.log(error);
@@ -111,10 +111,8 @@ export const MyPageForm = () => {
   };
 
   useEffect(() => {
-    if (decodedToken) {
-      getAxios(decodedToken.id);
-    }
-  }, [decodedToken]);
+    getAxios();
+  }, []);
 
   if (user) {
     return (

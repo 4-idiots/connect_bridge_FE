@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
-import './teamStyle.scss';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,28 +11,28 @@ export const TeamCard = ({ item, cnt }) => {
     <div className="card" onClick={() => navigate(`/team/info/${item.myID}`)}>
       {cnt === 0 && (
         <img
-          src="https://i.pinimg.com/564x/88/97/ec/8897ecb27b4dbd570100c9244fa11af0.jpg"
+          src="https://cdn.discordapp.com/attachments/885739536301318169/974292656656101436/dolphin.jpeg"
           className="card__image"
           alt=""
         />
       )}
       {cnt === 1 && (
         <img
-          src="https://i.pinimg.com/564x/8d/30/eb/8d30eb3c01d82b03ec50724bc5b70737.jpg"
+          src="https://cdn.discordapp.com/attachments/885739536301318169/974292656920363048/hama.jpeg"
           className="card__image"
           alt=""
         />
       )}
       {cnt === 2 && (
         <img
-          src="https://i.pinimg.com/564x/8c/a0/b8/8ca0b805e73aacb38bd07caa6d0f1ee2.jpg"
+          src="https://cdn.discordapp.com/attachments/885739536301318169/974292657151033375/lion.jpeg"
           className="card__image"
           alt=""
         />
       )}
       {cnt === 3 && (
         <img
-          src="https://i.pinimg.com/564x/5a/0c/fb/5a0cfb1e3bdf49e6c3cd225ef3c87a06.jpg"
+          src="https://cdn.discordapp.com/attachments/885739536301318169/974292657406898206/monkey.jpeg"
           className="card__image"
           alt=""
         />

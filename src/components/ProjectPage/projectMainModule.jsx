@@ -5,24 +5,28 @@ import { SuggestCard } from './mainComponent/suggestCard';
 import * as S from './mainComponent/style';
 import { ProjectInfinite } from '../../swr/projectInfinite';
 import { projectGetNewService } from '../../services/projectService';
+import { SkelProject, SkelSuggest, SkelNew } from '../skeleton/skelRouter';
 
 export const ProjectMainForm = () => {
+  const [loading, setLoading] = useState(true);
   const [newPr, setNewPr] = useState(null);
 
   useEffect(() => {
     const getNewAxios = async () => {
+      setLoading(true);
       try {
         const result = await projectGetNewService();
         setNewPr(result.data);
+        setLoading(false);
       } catch (error) {
-        console.log(error);
+        setLoading(false);
       }
     };
 
     getNewAxios();
   }, []);
 
-  if (newPr) {
+  if (newPr && !loading) {
     return (
       <Container style={{ marginTop: 80 }}>
         <Heading>프로젝트</Heading>
@@ -61,5 +65,43 @@ export const ProjectMainForm = () => {
       </Container>
     );
   }
-  return null;
+  return (
+    <Container style={{ marginTop: 80 }}>
+      <Heading>프로젝트</Heading>
+      <Block
+        style={{
+          backgroundColor: '#fbfbfb',
+          display: 'flex',
+          paddingBottom: '30px',
+        }}
+      >
+        <S.newWrap>
+          <S.textWrap>
+            <Heading size={4} style={{ fontWeight: 'bold' }}>
+              관심 프로젝트
+            </Heading>
+          </S.textWrap>
+          <SkelNew />
+        </S.newWrap>
+        <S.suggestWrap>
+          <S.textWrap>
+            <Heading size={4} style={{ fontWeight: 'bold' }}>
+              추천 프로젝트
+            </Heading>
+          </S.textWrap>
+          {[0, 1, 2].map(item => (
+            <SkelSuggest key={item} />
+          ))}
+        </S.suggestWrap>
+      </Block>
+      <Block>
+        <Heading size={4}>전체 프로젝트</Heading>
+        <S.gridBox>
+          {[0, 1, 2, 3, 4, 5, 6, 7].map(item => (
+            <SkelProject key={item} />
+          ))}
+        </S.gridBox>
+      </Block>
+    </Container>
+  );
 };

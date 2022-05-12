@@ -6,6 +6,7 @@ import fetcher from './fetcher';
 import useOnScreen from './useOnScreen';
 import { OutdoorCardForm } from '../components/OutdoorPage/outdoorCardModule';
 import { outdoorGetAllService } from '../services/outdoorService';
+import { SkelOutdoor } from '../components/skeleton/outdoor';
 
 const getKey = (pageIndex, previousPageData) => {
   if (previousPageData && !previousPageData.length) return null;
@@ -58,7 +59,7 @@ export const OutdoorInfinite = ({ outActClick }) => {
           />
         ))}
       <div ref={ref}>
-        {isLoadingMore ? 'loading...' : isReachingEnd ? '' : ''}
+        {isLoadingMore ? <SkelOutdoor /> : isReachingEnd ? '' : ''}
       </div>
     </>
   );

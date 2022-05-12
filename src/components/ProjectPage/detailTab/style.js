@@ -37,3 +37,10 @@ export const ApplyCardText = styled.div`
 export const ApplyCardLeft = styled.div``;
 
 export const ApplyCardRight = styled.div``;
+
+export const MemberGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 3rem;
+  place-items: center;
+`;

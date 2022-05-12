@@ -15,8 +15,8 @@ export const ProjectCard = ({ item }) => {
   const { decodedToken } = useJwt(auth.token);
 
   const [isHover, setIsHover] = useState(false);
-  const [onHeart, setOnHeart] = useState(false);
   const [onRecruit, setOnRecruit] = useState(false);
+  const [onHeart, setOnHeart] = useState(false);
   const [usLike, setUsLike] = useState(true);
   const [dynLike, setDynLike] = useState(item.projectLike);
 
