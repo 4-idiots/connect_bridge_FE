@@ -7,8 +7,10 @@ import * as S from './detailComponent/style';
 import * as Send from '../../services/projectService';
 import { useAuth } from '../../contexts/hooks/useAuth';
 import { NoticeTab, ApplyTab } from './detailTab/tabRoutes';
+import * as Sk from '../skeleton/project/skprRouter';
 
 export const ProjectDetailForm = () => {
+  const [loading, setLoading] = useState(false);
   const auth = useAuth();
   const { decodedToken } = useJwt(auth.token);
   const navigate = useNavigate();
@@ -17,11 +19,13 @@ export const ProjectDetailForm = () => {
   const [postData, setPostData] = useState(null);
 
   const getAxios = async id => {
+    setLoading(true);
     try {
       const result = await Send.projectGetSomeService(id);
       setPostData(result.data);
+      setLoading(false);
     } catch (error) {
-      console.log(error);
+      setLoading(false);
     }
   };
 
@@ -51,10 +55,19 @@ export const ProjectDetailForm = () => {
     }
   };
 
-  if (postData) {
+  const stateChange = async () => {
+    try {
+      const result = await Send.projectStateService(projectID);
+      alert('상태가 변경되었습니다.');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  if (postData && !loading) {
     return (
       <Container style={{ marginTop: 80 }}>
-        {postData.projectName && <DR.DetailHeader item={postData} />}
+        <DR.DetailHeader item={postData} />
         <S.PageWrap>
           <S.PageLeft>
             <Tabs size="medium" type="boxed" style={{ marginBottom: 60 }}>
@@ -136,6 +149,17 @@ export const ProjectDetailForm = () => {
                     프로젝트 수정
                   </Button>
                   <Button
+                    style={{ marginRight: 100 }}
+                    color={postData.projectOnOff ? 'warning' : 'success'}
+                    onClick={() => {
+                      stateChange();
+                    }}
+                  >
+                    {postData.projectOnOff
+                      ? '프로젝트 비활성화'
+                      : '프로젝트 활성화'}
+                  </Button>
+                  <Button
                     color="danger"
                     onClick={() => {
                       deleteAxios(projectID);
@@ -159,5 +183,25 @@ export const ProjectDetailForm = () => {
       </Container>
     );
   }
-  return null;
+  return (
+    <Container style={{ marginTop: 80 }}>
+      <Sk.SkelHeader />
+      <S.PageWrap>
+        <S.PageLeft>
+          <Sk.SkelTabs />
+          <S.LeftDetail>
+            <Sk.SkelRecruit />
+            <Sk.SkelPlatform />
+            <Sk.SkelContent />
+            <Sk.SkelSkill />
+            <Sk.SkelReference />
+            <Sk.SkelTeam />
+          </S.LeftDetail>
+          {where === 'notice' && <Sk.SkelNotice />}
+          {where === 'apply' && <Sk.SkelApply />}
+        </S.PageLeft>
+        <Sk.SkelRightCard />
+      </S.PageWrap>
+    </Container>
+  );
 };

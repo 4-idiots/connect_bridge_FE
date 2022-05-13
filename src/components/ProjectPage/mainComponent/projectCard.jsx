@@ -26,7 +26,6 @@ export const ProjectCard = ({ item }) => {
       setUsLike(result.data);
     } catch (error) {
       setUsLike(false);
-      console.log(error);
     }
   };
 

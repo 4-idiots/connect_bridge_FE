@@ -7,22 +7,13 @@ import { useNavigate } from 'react-router-dom';
 import * as Send from '../../../services/projectService';
 import { getKrField } from './getKrField';
 
-export const ApplyCard = ({ item, projectID, cnt }) => {
+export const ApplyMemCard = ({ item, projectID, cnt }) => {
   const navigate = useNavigate();
   const [field, setField] = useState('');
-  const onYes = async () => {
-    try {
-      const result = await Send.projectYesService(projectID, item.submitID);
-      alert('승인 되었습니다.');
-      window.location.replace(`/project/${projectID}`);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const onNo = async () => {
     try {
-      const result = await Send.projectNoService(projectID, item.submitID);
+      const result = await Send.projectOutService(projectID, item.memberID);
       alert('거절 되었습니다.');
       window.location.replace(`/project/${projectID}`);
     } catch (error) {
@@ -31,22 +22,17 @@ export const ApplyCard = ({ item, projectID, cnt }) => {
   };
 
   useEffect(() => {
-    setField(getKrField(item.field));
+    setField(getKrField(item.memberField));
   }, []);
 
   return (
     <div className="card">
       <div style={{ position: 'absolute', top: '0.5rem', right: '1rem' }}>
-        <B.Button.Group>
-          <B.Button onClick={onYes} color="success">
-            승인
-          </B.Button>
-          <B.Button onClick={onNo} color="danger">
-            거절
-          </B.Button>
-        </B.Button.Group>
+        <B.Button onClick={onNo} color="danger">
+          방출하기
+        </B.Button>
       </div>
-      <div onClick={() => navigate(`/team/info/${item.userID}`)}>
+      <div onClick={() => navigate(`/team/info/${item.memberID}`)}>
         {cnt === 0 && (
           <img
             src="https://cdn.discordapp.com/attachments/885739536301318169/974292656656101436/dolphin.jpeg"
@@ -78,15 +64,15 @@ export const ApplyCard = ({ item, projectID, cnt }) => {
       </div>
       <div
         className="card__overlay"
-        onClick={() => navigate(`/team/info/${item.userID}`)}
+        onClick={() => navigate(`/team/info/${item.memberID}`)}
       >
         <div className="card__header">
           <svg className="card__arc" xmlns="http://www.w3.org/2000/svg">
             <path />
           </svg>
-          <img className="card__thumb" src={item.img} alt="" />
+          <img className="card__thumb" src={item.memberImg} alt="" />
           <div className="card__header-text">
-            <h3 className="card__title">{item.nickname}</h3>
+            <h3 className="card__title">{item.memberName}</h3>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <span style={{ marginBottom: 4 }} className="card__status">
                 지원 분야: {field}
@@ -94,13 +80,13 @@ export const ApplyCard = ({ item, projectID, cnt }) => {
             </div>
           </div>
         </div>
-        <p className="card__description">{item.introduce}</p>
+        <p className="card__description">{item.memberIntroduce}</p>
       </div>
     </div>
   );
 };
 
-ApplyCard.propTypes = {
+ApplyMemCard.propTypes = {
   item: PropTypes.objectOf(PropTypes.any).isRequired,
   projectID: PropTypes.string.isRequired,
   cnt: PropTypes.number.isRequired,

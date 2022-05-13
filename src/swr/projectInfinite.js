@@ -5,6 +5,7 @@ import fetcher from './fetcher';
 import useOnScreen from './useOnScreen';
 import { ProjectCard } from '../components/ProjectPage/mainComponent/projectCard';
 import { projectGetAllService } from '../services/projectService';
+import { SkelProject } from '../components/skeleton/project';
 
 const getKey = (pageIndex, previousPageData) => {
   if (previousPageData && !previousPageData.length) return null;
@@ -41,7 +42,7 @@ export const ProjectInfinite = () => {
       {issues &&
         issues.map(item => <ProjectCard key={item.projectID} item={item} />)}
       <div ref={ref}>
-        {isLoadingMore ? 'loading...' : isReachingEnd ? '' : ''}
+        {isLoadingMore ? <SkelProject /> : isReachingEnd ? '' : ''}
       </div>
     </>
   );

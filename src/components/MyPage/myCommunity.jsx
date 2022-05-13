@@ -2,16 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { Heading } from 'react-bulma-components';
 import * as Send from '../../services/mypageService';
 import { MyCmCard } from './community/myCmCard';
+import { SkelCommunity } from '../skeleton/mypage/mypageRouter';
 
 export const MyCommunityForm = () => {
+  const [loading, setLoading] = useState(false);
   const [community, setCommunity] = useState(null);
 
   const getAxios = async () => {
+    setLoading(true);
     try {
       const result = await Send.myCommunityGetService();
       setCommunity(result.data);
+      setLoading(false);
     } catch (error) {
-      console.log(error);
+      setLoading(false);
     }
   };
 
@@ -29,7 +33,7 @@ export const MyCommunityForm = () => {
     getAxios();
   }, []);
 
-  if (community) {
+  if (community && !loading) {
     return (
       <>
         <Heading size={4}>작성한 글</Heading>
@@ -40,5 +44,12 @@ export const MyCommunityForm = () => {
       </>
     );
   }
-  return null;
+  return (
+    <>
+      <Heading size={4}>작성한 글</Heading>
+      <SkelCommunity />
+      <SkelCommunity />
+      <SkelCommunity />
+    </>
+  );
 };

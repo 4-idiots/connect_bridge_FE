@@ -67,3 +67,11 @@ export const projectYesService = (projectID, submitID) => {
 export const projectNoService = (projectID, submitID) => {
   return customAxios.get(`/api/project/${projectID}/reject/${submitID}`);
 };
+
+export const projectStateService = projectID => {
+  return customAxios.patch(`/api/${projectID}/manage/end`);
+};
+
+export const projectOutService = (projectID, memberID) => {
+  return customAxios.get(`/api/${projectID}/manage/fire/${memberID}`);
+};

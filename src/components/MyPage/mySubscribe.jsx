@@ -7,6 +7,7 @@ import { TeamCard } from '../MainPage/mainCard/teamCard';
 import { CommunityCard } from '../MainPage/mainCard/comCard';
 import { OutdoorCardForm } from '../OutdoorPage/outdoorCardModule';
 import { OutdoorModalForm } from '../OutdoorPage/outdoorModalModule';
+import { SkelSubscribe } from '../skeleton/mypage/subscribe';
 
 export const MySubscribeForm = () => {
   const [loading, setLoading] = useState(false);
@@ -24,21 +25,22 @@ export const MySubscribeForm = () => {
     });
   };
 
+  const getAxios = async () => {
+    setLoading(true);
+    try {
+      const result = await mySubscribeGetService();
+      setSubData(result.data);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const getAxios = async () => {
-      setLoading(true);
-      try {
-        const result = await mySubscribeGetService();
-        setSubData(result.data);
-        setLoading(false);
-        console.log(result.data);
-      } catch (error) {
-        console.log(error);
-        setLoading(false);
-      }
-    };
     getAxios();
   }, []);
+
+  useEffect(() => {}, []);
 
   if (subData && !loading) {
     return (
@@ -101,5 +103,5 @@ export const MySubscribeForm = () => {
       </>
     );
   }
-  return null;
+  return <SkelSubscribe />;
 };

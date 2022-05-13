@@ -55,7 +55,7 @@ export const InfoForm = () => {
 
   const likeClick = () => {
     if (follow === 1) {
-      customAxios.get(`/api/follow/${teamID}`).then(response => {
+      customAxios.get(`/api/follow?toUserId=${teamID}`).then(response => {
         console.log(teamID);
         console.log(response.data.follow);
       });

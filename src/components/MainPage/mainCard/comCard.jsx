@@ -8,6 +8,10 @@ import { useNavigate } from 'react-router-dom';
 import { useJwt } from 'react-jwt';
 import { ReactComponent as Heart } from '../../../assets/svg/heart.svg';
 import { useAuth } from '../../../contexts/hooks/useAuth';
+import {
+  communityLikeCheck,
+  communityLike,
+} from '../../../services/mainService';
 
 export const CommunityCard = ({ item }) => {
   const navigate = useNavigate();
@@ -15,9 +19,17 @@ export const CommunityCard = ({ item }) => {
   const [onHeart, setOnHeart] = useState(false);
   const [usLike, setUsLike] = useState(true);
   const [dynLike, setDynLike] = useState(item.likeCount);
-
   const auth = useAuth();
   const { decodedToken } = useJwt(auth.token);
+
+  const checkLike = async () => {
+    try {
+      const result = await communityLikeCheck(item.postID);
+      setUsLike(result.data);
+    } catch (error) {
+      setUsLike(false);
+    }
+  };
 
   const handleLike = async () => {
     if (usLike) {
@@ -26,11 +38,11 @@ export const CommunityCard = ({ item }) => {
       setDynLike(dynLike + 1);
     }
     setUsLike(!usLike);
-    // try {
-    //   const result = await Send.projectLikeService(item.projectID);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      const result = await communityLike(item.postID);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const getAll = () => {
@@ -46,6 +58,7 @@ export const CommunityCard = ({ item }) => {
 
   useEffect(() => {
     getAll();
+    checkLike();
   }, []);
 
   return (

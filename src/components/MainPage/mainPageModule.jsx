@@ -16,6 +16,7 @@ export const MainPageForm = () => {
     try {
       const result = await getMainService();
       setMain(result.data);
+      console.log(result.data);
       setLoading(false);
     } catch (error) {
       setLoading(false);

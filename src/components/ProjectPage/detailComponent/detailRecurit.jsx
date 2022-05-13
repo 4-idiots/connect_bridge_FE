@@ -23,7 +23,7 @@ export const DetailRecurit = ({ item, apply, projectID }) => {
               <S.StatusSmallP>
                 {item.uiuxPlanNow} / {item.uiuxPlan}
               </S.StatusSmallP>
-              {decodedToken && (
+              {decodedToken && item.projectOnOff && (
                 <>
                   {item.uiuxPlanNow !== 0 ? (
                     <>
@@ -62,7 +62,7 @@ export const DetailRecurit = ({ item, apply, projectID }) => {
               <S.StatusSmallP>
                 {item.gamePlanNow} / {item.gamePlan}
               </S.StatusSmallP>
-              {decodedToken && (
+              {decodedToken && item.projectOnOff && (
                 <>
                   {item.gamePlanNow !== 0 ? (
                     <>
@@ -101,7 +101,7 @@ export const DetailRecurit = ({ item, apply, projectID }) => {
               <S.StatusSmallP>
                 {item.managerPlanNow} / {item.managerPlan}
               </S.StatusSmallP>
-              {decodedToken && (
+              {decodedToken && item.projectOnOff && (
                 <>
                   {item.managerPlanNow !== 0 ? (
                     <>
@@ -140,7 +140,7 @@ export const DetailRecurit = ({ item, apply, projectID }) => {
               <S.StatusSmallP>
                 {item.hwPlanNow} / {item.hwPlan}
               </S.StatusSmallP>
-              {decodedToken && (
+              {decodedToken && item.projectOnOff && (
                 <>
                   {item.hwPlanNow !== 0 ? (
                     <>
@@ -179,7 +179,7 @@ export const DetailRecurit = ({ item, apply, projectID }) => {
               <S.StatusSmallP>
                 {item.iosFrNow} / {item.iosFr}
               </S.StatusSmallP>
-              {decodedToken && (
+              {decodedToken && item.projectOnOff && (
                 <>
                   {item.iosFrNow !== 0 ? (
                     <>
@@ -218,7 +218,7 @@ export const DetailRecurit = ({ item, apply, projectID }) => {
               <S.StatusSmallP>
                 {item.androidFrNow} / {item.androidFr}
               </S.StatusSmallP>
-              {decodedToken && (
+              {decodedToken && item.projectOnOff && (
                 <>
                   {item.androidFrNow !== 0 ? (
                     <>
@@ -257,7 +257,7 @@ export const DetailRecurit = ({ item, apply, projectID }) => {
               <S.StatusSmallP>
                 {item.webFrontFrNow} / {item.webFrontFr}
               </S.StatusSmallP>
-              {decodedToken && (
+              {decodedToken && item.projectOnOff && (
                 <>
                   {item.webFrontFrNow !== 0 ? (
                     <>
@@ -296,7 +296,7 @@ export const DetailRecurit = ({ item, apply, projectID }) => {
               <S.StatusSmallP>
                 {item.webPublicFrNow} / {item.webPublicFr}
               </S.StatusSmallP>
-              {decodedToken && (
+              {decodedToken && item.projectOnOff && (
                 <>
                   {item.webPublicFrNow !== 0 ? (
                     <>
@@ -335,7 +335,7 @@ export const DetailRecurit = ({ item, apply, projectID }) => {
               <S.StatusSmallP>
                 {item.crossFrNow} / {item.crossFr}
               </S.StatusSmallP>
-              {decodedToken && (
+              {decodedToken && item.projectOnOff && (
                 <>
                   {item.crossFrNow !== 0 ? (
                     <>
@@ -374,7 +374,7 @@ export const DetailRecurit = ({ item, apply, projectID }) => {
               <S.StatusSmallP>
                 {item.graphicDeNow} / {item.graphicDe}
               </S.StatusSmallP>
-              {decodedToken && (
+              {decodedToken && item.projectOnOff && (
                 <>
                   {item.graphicDeNow !== 0 ? (
                     <>
@@ -413,7 +413,7 @@ export const DetailRecurit = ({ item, apply, projectID }) => {
               <S.StatusSmallP>
                 {item.uiuxDeNow} / {item.uiuxDe}
               </S.StatusSmallP>
-              {decodedToken && (
+              {decodedToken && item.projectOnOff && (
                 <>
                   {item.uiuxDeNow !== 0 ? (
                     <>
@@ -452,7 +452,7 @@ export const DetailRecurit = ({ item, apply, projectID }) => {
               <S.StatusSmallP>
                 {item.thrdDeNow} / {item.thrdDe}
               </S.StatusSmallP>
-              {decodedToken && (
+              {decodedToken && item.projectOnOff && (
                 <>
                   {item.thrdDeNow !== 0 ? (
                     <>
@@ -491,7 +491,7 @@ export const DetailRecurit = ({ item, apply, projectID }) => {
               <S.StatusSmallP>
                 {item.hwDeNow} / {item.hwDe}
               </S.StatusSmallP>
-              {decodedToken && (
+              {decodedToken && item.projectOnOff && (
                 <>
                   {item.hwDeNow !== 0 ? (
                     <>
@@ -530,7 +530,7 @@ export const DetailRecurit = ({ item, apply, projectID }) => {
               <S.StatusSmallP>
                 {item.etcDeNow} / {item.etcDe}
               </S.StatusSmallP>
-              {decodedToken && (
+              {decodedToken && item.projectOnOff && (
                 <>
                   {item.etcDeNow !== 0 ? (
                     <>
@@ -569,7 +569,7 @@ export const DetailRecurit = ({ item, apply, projectID }) => {
               <S.StatusSmallP>
                 {item.webBkNow} / {item.webBk}
               </S.StatusSmallP>
-              {decodedToken && (
+              {decodedToken && item.projectOnOff && (
                 <>
                   {item.webBkNow !== 0 ? (
                     <>
@@ -608,7 +608,7 @@ export const DetailRecurit = ({ item, apply, projectID }) => {
               <S.StatusSmallP>
                 {item.blchBkNow} / {item.blchBk}
               </S.StatusSmallP>
-              {decodedToken && (
+              {decodedToken && item.projectOnOff && (
                 <>
                   {item.blchBkNow !== 0 ? (
                     <>
@@ -647,7 +647,7 @@ export const DetailRecurit = ({ item, apply, projectID }) => {
               <S.StatusSmallP>
                 {item.aiBkNow} / {item.aiBk}
               </S.StatusSmallP>
-              {decodedToken && (
+              {decodedToken && item.projectOnOff && (
                 <>
                   {item.aiBkNow !== 0 ? (
                     <>
@@ -686,7 +686,7 @@ export const DetailRecurit = ({ item, apply, projectID }) => {
               <S.StatusSmallP>
                 {item.dsBkNow} / {item.dsBk}
               </S.StatusSmallP>
-              {decodedToken && (
+              {decodedToken && item.projectOnOff && (
                 <>
                   {item.dsBkNow !== 0 ? (
                     <>
@@ -725,7 +725,7 @@ export const DetailRecurit = ({ item, apply, projectID }) => {
               <S.StatusSmallP>
                 {item.gameBkNow} / {item.gameBk}
               </S.StatusSmallP>
-              {decodedToken && (
+              {decodedToken && item.projectOnOff && (
                 <>
                   {item.gameBkNow !== 0 ? (
                     <>
@@ -764,7 +764,7 @@ export const DetailRecurit = ({ item, apply, projectID }) => {
               <S.StatusSmallP>
                 {item.planBuNow} / {item.planBu}
               </S.StatusSmallP>
-              {decodedToken && (
+              {decodedToken && item.projectOnOff && (
                 <>
                   {item.planBuNow !== 0 ? (
                     <>
@@ -803,7 +803,7 @@ export const DetailRecurit = ({ item, apply, projectID }) => {
               <S.StatusSmallP>
                 {item.marketingBuNow} / {item.marketingBu}
               </S.StatusSmallP>
-              {decodedToken && (
+              {decodedToken && item.projectOnOff && (
                 <>
                   {item.marketingBuNow !== 0 ? (
                     <>
@@ -842,7 +842,7 @@ export const DetailRecurit = ({ item, apply, projectID }) => {
               <S.StatusSmallP>
                 {item.financeBuNow} / {item.financeBu}
               </S.StatusSmallP>
-              {decodedToken && (
+              {decodedToken && item.projectOnOff && (
                 <>
                   {item.financeBuNow !== 0 ? (
                     <>
@@ -881,7 +881,7 @@ export const DetailRecurit = ({ item, apply, projectID }) => {
               <S.StatusSmallP>
                 {item.salesBuNow} / {item.salesBu}
               </S.StatusSmallP>
-              {decodedToken && (
+              {decodedToken && item.projectOnOff && (
                 <>
                   {item.salesBuNow !== 0 ? (
                     <>
@@ -920,7 +920,7 @@ export const DetailRecurit = ({ item, apply, projectID }) => {
               <S.StatusSmallP>
                 {item.consultBuNow} / {item.consultBu}
               </S.StatusSmallP>
-              {decodedToken && (
+              {decodedToken && item.projectOnOff && (
                 <>
                   {item.consultBuNow !== 0 ? (
                     <>
@@ -959,7 +959,7 @@ export const DetailRecurit = ({ item, apply, projectID }) => {
               <S.StatusSmallP>
                 {item.investBuNow} / {item.investBu}
               </S.StatusSmallP>
-              {decodedToken && (
+              {decodedToken && item.projectOnOff && (
                 <>
                   {item.investBuNow !== 0 ? (
                     <>
@@ -998,7 +998,7 @@ export const DetailRecurit = ({ item, apply, projectID }) => {
               <S.StatusSmallP>
                 {item.etcBuNow} / {item.etcBu}
               </S.StatusSmallP>
-              {decodedToken && (
+              {decodedToken && item.projectOnOff && (
                 <>
                   {item.etcBuNow !== 0 ? (
                     <>
@@ -1037,7 +1037,7 @@ export const DetailRecurit = ({ item, apply, projectID }) => {
               <S.StatusSmallP>
                 {item.blogEtcNow} / {item.blogEtc}
               </S.StatusSmallP>
-              {decodedToken && (
+              {decodedToken && item.projectOnOff && (
                 <>
                   {item.blogEtcNow !== 0 ? (
                     <>
@@ -1076,7 +1076,7 @@ export const DetailRecurit = ({ item, apply, projectID }) => {
               <S.StatusSmallP>
                 {item.influEtcNow} / {item.influEtc}
               </S.StatusSmallP>
-              {decodedToken && (
+              {decodedToken && item.projectOnOff && (
                 <>
                   {item.influEtcNow !== 0 ? (
                     <>
@@ -1115,7 +1115,7 @@ export const DetailRecurit = ({ item, apply, projectID }) => {
               <S.StatusSmallP>
                 {item.compEtcNow} / {item.compEtc}
               </S.StatusSmallP>
-              {decodedToken && (
+              {decodedToken && item.projectOnOff && (
                 <>
                   {item.compEtcNow !== 0 ? (
                     <>

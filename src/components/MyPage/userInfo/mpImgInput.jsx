@@ -33,7 +33,7 @@ export const MyPageImg = ({ setUser, user, setCheck, check }) => {
             name="imgSrc"
             onChange={e => encodeFileToBase64(e.target.files[0])}
             accept="img/*"
-            label="대표 이미지 올리기"
+            label="프로필 사진 변경"
             color="info"
             boxed
             size="small"

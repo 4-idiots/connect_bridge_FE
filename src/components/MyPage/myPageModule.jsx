@@ -6,11 +6,13 @@ import { MyPageInput, MyPageSelect, MyPageImg } from './userInfo/infoRoute';
 import * as S from './userInfo/style';
 import * as Send from '../../services/mypageService';
 import { useAuth } from '../../contexts/hooks/useAuth';
+import { SkelInfo } from '../skeleton/mypage/mypageRouter';
 
 export const MyPageForm = () => {
   const auth = useAuth();
   const { decodedToken } = useJwt(auth.token);
 
+  const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(null);
   const [pwInfo, setPwInfo] = useState({ userPW: '', pwCheck: '' });
   const [check, setCheck] = useState({
@@ -43,11 +45,14 @@ export const MyPageForm = () => {
   };
 
   const getAxios = async () => {
+    setLoading(true);
     try {
       const result = await Send.myGetUser();
       setUser(result.data);
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 
@@ -246,5 +251,5 @@ export const MyPageForm = () => {
       </>
     );
   }
-  return null;
+  return <SkelInfo />;
 };
