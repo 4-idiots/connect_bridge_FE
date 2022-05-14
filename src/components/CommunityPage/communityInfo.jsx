@@ -83,17 +83,19 @@ export const CommunityInfoForm = () => {
 
   const likesClick = () => {
     if (state === 1) {
-      customAxios.get(`/api/community/like/${communityID}`).then(response => {
-        console.log(communityID);
-        console.log(response.data.state);
-      });
+      customAxios
+        .get(`/api/community/like?toPostId=${communityID}`)
+        .then(response => {
+          console.log(communityID);
+          console.log(response.data.state);
+        });
       // eslint-disable-next-line no-unused-expressions
       color === 'black'
         ? setlikeCounta(likeCount + 1) || setColor('danger')
         : setlikeCounta(likeCount - 1) || setColor('black');
     } else if (state === 2)
       customAxios
-        .delete(`/api/community/like/${communityID}`)
+        .get(`/api/community/like?toPostId=${communityID}`)
         .then(response => {
           console.log(communityID);
           console.log(response.data.state);

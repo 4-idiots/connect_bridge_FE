@@ -63,7 +63,7 @@ export const InfoForm = () => {
       color === 'black' ? setColor('danger') : setColor('black');
       // eslint-disable-next-line no-unused-expressions
     } else if (follow === 2)
-      customAxios.delete(`/api/follow/${teamID}`).then(response => {
+      customAxios.get(`/api/follow?toUserId=${teamID}`).then(response => {
         console.log(teamID);
         console.log(response.data.follow);
       });
