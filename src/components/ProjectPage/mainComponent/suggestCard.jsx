@@ -9,6 +9,7 @@ import { RecruitModal } from './recruitModal';
 export const SuggestCard = ({ item }) => {
   const navigate = useNavigate();
   const [onRecruit, setOnRecruit] = useState(false);
+
   return (
     <S.suggestCardContainer
       onClick={() => navigate(`/project/${item.projectID}`)}

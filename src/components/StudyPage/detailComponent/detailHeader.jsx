@@ -3,12 +3,7 @@ import PropTypes from 'prop-types';
 import { Heading, Tag } from 'react-bulma-components';
 import * as S from './style';
 
-export const DetailHeader = ({
-  studyName,
-  leaderImg,
-  leaderName,
-  studyOnOff,
-}) => {
+export const DetailHeader = ({ item }) => {
   return (
     <S.HeaderWrap>
       <S.HeaderContent>
@@ -17,22 +12,26 @@ export const DetailHeader = ({
           size={4}
           style={{ fontWeight: 'bold', fontSize: 38, margin: 24 }}
         >
-          {studyName}
+          {item.studyName}
         </Heading>
         <S.LeaderWrap>
-          <S.LeaderImg src={leaderImg} />
-          <S.LeaderName>{leaderName}</S.LeaderName>
+          <S.LeaderImg src={item.leaderImg} />
+          <S.LeaderName>{item.leaderName}</S.LeaderName>
         </S.LeaderWrap>
         <S.StatusBox>
           <Tag
             color="info"
             rounded
             style={{ marginRight: 10 }}
-            className={studyOnOff ? '' : 'is-light'}
+            className={item.studyOnOff ? '' : 'is-light'}
           >
             모집 중
           </Tag>
-          <Tag color="info" rounded className={studyOnOff ? 'is-light' : ''}>
+          <Tag
+            color="info"
+            rounded
+            className={item.studyOnOff ? 'is-light' : ''}
+          >
             진행 중
           </Tag>
         </S.StatusBox>
@@ -42,8 +41,5 @@ export const DetailHeader = ({
 };
 
 DetailHeader.propTypes = {
-  studyName: PropTypes.string.isRequired,
-  leaderImg: PropTypes.string.isRequired,
-  leaderName: PropTypes.string.isRequired,
-  studyOnOff: PropTypes.bool.isRequired,
+  item: PropTypes.objectOf(PropTypes.any).isRequired,
 };

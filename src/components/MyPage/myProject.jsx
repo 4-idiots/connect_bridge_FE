@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Heading } from 'react-bulma-components';
 import * as S from './projectStudy/style';
 
-export const MyProjectStudyForm = () => {
-  const [project, setProject] = useState({});
+export const MyProjectForm = () => {
+  const [project, setProject] = useState(null);
 
   return (
     <>

@@ -1,48 +1,60 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Icon } from 'react-bulma-components';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as S from './style';
-import { ReactComponent as Heart } from '../../../assets/svg/heart.svg';
 import ReadOnlySlate from '../../../SlateEditor/ReadOnly';
+import { RecruitModal } from './recruitModal';
 
-export const SuggestCard = () => {
+export const SuggestCard = ({ item }) => {
+  const navigate = useNavigate();
+  const [onRecruit, setOnRecruit] = useState(false);
+
   return (
-    <S.suggestCardContainer>
+    <S.suggestCardContainer onClick={() => navigate(`/study/${item.studyID}`)}>
       <S.suggestBox>
-        <S.suggestImg src="https://letspl.s3.ap-northeast-2.amazonaws.com/images/project_thumb_05.png" />
+        <S.suggestImg src={item.studyImg} />
         <S.suggestInfo>
           <S.suggestTop>
-            <S.suggestName>스마트팜교육메타버스아바타챗봇</S.suggestName>
+            <S.suggestName>{item.studyName}</S.suggestName>
             <S.suggestIconWrap>
-              <S.suggestHeart>
-                <Icon>
-                  <Heart fill="rgb(255,192,203)" />
-                </Icon>
-              </S.suggestHeart>
-              <span>23</span>
+              <Icon>
+                <i className="fas fa-heart" />
+              </Icon>
+              <span style={{ margin: '0 10px 0 2px' }}>{item.studyLike}</span>
+              <Icon>
+                <i className="fas fa-eye" />
+              </Icon>
+              <span style={{ marginLeft: 2 }}>{item.studyView}</span>
             </S.suggestIconWrap>
           </S.suggestTop>
-
           <S.suggestMid>
-            <ReadOnlySlate
-              value={[
-                {
-                  type: 'paragaph',
-                  children: [
-                    {
-                      text: '프로젝트를 소 개 하자면....asdasd',
-                    },
-                  ],
-                },
-              ]}
-            />
+            <ReadOnlySlate value={item.content} />
           </S.suggestMid>
           <S.suggestBottom>
-            <S.newRecruit>[모집]UI/UX디자인</S.newRecruit>
+            <S.newEveBox
+              onMouseEnter={() => {
+                setOnRecruit(true);
+              }}
+              onMouseLeave={() => {
+                setOnRecruit(false);
+              }}
+            >
+              <S.newreBox>
+                모집현황
+                <Icon>
+                  <i className="fas fa-arrow-up" />
+                </Icon>
+              </S.newreBox>
+              {onRecruit ? <RecruitModal item={item} /> : ''}
+            </S.newEveBox>
           </S.suggestBottom>
         </S.suggestInfo>
       </S.suggestBox>
     </S.suggestCardContainer>
   );
+};
+
+SuggestCard.propTypes = {
+  item: PropTypes.objectOf(PropTypes.any).isRequired,
 };

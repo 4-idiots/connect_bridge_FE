@@ -3,32 +3,23 @@ import { Icon } from 'react-bulma-components';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as S from './style';
-import { ReactComponent as Heart } from '../../../assets/svg/heart.svg';
 import ReadOnlySlate from '../../../SlateEditor/ReadOnly';
+import { RecruitModal } from './recruitModal';
 
-export const NewCard = ({
-  prType,
-  isLike,
-  thumbnail,
-  prField,
-  prTitle,
-  prLike,
-  prView,
-  prTotal,
-  prUserID,
-  prID,
-  prContent,
-}) => {
-  const [content, setContent] = useState();
+export const NewCard = ({ item }) => {
+  const navigate = useNavigate();
+  const [stContent, setStContent] = useState(null);
+  const [onRecruit, setOnRecruit] = useState(false);
+
   const getAll = () => {
     let te = '';
-    prContent.map(item => {
-      return item.children.map(info => {
+    item.content.map(text => {
+      return text.children.map(info => {
         // eslint-disable-next-line no-return-assign
         return (te = te.concat(' ', info.text));
       });
     });
-    setContent([
+    setStContent([
       {
         type: 'paragaph',
         children: [{ text: te }],
@@ -41,30 +32,52 @@ export const NewCard = ({
   }, []);
 
   return (
-    <S.newCardContainer>
+    <S.newCardContainer onClick={() => navigate(`/study/${item.studyID}`)}>
       <S.newImg>
         <img
-          src="https://letspl.s3.ap-northeast-2.amazonaws.com/images/project_thumb_05.png"
+          src={item.studyImg}
           alt="test"
-          style={{ borderRadius: '3%', objectFit: 'cover' }}
+          style={{
+            borderRadius: '3%',
+            objectFit: 'cover',
+            width: '516px',
+            height: '230px',
+          }}
         />
       </S.newImg>
       <S.newBottom>
-        <S.newField>O2O</S.newField>
-        <S.newName>땡처리 서비스 개발</S.newName>
+        <S.newField>{item.studyField}</S.newField>
+        <S.newName>{item.studyName}</S.newName>
         <div style={{ width: '500px', overflow: 'hidden', height: '28px' }}>
-          {content && <ReadOnlySlate value={content} />}
+          {stContent && <ReadOnlySlate value={stContent} />}
         </div>
         <S.newInfoBox>
-          <S.heartWrap>
-            <S.newHeart>
+          <S.newEveBox
+            onMouseEnter={() => {
+              setOnRecruit(true);
+            }}
+            onMouseLeave={() => {
+              setOnRecruit(false);
+            }}
+          >
+            <S.newreBox>
+              모집현황
               <Icon>
-                <Heart fill="rgb(128,128,128)" />
+                <i className="fas fa-arrow-up" />
               </Icon>
-            </S.newHeart>
-            <span>{prView}</span>
-          </S.heartWrap>
-          <S.newRecruit>모집완료</S.newRecruit>
+            </S.newreBox>
+            {onRecruit ? <RecruitModal item={item} /> : ''}
+          </S.newEveBox>
+          <S.newIconBox>
+            <Icon>
+              <i className="fas fa-heart" />
+              <span style={{ marginLeft: 4 }}>{item.studyLike}</span>
+            </Icon>
+            <Icon>
+              <i className="fas fa-eye" />
+              <span style={{ marginLeft: 4 }}>{item.studyView}</span>
+            </Icon>
+          </S.newIconBox>
         </S.newInfoBox>
       </S.newBottom>
     </S.newCardContainer>
@@ -72,15 +85,5 @@ export const NewCard = ({
 };
 
 NewCard.propTypes = {
-  prType: PropTypes.bool.isRequired,
-  isLike: PropTypes.bool.isRequired,
-  thumbnail: PropTypes.string.isRequired,
-  prField: PropTypes.string.isRequired,
-  prTitle: PropTypes.string.isRequired,
-  prLike: PropTypes.number.isRequired,
-  prView: PropTypes.number.isRequired,
-  prTotal: PropTypes.arrayOf(PropTypes.object).isRequired,
-  prUserID: PropTypes.number.isRequired,
-  prContent: PropTypes.arrayOf(PropTypes.any).isRequired,
-  prID: PropTypes.number.isRequired,
+  item: PropTypes.objectOf(PropTypes.any).isRequired,
 };

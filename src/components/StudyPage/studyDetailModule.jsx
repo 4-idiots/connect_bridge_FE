@@ -1,43 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Container, Heading } from 'react-bulma-components';
+import { Container, Heading, Tabs, Button } from 'react-bulma-components';
 import { useJwt } from 'react-jwt';
-import {
-  DetailRecruit,
-  DetailHeader,
-  DetailContent,
-  DetailKeyward,
-  DetailRightCard,
-  DetailCommentLog,
-  DetailCommentInput,
-} from './detailComponent/detailRoute';
+import * as DR from './detailComponent/detailRoute';
 import * as S from '../ProjectPage/detailComponent/style';
 import * as Send from '../../services/studyService';
 import { useAuth } from '../../contexts/hooks/useAuth';
+import { NoticeTab, ApplyTab } from './detailTab/tabRoutes';
 
 export const StudyDetailForm = () => {
+  const [loading, setLoading] = useState(false);
   const auth = useAuth();
-  const { decodedToken, isExpired } = useJwt(auth.token);
+  const { decodedToken } = useJwt(auth.token);
   const navigate = useNavigate();
 
   const { studyID } = useParams();
   const [study, setStudy] = useState(null);
-  const [isInfo, setIsInfo] = useState(true);
   const [comment, setComment] = useState('');
+  const [where, setWhere] = useState('info');
 
-  const getAxios = async id => {
+  const applyService = async (stid, field) => {
     try {
-      const result = await Send.studyGetSomeService(id);
-      console.log(result.data);
-      setStudy(result.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const applyService = async (stid, uid, field) => {
-    try {
-      const result = await Send.studyApplyService(stid, uid, field);
+      const result = await Send.studyApplyService(stid, field);
       alert('정상적으로 신청이 되었습니다.');
     } catch (error) {
       alert('이미 신청하셨습니다.');
@@ -54,79 +38,134 @@ export const StudyDetailForm = () => {
     }
   };
 
+  const stateChange = async () => {
+    try {
+      const result = await Send.studyStateService(studyID);
+      alert('상태가 변경되었습니다.');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
+    const getAxios = async id => {
+      setLoading(true);
+      try {
+        const result = await Send.studyGetSomeService(id);
+        setStudy(result.data);
+        console.log(result.data);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+      }
+    };
+
     getAxios(studyID);
   }, []);
 
-  if (study) {
+  if (study && !loading) {
     return (
       <Container style={{ marginTop: 80 }}>
-        <DetailHeader
-          studyOnOff={study.studyOnOff}
-          studyName={study.studyName}
-          leaderImg="https://letspl.s3.ap-northeast-2.amazonaws.com/images/project_thumb_05.png"
-          leaderName="name"
-        />
+        <DR.DetailHeader item={study} />
         <S.PageWrap>
           <S.PageLeft>
-            <S.LeftTab>
-              <S.TalUl>
-                <S.TabLi onClick={() => setIsInfo(true)}>정보</S.TabLi>
-                <S.TabLi onClick={() => setIsInfo(false)}>질문</S.TabLi>
-              </S.TalUl>
-              {decodedToken && study.userID === decodedToken.id ? (
-                <S.TalUl>
-                  <S.TabUpdate
-                    onClick={() => navigate(`/study/update/${studyID}`)}
-                  >
-                    수정
-                  </S.TabUpdate>
-                  <S.TabUpdate
-                    onClick={() => {
-                      deleteAxios(studyID);
-                    }}
-                  >
-                    삭제
-                  </S.TabUpdate>
-                </S.TalUl>
+            <Tabs size="medium" type="boxed" style={{ marginBottom: 60 }}>
+              <Tabs.Tab
+                active={where === 'info'}
+                onClick={() => setWhere('info')}
+              >
+                정보
+              </Tabs.Tab>
+              <Tabs.Tab
+                active={where === 'qna'}
+                onClick={() => setWhere('qna')}
+              >
+                질문
+              </Tabs.Tab>
+              {(study.memberList &&
+                decodedToken &&
+                study.memberList.includes(decodedToken.id)) ||
+              (decodedToken && study.userID === decodedToken.id) ? (
+                <Tabs.Tab
+                  active={where === 'notice'}
+                  onClick={() => setWhere('notice')}
+                >
+                  공지
+                </Tabs.Tab>
               ) : (
-                ''
+                <Tabs.Tab>공지 🔒</Tabs.Tab>
               )}
-            </S.LeftTab>
-            <S.LeftDetail>
-              <DetailKeyward studyKeyward={study.studyKeyward} />
-              <DetailRecruit
-                studyMember={study.studyMember}
-                studyMemberNow={study.studyMemberNow}
-                apply={applyService}
-                userID={study.userID}
-                studyID={Number(studyID)}
-              />
-              <DetailContent value={study.content} />
-            </S.LeftDetail>
-            {!isInfo && (
+              {decodedToken && study.userID === decodedToken.id ? (
+                <Tabs.Tab
+                  active={where === 'apply'}
+                  onClick={() => setWhere('apply')}
+                >
+                  관리
+                </Tabs.Tab>
+              ) : (
+                <Tabs.Tab>관리 🔒</Tabs.Tab>
+              )}
+            </Tabs>
+            {where === 'info' && (
+              <S.LeftDetail>
+                <DR.DetailRecruit
+                  item={study}
+                  apply={applyService}
+                  studyID={Number(studyID)}
+                />
+                <DR.DetailContent value={JSON.parse(study.content)} />
+                <DR.DetailKeyward studyKeyward={study.studyKeyward} />
+                <DR.DetailMember item={study.memberID} />
+              </S.LeftDetail>
+            )}
+            {where === 'qna' ? (
               <S.CommentWrap>
                 <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
                   👍 이 모임에 응원 * 질문을 올려주세요!
                 </Heading>
-                <DetailCommentInput comment={comment} setComment={setComment} />
-                <DetailCommentLog />
-                {/* 여기는 석환이랑 db 협의가 끝나면 개발 */}
+                <DR.DetailCommentInput
+                  comment={comment}
+                  setComment={setComment}
+                />
+                <DR.DetailCommentLog />
                 <S.MediaBox />
               </S.CommentWrap>
+            ) : (
+              ''
+            )}
+            {where === 'apply' && (
+              <>
+                <Button.Group align="center">
+                  <Button
+                    style={{ marginRight: 100 }}
+                    color="link"
+                    onClick={() => navigate(`/study/update/${studyID}`)}
+                  >
+                    스터디 수정
+                  </Button>
+                  <Button
+                    style={{ marginRight: 100 }}
+                    color={study.studyOnOff ? 'warning' : 'success'}
+                    onClick={() => {
+                      stateChange();
+                    }}
+                  >
+                    {study.studyOnOff ? '스터디 비활성화' : '스터디 활성화'}
+                  </Button>
+                  <Button
+                    color="danger"
+                    onClick={() => {
+                      deleteAxios(studyID);
+                    }}
+                  >
+                    스터디 삭제
+                  </Button>
+                </Button.Group>
+                <ApplyTab studyID={studyID} member={study.memberID} />
+              </>
             )}
           </S.PageLeft>
-          <DetailRightCard
-            leaderImg="https://letspl.s3.ap-northeast-2.amazonaws.com/images/project_thumb_05.png"
-            leaderName="name"
-            leaderInfo="asdasdsa"
-            projectField={study.studyField}
-            projectLike={study.studyLike}
-            projectView={study.studyView}
-            projectStart={study.studyStart}
-            projectEnd={study.studyEnd}
-            projectSub={false}
-          />
+          <DR.DetailRightCard item={study} studyID={Number(studyID)} />
         </S.PageWrap>
       </Container>
     );

@@ -1,22 +1,22 @@
 import customAxios from './customAxios';
 
 export const studyUploadService = (
+  studyImg,
   studyName,
   studyKeyward,
   studyField,
   studyArea,
-  studyOnOff,
   studyMember,
   studyStart,
   studyEnd,
   content,
 ) => {
   return customAxios.post(`/api/study`, {
+    studyImg,
     studyName,
     studyKeyward,
     studyField,
     studyArea,
-    studyOnOff,
     studyMember,
     studyStart,
     studyEnd,
@@ -24,11 +24,12 @@ export const studyUploadService = (
   });
 };
 
-export const studyGetAllService = () => {
-  return `/api/study`;
+export const studyGetAllService = cursor => {
+  return `/api/study/page/${cursor}`;
 };
 
 export const studyUpdateService = ({
+  studyImg,
   studyName,
   studyKeyward,
   studyField,
@@ -41,6 +42,7 @@ export const studyUpdateService = ({
   studyID,
 }) => {
   return customAxios.patch(`/api/study`, {
+    studyImg,
     studyName,
     studyKeyward,
     studyField,
@@ -66,14 +68,37 @@ export const studyGetSomeService = studyID => {
   return customAxios.get(`/api/study/${studyID}`);
 };
 
-export const studyApplyService = (studyID, userID, field) => {
+export const studyApplyService = (studyID, field) => {
   return customAxios.post(`/api/study/apply`, {
     studyID,
-    userID,
     field,
   });
 };
 
 export const studyDeleteService = studyID => {
   return customAxios.delete(`/api/study/${studyID}`);
+};
+
+export const studyGetNewService = () => {
+  return customAxios.get(`/api/study/page/new`);
+};
+
+export const studyStateService = studyID => {
+  return customAxios.patch(`/api/${studyID}/manage/end`);
+};
+
+export const studyOutService = (studyID, memberID) => {
+  return customAxios.get(`/api/study/${studyID}/manage/fire/${memberID}`);
+};
+
+export const studyGetAdminService = studyID => {
+  return customAxios.get(`/api/study/${studyID}/manage`);
+};
+
+export const studyYesService = (studyID, submitID) => {
+  return customAxios.get(`/api/study/${studyID}/apply/${submitID}`);
+};
+
+export const studyNoService = (studyID, submitID) => {
+  return customAxios.get(`/api/study/${studyID}/reject/${submitID}`);
 };

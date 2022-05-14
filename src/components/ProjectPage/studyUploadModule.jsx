@@ -16,16 +16,18 @@ export const StudyUploadForm = () => {
     studyKeyward: '',
     studyField: '',
     studyArea: '',
-    studyOnOff: '',
     studyMember: '',
     studyStart: new Date('2022/01/01'),
     studyEnd: new Date('2022/01/07'),
+    studyOnline: '',
     content: [
       { type: 'paragaph', children: [{ text: '● 스터디 목표 및 진행방식' }] },
       { type: 'paragaph', children: [{ text: '' }] },
       {
         type: 'paragaph',
-        children: [{ text: '[목표] : ( 예: 제이쿼리를 마스터하고자 합니다) ' }],
+        children: [
+          { text: '[목표] : ( 예: 자바스크립트를 마스터하고자 합니다) ' },
+        ],
       },
       { type: 'paragaph', children: [{ text: '' }] },
       {
@@ -84,12 +86,19 @@ export const StudyUploadForm = () => {
     studyKeyward,
     studyField,
     studyArea,
-    studyOnOff,
     studyMember,
-    studyEnd,
     studyStart,
+    studyEnd,
     content,
+    studyOnline,
   } = study;
+
+  const randImg = [
+    'https://cdn.discordapp.com/attachments/885739536301318169/974946059811979304/pexels-olia-danilevich-5088022.jpg',
+    'https://cdn.discordapp.com/attachments/885739536301318169/974946060680175636/pexels-olia-danilevich-5088008.jpg',
+    'https://cdn.discordapp.com/attachments/885739536301318169/974946061242208326/pexels-lumn-351961.jpg',
+    'https://cdn.discordapp.com/attachments/885739536301318169/974946062106243102/pexels-pixabay-301920.jpg',
+  ];
 
   const onChangeStudyEvent = useCallback(
     e => {
@@ -101,48 +110,28 @@ export const StudyUploadForm = () => {
     [study],
   );
 
-  const uploadAxios = async (
-    sName,
-    sKey,
-    sField,
-    sArea,
-    sOn,
-    sMem,
-    sStart,
-    sEnd,
-    sCon,
-  ) => {
+  const uploadAxios = async () => {
     try {
       const result = await studyUploadService(
-        sName,
-        sKey,
-        sField,
-        sArea,
-        sOn,
-        sMem,
-        sStart,
-        sEnd,
-        JSON.stringify(sCon),
+        randImg[Math.floor(Math.random() * randImg.length)],
+        studyName,
+        studyKeyward,
+        studyField,
+        studyArea,
+        studyMember,
+        studyStart,
+        studyEnd,
+        studyOnline,
+        JSON.stringify(content),
       );
       alert('등록 되었습니다.');
     } catch (error) {
-      console.log('err');
+      console.log(error);
     }
   };
 
   const onSubmitEvent = () => {
-    console.log(study);
-    // uploadAxios(
-    //   studyName,
-    //   studyKeyward,
-    //   studyField,
-    //   studyArea,
-    //   studyOnOff,
-    //   studyMember,
-    //   studyStart,
-    //   studyEnd,
-    //   content,
-    // );
+    uploadAxios();
   };
 
   return (
@@ -151,7 +140,7 @@ export const StudyUploadForm = () => {
         label="* 스터디/네트워킹 주제"
         help="! 진행하고자 하는 스터디 주제를 제목으로 정해주세요"
         placeholder="웹 개발 같이 공부하실분~"
-        value={studyName || ''}
+        value={studyName}
         name="studyName"
         onChange={onChangeStudyEvent}
       />
@@ -159,7 +148,7 @@ export const StudyUploadForm = () => {
         label="* 스터디 분야/키워드"
         help="! 스터디의 키워드를 , 로 끊어주세요"
         placeholder="공부, 온라인"
-        value={studyKeyward || ''}
+        value={studyKeyward}
         name="studyKeyward"
         onChange={onChangeStudyEvent}
       />

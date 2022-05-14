@@ -1,16 +1,15 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useJwt } from 'react-jwt';
 import { Heading, Button } from 'react-bulma-components';
+import { useAuth } from '../../../contexts/hooks/useAuth';
 import * as S from './style';
 
-export const DetailRecruit = ({
-  studyMember,
-  studyMemberNow,
-  apply,
-  userID,
-  studyID,
-}) => {
+export const DetailRecruit = ({ item, apply, studyID }) => {
+  const auth = useAuth();
+  const { decodedToken } = useJwt(auth.token);
+
   return (
     <S.DetailStatus>
       <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
@@ -18,34 +17,38 @@ export const DetailRecruit = ({
       </Heading>
       <S.StatusUl>
         <S.StatusLi>
-          <S.StatusBigP>UI/UX 기획</S.StatusBigP>
+          <S.StatusBigP>누구나 참여가능</S.StatusBigP>
           <S.StatusSmallP>
-            {studyMemberNow} / {studyMember}
+            {item.studyMemberNow} / {item.studyMember}
           </S.StatusSmallP>
-          {studyMemberNow !== 0 ? (
+          {decodedToken && item.studyOnOff && (
             <>
-              {studyMember === studyMemberNow ? (
-                <Button color="danger">완료</Button>
+              {item.studyMemberNow !== 0 ? (
+                <>
+                  {item.studyMember === item.studyMemberNow ? (
+                    <Button color="danger">완료</Button>
+                  ) : (
+                    <Button
+                      color="info"
+                      onClick={() => {
+                        apply(studyID, 'study');
+                      }}
+                    >
+                      신청
+                    </Button>
+                  )}
+                </>
               ) : (
                 <Button
                   color="info"
                   onClick={() => {
-                    apply(studyID, userID, 'study_member');
+                    apply(studyID, 'study');
                   }}
                 >
                   신청
                 </Button>
               )}
             </>
-          ) : (
-            <Button
-              color="info"
-              onClick={() => {
-                apply(studyID, userID, 'study_member');
-              }}
-            >
-              신청
-            </Button>
           )}
         </S.StatusLi>
       </S.StatusUl>
@@ -54,9 +57,7 @@ export const DetailRecruit = ({
 };
 
 DetailRecruit.propTypes = {
-  studyMember: PropTypes.number.isRequired,
-  studyMemberNow: PropTypes.number.isRequired,
+  item: PropTypes.objectOf(PropTypes.any).isRequired,
   apply: PropTypes.func.isRequired,
-  userID: PropTypes.number.isRequired,
   studyID: PropTypes.number.isRequired,
 };

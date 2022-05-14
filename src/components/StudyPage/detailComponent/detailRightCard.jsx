@@ -1,33 +1,63 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Media, Button, Image, Content, Icon } from 'react-bulma-components';
+import { useNavigate } from 'react-router-dom';
+import { studyLikeService } from '../../../services/studyService';
 import * as S from './style';
 
-export const DetailRightCard = ({
-  leaderImg,
-  leaderName,
-  leaderInfo,
-  studyLike,
-  studyView,
-  studyStart,
-  studyEnd,
-  studyField,
-  studySub,
-}) => {
+export const DetailRightCard = ({ item, studyID }) => {
+  const navigate = useNavigate();
+  const [like, setLike] = useState(item.studySub);
+  const [day, setDay] = useState({});
+
+  const onLikeClick = async () => {
+    try {
+      const result = await studyLikeService(studyID);
+      setLike(!like);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getDate = () => {
+    const start = new Date(item.studyStart);
+    const sYear = start.getFullYear();
+    const sMonth = `0${start.getMonth() + 1}`.slice(-2);
+    const sDay = `0${start.getDate()}`.slice(-2);
+    const startString = `${sYear}.${sMonth}.${sDay}`;
+
+    const end = new Date(item.studyEnd);
+    const eYear = end.getFullYear();
+    const eMonth = `0${end.getMonth() + 1}`.slice(-2);
+    const eDay = `0${end.getDate()}`.slice(-2);
+    const endString = `${eYear}.${eMonth}.${eDay}`;
+
+    const btMs = end.getTime() - start.getTime();
+    const btDay = btMs / (1000 * 60 * 60 * 24);
+
+    setDay({ startDate: startString, endDate: endString, btDay });
+  };
+
+  useEffect(() => {
+    getDate();
+  }, []);
+
   return (
     <S.PageRight>
-      <S.RightInfo>
+      <S.RightInfo
+        onClick={() => navigate(`/team/info/${item.leaderInfo.leaderID}`)}
+      >
         <S.RightPBig>리더 정보</S.RightPBig>
         <Media>
           <Media.Item align="left">
-            <Image src={leaderImg} size={64} />
+            <Image src={item.leaderInfo.leaderImg} size={64} />
           </Media.Item>
           <Media.Item align="center">
             <Content>
               <p>
-                <strong>{leaderName}</strong>
+                <strong>{item.leaderInfo.leaderName}</strong>
                 <br />
-                {leaderInfo}
+                {item.leaderInfo.introduce}
                 <br />
                 <small
                   style={{
@@ -39,12 +69,12 @@ export const DetailRightCard = ({
                     <i className="fas fa-eye" />
                   </Icon>
                   <span style={{ display: 'block', marginRight: 20 }}>
-                    {studyView}
+                    {item.studyView}
                   </span>
                   <Icon>
                     <i className="fas fa-heart" />
                   </Icon>
-                  <span>{studyLike}</span>
+                  <span>{item.studyLike}</span>
                 </small>
               </p>
             </Content>
@@ -55,17 +85,30 @@ export const DetailRightCard = ({
       <S.RightMid>
         <S.RightPBig>스터디 기간</S.RightPBig>
         <S.RightPSmall>
-          {studyStart} ~ {studyEnd}
+          {day.startDate} ~ {day.endDate} ({day.btDay} 일)
         </S.RightPSmall>
       </S.RightMid>
 
       <S.RightMid>
         <S.RightPBig>스터디 분야</S.RightPBig>
-        <S.RightPSmall>{studyField}</S.RightPSmall>
+        <S.RightPSmall>{item.studyField}</S.RightPSmall>
       </S.RightMid>
 
-      {studySub ? (
-        ''
+      {like ? (
+        <S.RightFollow>
+          <S.RightPBig>스터디 구독 취소</S.RightPBig>
+          <Button.Group align="center">
+            <Button
+              className="is-light"
+              color="danger"
+              onClick={onLikeClick}
+              size="medium"
+              style={{ width: '100%' }}
+            >
+              구독 취소
+            </Button>
+          </Button.Group>
+        </S.RightFollow>
       ) : (
         <S.RightFollow>
           <S.RightPBig>스터디 구독하기</S.RightPBig>
@@ -73,7 +116,7 @@ export const DetailRightCard = ({
             <Button
               className="is-light"
               color="danger"
-              onClick={() => {}}
+              onClick={onLikeClick}
               size="medium"
               style={{ width: '100%' }}
             >
@@ -87,13 +130,6 @@ export const DetailRightCard = ({
 };
 
 DetailRightCard.propTypes = {
-  leaderImg: PropTypes.string.isRequired,
-  leaderName: PropTypes.string.isRequired,
-  leaderInfo: PropTypes.string.isRequired,
-  studyLike: PropTypes.number.isRequired,
-  studyView: PropTypes.number.isRequired,
-  studyStart: PropTypes.string.isRequired,
-  studyEnd: PropTypes.string.isRequired,
-  studyField: PropTypes.string.isRequired,
-  studySub: PropTypes.bool.isRequired,
+  item: PropTypes.objectOf(PropTypes.any).isRequired,
+  studyID: PropTypes.number.isRequired,
 };

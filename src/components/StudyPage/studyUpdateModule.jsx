@@ -16,6 +16,7 @@ import * as Send from '../../services/studyService';
 import { useAuth } from '../../contexts/hooks/useAuth';
 
 export const StudyUpdateForm = () => {
+  const [loading, setLoading] = useState(false);
   const auth = useAuth();
   const { decodedToken } = useJwt(auth.token);
   const navigate = useNavigate();
@@ -53,25 +54,26 @@ export const StudyUpdateForm = () => {
     }
   };
 
-  const getSomeAxios = async prID => {
-    try {
-      const result = await Send.studyGetSomeService(prID);
-      setStudy(result.data);
-    } catch (error) {
-      navigate('/study');
-    }
-  };
-
   useEffect(() => {
+    const getSomeAxios = async prID => {
+      setLoading(true);
+      try {
+        const result = await Send.studyGetSomeService(prID);
+        setStudy(result.data);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+      }
+    };
+
     getSomeAxios(studyID);
   }, []);
 
   const onSubmitEvent = () => {
-    console.log(study);
-    // updateAxios();
+    updateAxios();
   };
 
-  if (study) {
+  if (study && !loading) {
     return (
       <Container style={{ marginTop: 80 }}>
         {decodedToken && decodedToken.id === study.userID ? (

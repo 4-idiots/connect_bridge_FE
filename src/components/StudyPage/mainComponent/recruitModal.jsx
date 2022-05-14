@@ -1,16 +1,15 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as S from './style';
 
-export const RecruitModal = ({ studyMember, studyMemberNow }) => {
+export const RecruitModal = ({ item }) => {
   return (
     <S.DetailStatus>
       <S.StatusUl>
         <S.StatusLi>
           <S.StatusBigP>모집 인원</S.StatusBigP>
           <S.StatusSmallP>
-            {studyMemberNow} / {studyMember}
+            {item.studyMember} / {item.studyMember}
           </S.StatusSmallP>
         </S.StatusLi>
       </S.StatusUl>
@@ -19,11 +18,5 @@ export const RecruitModal = ({ studyMember, studyMemberNow }) => {
 };
 
 RecruitModal.propTypes = {
-  studyMember: PropTypes.number,
-  studyMemberNow: PropTypes.number,
-};
-
-RecruitModal.defaultProps = {
-  studyMember: 0,
-  studyMemberNow: 0,
+  item: PropTypes.objectOf(PropTypes.any).isRequired,
 };

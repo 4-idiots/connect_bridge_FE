@@ -18,6 +18,7 @@ export const newWrap = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding-bottom: 10px;
 `;
 
 export const textWrap = styled.div`
@@ -34,6 +35,7 @@ export const newCardContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 `;
 
 export const newImg = styled.div`
@@ -64,23 +66,31 @@ export const newName = styled.span`
 
 export const newInfoBox = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  margin-top: 10px;
+  margin-top: 20px;
 `;
 
-export const newHeart = styled.div`
-  width: 30px;
-  height: 30px;
-  margin-right: 4px;
+export const newEveBox = styled.div`
+  position: relative;
 `;
 
-export const heartWrap = styled.div`
+export const newreBox = styled.div`
+  font-size: 0.8rem;
+  font-weight: bold;
   display: flex;
+  align-items: center;
 `;
 
 export const newRecruit = styled.div`
   font-size: 14px;
   font-weight: bold;
+`;
+
+export const newIconBox = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  width: 100px;
 `;
 
 export const suggestWrap = styled.div`
@@ -94,7 +104,8 @@ export const suggestCardContainer = styled.div`
   width: 520px;
   display: flex;
   flex-direction: column;
-  margin-bottom: 14px;
+  margin-bottom: 20px;
+  cursor: pointer;
 `;
 
 export const suggestBox = styled.div`
@@ -202,5 +213,5 @@ export const mainRecruitWrap = styled.div`
   border-top-width: 1px;
   border-top-style: solid;
   border-top-color: rgba(219, 219, 219, 0.5);
-  position: 'relative';
+  position: relative;
 `;

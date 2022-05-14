@@ -17,6 +17,8 @@ export const ProjectDetailForm = () => {
 
   const { projectID } = useParams();
   const [postData, setPostData] = useState(null);
+  const [comment, setComment] = useState('');
+  const [where, setWhere] = useState('info');
 
   const getAxios = async id => {
     setLoading(true);
@@ -42,9 +44,6 @@ export const ProjectDetailForm = () => {
   useEffect(() => {
     getAxios(projectID);
   }, []);
-
-  const [comment, setComment] = useState('');
-  const [where, setWhere] = useState('info');
 
   const applyService = async (prid, uid, field) => {
     try {

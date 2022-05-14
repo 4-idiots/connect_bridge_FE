@@ -10,11 +10,11 @@ import { useAuth } from '../../contexts/hooks/useAuth';
 
 export const ProjectUploadForm = () => {
   const auth = useAuth();
-  const { decodedToken, isExpired } = useJwt(auth.token);
+  const { decodedToken } = useJwt(auth.token);
 
   const navigate = useNavigate();
   const [postInfo, setPostInfo] = useState({
-    projectOnOff: '-------',
+    projectOnline: '-------',
     projectArea: '-------',
     projectStart: new Date('2022/01/01'),
     projectEnd: new Date('2022/01/07'),
@@ -59,6 +59,7 @@ export const ProjectUploadForm = () => {
   });
 
   const {
+    projectOnline,
     projectName,
     projectField,
     projectImg,
@@ -125,6 +126,7 @@ export const ProjectUploadForm = () => {
   const onSubmitEvent = () => {
     const formData = new FormData();
     formData.append('userID', decodedToken.id);
+    formData.append('projectOnline', projectOnline);
     formData.append('projectName', projectName);
     formData.append('projectImg', projectImg);
     formData.append('content', JSON.stringify(content));

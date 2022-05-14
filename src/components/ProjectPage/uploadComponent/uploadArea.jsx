@@ -11,7 +11,7 @@ export const ProjectArea = ({ onChange }) => {
       <Form.Control>
         <Form.Select
           style={{ width: '20%' }}
-          name="projectOnOff"
+          name="projectOnline"
           onChange={onChange}
         >
           <option value="">-------</option>

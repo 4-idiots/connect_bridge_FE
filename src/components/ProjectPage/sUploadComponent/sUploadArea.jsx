@@ -11,7 +11,7 @@ export const StudyArea = ({ onChange }) => {
       <Form.Control>
         <Form.Select
           style={{ width: '20%' }}
-          name="studyOnOff"
+          name="studyOnline"
           onChange={onChange}
         >
           <option value="">-------</option>

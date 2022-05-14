@@ -2,34 +2,30 @@ import React, { useState, useEffect } from 'react';
 import { Card, Media, Content, Heading, Icon } from 'react-bulma-components';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useJwt } from 'react-jwt';
 import * as S from './style';
 import { ReactComponent as Heart } from '../../../assets/svg/heart.svg';
 import { RecruitModal } from './recruitModal';
 import * as Send from '../../../services/studyService';
+import { useAuth } from '../../../contexts/hooks/useAuth';
 
-export const StudyCard = ({
-  studyField,
-  studyName,
-  studyLike,
-  studyView,
-  stUserID,
-  studyID,
-}) => {
+export const StudyCard = ({ item }) => {
   const navigate = useNavigate();
+  const auth = useAuth();
+  const { decodedToken } = useJwt(auth.token);
 
   const [isHover, setIsHover] = useState(false);
   const [onHeart, setOnHeart] = useState(false);
   const [onRecruit, setOnRecruit] = useState(false);
   const [usLike, setUsLike] = useState(true);
-  const [dynLike, setDynLike] = useState(studyLike);
+  const [dynLike, setDynLike] = useState(item.studyLike);
 
   const checkLike = async () => {
     try {
-      const result = await Send.studyLikeCheck(studyID);
+      const result = await Send.studyLikeCheck(item.studyID);
       setUsLike(result.data);
     } catch (error) {
       setUsLike(false);
-      console.log(error);
     }
   };
 
@@ -45,7 +41,7 @@ export const StudyCard = ({
     }
     setUsLike(!usLike);
     try {
-      const result = await Send.studyLikeService(studyID);
+      const result = await Send.studyLikeService(item.studyID);
     } catch (error) {
       console.log(error);
     }
@@ -77,12 +73,12 @@ export const StudyCard = ({
       }}
     >
       <div
-        onClick={() => navigate(`/study/${studyID}`)}
+        onClick={() => navigate(`/study/${item.studyID}`)}
         className="imgclick"
         role="presentation"
       >
         <img
-          src=""
+          src={item.studyImg}
           style={{
             width: '100%',
             height: '160px',
@@ -114,23 +110,31 @@ export const StudyCard = ({
           setOnHeart(false);
         }}
       >
-        {usLike ? (
-          <Icon>
-            <Heart fill={onHeart ? 'rgb(255,192,203)' : 'rgb(215,90,74)'} />
-          </Icon>
+        {decodedToken ? (
+          <div>
+            {usLike ? (
+              <Icon>
+                <Heart fill={onHeart ? 'rgb(255,192,203)' : 'rgb(215,90,74)'} />
+              </Icon>
+            ) : (
+              <Icon>
+                <Heart
+                  fill={onHeart ? 'rgb(211,211,211)' : 'rgb(128,128,128)'}
+                />
+              </Icon>
+            )}
+          </div>
         ) : (
-          <Icon>
-            <Heart fill={onHeart ? 'rgb(211,211,211)' : 'rgb(128,128,128)'} />
-          </Icon>
+          ''
         )}
       </S.CustomDiv>
-      <Card.Content onClick={() => navigate(`/study/${studyID}`)}>
+      <Card.Content onClick={() => navigate(`/study/${item.studyID}`)}>
         <Media style={{ marginBottom: 0 }}>
           <Media.Item>
             <Heading subtitle size={7}>
-              {studyField}
+              {item.studyField}
             </Heading>
-            <Heading size={6}>{studyName}</Heading>
+            <Heading size={6}>{item.studyName}</Heading>
           </Media.Item>
         </Media>
         <Media style={{ marginBottom: '0.8rem' }}>
@@ -158,7 +162,7 @@ export const StudyCard = ({
               <Icon>
                 <i className="fas fa-eye" />
               </Icon>
-              <div>{studyView}</div>
+              <div>{item.studyView}</div>
             </div>
           </Content>
         </Media>
@@ -176,7 +180,7 @@ export const StudyCard = ({
               <i className="fas fa-arrow-up" />
             </Icon>
           </S.mainRecruitBox>
-          {onRecruit ? <RecruitModal /> : ''}
+          {onRecruit ? <RecruitModal item={item} /> : ''}
         </S.mainRecruitWrap>
       </Card.Content>
     </Card>
@@ -184,10 +188,5 @@ export const StudyCard = ({
 };
 
 StudyCard.propTypes = {
-  studyField: PropTypes.string.isRequired,
-  studyName: PropTypes.string.isRequired,
-  studyLike: PropTypes.number.isRequired,
-  studyView: PropTypes.number.isRequired,
-  stUserID: PropTypes.number.isRequired,
-  studyID: PropTypes.number.isRequired,
+  item: PropTypes.objectOf(PropTypes.any).isRequired,
 };

@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const HeaderWrap = styled.div`
   padding: 40px 0 44px;
@@ -65,6 +65,7 @@ export const PageRight = styled.div`
 export const RightInfo = styled.div`
   padding: 0 0 20px 0;
   border-bottom: 1px solid #e6e6e6;
+  cursor: pointer;
 `;
 
 export const RightMid = styled.div`
@@ -217,3 +218,33 @@ export const CustomFormWrap = styled.div`
 `;
 
 export const MediaBox = styled.div``;
+
+export const DetailMember = styled.div`
+  border-bottom: 1px solid #e6e6e6;
+  margin-bottom: 35px;
+  box-sizing: border-box;
+  padding: 15px 24px 15px 0;
+`;
+
+export const MemberGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 3rem;
+  place-items: center;
+`;
+
+export const MemberCardText = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+`;
+
+export const MemberCardLeft = styled.div`
+  font-size: 18px;
+`;
+
+export const MemberCardRight = styled.div`
+  font-size: 18px;
+  opacity: 0.7;
+`;

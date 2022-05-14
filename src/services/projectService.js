@@ -73,5 +73,5 @@ export const projectStateService = projectID => {
 };
 
 export const projectOutService = (projectID, memberID) => {
-  return customAxios.get(`/api/${projectID}/manage/fire/${memberID}`);
+  return customAxios.get(`/api/project/${projectID}/manage/fire/${memberID}`);
 };

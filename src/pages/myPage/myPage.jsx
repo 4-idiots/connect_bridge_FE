@@ -4,9 +4,10 @@ import {
   NavbarForm,
   FooterForm,
   MyPageForm,
-  MyProjectStudyForm,
+  MyProjectForm,
   MyCommunityForm,
   MySubscribeForm,
+  MyStudyForm,
 } from '../../components/cRoutes';
 
 export const MyPage = () => {
@@ -29,7 +30,13 @@ export const MyPage = () => {
             active={where === 'project'}
             onClick={() => setWhere('project')}
           >
-            프로젝트/스터디
+            프로젝트
+          </Tabs.Tab>
+          <Tabs.Tab
+            active={where === 'study'}
+            onClick={() => setWhere('study')}
+          >
+            스터디
           </Tabs.Tab>
           <Tabs.Tab
             active={where === 'community'}
@@ -46,7 +53,8 @@ export const MyPage = () => {
           <Tabs.Tab>알림</Tabs.Tab>
         </Tabs>
         {where === 'my' && <MyPageForm />}
-        {where === 'project' && <MyProjectStudyForm />}
+        {where === 'project' && <MyProjectForm />}
+        {where === 'study' && <MyStudyForm />}
         {where === 'community' && <MyCommunityForm />}
         {where === 'subscribe' && <MySubscribeForm />}
       </Container>

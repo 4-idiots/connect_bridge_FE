@@ -4,6 +4,7 @@ import { getMainService } from '../../services/mainService';
 import { ProjectCard } from '../ProjectPage/mainComponent/projectCard';
 import { CommunityCard } from './mainCard/comCard';
 import { TeamCard } from './mainCard/teamCard';
+import { StudyCard } from '../StudyPage/mainComponent/studyCard';
 import * as S from './style';
 import { SkelProject, SkelCommunity, SkelTeam } from '../skeleton/skelRouter';
 
@@ -40,6 +41,15 @@ export const MainPageForm = () => {
             ))}
         </S.MainGrid>
         <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
+          스터디
+        </Heading>
+        <S.MainGrid>
+          {main.study &&
+            main.study.map(item => (
+              <StudyCard item={item} key={item.studyID} />
+            ))}
+        </S.MainGrid>
+        <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
           커뮤니티
         </Heading>
         <S.MainGrid>
@@ -57,10 +67,6 @@ export const MainPageForm = () => {
           <TeamCard item={main.register[2]} cnt={2} />
           <TeamCard item={main.register[3]} cnt={3} />
         </S.MainGrid>
-        <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
-          스터디
-        </Heading>
-        <S.MainGrid>a</S.MainGrid>
       </Container>
     );
   }
@@ -69,6 +75,14 @@ export const MainPageForm = () => {
     <Container style={{ marginTop: 80 }}>
       <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
         프로젝트
+      </Heading>
+      <S.MainGrid>
+        {[0, 1, 2, 3].map(item => (
+          <SkelProject key={item} />
+        ))}
+      </S.MainGrid>
+      <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
+        스터디
       </Heading>
       <S.MainGrid>
         {[0, 1, 2, 3].map(item => (
@@ -91,10 +105,6 @@ export const MainPageForm = () => {
           <SkelTeam key={item} />
         ))}
       </S.MainGrid>
-      <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
-        스터디
-      </Heading>
-      <S.MainGrid>a</S.MainGrid>
     </Container>
   );
 };

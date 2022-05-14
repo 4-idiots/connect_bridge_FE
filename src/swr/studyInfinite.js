@@ -5,6 +5,7 @@ import fetcher from './fetcher';
 import useOnScreen from './useOnScreen';
 import { StudyCard } from '../components/StudyPage/mainComponent/studyCard';
 import { studyGetAllService } from '../services/studyService';
+import { SkelProject } from '../components/skeleton/skelRouter';
 
 const getKey = (pageIndex, previousPageData) => {
   if (previousPageData && !previousPageData.length) return null;
@@ -39,19 +40,9 @@ export const StudyInfinite = () => {
     <>
       {isEmpty ? <p>Yay, no outdoor found.</p> : null}
       {issues &&
-        issues.map(item => (
-          <StudyCard
-            key={item.id}
-            studyField={item.studyField}
-            studyName={item.studyName}
-            studyLike={item.studyLike}
-            studyView={item.studyView}
-            stUserID={item.userID}
-            studyID={item.studyID}
-          />
-        ))}
+        issues.map(item => <StudyCard key={item.studyID} item={item} />)}
       <div ref={ref}>
-        {isLoadingMore ? 'loading...' : isReachingEnd ? '' : ''}
+        {isLoadingMore ? <SkelProject /> : isReachingEnd ? '' : ''}
       </div>
     </>
   );
