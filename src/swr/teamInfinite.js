@@ -1,10 +1,10 @@
 /* eslint-disable no-nested-ternary */
 import React, { useRef, useEffect } from 'react';
 import useSWRInfinite from 'swr/infinite';
-import PropTypes from 'prop-types';
 import fetcher from './fetcher';
 import useOnScreen from './useOnScreen';
-import { TeamCardForm } from '../components/TeamPage/cardTeam';
+import { TeamCard } from '../components/MainPage/mainCard/teamCard';
+import { SkelTeam } from '../components/skeleton/skelRouter';
 
 const getKey = (pageIndex, previousPageData) => {
   if (previousPageData && !previousPageData.length) return null;
@@ -14,15 +14,15 @@ const getKey = (pageIndex, previousPageData) => {
   return `/api/team${pageIndex}`;
 };
 
-export const TeamInfinite = ({ outActClick }) => {
+export const TeamInfinite = () => {
   const ref = useRef();
   const isVisible = useOnScreen(ref);
 
-  const { data, error, mutate, size, setSize, isValidating } = useSWRInfinite(
+  const { data, error, size, setSize, isValidating } = useSWRInfinite(
     getKey,
     fetcher,
   );
-  const issues = data ? [].concat(...data) : []; // 이게 대박 하나로 통일 하는 코드, 안쓰면 렌더링에서 map을 2번 써야 함
+  const issues = data ? [].concat(...data) : [];
   const isLoadingInitialData = !data && !error;
   const isLoadingMore =
     isLoadingInitialData ||
@@ -42,37 +42,15 @@ export const TeamInfinite = ({ outActClick }) => {
       {isEmpty ? <p>Yay, no team found.</p> : null}
       {issues &&
         issues.map(item => (
-          <TeamCardForm
+          <TeamCard
             key={item.myid}
-            userNickname={item.userNickname}
-            userAbility={item.userAbility}
-            userInterest={item.userInterest}
-            userPicture={item.userPicture}
-            userLike={item.userLike}
-            onActClick={() => {
-              outActClick(
-                item.userNickname,
-                item.userAbility,
-                item.userInterest,
-                item.userPicture,
-                item.userLike,
-                item.myid,
-              );
-            }}
-            myid={item.myid}
+            item={item}
+            cnt={Math.floor(Math.random() * 4)}
           />
         ))}
-      <div ref={ref}>{isLoadingMore ? '' : isReachingEnd ? '' : ''}</div>
+      <div ref={ref}>
+        {isLoadingMore ? <SkelTeam /> : isReachingEnd ? '' : ''}
+      </div>
     </>
   );
-};
-
-TeamInfinite.defaultProps = {
-  outActClick: (name, img, Ability, Interest, like, myid) => {
-    console.log(name, img, Ability, Interest, like, myid);
-  },
-};
-
-TeamInfinite.propTypes = {
-  outActClick: PropTypes.func,
 };
