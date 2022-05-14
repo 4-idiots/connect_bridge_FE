@@ -2,6 +2,8 @@
 /* eslint-disable no-nested-ternary */
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
+
 import validator from 'validator';
 import {
   Container,
@@ -11,10 +13,9 @@ import {
   Box,
   Card,
   Media,
-  Image,
   Content,
   Figure,
-  Img,
+  Image,
 } from 'react-bulma-components';
 import { useParams } from 'react-router-dom';
 import { useJwt } from 'react-jwt';
@@ -28,6 +29,7 @@ export const CommunityInfoForm = () => {
   const [title, settitle] = useState('');
   const [hashtag, sethashtag] = useState([]);
   const [userNickname, setuserNickname] = useState('');
+  const [userPicture, setuserPicture] = useState('');
   const [viewCount, setviewCount] = useState(0);
   const [likeCount, setlikeCount] = useState(0);
   const [likeCounta, setlikeCounta] = useState(0);
@@ -124,6 +126,7 @@ export const CommunityInfoForm = () => {
       setuserID(response.data.userID);
       setcommentList(response.data.commentList);
       setcomment(response.data.commentList.comment);
+      setuserPicture(response.data.userPicture);
     });
   };
 
@@ -148,162 +151,482 @@ export const CommunityInfoForm = () => {
   }, []);
 
   return (
-    <Container>
-      <Heading style={{ textAlign: 'center' }}>{title}</Heading>
-      <Box
-        style={{
-          marginTop: '3%',
-          marginBottom: 'auto',
-          marginLeft: '10%',
-          marginRight: '10%',
-          Box: 'center',
-        }}
-      >
-        <div style={{ marginTop: '2%', marginBottom: '0%', marginLeft: '8%' }}>
-          <figure className="image is-128x128">
-            <Image src="data:image/png;base64,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" />
-          </figure>
-        </div>
-        <p
-          style={{
-            position: 'absolute',
-            bottom: '440px',
-            left: '390px',
-            fontSize: '1.2em',
-          }}
-        >
-          {userNickname}
-        </p>
-        <p
-          style={{
-            position: 'absolute',
-            bottom: '420px',
-            left: '390px',
-            fontSize: '0.7em',
-          }}
-        >
-          실력 : {userAbility}
-        </p>
-        <p
-          style={{
-            position: 'absolute',
-            bottom: '400px',
-            left: '390px',
-            fontSize: '0.7em',
-          }}
-        >
-          관심분야 : {userInterestMain}/ {userInterestSub}
-        </p>
-        <p
-          style={{
-            position: 'absolute',
-            bottom: '430px',
-            left: '1000px',
-            fontSize: '1.3em',
-          }}
-        >
-          🖤 : {likeCounta} &nbsp;👀 : {viewCount}&nbsp;💬 : {commentCount}
-        </p>
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '350px',
-            left: '1120px',
-            fontSize: '1.3em',
-          }}
-        >
-          {state === 1 ? (
-            <Button onClick={likesClick} onChange={statedata} color={color}>
-              ♥
-            </Button>
-          ) : state === 2 ? (
-            <Button onClick={likesClick} onChange={statedata} color={color}>
-              ♥
-            </Button>
-          ) : (
-            <> </>
-          )}
-        </div>
+    <Main>
+      <Top1>
+        <Top2>.</Top2>
+        <Top3>
+          <Top311>
+            <Top31>{title}</Top31>
+          </Top311>
+          <Top32>
+            {hashtag.map((item, id) => (
+              <Top321
+                item={item}
+                // eslint-disable-next-line react/no-array-index-key
+                key={id}
+                className="tag is-light is-small"
+              >
+                #{item}
+                <br />
+              </Top321>
+            ))}
+          </Top32>
+          <Top33>
+            <Top331>
+              <Top3311>
+                👀<span style={{ color: 'white' }}>{viewCount}</span>&nbsp;
+              </Top3311>
+              <Top3311>
+                💬<span style={{ color: 'white' }}>{commentCount}</span>&nbsp;
+              </Top3311>
+              <Top3311>
+                🤍<span style={{ color: 'white' }}>{likeCount}</span>
+              </Top3311>
+            </Top331>
+          </Top33>
+        </Top3>
+      </Top1>
+      <Layout1>
+        <Layout2>
+          <Layout3>
+            <Layout31>
+              {state === 1 ? (
+                <Button onClick={likesClick} onChange={statedata} color={color}>
+                  🤍
+                </Button>
+              ) : state === 2 ? (
+                <Button onClick={likesClick} onChange={statedata} color={color}>
+                  🤍
+                </Button>
+              ) : (
+                <> </>
+              )}
+            </Layout31>
+            <Layout32>
+              <Layout321>
+                <img src={userPicture} alt="img" />
+              </Layout321>
+            </Layout32>
+            <Layout33>
+              <div>
+                {userNickname}
+                <Layout331>
+                  <Layout3311>
+                    {userInterestMain}/ {userInterestSub}
+                  </Layout3311>
 
-        <hr />
-        <div
-          style={{ marginTop: '2%', marginBottom: 'auto', marginLeft: '8%' }}
-        >
-          {contents && <ReadOnlySlate value={contents} />}
-
-          <br />
-          <br />
-          {hashtag.map((item, id) => (
-            <span
-              item={item}
-              // eslint-disable-next-line react/no-array-index-key
-              key={id}
-              className="tag is-light is-small"
-            >
-              #{item}
+                  <Layout3311>{userAbility}</Layout3311>
+                </Layout331>
+              </div>
+            </Layout33>
+          </Layout3>
+          <Comment1>
+            <Comment11>
+              {contents && <ReadOnlySlate value={contents} />}
               <br />
-            </span>
-          ))}
-          <br />
-          <br />
-          <br />
-          <div className="commentContainer">
-            <form className="commentWrap">
-              <input
-                type="text"
+              <br />
+              <br />
+              <br />
+              <br />
+            </Comment11>
+          </Comment1>
+        </Layout2>
+        <Botton1>
+          <Reply1>
+            <Reply11>
+              <Reply111>
+                {commentList &&
+                  commentList.map((item, id) => (
+                    <div key={id}>
+                      <Reply1111>
+                        <Reply11111>{item.userNickname} </Reply11111>
+
+                        <Reply11122>
+                          <Reply11121>{item.comment}</Reply11121>
+                        </Reply11122>
+                      </Reply1111>
+                      <Reply111220>
+                        {item.userID === decodedToken?.id ? (
+                          <Button.Group align="center">
+                            <Reply111221
+                              color="black"
+                              onClick={() =>
+                                CommentChangeClick(item.id, item.comment)
+                              }
+                            >
+                              수정
+                            </Reply111221>
+                            |
+                            <Reply111223
+                              color="black"
+                              onClick={() => CommentDeleteClick(item.id)}
+                            >
+                              삭제
+                            </Reply111223>
+                          </Button.Group>
+                        ) : (
+                          <> </>
+                        )}
+                      </Reply111220>
+                    </div>
+                  ))}
+              </Reply111>
+            </Reply11>
+          </Reply1>
+          <Botton11>
+            <Botton12>
+              <Botton2
                 placeholder="댓글달기..."
                 value={comment || ''}
                 onChange={onChange}
-              />
-              <button type="button" className="commetBtn" onClick={onSubmit}>
-                등록
-              </button>
-            </form>
-          </div>
-          <div style={{ textAlign: 'center' }}>
-            {userID === decodedToken?.id ? (
-              <Button.Group align="center">
-                <Button color="success" onClick={ChangeClick}>
-                  수정하기
-                </Button>
-                <Button color="success" onClick={DeleteClick}>
-                  삭제하기
-                </Button>
-              </Button.Group>
-            ) : (
-              <> </>
-            )}
-          </div>
-          {commentList &&
-            commentList.map((item, id) => (
-              <div key={id}>
-                닉:{item.userNickname} 내용:{item.comment}{' '}
+              >
                 <div style={{ textAlign: 'center' }}>
-                  {item.userID === decodedToken?.id ? (
+                  {userID === decodedToken?.id ? (
                     <Button.Group align="center">
-                      <Button
-                        color="black"
-                        onClick={() =>
-                          CommentChangeClick(item.id, item.comment)
-                        }
-                      >
-                        수정
+                      <Button color="success" onClick={ChangeClick}>
+                        수정하기
                       </Button>
-                      <Button
-                        color="black"
-                        onClick={() => CommentDeleteClick(item.id)}
-                      >
-                        삭제
+                      <Button color="success" onClick={DeleteClick}>
+                        삭제하기
                       </Button>
                     </Button.Group>
                   ) : (
                     <> </>
                   )}
                 </div>
-              </div>
-            ))}
-        </div>
-      </Box>
-    </Container>
+              </Botton2>
+              <Botton3 type="button" className="commetBtn" onClick={onSubmit}>
+                등록
+              </Botton3>
+            </Botton12>
+          </Botton11>
+        </Botton1>
+      </Layout1>
+    </Main>
   );
 };
+const Main = styled.div`
+  color: #333;
+`;
+
+const Top1 = styled.div`
+  position: fixed;
+  width: 100%;
+  left: 0;
+  z-index: 1;
+  background-color: #222;
+  top: 51px;
+  overflow: hidden;
+`;
+const Top2 = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #5f5f5f;
+`;
+const Top3 = styled.div`
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  height: 360px;
+  box-sizing: border-box;
+  padding-bottom: 70px;
+  position: relative;
+`;
+
+const Top31 = styled.h2`
+  color: #fff;
+  max-width: 600px;
+  min-width: 320px;
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+  font-size: 28px;
+  line-height: 38px;
+  font-weight: bold;
+`;
+
+const Top311 = styled.div`
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 150px;
+  margin-bottom: 35px;
+`;
+const Top32 = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto 0;
+  flex-wrap: wrap;
+  max-width: 600px;
+`;
+const Top321 = styled.div`
+  font-size: 14px;
+  color: #fff;
+  line-height: 14px;
+  margin-right: 6px;
+`;
+
+const Top33 = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  width: 100%;
+  justify-content: space-between;
+  position: absolute;
+  left: 0;
+  bottom: 40px;
+`;
+
+const Top331 = styled.div`
+  margin: 0;
+  padding: 0;
+  display: block;
+`;
+
+const Top3311 = styled.p`
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 16px;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+`;
+
+const Layout1 = styled.section`
+  box-sizing: border-box;
+  max-width: 100%;
+  margin-top: 400px;
+  position: relative;
+  z-index: 5;
+  background-color: #fff;
+  padding-bottom: 30px;
+  overflow: hidden;
+`;
+
+const Layout2 = styled.div`
+  width: 100%;
+  box-shadow: 0 3px 24px 0 rgb(0 0 0 / 8%);
+  padding: 0 40px;
+  box-sizing: border-box;
+  max-width: 1200px;
+  background-color: #fff;
+  margin: 0 auto;
+`;
+
+const Layout3 = styled.div`
+  border-bottom: 1px solid #e6e6e6;
+  box-sizing: border-box;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+`;
+
+const Layout31 = styled.div`
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  background-color: #fff;
+  box-shadow: 0 0 19px 8px rgb(0 0 0 / 6%);
+  cursor: pointer;
+  position: absolute;
+  top: 34px;
+  right: 0;
+`;
+
+const Layout32 = styled.div`
+  width: 130px;
+  height: 94px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background-color: transparent;
+  margin-right: 30px;
+  position: relative;
+`;
+
+const Layout321 = styled.div`
+  width: 130px;
+  height: 94px;
+  object-fit: cover;
+`;
+
+const Layout33 = styled.div`
+  border-bottom: 1px solid #e6e6e6;
+  box-sizing: border-box;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+`;
+
+const Layout331 = styled.p`
+  font-size: 17px;
+  color: #42495b;
+  line-height: 17px;
+`;
+
+const Layout3311 = styled.span`
+  display: block;
+  font-size: 13px;
+  color: #8e8ea2;
+  margin-top: 8px;
+`;
+
+const Comment1 = styled.div`
+  box-sizing: border-box;
+  padding: 20px 0 0;
+`;
+
+const Comment11 = styled.div`
+  margin-bottom: 30px;
+  width: 100%;
+`;
+
+const Botton1 = styled.div`
+  background-color: #f7f7f7;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 24px 40px 10px;
+  max-width: 1200px;
+  margin: 0 auto;
+`;
+const Reply1 = styled.div`
+  box-sizing: border-box;
+  background-color: #f7f7f7;
+`;
+
+const Reply11 = styled.div`
+  display: inline-flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 34px;
+`;
+
+const Reply111 = styled.div`
+  width: 100%;
+`;
+
+const Reply1111 = styled.div`
+  display: inline-flex;
+  justify-content: space-between;
+  width: 100%;
+  border-top: 1px solid #ebebeb;
+`;
+const Reply11111 = styled.p`
+  font-size: 1.2rem;
+  color: #42495b;
+  position: relative;
+  font-weight: bold;
+`;
+
+const Reply11121 = styled.div`
+  background: none;
+  border: none;
+  color: #222;
+  flex: 1 1;
+  padding: 13px;
+  resize: none;
+  opacity: 1;
+  -webkit-text-fill-color: #222;
+  width: 100%;
+  vertical-align: middle;
+`;
+
+const Reply11122 = styled.div`
+  margin-left: 5px;
+  width: 870px;
+  font-family: 'Malgun Gothic', '맑은 고딕', helvetica, 'Apple SD Gothic Neo',
+    sans-serif;
+  font-size: 14px;
+`;
+
+const Reply111220 = styled.div`
+  margin-top: 4px;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 100%;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 10px;
+`;
+
+const Reply111221 = styled.button`
+  color: #42495b;
+  font-size: 0.75rem;
+  transition: all 0.2s;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: button;
+  border-radius: 0;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+  vertical-align: middle;
+`;
+
+const Reply111223 = styled.button`
+  font-size: 0.75rem;
+  color: #81839c;
+  transition: all 0.2s;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: button;
+  border-radius: 0;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+  vertical-align: middle;
+`;
+
+const Botton11 = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+`;
+
+const Botton12 = styled.div`
+  flex: 1 1;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const Botton2 = styled.textarea`
+  flex: 1 1;
+  font-size: 0.875rem;
+  box-sizing: border-box;
+  padding: 11px 16px;
+  border-radius: 4px;
+  margin-right: 14px;
+  resize: none;
+  border: 1px solid #9796a7;
+`;
+
+const Botton3 = styled.button`
+  background-color: #42495b;
+  color: #fff;
+  border: 1px solid #42495b;
+  width: auto;
+  padding: 8px 29px !important;
+  transition: all 0.2s;
+  font-size: 0.75rem;
+  border-radius: 4px;
+`;

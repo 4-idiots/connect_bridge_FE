@@ -62,9 +62,7 @@ export const TeamInfinite = ({ outActClick }) => {
             myid={item.myid}
           />
         ))}
-      <div ref={ref}>
-        {isLoadingMore ? 'loading...' : isReachingEnd ? 'no more' : ''}
-      </div>
+      <div ref={ref}>{isLoadingMore ? '' : isReachingEnd ? '' : ''}</div>
     </>
   );
 };
