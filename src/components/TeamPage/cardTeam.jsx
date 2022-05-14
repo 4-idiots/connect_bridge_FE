@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, Card, Media, Heading, Image } from 'react-bulma-components';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 export const TeamCardForm = ({
   myid,
@@ -12,53 +13,40 @@ export const TeamCardForm = ({
   onActClick,
   userPicture,
 }) => {
-  return (
-    <div
+  /* <div
+    onClick={() => navigate(`/project/${item.projectID}`)}
+    className="imgclick"
+    role="presentation"
+  >
+    <img
+      src={item.projectImg}
       style={{
-        marginRight: '30px',
-        marginLeft: '16px',
-        display: 'inline-block',
+        width: '100%',
+        height: '160px',
+        borderRadius: '5%',
+        objectFit: 'cover',
       }}
-    >
-      <Card
-        style={{
-          marginTop: '30px',
-          marginRight: '30px',
-          width: '200px',
-          height: '350px',
-          border: '2px solid #e7e7e7',
-          padding: '14px ',
-        }}
-      >
-        <Card.Content>
-          <Media>
-            <Media.Item>
-              <div style={{ marginRight: '30px' }}>
-                <Image
-                  renderAs={Link}
-                  to={`/team/info/${myid}`}
-                  size="4by4"
-                  alt="64x64"
-                  src="http://bulma.io/images/placeholders/64x64.png"
-                />
+      alt="img"
+    />
+  </div>; */
 
-                <div size={5}>{userNickname}</div>
-              </div>
-
-              <br />
-              <Heading subtitle size={6}>
-                능력: {userAbility}
-              </Heading>
-              <Heading subtitle size={6}>
-                흥미: {userInterest}
-              </Heading>
-
-              <br />
-            </Media.Item>
-          </Media>
-        </Card.Content>
-      </Card>
-    </div>
+  return (
+    <People11>
+      <People11122>
+        <img
+          renderAs={Link}
+          to={`/team/info/${myid}`}
+          src={userPicture}
+          alt="img"
+        />
+      </People11122>
+      <People111>
+        <People1111> {userNickname} </People1111>
+        <People1112>🤍:5</People1112>
+      </People111>
+      <People112>분야: {userInterest}</People112>
+      <People112>능력: {userAbility}</People112>
+    </People11>
   );
 };
 
@@ -83,3 +71,47 @@ TeamCardForm.defaultProps = {
   },
   userPicture: 'Picture',
 };
+
+const People11 = styled.li`
+  max-width: 300px;
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #e5e5e5;
+  background-color: #fff;
+  padding: 15px 20px 15px 20px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 20px;
+  transition: all 0.2s;
+  list-style: none;
+`;
+
+const People111 = styled.div`
+  display: inline-flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+`;
+const People11122 = styled.div`
+  width: 100%;
+`;
+const People1111 = styled.div`
+  margin-top: 15px;
+  margin-bottom: 13px;
+  margin-left: 7px;
+  font-size: 22px;
+  font-weight: bold;
+`;
+const People1112 = styled.div`
+  margin-top: 22px;
+  margin-bottom: 13px;
+  margin-left: 7px;
+
+  font-size: 0.9em;
+`;
+const People112 = styled.div`
+  font-family: Noto Sans KR, Lato, sans-serif;
+  margin-left: 17px;
+`;
+/* background-color: #f5f5f5; */
