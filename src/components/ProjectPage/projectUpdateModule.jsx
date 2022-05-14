@@ -28,7 +28,7 @@ export const ProjectUpdateForm = () => {
 
   const updateAxios = async formdata => {
     try {
-      const result = await Send.proejctUpdateService(formdata);
+      await Send.proejctUpdateService(formdata);
       alert('수정 되었습니다.');
       navigate('/project');
     } catch (error) {
@@ -39,7 +39,6 @@ export const ProjectUpdateForm = () => {
   const getSomeAxios = async prID => {
     try {
       const result = await Send.projectGetSomeService(prID);
-      console.log(result);
       setPostInfo(result.data);
     } catch (error) {
       navigate('/project');

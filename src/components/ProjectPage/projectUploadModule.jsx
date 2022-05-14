@@ -114,11 +114,10 @@ export const ProjectUploadForm = () => {
 
   const uploadAxios = async formData => {
     try {
-      const result = await projectUploadService(formData);
+      await projectUploadService(formData);
       alert('등록 되었습니다.');
       navigate('/project');
     } catch (error) {
-      console.log(error);
       alert('다시 시도해주세요');
     }
   };

@@ -20,7 +20,7 @@ export const OutdoorCardForm = ({ item, onActClick }) => {
 
   const deleteAxios = async id => {
     try {
-      const result = await Send.outdoorDeleteService(id);
+      await Send.outdoorDeleteService(id);
       alert('삭제 완료');
       window.location.replace('/outdoor');
     } catch (error) {
@@ -35,7 +35,7 @@ export const OutdoorCardForm = ({ item, onActClick }) => {
       setIsLike(result.data);
     } catch (error) {
       setIsLike(false);
-      console.log(error);
+      // pass
     }
   };
 
@@ -47,17 +47,17 @@ export const OutdoorCardForm = ({ item, onActClick }) => {
     }
     setIsLike(!isLike);
     try {
-      const result = await Send.outdoorLikeService(item.outActID);
+      await Send.outdoorLikeService(item.outActID);
     } catch (error) {
-      console.log(error);
+      // pass
     }
   };
 
   const addView = async () => {
     try {
-      const result = await Send.outdoorGetSomeService(item.outActID);
+      await Send.outdoorGetSomeService(item.outActID);
     } catch (err) {
-      console.log('error');
+      // pass
     }
   };
 

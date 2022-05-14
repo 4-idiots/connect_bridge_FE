@@ -41,9 +41,9 @@ export const ProjectCard = ({ item }) => {
     }
     setUsLike(!usLike);
     try {
-      const result = await Send.projectLikeService(item.projectID);
+      await Send.projectLikeService(item.projectID);
     } catch (error) {
-      console.log(error);
+      // pass
     }
   };
 

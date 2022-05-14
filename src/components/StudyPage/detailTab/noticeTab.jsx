@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Icon, Heading } from 'react-bulma-components';
-import { projectGetNoticeServie } from '../../../services/projectService';
+import { studyGetNoticeServie } from '../../../services/studyService';
 import * as S from './style';
 import { NoticeUpload } from './noticeUpload';
 
-export const NoticeTab = ({ projectID, isMaster }) => {
+export const NoticeTab = ({ studyID, isMaster }) => {
   const [notice, setNotice] = useState(null);
 
   const getAxios = async () => {
     try {
-      const result = await projectGetNoticeServie(projectID);
+      const result = await studyGetNoticeServie(studyID);
       setNotice(result.data);
     } catch (error) {
-      console.log(error);
+      setNotice(null);
     }
   };
 
@@ -42,12 +42,12 @@ export const NoticeTab = ({ projectID, isMaster }) => {
           </S.PSNull>
         </S.PSBox>
       )}
-      {isMaster ? <NoticeUpload projectID={projectID} /> : ''}
+      {isMaster ? <NoticeUpload studyID={studyID} /> : ''}
     </div>
   );
 };
 
 NoticeTab.propTypes = {
-  projectID: PropTypes.string.isRequired,
+  studyID: PropTypes.string.isRequired,
   isMaster: PropTypes.bool.isRequired,
 };

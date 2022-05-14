@@ -33,7 +33,7 @@ export const ProjectDetailForm = () => {
 
   const deleteAxios = async id => {
     try {
-      const result = await Send.projectDeleteService(id);
+      await Send.projectDeleteService(id);
       alert('삭제되었습니다.');
       navigate('/project');
     } catch (error) {
@@ -47,7 +47,7 @@ export const ProjectDetailForm = () => {
 
   const applyService = async (prid, uid, field) => {
     try {
-      const result = await Send.projectApplyService(prid, uid, field);
+      await Send.projectApplyService(prid, uid, field);
       alert('정상적으로 신청이 되었습니다.');
     } catch (error) {
       alert('이미 신청하셨습니다.');
@@ -56,10 +56,10 @@ export const ProjectDetailForm = () => {
 
   const stateChange = async () => {
     try {
-      const result = await Send.projectStateService(projectID);
+      await Send.projectStateService(projectID);
       alert('상태가 변경되었습니다.');
     } catch (error) {
-      console.log(error);
+      // pass
     }
   };
 

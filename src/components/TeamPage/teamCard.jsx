@@ -5,9 +5,9 @@ import { useJwt } from 'react-jwt';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { Icon } from 'react-bulma-components';
-import { ReactComponent as Heart } from '../../../assets/svg/heart.svg';
-import { useAuth } from '../../../contexts/hooks/useAuth';
-import { teamLike, teamLikeCheck } from '../../../services/mainService';
+import { ReactComponent as Heart } from '../../assets/svg/heart.svg';
+import { useAuth } from '../../contexts/hooks/useAuth';
+import { teamLike, teamLikeCheck } from '../../services/mainService';
 
 export const TeamCard = ({ item }) => {
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ export const TeamCard = ({ item }) => {
     try {
       await teamLike(item.myid);
     } catch (error) {
-      // pass
+      console.log(error);
     }
   };
 

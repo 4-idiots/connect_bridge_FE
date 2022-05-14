@@ -12,10 +12,10 @@ export const DetailRightCard = ({ item, studyID }) => {
 
   const onLikeClick = async () => {
     try {
-      const result = await studyLikeService(studyID);
+      await studyLikeService(studyID);
       setLike(!like);
     } catch (error) {
-      console.log(error);
+      // pass
     }
   };
 

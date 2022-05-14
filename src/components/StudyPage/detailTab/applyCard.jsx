@@ -6,25 +6,25 @@ import * as B from 'react-bulma-components';
 import { useNavigate } from 'react-router-dom';
 import * as Send from '../../../services/studyService';
 
-export const ApplyCard = ({ item, studyID, cnt }) => {
+export const ApplyCard = ({ item, studyID }) => {
   const navigate = useNavigate();
   const onYes = async () => {
     try {
-      const result = await Send.studyYesService(studyID, item.submitID);
+      await Send.studyYesService(studyID, item.submitID);
       alert('승인 되었습니다.');
       window.location.replace(`/study/${studyID}`);
     } catch (error) {
-      console.log(error);
+      // pass
     }
   };
 
   const onNo = async () => {
     try {
-      const result = await Send.studyNoService(studyID, item.submitID);
+      await Send.studyNoService(studyID, item.submitID);
       alert('거절 되었습니다.');
       window.location.replace(`/study/${studyID}`);
     } catch (error) {
-      console.log(error);
+      // pass
     }
   };
 
@@ -41,34 +41,7 @@ export const ApplyCard = ({ item, studyID, cnt }) => {
         </B.Button.Group>
       </div>
       <div onClick={() => navigate(`/team/info/${item.userID}`)}>
-        {cnt === 0 && (
-          <img
-            src="https://cdn.discordapp.com/attachments/885739536301318169/974292656656101436/dolphin.jpeg"
-            className="card__image"
-            alt=""
-          />
-        )}
-        {cnt === 1 && (
-          <img
-            src="https://cdn.discordapp.com/attachments/885739536301318169/974292656920363048/hama.jpeg"
-            className="card__image"
-            alt=""
-          />
-        )}
-        {cnt === 2 && (
-          <img
-            src="https://cdn.discordapp.com/attachments/885739536301318169/974292657151033375/lion.jpeg"
-            className="card__image"
-            alt=""
-          />
-        )}
-        {cnt === 3 && (
-          <img
-            src="https://cdn.discordapp.com/attachments/885739536301318169/974292657406898206/monkey.jpeg"
-            className="card__image"
-            alt=""
-          />
-        )}
+        <img src={item.img} className="card__image" alt="" />
       </div>
       <div
         className="card__overlay"
@@ -98,5 +71,4 @@ export const ApplyCard = ({ item, studyID, cnt }) => {
 ApplyCard.propTypes = {
   item: PropTypes.objectOf(PropTypes.any).isRequired,
   studyID: PropTypes.string.isRequired,
-  cnt: PropTypes.number.isRequired,
 };

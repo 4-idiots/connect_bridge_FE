@@ -7,17 +7,17 @@ import { useNavigate } from 'react-router-dom';
 import * as Send from '../../../services/projectService';
 import { getKrField } from './getKrField';
 
-export const ApplyMemCard = ({ item, projectID, cnt }) => {
+export const ApplyMemCard = ({ item, projectID }) => {
   const navigate = useNavigate();
   const [field, setField] = useState('');
 
   const onNo = async () => {
     try {
-      const result = await Send.projectOutService(projectID, item.memberID);
+      await Send.projectOutService(projectID, item.memberID);
       alert('거절 되었습니다.');
       window.location.replace(`/project/${projectID}`);
     } catch (error) {
-      console.log(error);
+      // pass
     }
   };
 
@@ -33,34 +33,7 @@ export const ApplyMemCard = ({ item, projectID, cnt }) => {
         </B.Button>
       </div>
       <div onClick={() => navigate(`/team/info/${item.memberID}`)}>
-        {cnt === 0 && (
-          <img
-            src="https://cdn.discordapp.com/attachments/885739536301318169/974292656656101436/dolphin.jpeg"
-            className="card__image"
-            alt=""
-          />
-        )}
-        {cnt === 1 && (
-          <img
-            src="https://cdn.discordapp.com/attachments/885739536301318169/974292656920363048/hama.jpeg"
-            className="card__image"
-            alt=""
-          />
-        )}
-        {cnt === 2 && (
-          <img
-            src="https://cdn.discordapp.com/attachments/885739536301318169/974292657151033375/lion.jpeg"
-            className="card__image"
-            alt=""
-          />
-        )}
-        {cnt === 3 && (
-          <img
-            src="https://cdn.discordapp.com/attachments/885739536301318169/974292657406898206/monkey.jpeg"
-            className="card__image"
-            alt=""
-          />
-        )}
+        <img src={item.memberImg} className="card__image" alt="" />
       </div>
       <div
         className="card__overlay"
@@ -70,7 +43,6 @@ export const ApplyMemCard = ({ item, projectID, cnt }) => {
           <svg className="card__arc" xmlns="http://www.w3.org/2000/svg">
             <path />
           </svg>
-          <img className="card__thumb" src={item.memberImg} alt="" />
           <div className="card__header-text">
             <h3 className="card__title">{item.memberName}</h3>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -89,5 +61,4 @@ export const ApplyMemCard = ({ item, projectID, cnt }) => {
 ApplyMemCard.propTypes = {
   item: PropTypes.objectOf(PropTypes.any).isRequired,
   projectID: PropTypes.string.isRequired,
-  cnt: PropTypes.number.isRequired,
 };

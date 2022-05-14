@@ -1,23 +1,13 @@
 import React from 'react';
-import { useJwt } from 'react-jwt';
-import {
-  NavbarForm,
-  FooterForm,
-  BannerForm,
-  MainPageForm,
-} from '../../components/cRoutes';
-import { useAuth } from '../../contexts/hooks/useAuth';
+import * as C from '../../components/cRoutes';
 
 export const Main = () => {
-  const auth = useAuth();
-  const { decodedToken, isExpired } = useJwt(auth.token);
-
   return (
     <>
-      <NavbarForm />
-      <BannerForm />
-      <MainPageForm />
-      <FooterForm />
+      <C.NavbarForm />
+      <C.BannerForm />
+      <C.MainPageForm />
+      <C.FooterForm />
     </>
   );
 };

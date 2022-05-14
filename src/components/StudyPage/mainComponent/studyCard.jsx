@@ -41,9 +41,9 @@ export const StudyCard = ({ item }) => {
     }
     setUsLike(!usLike);
     try {
-      const result = await Send.studyLikeService(item.studyID);
+      await Send.studyLikeService(item.studyID);
     } catch (error) {
-      console.log(error);
+      // pass
     }
   };
 

@@ -1,12 +1,12 @@
 import React from 'react';
-import { SignupForm, NavbarForm, FooterForm } from '../../components/cRoutes';
+import * as C from '../../components/cRoutes';
 
 export const Sign = () => {
   return (
     <>
-      <NavbarForm />
-      <SignupForm />
-      <FooterForm />
+      <C.NavbarForm />
+      <C.SignupForm />
+      <C.FooterForm />
     </>
   );
 };

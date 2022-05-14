@@ -35,7 +35,7 @@ export const OutdoorUploadForm = () => {
 
   const uploadAxios = async formdata => {
     try {
-      const result = await outdoorUploadService(formdata);
+      await outdoorUploadService(formdata);
       alert('등록 되었습니다.');
       navigate('/outdoor');
     } catch (error) {

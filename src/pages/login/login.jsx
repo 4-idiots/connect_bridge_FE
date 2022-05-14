@@ -1,18 +1,13 @@
 import React from 'react';
-import {
-  LoginForm,
-  NavbarForm,
-  FooterForm,
-  BannerForm,
-} from '../../components/cRoutes';
+import * as C from '../../components/cRoutes';
 
 export const Login = () => {
   return (
     <>
-      <NavbarForm />
-      <BannerForm />
-      <LoginForm />
-      <FooterForm />
+      <C.NavbarForm />
+      <C.BannerForm />
+      <C.LoginForm />
+      <C.FooterForm />
     </>
   );
 };

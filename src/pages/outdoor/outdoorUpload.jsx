@@ -1,16 +1,12 @@
 import React from 'react';
-import {
-  OutdoorUploadForm,
-  NavbarForm,
-  FooterForm,
-} from '../../components/cRoutes';
+import * as C from '../../components/cRoutes';
 
 export const OutdoorUpload = () => {
   return (
     <>
-      <NavbarForm />
-      <OutdoorUploadForm />
-      <FooterForm />
+      <C.NavbarForm />
+      <C.OutdoorUploadForm />
+      <C.FooterForm />
     </>
   );
 };

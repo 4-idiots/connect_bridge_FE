@@ -1,21 +1,13 @@
 import React, { useState } from 'react';
 import { Container, Tabs } from 'react-bulma-components';
-import {
-  NavbarForm,
-  FooterForm,
-  MyPageForm,
-  MyProjectForm,
-  MyCommunityForm,
-  MySubscribeForm,
-  MyStudyForm,
-} from '../../components/cRoutes';
+import * as C from '../../components/cRoutes';
 
 export const MyPage = () => {
   const [where, setWhere] = useState('my');
 
   return (
     <>
-      <NavbarForm />
+      <C.NavbarForm />
       <Container style={{ marginTop: 80 }}>
         <Tabs
           align="center"
@@ -52,13 +44,13 @@ export const MyPage = () => {
           </Tabs.Tab>
           <Tabs.Tab>알림</Tabs.Tab>
         </Tabs>
-        {where === 'my' && <MyPageForm />}
-        {where === 'project' && <MyProjectForm />}
-        {where === 'study' && <MyStudyForm />}
-        {where === 'community' && <MyCommunityForm />}
-        {where === 'subscribe' && <MySubscribeForm />}
+        {where === 'my' && <C.MyPageForm />}
+        {where === 'project' && <C.MyProjectForm />}
+        {where === 'study' && <C.MyStudyForm />}
+        {where === 'community' && <C.MyCommunityForm />}
+        {where === 'subscribe' && <C.MySubscribeForm />}
       </Container>
-      <FooterForm />
+      <C.FooterForm />
     </>
   );
 };

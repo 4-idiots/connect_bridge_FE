@@ -19,7 +19,7 @@ export const FindPWForm = () => {
 
   const findPWAxios = async () => {
     try {
-      const result = await findPWServcie(userID, userName, userEmail);
+      await findPWServcie(userID, userName, userEmail);
       alert('임시 비밀번호가 발급 되었습니다. 메일을 확인하세요');
     } catch (error) {
       alert('다시 시도해주세요');

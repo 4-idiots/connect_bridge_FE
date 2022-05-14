@@ -9,7 +9,7 @@ export const RecruitModal = ({ item }) => {
         <S.StatusLi>
           <S.StatusBigP>모집 인원</S.StatusBigP>
           <S.StatusSmallP>
-            {item.studyMember} / {item.studyMember}
+            {item.studyMemberNow} / {item.studyMember}
           </S.StatusSmallP>
         </S.StatusLi>
       </S.StatusUl>

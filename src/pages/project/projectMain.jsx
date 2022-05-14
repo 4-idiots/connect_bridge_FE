@@ -1,16 +1,12 @@
 import React from 'react';
-import {
-  ProjectMainForm,
-  NavbarForm,
-  FooterForm,
-} from '../../components/cRoutes';
+import * as C from '../../components/cRoutes';
 
 export const ProjectMain = () => {
   return (
     <>
-      <NavbarForm />
-      <ProjectMainForm />
-      <FooterForm />
+      <C.NavbarForm />
+      <C.ProjectMainForm />
+      <C.FooterForm />
     </>
   );
 };

@@ -12,10 +12,9 @@ export const ApplyTab = ({ projectID, member }) => {
   const getAxios = async () => {
     try {
       const result = await projectGetAdminService(projectID);
-      console.log(result);
       setApplicant(result.data);
     } catch (error) {
-      console.log(error);
+      // pass
     }
   };
 
@@ -31,12 +30,7 @@ export const ApplyTab = ({ projectID, member }) => {
       <S.MemberGrid>
         {applicant &&
           applicant.map(item => (
-            <ApplyCard
-              item={item}
-              key={item.userID}
-              projectID={projectID}
-              cnt={Math.floor(Math.random() * 4)}
-            />
+            <ApplyCard item={item} key={item.userID} projectID={projectID} />
           ))}
       </S.MemberGrid>
       <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
@@ -48,7 +42,6 @@ export const ApplyTab = ({ projectID, member }) => {
             <ApplyMemCard
               key={item.memberID}
               item={item}
-              cnt={Math.floor(Math.random() * 4)}
               projectID={projectID}
             />
           ))}

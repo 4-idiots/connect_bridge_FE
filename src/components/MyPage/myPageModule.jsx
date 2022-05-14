@@ -51,14 +51,13 @@ export const MyPageForm = () => {
       setUser(result.data);
       setLoading(false);
     } catch (error) {
-      console.log(error);
       setLoading(false);
     }
   };
 
   const updateAxios = async data => {
     try {
-      const result = await Send.mypageUpdate(data);
+      await Send.mypageUpdate(data);
       window.location.replace('/my/info');
     } catch (error) {
       alert('다시 시도해주세요');
@@ -67,7 +66,7 @@ export const MyPageForm = () => {
 
   const updateNoImgAxios = async () => {
     try {
-      const result = await Send.mypageUpdatePost(
+      await Send.mypageUpdatePost(
         decodedToken.id,
         pwInfo.userPW,
         user.userNickname,
@@ -81,7 +80,7 @@ export const MyPageForm = () => {
       );
       window.location.replace('/my/info');
     } catch (error) {
-      console.log(error);
+      alert('다시 시도해주세요');
     }
   };
 
@@ -119,7 +118,7 @@ export const MyPageForm = () => {
     getAxios();
   }, []);
 
-  if (user) {
+  if (user && !loading) {
     return (
       <>
         <MyPageImg

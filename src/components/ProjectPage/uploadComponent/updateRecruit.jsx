@@ -37,7 +37,7 @@ export const UpdateRecruit = ({ member, setMember }) => {
     ncompEtc: 1,
   });
 
-  const handleInputChange = (e, index, sub) => {
+  const handleInputChange = (e, index) => {
     const { name, value } = e.target;
     const list = [...member.projectTotal];
     list[index][name] = value;

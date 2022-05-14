@@ -55,7 +55,7 @@ export const OutdoorUpdateForm = () => {
 
   const updateAxios = async formdata => {
     try {
-      const result = await Send.outdoorUpdateService(formdata);
+      await Send.outdoorUpdateService(formdata);
       alert('수정이 완료되었습니다.');
       navigate('/outdoor');
     } catch (error) {

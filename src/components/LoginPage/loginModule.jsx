@@ -40,7 +40,7 @@ export const LoginForm = () => {
     }
   };
 
-  const onSubmitEvent = e => {
+  const onSubmitEvent = () => {
     loginAxios(userID, userPW);
   };
 

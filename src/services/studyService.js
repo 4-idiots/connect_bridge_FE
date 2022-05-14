@@ -10,6 +10,7 @@ export const studyUploadService = (
   studyStart,
   studyEnd,
   content,
+  studyOnline,
 ) => {
   return customAxios.post(`/api/study`, {
     studyImg,
@@ -21,6 +22,7 @@ export const studyUploadService = (
     studyStart,
     studyEnd,
     content,
+    studyOnline,
   });
 };
 
@@ -69,7 +71,7 @@ export const studyGetSomeService = studyID => {
 };
 
 export const studyApplyService = (studyID, field) => {
-  return customAxios.post(`/api/study/apply`, {
+  return customAxios.patch(`/api/study/apply`, {
     studyID,
     field,
   });
@@ -101,4 +103,8 @@ export const studyYesService = (studyID, submitID) => {
 
 export const studyNoService = (studyID, submitID) => {
   return customAxios.get(`/api/study/${studyID}/reject/${submitID}`);
+};
+
+export const studyGetNoticeServie = studyID => {
+  return customAxios.get(`/api/study/${studyID}/notice`);
 };

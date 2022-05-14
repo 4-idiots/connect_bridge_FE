@@ -1,12 +1,12 @@
 import React from 'react';
-import { TeamForm, NavbarForm, FooterForm } from '../../components/cRoutes';
+import * as C from '../../components/cRoutes';
 
 export const Team = () => {
   return (
     <>
-      <NavbarForm />
-      <TeamForm />
-      <FooterForm />
+      <C.NavbarForm />
+      <C.TeamForm />
+      <C.FooterForm />
     </>
   );
 };

@@ -39,9 +39,9 @@ export const CommunityCard = ({ item }) => {
     }
     setUsLike(!usLike);
     try {
-      const result = await communityLike(item.postID);
+      await communityLike(item.postID);
     } catch (error) {
-      console.log(error);
+      // pass
     }
   };
 

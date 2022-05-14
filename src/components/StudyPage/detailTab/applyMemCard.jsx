@@ -6,16 +6,16 @@ import * as B from 'react-bulma-components';
 import { useNavigate } from 'react-router-dom';
 import * as Send from '../../../services/studyService';
 
-export const ApplyMemCard = ({ item, studyID, cnt }) => {
+export const ApplyMemCard = ({ item, studyID }) => {
   const navigate = useNavigate();
 
   const onNo = async () => {
     try {
-      const result = await Send.studyOutService(studyID, item.memberID);
+      await Send.studyOutService(studyID, item.memberID);
       alert('거절 되었습니다.');
       window.location.replace(`/study/${studyID}`);
     } catch (error) {
-      console.log(error);
+      // pass
     }
   };
 
@@ -27,34 +27,7 @@ export const ApplyMemCard = ({ item, studyID, cnt }) => {
         </B.Button>
       </div>
       <div onClick={() => navigate(`/team/info/${item.memberID}`)}>
-        {cnt === 0 && (
-          <img
-            src="https://cdn.discordapp.com/attachments/885739536301318169/974292656656101436/dolphin.jpeg"
-            className="card__image"
-            alt=""
-          />
-        )}
-        {cnt === 1 && (
-          <img
-            src="https://cdn.discordapp.com/attachments/885739536301318169/974292656920363048/hama.jpeg"
-            className="card__image"
-            alt=""
-          />
-        )}
-        {cnt === 2 && (
-          <img
-            src="https://cdn.discordapp.com/attachments/885739536301318169/974292657151033375/lion.jpeg"
-            className="card__image"
-            alt=""
-          />
-        )}
-        {cnt === 3 && (
-          <img
-            src="https://cdn.discordapp.com/attachments/885739536301318169/974292657406898206/monkey.jpeg"
-            className="card__image"
-            alt=""
-          />
-        )}
+        <img src={item.memberImg} className="card__image" alt="" />
       </div>
       <div
         className="card__overlay"
@@ -69,9 +42,9 @@ export const ApplyMemCard = ({ item, studyID, cnt }) => {
             <h3 className="card__title">{item.memberName}</h3>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <span style={{ marginBottom: 4 }} className="card__status">
-                분야: {item.userInterestSub}
+                분야: {item.memberInterestSub}
               </span>
-              <span className="card__status">능력: {item.userAbility}</span>
+              <span className="card__status">능력: {item.memberAbility}</span>
             </div>
           </div>
         </div>
@@ -84,5 +57,4 @@ export const ApplyMemCard = ({ item, studyID, cnt }) => {
 ApplyMemCard.propTypes = {
   item: PropTypes.objectOf(PropTypes.any).isRequired,
   studyID: PropTypes.string.isRequired,
-  cnt: PropTypes.number.isRequired,
 };

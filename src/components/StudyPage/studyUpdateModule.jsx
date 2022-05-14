@@ -35,7 +35,7 @@ export const StudyUpdateForm = () => {
 
   const updateAxios = async () => {
     try {
-      const result = await Send.studyUpdateService(
+      await Send.studyUpdateService(
         studyID,
         study.studyName,
         study.studyKeyward,

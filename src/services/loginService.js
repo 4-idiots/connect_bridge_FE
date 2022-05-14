@@ -1,14 +1,10 @@
 import customAxios from './customAxios';
 
 export const loginService = (userID, userPW) => {
-  return customAxios.post(
-    `/api/user/login`,
-    {
-      userID,
-      userPW,
-    },
-    { withCredentials: true },
-  );
+  return customAxios.post(`/api/user/login`, {
+    userID,
+    userPW,
+  });
 };
 
 export const setAuthorizationToken = token => {

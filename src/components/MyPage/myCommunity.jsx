@@ -21,7 +21,7 @@ export const MyCommunityForm = () => {
 
   const deleteAxios = async cid => {
     try {
-      const result = await Send.myCommunityDelete(cid);
+      await Send.myCommunityDelete(cid);
       alert('삭제 되었습니다.');
       window.location.replace('/my/info');
     } catch (error) {

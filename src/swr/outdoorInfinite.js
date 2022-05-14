@@ -65,12 +65,6 @@ export const OutdoorInfinite = ({ outActClick }) => {
   );
 };
 
-OutdoorInfinite.defaultProps = {
-  outActClick: (name, img, link, view, like, id) => {
-    console.log(name, img, link, view, like, id);
-  },
-};
-
 OutdoorInfinite.propTypes = {
-  outActClick: PropTypes.func,
+  outActClick: PropTypes.func.isRequired,
 };

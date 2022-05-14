@@ -9,7 +9,7 @@ export const NoticeUpload = ({ projectID }) => {
 
   const submit = async () => {
     try {
-      const result = await projectNoticeUploadService(projectID, content);
+      await projectNoticeUploadService(projectID, content);
       alert('글이 등록 되었습니다.');
       window.location.replace(`/project/${projectID}`);
     } catch (error) {

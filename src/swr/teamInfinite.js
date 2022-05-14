@@ -3,7 +3,7 @@ import React, { useRef, useEffect } from 'react';
 import useSWRInfinite from 'swr/infinite';
 import fetcher from './fetcher';
 import useOnScreen from './useOnScreen';
-import { TeamCard } from '../components/MainPage/mainCard/teamCard';
+import { TeamCard } from '../components/TeamPage/teamCard';
 import { SkelTeam } from '../components/skeleton/skelRouter';
 
 const getKey = (pageIndex, previousPageData) => {
@@ -40,14 +40,7 @@ export const TeamInfinite = () => {
   return (
     <>
       {isEmpty ? <p>Yay, no team found.</p> : null}
-      {issues &&
-        issues.map(item => (
-          <TeamCard
-            key={item.myid}
-            item={item}
-            cnt={Math.floor(Math.random() * 4)}
-          />
-        ))}
+      {issues && issues.map(item => <TeamCard key={item.myid} item={item} />)}
       <div ref={ref}>
         {isLoadingMore ? <SkelTeam /> : isReachingEnd ? '' : ''}
       </div>

@@ -1,16 +1,12 @@
 import React from 'react';
-import {
-  ProjectStudyUploadForm,
-  NavbarForm,
-  FooterForm,
-} from '../../components/cRoutes';
+import * as C from '../../components/cRoutes';
 
 export const ProjectUpload = () => {
   return (
     <>
-      <NavbarForm />
-      <ProjectStudyUploadForm />
-      <FooterForm />
+      <C.NavbarForm />
+      <C.ProjectStudyUploadForm />
+      <C.FooterForm />
     </>
   );
 };

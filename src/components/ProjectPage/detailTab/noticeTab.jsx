@@ -13,7 +13,7 @@ export const NoticeTab = ({ projectID, isMaster }) => {
       const result = await projectGetNoticeServie(projectID);
       setNotice(result.data);
     } catch (error) {
-      console.log(error);
+      // pass
     }
   };
 

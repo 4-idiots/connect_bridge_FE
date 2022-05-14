@@ -18,7 +18,6 @@ export const StudyMainForm = () => {
         const result = await studyGetNewService();
         setNewStudy(result.data);
         setLoading(false);
-        console.log(result);
       } catch (error) {
         setLoading(false);
       }

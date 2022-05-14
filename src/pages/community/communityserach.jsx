@@ -1,16 +1,12 @@
 import React from 'react';
-import {
-  CommunityserachForm,
-  NavbarForm,
-  FooterForm,
-} from '../../components/cRoutes';
+import * as C from '../../components/cRoutes';
 
 export const Communityserach = () => {
   return (
     <>
-      <NavbarForm />
-      <CommunityserachForm />
-      <FooterForm />
+      <C.NavbarForm />
+      <C.CommunityserachForm />
+      <C.FooterForm />
     </>
   );
 };

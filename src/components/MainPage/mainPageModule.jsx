@@ -17,7 +17,6 @@ export const MainPageForm = () => {
     try {
       const result = await getMainService();
       setMain(result.data);
-      console.log(result.data);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -62,10 +61,8 @@ export const MainPageForm = () => {
           팀원들
         </Heading>
         <S.MainGrid>
-          <TeamCard item={main.register[0]} cnt={0} />
-          <TeamCard item={main.register[1]} cnt={1} />
-          <TeamCard item={main.register[2]} cnt={2} />
-          <TeamCard item={main.register[3]} cnt={3} />
+          {main.register &&
+            main.register.map(item => <TeamCard item={item} key={item.myid} />)}
         </S.MainGrid>
       </Container>
     );

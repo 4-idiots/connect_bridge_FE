@@ -1,12 +1,12 @@
 import React from 'react';
-import { InfoForm, NavbarForm, FooterForm } from '../../components/cRoutes';
+import * as C from '../../components/cRoutes';
 
 export const Info = () => {
   return (
     <>
-      <NavbarForm />
-      <InfoForm />
-      <FooterForm />
+      <C.NavbarForm />
+      <C.InfoForm />
+      <C.FooterForm />
     </>
   );
 };

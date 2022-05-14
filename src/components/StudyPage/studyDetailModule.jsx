@@ -21,7 +21,7 @@ export const StudyDetailForm = () => {
 
   const applyService = async (stid, field) => {
     try {
-      const result = await Send.studyApplyService(stid, field);
+      await Send.studyApplyService(stid, field);
       alert('정상적으로 신청이 되었습니다.');
     } catch (error) {
       alert('이미 신청하셨습니다.');
@@ -30,7 +30,7 @@ export const StudyDetailForm = () => {
 
   const deleteAxios = async id => {
     try {
-      const result = await Send.studyDeleteService(id);
+      await Send.studyDeleteService(id);
       alert('삭제되었습니다.');
       navigate('/study');
     } catch (error) {
@@ -40,10 +40,10 @@ export const StudyDetailForm = () => {
 
   const stateChange = async () => {
     try {
-      const result = await Send.studyStateService(studyID);
+      await Send.studyStateService(studyID);
       alert('상태가 변경되었습니다.');
     } catch (error) {
-      console.log(error);
+      navigate('/study');
     }
   };
 
@@ -53,7 +53,6 @@ export const StudyDetailForm = () => {
       try {
         const result = await Send.studyGetSomeService(id);
         setStudy(result.data);
-        console.log(result.data);
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -113,7 +112,7 @@ export const StudyDetailForm = () => {
                   apply={applyService}
                   studyID={Number(studyID)}
                 />
-                <DR.DetailContent value={JSON.parse(study.content)} />
+                <DR.DetailContent value={study.content} />
                 <DR.DetailKeyward studyKeyward={study.studyKeyward} />
                 <DR.DetailMember item={study.memberID} />
               </S.LeftDetail>
@@ -163,6 +162,12 @@ export const StudyDetailForm = () => {
                 </Button.Group>
                 <ApplyTab studyID={studyID} member={study.memberID} />
               </>
+            )}
+            {where === 'notice' && decodedToken && (
+              <NoticeTab
+                studyID={studyID}
+                isMaster={study.userID === decodedToken.id}
+              />
             )}
           </S.PageLeft>
           <DR.DetailRightCard item={study} studyID={Number(studyID)} />

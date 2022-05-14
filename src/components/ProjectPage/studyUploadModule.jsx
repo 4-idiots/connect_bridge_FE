@@ -112,7 +112,7 @@ export const StudyUploadForm = () => {
 
   const uploadAxios = async () => {
     try {
-      const result = await studyUploadService(
+      await studyUploadService(
         randImg[Math.floor(Math.random() * randImg.length)],
         studyName,
         studyKeyward,
@@ -121,12 +121,12 @@ export const StudyUploadForm = () => {
         studyMember,
         studyStart,
         studyEnd,
-        studyOnline,
         JSON.stringify(content),
+        studyOnline,
       );
       alert('등록 되었습니다.');
     } catch (error) {
-      console.log(error);
+      // pass
     }
   };
 
