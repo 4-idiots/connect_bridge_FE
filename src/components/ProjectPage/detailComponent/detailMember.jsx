@@ -11,7 +11,19 @@ export const DetailMember = ({ item }) => {
         멤버
       </Heading>
       <S.MemberGrid>
-        {item && item.map(it => <MemberCard key={it.memberID} item={it} />)}
+        {item && item.length !== 0 ? (
+          <>
+            {item.map(it => (
+              <MemberCard key={it.memberID} item={it} />
+            ))}
+          </>
+        ) : (
+          <S.PSBox>
+            <S.PSNull>
+              <S.PSText>아직 프로젝트에 참가중인 팀원이 없습니다.</S.PSText>
+            </S.PSNull>
+          </S.PSBox>
+        )}
       </S.MemberGrid>
     </S.DetailMember>
   );

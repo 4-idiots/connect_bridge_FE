@@ -31,17 +31,17 @@ export const studyGetAllService = cursor => {
 };
 
 export const studyUpdateService = ({
+  studyID,
   studyImg,
   studyName,
   studyKeyward,
   studyField,
   studyArea,
-  studyOnOff,
   studyMember,
-  studyStart,
   studyEnd,
+  studyStart,
   content,
-  studyID,
+  studyOnline,
 }) => {
   return customAxios.patch(`/api/study`, {
     studyImg,
@@ -49,12 +49,12 @@ export const studyUpdateService = ({
     studyKeyward,
     studyField,
     studyArea,
-    studyOnOff,
     studyMember,
     studyStart,
     studyEnd,
     content,
     studyID,
+    studyOnline,
   });
 };
 

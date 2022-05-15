@@ -59,5 +59,5 @@ export const DetailRecruit = ({ item, apply, studyID }) => {
 DetailRecruit.propTypes = {
   item: PropTypes.objectOf(PropTypes.any).isRequired,
   apply: PropTypes.func.isRequired,
-  studyID: PropTypes.number.isRequired,
+  studyID: PropTypes.string.isRequired,
 };

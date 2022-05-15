@@ -14,6 +14,7 @@ import {
 import SlateEditor from '../../SlateEditor/Editor';
 import * as Send from '../../services/studyService';
 import { useAuth } from '../../contexts/hooks/useAuth';
+import { SkelUpdate } from '../skeleton/project/update';
 
 export const StudyUpdateForm = () => {
   const [loading, setLoading] = useState(false);
@@ -37,15 +38,16 @@ export const StudyUpdateForm = () => {
     try {
       await Send.studyUpdateService(
         studyID,
+        study.studyImg,
         study.studyName,
         study.studyKeyward,
         study.studyField,
         study.studyArea,
-        study.studyOnOff,
         study.studyMember,
         study.studyEnd,
         study.studyStart,
         JSON.stringify(study.content),
+        study.studyOnline,
       );
       alert('수정 되었습니다.');
       navigate('/study');
@@ -60,6 +62,7 @@ export const StudyUpdateForm = () => {
       try {
         const result = await Send.studyGetSomeService(prID);
         setStudy(result.data);
+        console.log(result);
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -104,7 +107,7 @@ export const StudyUpdateForm = () => {
                 member={study.studyMember}
                 onChange={onChangeStudyEvent}
               />
-              <StudyArea onChange={onChangeStudyEvent} />
+              <StudyArea onChange={onChangeStudyEvent} value={study} />
               <StudyDate
                 start={study.studyStart}
                 end={study.studyEnd}
@@ -139,5 +142,5 @@ export const StudyUpdateForm = () => {
       </Container>
     );
   }
-  return null;
+  return <SkelUpdate />;
 };

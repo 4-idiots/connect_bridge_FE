@@ -7,6 +7,7 @@ import * as S from '../ProjectPage/detailComponent/style';
 import * as Send from '../../services/studyService';
 import { useAuth } from '../../contexts/hooks/useAuth';
 import { NoticeTab, ApplyTab } from './detailTab/tabRoutes';
+import * as Sk from '../skeleton/project/skprRouter';
 
 export const StudyDetailForm = () => {
   const [loading, setLoading] = useState(false);
@@ -175,5 +176,23 @@ export const StudyDetailForm = () => {
       </Container>
     );
   }
-  return null;
+  return (
+    <Container style={{ marginTop: 80 }}>
+      <Sk.SkelHeader />
+      <S.PageWrap>
+        <S.PageLeft>
+          <Sk.SkelTabs />
+          <S.LeftDetail>
+            <Sk.SkelRecruit />
+            <Sk.SkelContent />
+            <Sk.SkelSkill />
+            <Sk.SkelTeam />
+          </S.LeftDetail>
+          {where === 'notice' && <Sk.SkelNotice />}
+          {where === 'apply' && <Sk.SkelApply />}
+        </S.PageLeft>
+        <Sk.SkelRightCard />
+      </S.PageWrap>
+    </Container>
+  );
 };

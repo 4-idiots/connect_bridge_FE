@@ -9,3 +9,4 @@ export { SkelTeam } from '../team';
 export { SkelRightCard } from './rightCard';
 export { SkelNotice } from './notice';
 export { SkelApply } from './apply';
+export { SkelUpdate } from './update';

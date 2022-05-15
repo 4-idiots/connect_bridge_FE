@@ -1,4 +1,3 @@
-/* eslint-disable valid-typeof */
 import React, { useState, useCallback, useEffect } from 'react';
 import { Container, Heading, Button, Box, Form } from 'react-bulma-components';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -8,8 +7,10 @@ import * as UR from './uploadComponent/uploadRoutes';
 import * as Send from '../../services/projectService';
 import SlateEditor from '../../SlateEditor/Editor';
 import { useAuth } from '../../contexts/hooks/useAuth';
+import { SkelUpdate } from '../skeleton/project/update';
 
 export const ProjectUpdateForm = () => {
+  const [loading, setLoading] = useState(false);
   const auth = useAuth();
   const { decodedToken } = useJwt(auth.token);
   const navigate = useNavigate();
@@ -37,11 +38,14 @@ export const ProjectUpdateForm = () => {
   };
 
   const getSomeAxios = async prID => {
+    setLoading(true);
     try {
       const result = await Send.projectGetSomeService(prID);
       setPostInfo(result.data);
+      setLoading(false);
     } catch (error) {
       navigate('/project');
+      setLoading(false);
     }
   };
 
@@ -52,7 +56,7 @@ export const ProjectUpdateForm = () => {
   const onSubmitEvent = () => {
     const formData = new FormData();
     formData.append('userID', decodedToken.id);
-    formData.append('projectOnOff', true); // 이거 바꾸는 버튼 만들어야 함
+    formData.append('projectOnOff', true);
     formData.append('projectID', projectID);
     formData.append('projectName', postInfo.projectName);
     formData.append('projectMotive', postInfo.projectMotive);
@@ -128,7 +132,7 @@ export const ProjectUpdateForm = () => {
     updateAxios(formData);
   };
 
-  if (postInfo) {
+  if (postInfo && !loading) {
     return (
       <Container style={{ marginTop: 80 }}>
         {decodedToken && decodedToken.id === postInfo.userID ? (
@@ -211,5 +215,5 @@ export const ProjectUpdateForm = () => {
       </Container>
     );
   }
-  return null;
+  return <SkelUpdate />;
 };

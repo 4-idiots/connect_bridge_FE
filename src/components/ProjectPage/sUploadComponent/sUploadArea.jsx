@@ -3,7 +3,7 @@ import { Form } from 'react-bulma-components';
 import PropTypes from 'prop-types';
 import { areaArray, onOffArray } from '../uploadComponent/uploadValue';
 
-export const StudyArea = ({ onChange }) => {
+export const StudyArea = ({ onChange, value }) => {
   return (
     <Form.Field>
       <Form.Label>* 지역</Form.Label>
@@ -13,6 +13,7 @@ export const StudyArea = ({ onChange }) => {
           style={{ width: '20%' }}
           name="studyOnline"
           onChange={onChange}
+          defaultValue={value.studyOnline}
         >
           <option value="">-------</option>
           {onOffArray.map(item => (
@@ -25,6 +26,7 @@ export const StudyArea = ({ onChange }) => {
           style={{ width: '16%' }}
           name="studyArea"
           onChange={onChange}
+          defaultValue={value.studyArea}
         >
           <option value="">-------</option>
           {areaArray.map(item => (
@@ -40,4 +42,5 @@ export const StudyArea = ({ onChange }) => {
 
 StudyArea.propTypes = {
   onChange: PropTypes.func.isRequired,
+  value: PropTypes.objectOf(PropTypes.any).isRequired,
 };

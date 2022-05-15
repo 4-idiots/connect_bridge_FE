@@ -1,8 +1,10 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import React, { useEffect, useState } from 'react';
 import { Heading } from 'react-bulma-components';
 import * as Send from '../../services/mypageService';
 import { MyCmCard } from './community/myCmCard';
 import { SkelCommunity } from '../skeleton/mypage/mypageRouter';
+import * as S from '../ProjectPage/detailTab/style';
 
 export const MyCommunityForm = () => {
   const [loading, setLoading] = useState(false);
@@ -37,10 +39,24 @@ export const MyCommunityForm = () => {
     return (
       <>
         <Heading size={4}>작성한 글</Heading>
-        {community &&
-          community.map(item => (
-            <MyCmCard item={item} deleteAxios={deleteAxios} key={item.postID} />
-          ))}
+        {community.length !== 0 ? (
+          <>
+            {community &&
+              community.map(item => (
+                <MyCmCard
+                  item={item}
+                  deleteAxios={deleteAxios}
+                  key={item.postID}
+                />
+              ))}
+          </>
+        ) : (
+          <S.PSBox>
+            <S.PSNull>
+              <S.PSText>아직 작성된 글이 없습니다.</S.PSText>
+            </S.PSNull>
+          </S.PSBox>
+        )}
       </>
     );
   }
