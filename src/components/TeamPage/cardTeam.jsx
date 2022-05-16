@@ -33,12 +33,7 @@ export const TeamCardForm = ({
   return (
     <People11>
       <People11122>
-        <img
-          renderAs={Link}
-          to={`/team/info/${myid}`}
-          src={userPicture}
-          alt="img"
-        />
+        <img to={`/team/info/${myid}`} src={userPicture} alt="img" />
       </People11122>
       <People111>
         <People1111> {userNickname} </People1111>
@@ -94,7 +89,7 @@ const People111 = styled.div`
   width: 100%;
 `;
 const People11122 = styled.div`
-  width: 100%;
+  height: 100%;
 `;
 const People1111 = styled.div`
   margin-top: 15px;
