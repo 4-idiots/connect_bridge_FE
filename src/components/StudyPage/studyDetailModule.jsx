@@ -111,7 +111,7 @@ export const StudyDetailForm = () => {
                 <DR.DetailRecruit
                   item={study}
                   apply={applyService}
-                  studyID={Number(studyID)}
+                  studyID={studyID}
                 />
                 <DR.DetailContent value={study.content} />
                 <DR.DetailKeyward studyKeyward={study.studyKeyward} />

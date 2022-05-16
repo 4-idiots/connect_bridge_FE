@@ -239,3 +239,10 @@ export const mainRecruitWrap = styled.div`
   border-top-color: rgba(219, 219, 219, 0.5);
   position: relative;
 `;
+
+export const ProjectGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  row-gap: 3rem;
+  margin-bottom: 80px;
+`;
