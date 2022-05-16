@@ -7,18 +7,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import {
-  Container,
-  Heading,
-  Form,
-  Button,
-  Box,
-  Card,
-  Media,
-  Image,
-  Content,
-  Panel,
-} from 'react-bulma-components';
+import { Card } from 'react-bulma-components';
 import { Link, useParams } from 'react-router-dom';
 import { useJwt } from 'react-jwt';
 import { useAuth } from '../../contexts/hooks/useAuth';
@@ -29,11 +18,8 @@ export const CommunityserachForm = ({ commentCount, onActClick, hashtag }) => {
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
   const auth = useAuth();
-  const { decodedToken, isExpired } = useJwt(auth.token);
-  const { teID } = useParams(`${decodedToken?.id}`);
+  const { decodedToken } = useJwt(auth.token);
   const offset = (page - 1) * limit;
-  const [items, setItems] = useState();
-  /* const [query, setquery] = useState(''); */
   const { query } = useParams();
   const [querya, setquerya] = useState('');
   const handleQuery = e => {
@@ -43,24 +29,21 @@ export const CommunityserachForm = ({ commentCount, onActClick, hashtag }) => {
     try {
       const res = await axios.get(`/api/serach/${querya}`, {
         params: {
-          // eslint-disable-next-line object-shorthand
-          querya: querya,
+          querya,
         },
       });
       if (res && res.status === 200) {
         const { data } = res;
-        console.log(data);
         setItems(data.items);
         window.location.replace(`/serach/${querya}`);
       }
     } catch (e) {
-      console.log('error ', e);
+      // pass
     }
   };
 
   useEffect(() => {
-    // eslint-disable-next-line prefer-template
-    fetch('/api/serach/' + query)
+    fetch(`/api/serach/${query}`)
       .then(res => res.json())
       .then(data => setPosts(data));
   }, []);
@@ -147,15 +130,7 @@ export const CommunityserachForm = ({ commentCount, onActClick, hashtag }) => {
                 {posts
                   .slice(offset, offset + limit)
                   .map(
-                    ({
-                      id,
-                      postID,
-                      title,
-                      userNickname,
-                      viewCount,
-                      likeCount,
-                      body,
-                    }) => (
+                    ({ postID, title, userNickname, viewCount, likeCount }) => (
                       <Bl2 key={postID}>
                         <Bl3 style={{ fontSize: 'medium' }} className="size01">
                           {postID}
@@ -379,15 +354,14 @@ const Bl3 = styled.td`
 CommunityserachForm.propTypes = {
   commentCount: PropTypes.number,
   onActClick: PropTypes.func,
-  // eslint-disable-next-line react/forbid-prop-types
-  hashtag: PropTypes.array,
+  hashtag: PropTypes.arrayOf(PropTypes.any),
 };
 
 CommunityserachForm.defaultProps = {
   commentCount: 0,
 
   onActClick: () => {
-    console.log('hh');
+    // pass
   },
   hashtag: [''],
 };

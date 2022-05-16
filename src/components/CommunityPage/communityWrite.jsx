@@ -1,38 +1,18 @@
 /* eslint-disable react/no-array-index-key */
-/* eslint-disable react/jsx-no-undef */
 /* eslint-disable jsx-a11y/control-has-associated-label */
-/* eslint-disable react/self-closing-comp */
-/* eslint-disable react/button-has-type */
-import axios from 'axios';
-import React, { useState, useEffect, useCallback } from 'react';
-
-import { useParams } from 'react-router-dom';
-
-import {
-  Container,
-  Heading,
-  Form,
-  Button,
-  Box,
-  Card,
-  Media,
-  Image,
-  Tag,
-  tags,
-} from 'react-bulma-components';
+import React, { useState } from 'react';
+import { Container, Heading, Form, Button, Box } from 'react-bulma-components';
 import { useJwt } from 'react-jwt';
 import { useAuth } from '../../contexts/hooks/useAuth';
 import SlateEditor from '../../SlateEditor/Editor';
 import customAxios from '../../services/customAxios';
 
 export const CommunityWriteForm = () => {
-  const [data, setdata] = useState([]);
   const [tagInput, setTagInput] = useState('');
   const [hashtag, sethashtag] = useState([]);
   const [title, settitle] = useState('');
   const auth = useAuth();
-  const { decodedToken, isExpired } = useJwt(auth.token);
-  const { fromUserId } = useParams(`${decodedToken?.id}`);
+  const { decodedToken } = useJwt(auth.token);
 
   const [contents, setcontents] = useState({
     content: [
@@ -42,17 +22,6 @@ export const CommunityWriteForm = () => {
       },
     ],
   });
-
-  const userData = () => {
-    return customAxios.get('/api/communityw').then(response => {
-      console.log(response);
-      setdata(response.data);
-    });
-  };
-
-  useEffect(() => {
-    userData();
-  }, []);
 
   const titledata = e => {
     settitle(e.target.value);
@@ -64,11 +33,8 @@ export const CommunityWriteForm = () => {
 
       setTagInput('');
     }
-    console.log(hashtag);
   };
   const removeList = id => {
-    console.log(id);
-
     sethashtag(hashtag.filter(item => item !== id));
   };
 
@@ -81,13 +47,11 @@ export const CommunityWriteForm = () => {
           contents: JSON.stringify(contents.content),
         })
 
-        .then(response => {
-          console.log(response.data.message);
-          userData();
+        .then(() => {
           alert('작성이 완료하였습니다.');
           window.location = '/community';
         })
-        .catch(response => {
+        .catch(() => {
           alert('입력값을 확인해주세요.');
         });
     } else {
@@ -136,7 +100,8 @@ export const CommunityWriteForm = () => {
                   key={id}
                   onClick={() => removeList(item)}
                   className="delete is-small"
-                ></button>
+                  type="button"
+                />
                 <br />
               </span>
             ))}

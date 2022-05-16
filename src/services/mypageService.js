@@ -55,3 +55,11 @@ export const myCommunityDelete = communityID => {
 export const mySubscribeGetService = () => {
   return customAxios.get(`/api/myfollow`);
 };
+
+export const myProjectGetService = () => {
+  return customAxios.get(`/api/myproject`);
+};
+
+export const myStudyGetService = () => {
+  return customAxios.get(`/api/mystudy`);
+};

@@ -1,6 +1,5 @@
-/* eslint-disable react/jsx-no-undef */
-import React, { useState } from 'react';
-import { Button, Card, Media, Heading, Image } from 'react-bulma-components';
+import React from 'react';
+import { Card, Media, Heading } from 'react-bulma-components';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useJwt } from 'react-jwt';
@@ -13,13 +12,10 @@ export const CommunityCardForm = ({
   viewCount,
   likeCount,
   commentCount,
-  onActClick,
   hashtag,
 }) => {
   const auth = useAuth();
-  const { decodedToken, isExpired } = useJwt(auth.token);
-  const [itema, setitema] = useState({});
-  const { titlea, userNicknamea } = itema;
+  const { decodedToken } = useJwt(auth.token);
   return (
     <div
       style={{
@@ -126,9 +122,7 @@ CommunityCardForm.propTypes = {
   viewCount: PropTypes.number,
   likeCount: PropTypes.number,
   commentCount: PropTypes.number,
-  onActClick: PropTypes.func,
-  // eslint-disable-next-line react/forbid-prop-types
-  hashtag: PropTypes.array,
+  hashtag: PropTypes.arrayOf(PropTypes.any),
 };
 
 CommunityCardForm.defaultProps = {
@@ -138,8 +132,5 @@ CommunityCardForm.defaultProps = {
   commentCount: 0,
   viewCount: 0,
   likeCount: 0,
-  onActClick: () => {
-    console.log('hh');
-  },
   hashtag: [''],
 };

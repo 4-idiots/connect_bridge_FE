@@ -1,22 +1,8 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-nested-ternary */
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-
-import validator from 'validator';
-import {
-  Container,
-  Heading,
-  Form,
-  Button,
-  Box,
-  Card,
-  Media,
-  Content,
-  Figure,
-  Image,
-} from 'react-bulma-components';
+import { Button } from 'react-bulma-components';
 import { useParams } from 'react-router-dom';
 import { useJwt } from 'react-jwt';
 import { useAuth } from '../../contexts/hooks/useAuth';
@@ -24,7 +10,6 @@ import ReadOnlySlate from '../../SlateEditor/ReadOnly';
 import customAxios from '../../services/customAxios';
 
 export const CommunityInfoForm = () => {
-  const [users, setusers] = useState([]);
   const [postID, setpostID] = useState(0);
   const [title, settitle] = useState('');
   const [hashtag, sethashtag] = useState([]);
@@ -36,8 +21,7 @@ export const CommunityInfoForm = () => {
   const [commentCount, setcommentCount] = useState(0);
   const { communityID } = useParams();
   const auth = useAuth();
-  const { decodedToken, isExpired } = useJwt(auth.token);
-  const { teID } = useParams(`${decodedToken?.id}`);
+  const { decodedToken } = useJwt(auth.token);
   const [color, setColor] = useState('');
   const [state, setstate] = useState(0);
   const [comment, setcomment] = useState('');
@@ -47,7 +31,6 @@ export const CommunityInfoForm = () => {
   const [userInterestMain, setuserInterestMain] = useState('');
   const [userInterestSub, setuserInterestSub] = useState('');
   const [userID, setuserID] = useState('');
-  const [ida, setida] = useState({});
 
   const onSubmit = e => {
     e.preventDefault();
@@ -56,7 +39,7 @@ export const CommunityInfoForm = () => {
         comment,
         postID,
       })
-      .then(response => {
+      .then(() => {
         if (comment === '') {
           return;
         }
@@ -75,9 +58,8 @@ export const CommunityInfoForm = () => {
     window.location = `/community/change/${communityID}`;
   };
   const DeleteClick = () => {
-    customAxios.delete(`/api/community/${communityID}`).then(response => {
+    customAxios.delete(`/api/community/${communityID}`).then(() => {
       window.location = '/community';
-      console.log(communityID);
     });
   };
 
@@ -86,8 +68,7 @@ export const CommunityInfoForm = () => {
       customAxios
         .get(`/api/community/like?toPostId=${communityID}`)
         .then(response => {
-          console.log(communityID);
-          console.log(response.data.state);
+          // pass
         });
       // eslint-disable-next-line no-unused-expressions
       color === 'black'
@@ -109,8 +90,6 @@ export const CommunityInfoForm = () => {
 
   const userData = () => {
     customAxios.get(`/api/community/info/${communityID}`).then(response => {
-      console.log(response);
-      setusers(response.data);
       setpostID(response.data.postID);
       setuserNickname(response.data.userNickname);
       sethashtag(response.data.hashtag);
@@ -133,19 +112,15 @@ export const CommunityInfoForm = () => {
   };
 
   const CommentChangeClick = (cmID, cmComment) => {
-    customAxios
-      .patch(`/api/community/comment`, cmID, cmComment)
-      .then(response => {
-        window.location.reload();
-      });
+    customAxios.patch(`/api/community/comment`, cmID, cmComment).then(() => {
+      window.location.reload();
+    });
   };
 
   const CommentDeleteClick = cmID => {
-    customAxios
-      .delete(`/api/community/comment/${cmID}/${postID}`)
-      .then(response => {
-        window.location.reload();
-      });
+    customAxios.delete(`/api/community/comment/${cmID}/${postID}`).then(() => {
+      window.location.reload();
+    });
   };
 
   useEffect(() => {
@@ -501,9 +476,8 @@ const Comment11 = styled.div`
   margin-bottom: 30px;
   width: 100%;
 `;
-const Delete1 = styled.div``;
 
-const Delete11 = styled.div``;
+const Delete1 = styled.div``;
 
 const Botton1 = styled.div`
   background-color: #f7f7f7;

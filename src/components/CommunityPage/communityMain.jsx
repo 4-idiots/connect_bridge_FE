@@ -7,22 +7,10 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { BiListCheck, BiSearchAlt2 } from 'react-icons/bi';
 
 import PropTypes from 'prop-types';
-import {
-  Container,
-  Heading,
-  Form,
-  Button,
-  Box,
-  Card,
-  Media,
-  Image,
-  Content,
-  Panel,
-} from 'react-bulma-components';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Button } from 'react-bulma-components';
+import { Link, useParams } from 'react-router-dom';
 import { useJwt } from 'react-jwt';
 import { useAuth } from '../../contexts/hooks/useAuth';
 import { Pagination } from '../../swr/Pagination';
@@ -31,13 +19,9 @@ export const CommunityForm = ({ commentCount, onActClick, hashtag }) => {
   const [posts, setPosts] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
-  const [postID, setpostID] = useState('');
-  const str = posts.toString();
   const auth = useAuth();
   const { decodedToken, isExpired } = useJwt(auth.token);
-  const { teID } = useParams(`${decodedToken?.id}`);
   const offset = (page - 1) * limit;
-  const [items, setItems] = useState();
   const [query, setquery] = useState('');
 
   const handleQuery = e => {
@@ -49,19 +33,17 @@ export const CommunityForm = ({ commentCount, onActClick, hashtag }) => {
         `/api/serach/${query}`,
         {
           params: {
-            // eslint-disable-next-line object-shorthand
-            query: query,
+            query,
           },
         },
         window.location.replace(`/serach/${query}`),
       );
       if (res && res.status === 200) {
         const { data } = res;
-        console.log(data);
         setItems(data.items);
       }
     } catch (e) {
-      console.log('error ', e);
+      // pass
     }
   };
   useEffect(() => {
@@ -404,15 +386,13 @@ const Bl3 = styled.td`
 CommunityForm.propTypes = {
   commentCount: PropTypes.number,
   onActClick: PropTypes.func,
-  // eslint-disable-next-line react/forbid-prop-types
-  hashtag: PropTypes.array,
+  hashtag: PropTypes.arrayOf(PropTypes.any),
 };
 
 CommunityForm.defaultProps = {
   commentCount: 0,
-
   onActClick: () => {
-    console.log('hh');
+    // pass
   },
   hashtag: [''],
 };

@@ -6,21 +6,9 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { BiListCheck, BiSearchAlt2 } from 'react-icons/bi';
 
 import PropTypes from 'prop-types';
-import {
-  Container,
-  Heading,
-  Form,
-  Button,
-  Box,
-  Card,
-  Media,
-  Image,
-  Content,
-  Panel,
-} from 'react-bulma-components';
+import { Card } from 'react-bulma-components';
 import { Link, useParams } from 'react-router-dom';
 import { useJwt } from 'react-jwt';
 import { useAuth } from '../../contexts/hooks/useAuth';
@@ -31,10 +19,8 @@ export const CommunityPForm = ({ commentCount, onActClick, hashtag }) => {
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
   const auth = useAuth();
-  const { decodedToken, isExpired } = useJwt(auth.token);
-  const { teID } = useParams(`${decodedToken?.id}`);
+  const { decodedToken } = useJwt(auth.token);
   const offset = (page - 1) * limit;
-  const [items, setItems] = useState();
   const [query, setquery] = useState('');
   const handleQuery = e => {
     setquery(e.target.value);
@@ -45,19 +31,17 @@ export const CommunityPForm = ({ commentCount, onActClick, hashtag }) => {
         `/api/serach/${query}`,
         {
           params: {
-            // eslint-disable-next-line object-shorthand
-            query: query,
+            query,
           },
         },
         window.location.replace(`/serach/${query}`),
       );
       if (res && res.status === 200) {
         const { data } = res;
-        console.log(data);
         setItems(data.items);
       }
     } catch (e) {
-      console.log('error ', e);
+      // pass
     }
   };
   useEffect(() => {
@@ -149,15 +133,7 @@ export const CommunityPForm = ({ commentCount, onActClick, hashtag }) => {
                 {posts
                   .slice(offset, offset + limit)
                   .map(
-                    ({
-                      id,
-                      postID,
-                      title,
-                      userNickname,
-                      viewCount,
-                      likeCount,
-                      body,
-                    }) => (
+                    ({ postID, title, userNickname, viewCount, likeCount }) => (
                       <Bl2 key={postID}>
                         <Bl3 style={{ fontSize: 'medium' }} className="size01">
                           {postID}
@@ -381,15 +357,13 @@ const Bl3 = styled.td`
 CommunityPForm.propTypes = {
   commentCount: PropTypes.number,
   onActClick: PropTypes.func,
-  // eslint-disable-next-line react/forbid-prop-types
-  hashtag: PropTypes.array,
+  hashtag: PropTypes.arrayOf(PropTypes.any),
 };
-
 CommunityPForm.defaultProps = {
   commentCount: 0,
 
   onActClick: () => {
-    console.log('hh');
+    // pass
   },
   hashtag: [''],
 };
