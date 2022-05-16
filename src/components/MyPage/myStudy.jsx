@@ -16,7 +16,6 @@ export const MyStudyForm = () => {
         const result = await myStudyGetService();
         setStudy(result.data);
         setLoading(false);
-        console.log(result);
       } catch (error) {
         setLoading(false);
       }

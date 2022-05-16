@@ -36,7 +36,7 @@ export const TeamCard = ({ item }) => {
     try {
       await teamLike(item.myid);
     } catch (error) {
-      console.log(error);
+      // pass
     }
   };
 

@@ -1,613 +1,264 @@
 /* eslint-disable react/no-array-index-key */
-/* eslint-disable no-nested-ternary */
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import { Button } from 'react-bulma-components';
 import { useParams } from 'react-router-dom';
 import { useJwt } from 'react-jwt';
+import * as S from './infoStyle';
 import { useAuth } from '../../contexts/hooks/useAuth';
 import ReadOnlySlate from '../../SlateEditor/ReadOnly';
-import customAxios from '../../services/customAxios';
+import {
+  getSomeCommunity,
+  deleteCommentService,
+  changeCommentService,
+  deleteCommunityService,
+  postCommentService,
+  commmmunityLikeService,
+} from '../../services/communityService';
 
 export const CommunityInfoForm = () => {
-  const [postID, setpostID] = useState(0);
-  const [title, settitle] = useState('');
-  const [hashtag, sethashtag] = useState([]);
-  const [userNickname, setuserNickname] = useState('');
-  const [userPicuture, setuserPicuture] = useState('');
-  const [viewCount, setviewCount] = useState(0);
-  const [likeCount, setlikeCount] = useState(0);
-  const [likeCounta, setlikeCounta] = useState(0);
-  const [commentCount, setcommentCount] = useState(0);
   const { communityID } = useParams();
   const auth = useAuth();
   const { decodedToken } = useJwt(auth.token);
-  const [color, setColor] = useState('');
-  const [state, setstate] = useState(0);
+  const [community, setCommunity] = useState(null);
+  const [likeCount, setlikeCount] = useState(0);
+  const [isLike, setIsLike] = useState(true);
+
   const [comment, setcomment] = useState('');
+
   const onChange = event => setcomment(event.target.value);
-  const [commentList, setcommentList] = useState();
-  const [userAbility, setuserAbility] = useState('');
-  const [userInterestMain, setuserInterestMain] = useState('');
-  const [userInterestSub, setuserInterestSub] = useState('');
-  const [userID, setuserID] = useState('');
 
-  const onSubmit = e => {
-    e.preventDefault();
-    customAxios
-      .post(`/api/community/comment`, {
-        comment,
-        postID,
-      })
-      .then(() => {
-        if (comment === '') {
-          return;
-        }
-        setcommentList(commentValueList => [comment, ...commentValueList]);
-        setcomment('');
-        window.location.reload();
-      });
+  const submit = async () => {
+    try {
+      await postCommentService(comment, communityID);
+      window.location.reload();
+    } catch (error) {
+      // pass
+    }
   };
 
-  const [contents, setcontents] = useState(null);
-
-  const statedata = () => {
-    setstate(current => !current);
+  const handleLike = async () => {
+    if (isLike) {
+      setlikeCount(likeCount - 1);
+    } else {
+      setlikeCount(likeCount + 1);
+    }
+    setIsLike(!isLike);
+    try {
+      await commmmunityLikeService(communityID);
+    } catch (error) {
+      // pass
+    }
   };
+
   const ChangeClick = () => {
     window.location = `/community/change/${communityID}`;
   };
-  const DeleteClick = () => {
-    customAxios.delete(`/api/community/${communityID}`).then(() => {
+
+  const DeleteClick = async () => {
+    try {
+      await deleteCommunityService(communityID);
       window.location = '/community';
-    });
+    } catch (error) {
+      // pass
+    }
   };
 
-  const likesClick = () => {
-    if (state === 1) {
-      customAxios
-        .get(`/api/community/like?toPostId=${communityID}`)
-        .then(response => {
-          // pass
-        });
-      // eslint-disable-next-line no-unused-expressions
-      color === 'black'
-        ? setlikeCounta(likeCount + 1) || setColor('danger')
-        : setlikeCounta(likeCount - 1) || setColor('black');
-    } else if (state === 2)
-      customAxios
-        .get(`/api/community/like?toPostId=${communityID}`)
-        .then(response => {
-          console.log(communityID);
-          console.log(response.data.state);
-        });
-
-    // eslint-disable-next-line no-unused-expressions
-    color === 'danger'
-      ? setlikeCounta(likeCounta - 1) || setColor('black')
-      : setlikeCounta(likeCounta + 1) || setColor('danger');
-  };
-
-  const userData = () => {
-    customAxios.get(`/api/community/info/${communityID}`).then(response => {
-      setpostID(response.data.postID);
-      setuserNickname(response.data.userNickname);
-      sethashtag(response.data.hashtag);
-      settitle(response.data.title);
-      setviewCount(response.data.viewCount);
-      setlikeCounta(response.data.likeCounta);
-      setlikeCount(response.data.likeCount);
-      setstate(response.data.state);
-      setColor(response.data.color);
-      setuserAbility(response.data.userAbility);
-      setuserInterestMain(response.data.userInterestMain);
-      setuserInterestSub(response.data.userInterestSub);
-      setcommentCount(response.data.commentCount);
-      setcontents(response.data.contents);
-      setuserID(response.data.userID);
-      setcommentList(response.data.commentList);
-      setcomment(response.data.commentList.comment);
-      setuserPicuture(response.data.userPicuture);
-    });
-  };
-
-  const CommentChangeClick = (cmID, cmComment) => {
-    customAxios.patch(`/api/community/comment`, cmID, cmComment).then(() => {
+  const changeComment = async (cmID, cmComment) => {
+    try {
+      await changeCommentService(cmID, cmComment);
       window.location.reload();
-    });
+    } catch (error) {
+      // pass
+    }
   };
 
-  const CommentDeleteClick = cmID => {
-    customAxios.delete(`/api/community/comment/${cmID}/${postID}`).then(() => {
+  const deleteComment = async cmID => {
+    try {
+      await deleteCommentService(cmID, communityID);
       window.location.reload();
-    });
+    } catch (error) {
+      // pass
+    }
   };
 
   useEffect(() => {
-    userData();
+    const getAxios = async () => {
+      try {
+        const result = await getSomeCommunity(communityID);
+        setCommunity(result.data);
+        setlikeCount(result.data.likeCount);
+        if (result.data.state === 2) {
+          setIsLike(true);
+        } else {
+          setIsLike(false);
+        }
+      } catch (error) {
+        // pass
+      }
+    };
+    getAxios();
   }, []);
 
-  return (
-    <Main>
-      <Top1>
-        <Top2>.</Top2>
-        <Top3>
-          <Top311>
-            <Top31>{title}</Top31>
-          </Top311>
-          <Top32>
-            {hashtag.map((item, id) => (
-              <Top321
-                item={item}
-                // eslint-disable-next-line react/no-array-index-key
-                key={id}
-                className="tag is-light is-small"
-              >
-                #{item}
+  if (community) {
+    return (
+      <S.Main>
+        <S.Top1>
+          <S.Top2>.</S.Top2>
+          <S.Top3>
+            <S.Top311>
+              <S.Top31>{community.title}</S.Top31>
+            </S.Top311>
+            <S.Top32>
+              {community.hashtag.map((item, id) => (
+                <S.Top321
+                  item={item}
+                  // eslint-disable-next-line react/no-array-index-key
+                  key={id}
+                  className="tag is-light is-small"
+                >
+                  #{item}
+                  <br />
+                </S.Top321>
+              ))}
+            </S.Top32>
+            <S.Top33>
+              <S.Top331>
+                <S.Top3311>
+                  👀
+                  <span style={{ color: 'white' }}>{community.viewCount}</span>
+                  &nbsp;
+                </S.Top3311>
+                <S.Top3311>
+                  💬
+                  <span style={{ color: 'white' }}>
+                    {community.commentCount}
+                  </span>
+                  &nbsp;
+                </S.Top3311>
+                <S.Top3311>
+                  🤍
+                  <span style={{ color: 'white' }}>{likeCount}</span>
+                </S.Top3311>
+              </S.Top331>
+            </S.Top33>
+          </S.Top3>
+        </S.Top1>
+        <S.Layout1>
+          <S.Layout2>
+            <S.Layout3>
+              <S.Layout31>
+                <Button
+                  onClick={handleLike}
+                  color={isLike ? 'danger' : 'black'}
+                >
+                  🤍
+                </Button>
+              </S.Layout31>
+              <S.Layout32>
+                <S.Layout321>
+                  <img src={community.userPicuture} alt="img" />
+                </S.Layout321>
+              </S.Layout32>
+              <S.Layout33>
+                <div>
+                  {community.userNickname}
+                  <S.Layout331>
+                    <S.Layout3311>
+                      {community.userInterestMain} / {community.userInterestSub}
+                    </S.Layout3311>
+
+                    <S.Layout3311>{community.userAbility}</S.Layout3311>
+                  </S.Layout331>
+                </div>
+              </S.Layout33>
+            </S.Layout3>
+
+            <S.Comment1>
+              <S.Comment11>
+                {community.contents && (
+                  <ReadOnlySlate value={community.contents} />
+                )}
                 <br />
-              </Top321>
-            ))}
-          </Top32>
-          <Top33>
-            <Top331>
-              <Top3311>
-                👀<span style={{ color: 'white' }}>{viewCount}</span>&nbsp;
-              </Top3311>
-              <Top3311>
-                💬<span style={{ color: 'white' }}>{commentCount}</span>&nbsp;
-              </Top3311>
-              <Top3311>
-                🤍<span style={{ color: 'white' }}>{likeCount}</span>
-              </Top3311>
-            </Top331>
-          </Top33>
-        </Top3>
-      </Top1>
-      <Layout1>
-        <Layout2>
-          <Layout3>
-            <Layout31>
-              {state === 1 ? (
-                <Button onClick={likesClick} onChange={statedata} color={color}>
-                  🤍
-                </Button>
-              ) : state === 2 ? (
-                <Button onClick={likesClick} onChange={statedata} color={color}>
-                  🤍
-                </Button>
+                <br />
+                <br />
+                <br />
+                <br />
+              </S.Comment11>
+            </S.Comment1>
+            <S.Delete1>
+              {community.userID === decodedToken?.id ? (
+                <Button.Group align="right">
+                  <Button color="" onClick={ChangeClick}>
+                    수정
+                  </Button>
+                  <Button color="" onClick={DeleteClick}>
+                    삭제
+                  </Button>
+                </Button.Group>
               ) : (
                 <> </>
               )}
-            </Layout31>
-            <Layout32>
-              <Layout321>
-                <img src={userPicuture} alt="img" />
-              </Layout321>
-            </Layout32>
-            <Layout33>
-              <div>
-                {userNickname}
-                <Layout331>
-                  <Layout3311>
-                    {userInterestMain}/ {userInterestSub}
-                  </Layout3311>
-
-                  <Layout3311>{userAbility}</Layout3311>
-                </Layout331>
-              </div>
-            </Layout33>
-          </Layout3>
-
-          <Comment1>
-            <Comment11>
-              {contents && <ReadOnlySlate value={contents} />}
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-            </Comment11>
-          </Comment1>
-          <Delete1>
-            {userID === decodedToken?.id ? (
-              <Button.Group align="right">
-                <Button color="" onClick={ChangeClick}>
-                  수정
-                </Button>
-                <Button color="" onClick={DeleteClick}>
-                  삭제
-                </Button>
-              </Button.Group>
-            ) : (
-              <> </>
-            )}
-          </Delete1>
-        </Layout2>
-        <Botton1>
-          <Reply1>
-            <Reply11>
-              <Reply111>
-                {commentList &&
-                  commentList.map((item, id) => (
-                    <div key={id}>
-                      <Reply1111>
-                        <Reply11111>{item.userNickname} </Reply11111>
-
-                        <Reply11122>
-                          <Reply11121>{item.comment}</Reply11121>
-                        </Reply11122>
-                      </Reply1111>
-                      <Reply111220>
-                        {item.userID === decodedToken?.id ? (
-                          <Button.Group align="center">
-                            <Reply111221
-                              color="black"
-                              onClick={() =>
-                                CommentChangeClick(item.id, item.comment)
-                              }
-                            >
-                              수정
-                            </Reply111221>
-                            |
-                            <Reply111223
-                              color="black"
-                              onClick={() => CommentDeleteClick(item.id)}
-                            >
-                              삭제
-                            </Reply111223>
-                          </Button.Group>
-                        ) : (
-                          <> </>
-                        )}
-                      </Reply111220>
-                    </div>
-                  ))}
-              </Reply111>
-            </Reply11>
-          </Reply1>
-          <Botton11>
-            <Botton12>
-              <Botton2
-                placeholder="댓글달기..."
-                value={comment || ''}
-                onChange={onChange}
-              >
-                &nbsp;
-              </Botton2>
-              <Botton3 type="button" className="commetBtn" onClick={onSubmit}>
-                등록
-              </Botton3>
-            </Botton12>
-          </Botton11>
-        </Botton1>
-      </Layout1>
-    </Main>
-  );
+            </S.Delete1>
+          </S.Layout2>
+          <S.Botton1>
+            <S.Reply1>
+              <S.Reply11>
+                <S.Reply111>
+                  {community.commentList &&
+                    community.commentList.map((item, id) => (
+                      <div key={id}>
+                        <S.Reply1111>
+                          <S.Reply11111>{item.userNickname} </S.Reply11111>
+                          <S.Reply11122>
+                            <S.Reply11121>{item.comment}</S.Reply11121>
+                          </S.Reply11122>
+                        </S.Reply1111>
+                        <S.Reply111220>
+                          {item.userID === decodedToken?.id ? (
+                            <Button.Group align="center">
+                              <S.Reply111221
+                                color="black"
+                                onClick={() =>
+                                  changeComment(item.id, item.comment)
+                                }
+                              >
+                                수정
+                              </S.Reply111221>
+                              |
+                              <S.Reply111223
+                                color="black"
+                                onClick={() => deleteComment(item.id)}
+                              >
+                                삭제
+                              </S.Reply111223>
+                            </Button.Group>
+                          ) : (
+                            <> </>
+                          )}
+                        </S.Reply111220>
+                      </div>
+                    ))}
+                </S.Reply111>
+              </S.Reply11>
+            </S.Reply1>
+            <S.Botton11>
+              <S.Botton12>
+                <S.Botton2
+                  placeholder="댓글달기..."
+                  value={community.comment || ''}
+                  onChange={onChange}
+                >
+                  &nbsp;
+                </S.Botton2>
+                <S.Botton3 type="button" className="commetBtn" onClick={submit}>
+                  등록
+                </S.Botton3>
+              </S.Botton12>
+            </S.Botton11>
+          </S.Botton1>
+        </S.Layout1>
+      </S.Main>
+    );
+  }
+  return null;
 };
-const Main = styled.div`
-  color: #333;
-`;
-
-const Top1 = styled.div`
-  position: fixed;
-  width: 100%;
-  left: 0;
-  z-index: 1;
-  background-color: #222;
-  top: 51px;
-  overflow: hidden;
-`;
-const Top2 = styled.div`
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #5f5f5f;
-`;
-const Top3 = styled.div`
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
-  height: 360px;
-  box-sizing: border-box;
-  padding-bottom: 70px;
-  position: relative;
-`;
-
-const Top31 = styled.h2`
-  color: #fff;
-  max-width: 600px;
-  min-width: 320px;
-  display: block;
-  text-align: center;
-  margin: 0 auto;
-  font-size: 28px;
-  line-height: 38px;
-  font-weight: bold;
-`;
-
-const Top311 = styled.div`
-  display: inline-flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  margin-top: 150px;
-  margin-bottom: 35px;
-`;
-const Top32 = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin: 10px auto 0;
-  flex-wrap: wrap;
-  max-width: 600px;
-`;
-const Top321 = styled.div`
-  font-size: 14px;
-  color: #fff;
-  line-height: 14px;
-  margin-right: 6px;
-`;
-
-const Top33 = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-top: 20px;
-  width: 100%;
-  justify-content: space-between;
-  position: absolute;
-  left: 0;
-  bottom: 40px;
-`;
-
-const Top331 = styled.div`
-  margin: 0;
-  padding: 0;
-  display: block;
-`;
-
-const Top3311 = styled.p`
-  display: inline-flex;
-  flex-direction: row;
-  align-items: center;
-  margin-right: 16px;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  font-weight: bold;
-`;
-
-const Layout1 = styled.section`
-  box-sizing: border-box;
-  max-width: 100%;
-  margin-top: 400px;
-  position: relative;
-  z-index: 5;
-  background-color: #fff;
-  padding-bottom: 30px;
-  overflow: hidden;
-`;
-
-const Layout2 = styled.div`
-  width: 100%;
-  box-shadow: 0 3px 24px 0 rgb(0 0 0 / 8%);
-  padding: 0 40px;
-  box-sizing: border-box;
-  max-width: 1200px;
-  background-color: #fff;
-  margin: 0 auto;
-`;
-
-const Layout3 = styled.div`
-  border-bottom: 1px solid #e6e6e6;
-  box-sizing: border-box;
-  padding: 20px 0;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  position: relative;
-`;
-
-const Layout31 = styled.div`
-  width: 40px;
-  height: 40px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 100px;
-  background-color: #fff;
-  box-shadow: 0 0 19px 8px rgb(0 0 0 / 6%);
-  cursor: pointer;
-  position: absolute;
-  top: 34px;
-  right: 0;
-`;
-
-const Layout32 = styled.div`
-  width: 130px;
-  height: 94px;
-  overflow: hidden;
-  flex-shrink: 0;
-  background-color: transparent;
-  margin-right: 30px;
-  position: relative;
-`;
-
-const Layout321 = styled.div`
-  width: 130px;
-  height: 94px;
-  object-fit: cover;
-`;
-
-const Layout33 = styled.div`
-  border-bottom: 1px solid #e6e6e6;
-  box-sizing: border-box;
-  padding: 20px 0;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  position: relative;
-`;
-
-const Layout331 = styled.p`
-  font-size: 17px;
-  color: #42495b;
-  line-height: 17px;
-`;
-
-const Layout3311 = styled.span`
-  display: block;
-  font-size: 13px;
-  color: #8e8ea2;
-  margin-top: 8px;
-`;
-
-const Comment1 = styled.div`
-  box-sizing: border-box;
-  padding: 20px 0 0;
-`;
-
-const Comment11 = styled.div`
-  margin-bottom: 30px;
-  width: 100%;
-`;
-
-const Delete1 = styled.div``;
-
-const Botton1 = styled.div`
-  background-color: #f7f7f7;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  padding: 24px 40px 10px;
-  max-width: 1200px;
-  margin: 0 auto;
-`;
-const Reply1 = styled.div`
-  box-sizing: border-box;
-  background-color: #f7f7f7;
-`;
-
-const Reply11 = styled.div`
-  display: inline-flex;
-  flex-direction: row;
-  align-items: flex-start;
-  width: 100%;
-  margin-bottom: 34px;
-`;
-
-const Reply111 = styled.div`
-  width: 100%;
-`;
-
-const Reply1111 = styled.div`
-  display: inline-flex;
-  justify-content: space-between;
-  width: 100%;
-  border-top: 1px solid #ebebeb;
-`;
-const Reply11111 = styled.p`
-  font-size: 1.2rem;
-  color: #42495b;
-  position: relative;
-  font-weight: bold;
-`;
-
-const Reply11121 = styled.div`
-  background: none;
-  border: none;
-  color: #222;
-  flex: 1 1;
-  padding: 13px;
-  resize: none;
-  opacity: 1;
-  -webkit-text-fill-color: #222;
-  width: 100%;
-  vertical-align: middle;
-`;
-
-const Reply11122 = styled.div`
-  margin-left: 5px;
-  width: 870px;
-  font-family: 'Malgun Gothic', '맑은 고딕', helvetica, 'Apple SD Gothic Neo',
-    sans-serif;
-  font-size: 14px;
-`;
-
-const Reply111220 = styled.div`
-  margin-top: 4px;
-  display: inline-flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  width: 100%;
-  align-items: center;
-  text-align: center;
-  margin-bottom: 10px;
-`;
-
-const Reply111221 = styled.button`
-  color: #42495b;
-  font-size: 0.75rem;
-  transition: all 0.2s;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-appearance: button;
-  border-radius: 0;
-  border: 0;
-  background-color: transparent;
-  cursor: pointer;
-  vertical-align: middle;
-`;
-
-const Reply111223 = styled.button`
-  font-size: 0.75rem;
-  color: #81839c;
-  transition: all 0.2s;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-appearance: button;
-  border-radius: 0;
-  border: 0;
-  background-color: transparent;
-  cursor: pointer;
-  vertical-align: middle;
-`;
-
-const Botton11 = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-`;
-
-const Botton12 = styled.div`
-  flex: 1 1;
-  display: inline-flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-const Botton2 = styled.textarea`
-  flex: 1 1;
-  font-size: 0.875rem;
-  box-sizing: border-box;
-  padding: 11px 16px;
-  border-radius: 4px;
-  margin-right: 14px;
-  resize: none;
-  border: 1px solid #9796a7;
-`;
-
-const Botton3 = styled.button`
-  background-color: #42495b;
-  color: #fff;
-  border: 1px solid #42495b;
-  width: auto;
-  padding: 8px 29px !important;
-  transition: all 0.2s;
-  font-size: 0.75rem;
-  border-radius: 4px;
-`;

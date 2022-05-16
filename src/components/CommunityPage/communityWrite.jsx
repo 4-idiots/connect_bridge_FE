@@ -2,62 +2,51 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useState } from 'react';
 import { Container, Heading, Form, Button, Box } from 'react-bulma-components';
-import { useJwt } from 'react-jwt';
-import { useAuth } from '../../contexts/hooks/useAuth';
 import SlateEditor from '../../SlateEditor/Editor';
-import customAxios from '../../services/customAxios';
+import { postCommunityService } from '../../services/communityService';
 
 export const CommunityWriteForm = () => {
-  const [tagInput, setTagInput] = useState('');
-  const [hashtag, sethashtag] = useState([]);
-  const [title, settitle] = useState('');
-  const auth = useAuth();
-  const { decodedToken } = useJwt(auth.token);
-
-  const [contents, setcontents] = useState({
+  const [community, setCommunity] = useState({
+    title: '',
     content: [
       {
         type: 'paragaph',
         children: [{ text: '글작성' }],
       },
     ],
+    tagInput: '',
+    hashtag: [],
   });
-
-  const titledata = e => {
-    settitle(e.target.value);
-  };
 
   const onEnter = e => {
     if (e.key === 'Enter') {
-      sethashtag([...hashtag, tagInput]);
-
-      setTagInput('');
+      setCommunity({
+        ...community,
+        hashtag: [...community.hashtag, community.tagInput],
+        tagInput: '',
+      });
     }
   };
+
   const removeList = id => {
-    sethashtag(hashtag.filter(item => item !== id));
+    setCommunity({
+      ...community,
+      hashtag: [...community.hashtag.filter(item => item !== id)],
+    });
   };
 
-  const Write = e => {
-    if (title) {
-      customAxios
-        .post(`/api/write`, {
-          hashtag,
-          title,
-          contents: JSON.stringify(contents.content),
-        })
-
-        .then(() => {
-          alert('작성이 완료하였습니다.');
-          window.location = '/community';
-        })
-        .catch(() => {
-          alert('입력값을 확인해주세요.');
-        });
-    } else {
-      alert('입력값을 확인해');
+  const postAxios = async () => {
+    try {
+      await postCommunityService(
+        community.title,
+        JSON.stringify(community.content),
+        community.hashtag,
+      );
+      alert('작성이 완료되었습니다.');
+      window.location = '/community';
+    } catch (error) {
+      alert('다시 시도해주세요');
     }
-    e.preventDefault();
   };
 
   return (
@@ -69,12 +58,18 @@ export const CommunityWriteForm = () => {
         <Form.Field>
           <Form.Label>제목</Form.Label>
           <Form.Control>
-            <Form.Input type="text" onChange={titledata} value={title} />
+            <Form.Input
+              type="text"
+              onChange={e =>
+                setCommunity({ ...community, title: e.currentTarget.value })
+              }
+              value={community.title}
+            />
           </Form.Control>
         </Form.Field>
 
         <Form.Label>내용</Form.Label>
-        <SlateEditor value={contents} setValue={setcontents} />
+        <SlateEditor value={community} setValue={setCommunity} />
 
         <br />
         <br />
@@ -85,15 +80,20 @@ export const CommunityWriteForm = () => {
             <div>
               <input
                 type="text"
-                value={tagInput}
-                onChange={e => setTagInput(e.currentTarget.value)}
+                value={community.tagInput}
+                onChange={e =>
+                  setCommunity({
+                    ...community,
+                    tagInput: e.currentTarget.value,
+                  })
+                }
                 placeholder="해시태그 입력"
                 onKeyPress={onEnter}
               />
             </div>
             <br />
 
-            {hashtag.map((item, id) => (
+            {community.hashtag.map((item, id) => (
               <span item={item} key={id} className="tag is-warning is-medium">
                 #{item}
                 <button
@@ -109,7 +109,7 @@ export const CommunityWriteForm = () => {
         </Form.Field>
 
         <div style={{ textAlign: 'center' }}>
-          <Button color="danger" size="small" onClick={Write}>
+          <Button color="danger" size="small" onClick={() => postAxios()}>
             작성
           </Button>
         </div>

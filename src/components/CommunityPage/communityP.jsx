@@ -9,7 +9,7 @@ import styled from 'styled-components';
 
 import PropTypes from 'prop-types';
 import { Card } from 'react-bulma-components';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useJwt } from 'react-jwt';
 import { useAuth } from '../../contexts/hooks/useAuth';
 import { Pagination } from '../../swr/Pagination';
