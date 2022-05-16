@@ -22,7 +22,6 @@ export const CommunityInfoForm = () => {
   const [community, setCommunity] = useState(null);
   const [likeCount, setlikeCount] = useState(0);
   const [isLike, setIsLike] = useState(true);
-
   const [comment, setcomment] = useState('');
 
   const onChange = event => setcomment(event.target.value);
@@ -245,7 +244,7 @@ export const CommunityInfoForm = () => {
               <S.Botton12>
                 <S.Botton2
                   placeholder="댓글달기..."
-                  value={community.comment || ''}
+                  value={comment || ''}
                   onChange={onChange}
                 >
                   &nbsp;
