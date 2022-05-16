@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-shadow */
 /* eslint-disable no-undef */
@@ -274,14 +275,19 @@ export const SignupForm = () => {
           </Form.Control>
           {validator.isLength(userID, { min: 5, max: 20 }) ? (
             <Form.Label style={{ color: 'green' }} size="small">
-              O
+              5~20자로 입력했습니다
             </Form.Label>
           ) : (
             <Form.Label style={{ color: '#ff6347' }} size="small">
-              5~20자로 사용하세요
+              5~20자로 입력하세요
             </Form.Label>
           )}
-          <Button size="small" color="danger" onClick={sameIDButton}>
+          <Button
+            className="button is-outlined"
+            size="small"
+            color=""
+            onClick={sameIDButton}
+          >
             중복확인
           </Button>
         </Form.Field>
@@ -298,11 +304,11 @@ export const SignupForm = () => {
           </Form.Control>
           {validator.isLength(userPW, { min: 8, max: 20 }) ? (
             <Form.Label style={{ color: 'green' }} size="small">
-              O
+              8~20자로 입력했습니다
             </Form.Label>
           ) : (
             <Form.Label style={{ color: '#ff6347' }} size="small">
-              8~20자로 사용하세요
+              8~20자로 입력하세요
             </Form.Label>
           )}
         </Form.Field>
@@ -339,12 +345,18 @@ export const SignupForm = () => {
               value={userNickname}
             />
           </Form.Control>
-          <Button
-            mt="1"
-            size="small"
-            color="danger"
-            onClick={sameNicknameButton}
-          >
+
+          {sameNickname === true ? (
+            <Form.Label size="small" style={{ color: 'green' }}>
+              확인되었습니다
+            </Form.Label>
+          ) : sameNickname === false ? (
+            <Form.Label size="small">&nbsp;&nbsp;</Form.Label>
+          ) : (
+            <Form.Label size="small">&nbsp;&nbsp;</Form.Label>
+          )}
+
+          <Button mt="1" size="small" color="" onClick={sameNicknameButton}>
             중복확인
           </Button>
         </Form.Field>
@@ -361,6 +373,7 @@ export const SignupForm = () => {
           </Form.Control>
         </Form.Field>
         <Form.Field>
+          <Form.Label size="small">&nbsp;&nbsp;</Form.Label>
           <Form.Label>이메일</Form.Label>
           <Form.Control>
             <Form.Input
@@ -370,23 +383,24 @@ export const SignupForm = () => {
               value={userEmail}
             />
           </Form.Control>
-
           {validator.isEmail(userEmail) ? (
             <Form.Label style={{ color: 'green' }} size="small">
-              O
+              이메일 형식이 맞습니다
             </Form.Label>
           ) : (
             <Form.Label style={{ color: '#ff6347' }} size="small">
               이메일 형식이 아닙니다!
             </Form.Label>
           )}
-          <Button size="small" color="danger" onClick={sameEmailButton}>
+          <Button size="small" color="" onClick={sameEmailButton}>
             중복확인
           </Button>
-          <Button size="small" color="danger" onClick={EmailOnClick}>
+          &nbsp;&nbsp;
+          <Button size="small" color="" onClick={EmailOnClick}>
             이메일 인증
           </Button>
           <Form.Control>
+            <br />
             <Form.Input
               type="emailcode"
               placeholder="이메일코드"
@@ -394,16 +408,23 @@ export const SignupForm = () => {
               value={code}
             />
           </Form.Control>
-          <Button size="small" color="danger" onClick={EmailCode}>
+          {codeon === true ? (
+            <Form.Label size="small" style={{ color: 'green' }}>
+              확인되었습니다
+            </Form.Label>
+          ) : codeon === false ? (
+            <Form.Label size="small">&nbsp;&nbsp;</Form.Label>
+          ) : (
+            <Form.Label size="small">&nbsp;&nbsp;</Form.Label>
+          )}
+          <Button size="small" color="" onClick={EmailCode}>
             확인
           </Button>
-
           <div id="result" />
         </Form.Field>
         <br />
-
         <Form.Field>
-          <Form.Label>실력</Form.Label>
+          <Form.Label>능력</Form.Label>
           <Form.Control>
             <Form.Select onChange={userAbilitydata} value={userAbility}>
               <option value="">---------------------------</option>
@@ -453,10 +474,9 @@ export const SignupForm = () => {
             </Form.Select>
           </Form.Control>
         </Form.Field>
-
         <div style={{ display: 'inline-block' }}>
           <Form.Field>
-            <Form.Label>흥미</Form.Label>
+            <Form.Label>직무</Form.Label>
             <Form.Control>
               <Form.Select
                 onChange={userInterestMaindata}
@@ -468,6 +488,7 @@ export const SignupForm = () => {
             </Form.Control>
           </Form.Field>
         </div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <div style={{ display: 'inline-block' }}>
           <Form.Field>
             <Form.Control>
@@ -490,12 +511,17 @@ export const SignupForm = () => {
             </Form.Control>
           </Form.Field>
         </div>
-
         <br />
         <br />
-        <Button color="danger" size="medium" onClick={Click}>
-          회원 가입
-        </Button>
+        <div>
+          <Button
+            style={{ fontWeight: 'bolder' }}
+            className="button is-medium is-fullwidth"
+            onClick={Click}
+          >
+            가입하기
+          </Button>
+        </div>
       </Box>
     </Container>
   );

@@ -110,7 +110,7 @@ export const CommunityChangeForm = () => {
           <SlateEditor value={contents} setValue={setcontents} />
         )}
         <br />
-        {JSON.stringify(contents)}
+
         <br />
 
         <Form.Field>

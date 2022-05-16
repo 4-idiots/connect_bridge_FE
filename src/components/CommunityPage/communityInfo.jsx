@@ -29,7 +29,7 @@ export const CommunityInfoForm = () => {
   const [title, settitle] = useState('');
   const [hashtag, sethashtag] = useState([]);
   const [userNickname, setuserNickname] = useState('');
-  const [userPicture, setuserPicture] = useState('');
+  const [userPicuture, setuserPicuture] = useState('');
   const [viewCount, setviewCount] = useState(0);
   const [likeCount, setlikeCount] = useState(0);
   const [likeCounta, setlikeCounta] = useState(0);
@@ -128,7 +128,7 @@ export const CommunityInfoForm = () => {
       setuserID(response.data.userID);
       setcommentList(response.data.commentList);
       setcomment(response.data.commentList.comment);
-      setuserPicture(response.data.userPicture);
+      setuserPicuture(response.data.userPicuture);
     });
   };
 
@@ -206,7 +206,7 @@ export const CommunityInfoForm = () => {
             </Layout31>
             <Layout32>
               <Layout321>
-                <img src={userPicture} alt="img" />
+                <img src={userPicuture} alt="img" />
               </Layout321>
             </Layout32>
             <Layout33>
@@ -222,6 +222,7 @@ export const CommunityInfoForm = () => {
               </div>
             </Layout33>
           </Layout3>
+
           <Comment1>
             <Comment11>
               {contents && <ReadOnlySlate value={contents} />}
@@ -232,6 +233,20 @@ export const CommunityInfoForm = () => {
               <br />
             </Comment11>
           </Comment1>
+          <Delete1>
+            {userID === decodedToken?.id ? (
+              <Button.Group align="right">
+                <Button color="" onClick={ChangeClick}>
+                  수정
+                </Button>
+                <Button color="" onClick={DeleteClick}>
+                  삭제
+                </Button>
+              </Button.Group>
+            ) : (
+              <> </>
+            )}
+          </Delete1>
         </Layout2>
         <Botton1>
           <Reply1>
@@ -282,20 +297,7 @@ export const CommunityInfoForm = () => {
                 value={comment || ''}
                 onChange={onChange}
               >
-                <div style={{ textAlign: 'center' }}>
-                  {userID === decodedToken?.id ? (
-                    <Button.Group align="center">
-                      <Button color="success" onClick={ChangeClick}>
-                        수정하기
-                      </Button>
-                      <Button color="success" onClick={DeleteClick}>
-                        삭제하기
-                      </Button>
-                    </Button.Group>
-                  ) : (
-                    <> </>
-                  )}
-                </div>
+                &nbsp;
               </Botton2>
               <Botton3 type="button" className="commetBtn" onClick={onSubmit}>
                 등록
@@ -499,6 +501,9 @@ const Comment11 = styled.div`
   margin-bottom: 30px;
   width: 100%;
 `;
+const Delete1 = styled.div``;
+
+const Delete11 = styled.div``;
 
 const Botton1 = styled.div`
   background-color: #f7f7f7;
