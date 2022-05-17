@@ -3,15 +3,19 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Heading, Form, Button, Box } from 'react-bulma-components';
+import { useJwt } from 'react-jwt';
 import SlateEditor from '../../SlateEditor/Editor';
 import {
   getCommunityChange,
   patchCommunityService,
 } from '../../services/communityService';
+import { useAuth } from '../../contexts/hooks/useAuth';
 
 export const CommunityChangeForm = () => {
   const [community, setCommunity] = useState(null);
   const { communityID } = useParams();
+  const auth = useAuth();
+  const { decodedToken } = useJwt(auth.token);
 
   const onEnter = e => {
     if (e.key === 'Enter') {
@@ -61,69 +65,84 @@ export const CommunityChangeForm = () => {
   if (community) {
     return (
       <Container>
-        <Heading style={{ textAlign: 'center', margin: 35 }}>
-          커뮤니티 수정하기
-        </Heading>
-        <Box style={{ margin: 100, Box: 'center' }}>
-          <Form.Field>
-            <Form.Label>제목</Form.Label>
-            <Form.Control>
-              <Form.Input
-                type="text"
-                onChange={e =>
-                  setCommunity({ ...community, title: e.currentTarget.value })
-                }
-                value={community.title}
-              />
-            </Form.Control>
-          </Form.Field>
-
-          <Form.Label>내용</Form.Label>
-          {community.content && (
-            <SlateEditor value={community} setValue={setCommunity} />
-          )}
-          <br />
-          <br />
-          <Form.Field>
-            <Form.Label>태그 (#)</Form.Label>
-            <Form.Control>
-              <div>
-                <input
-                  type="text"
-                  value={community.tagInput || ''}
-                  onChange={e =>
-                    setCommunity({
-                      ...community,
-                      tagInput: e.currentTarget.value,
-                    })
-                  }
-                  placeholder="해시태그 입력"
-                  onKeyPress={onEnter}
-                />
-              </div>
-              <br />
-
-              {community.hashtag.map((item, id) => (
-                <span item={item} key={id} className="tag is-warning is-medium">
-                  #{item}
-                  <button
-                    key={id}
-                    onClick={() => removeList(item)}
-                    className="delete is-small"
-                    type="button"
+        {decodedToken && decodedToken.id === community.userID ? (
+          <>
+            <Heading style={{ textAlign: 'center', margin: 35 }}>
+              커뮤니티 수정하기
+            </Heading>
+            <Box style={{ margin: 100, Box: 'center' }}>
+              <Form.Field>
+                <Form.Label>제목</Form.Label>
+                <Form.Control>
+                  <Form.Input
+                    type="text"
+                    onChange={e =>
+                      setCommunity({
+                        ...community,
+                        title: e.currentTarget.value,
+                      })
+                    }
+                    value={community.title}
                   />
-                  <br />
-                </span>
-              ))}
-            </Form.Control>
-          </Form.Field>
+                </Form.Control>
+              </Form.Field>
 
-          <div style={{ textAlign: 'center' }}>
-            <Button color="danger" size="small" onClick={() => postAxios()}>
-              수정
-            </Button>
-          </div>
-        </Box>
+              <Form.Label>내용</Form.Label>
+              {community.content && (
+                <SlateEditor value={community} setValue={setCommunity} />
+              )}
+              <br />
+              <br />
+              <Form.Field>
+                <Form.Label>태그 (#)</Form.Label>
+                <Form.Control>
+                  <div>
+                    <input
+                      type="text"
+                      value={community.tagInput || ''}
+                      onChange={e =>
+                        setCommunity({
+                          ...community,
+                          tagInput: e.currentTarget.value,
+                        })
+                      }
+                      placeholder="해시태그 입력"
+                      onKeyPress={onEnter}
+                    />
+                  </div>
+                  <br />
+
+                  {community.hashtag.map((item, id) => (
+                    <span
+                      item={item}
+                      key={id}
+                      className="tag is-warning is-medium"
+                    >
+                      #{item}
+                      <button
+                        key={id}
+                        onClick={() => removeList(item)}
+                        className="delete is-small"
+                        type="button"
+                      />
+                      <br />
+                    </span>
+                  ))}
+                </Form.Control>
+              </Form.Field>
+
+              <div style={{ textAlign: 'center' }}>
+                <Button color="danger" size="small" onClick={() => postAxios()}>
+                  수정
+                </Button>
+              </div>
+            </Box>
+          </>
+        ) : (
+          <Heading style={{ textAlign: 'center', marginTop: 80 }}>
+            권한이 없습니다.
+          </Heading>
+        )}
       </Container>
     );
   }

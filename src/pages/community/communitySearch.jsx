@@ -1,11 +1,11 @@
 import React from 'react';
 import * as C from '../../components/cRoutes';
 
-export const Communityserach = () => {
+export const CommunitySearch = () => {
   return (
     <>
       <C.NavbarForm />
-      <C.CommunityserachForm />
+      <C.CommunitySearchForm />
       <C.FooterForm />
     </>
   );

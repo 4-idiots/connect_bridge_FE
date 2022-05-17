@@ -47,7 +47,7 @@ export const ProjectCard = ({ item, recu }) => {
 
   const rejectService = async () => {
     try {
-      await Send.projectNoService(1);
+      await Send.projectNoService(item.submitID);
     } catch (error) {
       // pass
     }
@@ -134,8 +134,11 @@ export const ProjectCard = ({ item, recu }) => {
           ''
         )}
       </S.CustomDiv>
-      <B.Card.Content onClick={() => navigate(`/project/${item.projectID}`)}>
-        <B.Media style={{ marginBottom: 0 }}>
+      <B.Card.Content>
+        <B.Media
+          style={{ marginBottom: 0 }}
+          onClick={() => navigate(`/project/${item.projectID}`)}
+        >
           <B.Media.Item>
             <B.Heading subtitle size={7}>
               {item.projectField}
@@ -143,7 +146,10 @@ export const ProjectCard = ({ item, recu }) => {
             <B.Heading size={6}>{item.projectName}</B.Heading>
           </B.Media.Item>
         </B.Media>
-        <B.Media style={{ marginBottom: '0.8rem' }}>
+        <B.Media
+          style={{ marginBottom: '0.8rem' }}
+          onClick={() => navigate(`/project/${item.projectID}`)}
+        >
           <B.Content
             style={{
               display: 'flex',

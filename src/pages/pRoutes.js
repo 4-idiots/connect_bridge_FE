@@ -1,4 +1,5 @@
 export { Main } from './main/main';
+export { Err } from './main/err';
 
 export { Login } from './login/login';
 export { FindID } from './login/findID';
@@ -18,7 +19,7 @@ export { CommunityInfo } from './community/communityinfo';
 export { CommunityWrite } from './community/communitywrite';
 export { CommunityChange } from './community/communitychange';
 export { CommunityP } from './community/communityP';
-export { Communityserach } from './community/communityserach';
+export { CommunitySearch } from './community/communitySearch';
 
 export { ProjectUpload } from './project/projectUpload';
 export { ProjectMain } from './project/projectMain';

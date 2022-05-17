@@ -48,3 +48,15 @@ export const postCommentService = (comment, postID) => {
     postID,
   });
 };
+
+export const getSearchCommunity = query => {
+  return customAxios.get(`/api/serach/${query}`);
+};
+
+export const getAllCommunity = () => {
+  return customAxios.get('/api/community');
+};
+
+export const getPopularCommunity = () => {
+  return customAxios.get('/api/community/popular');
+};

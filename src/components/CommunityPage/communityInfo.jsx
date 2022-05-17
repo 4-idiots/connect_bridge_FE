@@ -145,14 +145,18 @@ export const CommunityInfoForm = () => {
         <S.Layout1>
           <S.Layout2>
             <S.Layout3>
-              <S.Layout31>
-                <Button
-                  onClick={handleLike}
-                  color={isLike ? 'danger' : 'black'}
-                >
-                  🤍
-                </Button>
-              </S.Layout31>
+              {decodedToken ? (
+                <S.Layout31>
+                  <Button
+                    onClick={handleLike}
+                    color={isLike ? 'danger' : 'black'}
+                  >
+                    🤍
+                  </Button>
+                </S.Layout31>
+              ) : (
+                ''
+              )}
               <S.Layout32>
                 <S.Layout321>
                   <img src={community.userPicuture} alt="img" />
@@ -240,20 +244,28 @@ export const CommunityInfoForm = () => {
                 </S.Reply111>
               </S.Reply11>
             </S.Reply1>
-            <S.Botton11>
-              <S.Botton12>
-                <S.Botton2
-                  placeholder="댓글달기..."
-                  value={comment || ''}
-                  onChange={onChange}
-                >
-                  &nbsp;
-                </S.Botton2>
-                <S.Botton3 type="button" className="commetBtn" onClick={submit}>
-                  등록
-                </S.Botton3>
-              </S.Botton12>
-            </S.Botton11>
+            {decodedToken ? (
+              <S.Botton11>
+                <S.Botton12>
+                  <S.Botton2
+                    placeholder="댓글달기..."
+                    value={comment || ''}
+                    onChange={onChange}
+                  >
+                    &nbsp;
+                  </S.Botton2>
+                  <S.Botton3
+                    type="button"
+                    className="commetBtn"
+                    onClick={submit}
+                  >
+                    등록
+                  </S.Botton3>
+                </S.Botton12>
+              </S.Botton11>
+            ) : (
+              ''
+            )}
           </S.Botton1>
         </S.Layout1>
       </S.Main>

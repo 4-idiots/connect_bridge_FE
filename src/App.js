@@ -36,7 +36,7 @@ const App = () => {
           />
           <Route path="/community" element={<P.Community />} />
           <Route path="/community/popular" element={<P.CommunityP />} />
-          <Route path="/serach/:query" element={<P.Communityserach />} />
+          <Route path="/search/:query" element={<P.CommunitySearch />} />
           <Route path="/community/write" element={<P.CommunityWrite />} />
           <Route
             path="/community/change/:communityID"
@@ -47,6 +47,7 @@ const App = () => {
             element={<P.CommunityInfo />}
           />
           <Route path="/my/info" element={<P.MyPage />} />
+          <Route path="*" element={<P.Err />} />
         </Routes>
       </BrowserRouter>
     </AuthContext.Provider>

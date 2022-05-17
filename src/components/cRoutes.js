@@ -35,7 +35,7 @@ export { StudyMainForm } from './StudyPage/studyMainModule';
 // CommunityPage
 export { CommunityForm } from './CommunityPage/communityMain';
 export { CommunityPForm } from './CommunityPage/communityP';
-export { CommunityserachForm } from './CommunityPage/communityserach';
+export { CommunitySearchForm } from './CommunityPage/communitySearch';
 
 export { CommunityInfoForm } from './CommunityPage/communityInfo';
 export { CommunityWriteForm } from './CommunityPage/communityWrite';

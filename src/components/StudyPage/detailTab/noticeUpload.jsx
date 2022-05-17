@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button } from 'react-bulma-components';
-import { projectNoticeUploadService } from '../../../services/projectService';
+import { studyNoticeUploadService } from '../../../services/studyService';
 import * as S from './style';
 
-export const NoticeUpload = ({ projectID }) => {
+export const NoticeUpload = ({ studyID }) => {
   const [content, setContent] = useState('');
 
   const submit = async () => {
     try {
-      await projectNoticeUploadService(projectID, content);
+      await studyNoticeUploadService(studyID, content);
       alert('글이 등록 되었습니다.');
-      window.location.replace(`/project/${projectID}`);
+      window.location.replace(`/project/${studyID}`);
     } catch (error) {
       alert('다시 시도해주세요');
     }
@@ -37,5 +37,5 @@ export const NoticeUpload = ({ projectID }) => {
 };
 
 NoticeUpload.propTypes = {
-  projectID: PropTypes.string.isRequired,
+  studyID: PropTypes.string.isRequired,
 };

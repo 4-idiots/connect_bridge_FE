@@ -29,7 +29,7 @@ export const StudyCard = ({ item, recu }) => {
 
   const rejectService = async () => {
     try {
-      await Send.studyNoService(1);
+      await Send.studyNoService(item.studyID, item.submitID);
     } catch (error) {
       // pass
     }
@@ -134,8 +134,11 @@ export const StudyCard = ({ item, recu }) => {
           ''
         )}
       </S.CustomDiv>
-      <B.Card.Content onClick={() => navigate(`/study/${item.studyID}`)}>
-        <B.Media style={{ marginBottom: 0 }}>
+      <B.Card.Content>
+        <B.Media
+          style={{ marginBottom: 0 }}
+          onClick={() => navigate(`/study/${item.studyID}`)}
+        >
           <B.Media.Item>
             <B.Heading subtitle size={7}>
               {item.studyField}
@@ -143,7 +146,10 @@ export const StudyCard = ({ item, recu }) => {
             <B.Heading size={6}>{item.studyName}</B.Heading>
           </B.Media.Item>
         </B.Media>
-        <B.Media style={{ marginBottom: '0.8rem' }}>
+        <B.Media
+          style={{ marginBottom: '0.8rem' }}
+          onClick={() => navigate(`/study/${item.studyID}`)}
+        >
           <B.Content
             style={{
               display: 'flex',

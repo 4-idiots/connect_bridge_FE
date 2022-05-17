@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from 'react-bulma-components';
 import { useParams } from 'react-router-dom';
+import { useJwt } from 'react-jwt';
 import * as S from './style';
+import { useAuth } from '../../contexts/hooks/useAuth';
 import {
   getSomeTeamService,
   teamLikeService,
@@ -9,6 +11,8 @@ import {
 
 export const InfoForm = () => {
   const { teamID } = useParams();
+  const auth = useAuth();
+  const { decodedToken } = useJwt(auth.token);
   const [user, setUser] = useState(null);
   const [follow, setfollow] = useState(false);
 
@@ -59,14 +63,18 @@ export const InfoForm = () => {
             <S.Name>
               <S.Name1>
                 {user.userNickname} &nbsp;&nbsp;
-                <span>
-                  <Button
-                    onClick={likeClick}
-                    color={follow ? 'danger' : 'black'}
-                  >
-                    🤍
-                  </Button>
-                </span>
+                {decodedToken ? (
+                  <span>
+                    <Button
+                      onClick={likeClick}
+                      color={follow ? 'danger' : 'black'}
+                    >
+                      🤍
+                    </Button>
+                  </span>
+                ) : (
+                  ''
+                )}
               </S.Name1>
             </S.Name>
             <br />

@@ -62,7 +62,6 @@ export const StudyUpdateForm = () => {
       try {
         const result = await Send.studyGetSomeService(prID);
         setStudy(result.data);
-        console.log(result);
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -109,8 +108,8 @@ export const StudyUpdateForm = () => {
               />
               <StudyArea onChange={onChangeStudyEvent} value={study} />
               <StudyDate
-                start={study.studyStart}
-                end={study.studyEnd}
+                start={new Date(study.studyStart)}
+                end={new Date(study.studyEnd)}
                 startChange={date => {
                   setStudy({ ...study, studyStart: date });
                 }}

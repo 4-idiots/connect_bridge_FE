@@ -1,26 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import * as S from './pStyle';
+import { useParams, useNavigate } from 'react-router-dom';
+import * as S from './serachStyle';
 import { Pagination } from '../../swr/Pagination';
-import { getPopularCommunity } from '../../services/communityService';
+import { getSearchCommunity } from '../../services/communityService';
 
-export const CommunityPForm = () => {
+export const CommunitySearchForm = () => {
+  const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
-  const [query, setquery] = useState('');
-  const navigate = useNavigate();
+  const { query } = useParams();
+  const [querya, setquerya] = useState('');
 
   useEffect(() => {
     const getAxios = async () => {
       try {
-        const result = await getPopularCommunity();
+        const result = await getSearchCommunity(query);
         setPosts(result.data);
       } catch (error) {
         // pass
       }
     };
+
     getAxios();
   }, []);
 
@@ -34,7 +36,7 @@ export const CommunityPForm = () => {
             }}
           >
             <h1 style={{ marginTop: 80, fontWeight: 'bold' }}>
-              인기 게시물 목록
+              전체 게시물 목록
             </h1>
             <br />
           </div>
@@ -102,7 +104,6 @@ export const CommunityPForm = () => {
                   <S.Ble3>좋아요 </S.Ble3>
                 </S.Ble2>
               </S.Ble1>
-
               <S.Bl1>
                 {posts
                   .slice(offset, offset + limit)
@@ -166,16 +167,14 @@ export const CommunityPForm = () => {
             type="search"
             className="form-control rounded"
             placeholder="검색 입력"
-            onChange={e => setquery(e.target.value)}
+            onChange={e => setquerya(e.target.value)}
           />
           &nbsp;
           <button
             className="button is-pink"
             type="button"
             id="search_btn"
-            onClick={() => {
-              navigate(`/community/info/${query}`);
-            }}
+            onClick={() => window.location.replace(`/search/${querya}`)}
           >
             검색
           </button>
