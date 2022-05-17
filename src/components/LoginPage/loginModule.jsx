@@ -1,6 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { Box, Button, Container, Form, Heading } from 'react-bulma-components';
 import { Link, useNavigate } from 'react-router-dom';
+import { useJwt } from 'react-jwt';
 import { loginService } from '../../services/loginService';
 import customAxios from '../../services/customAxios';
 import { useAuth } from '../../contexts/hooks/useAuth';
@@ -8,15 +9,15 @@ import { useAuth } from '../../contexts/hooks/useAuth';
 export const LoginForm = () => {
   const navigate = useNavigate();
   const auth = useAuth();
+  const { decodedToken } = useJwt(auth.token);
   const [userInfo, setUserInfo] = useState({});
   const { userID, userPW } = userInfo;
 
   useEffect(() => {
-    const isLogin = localStorage.getItem('isLogin') || '';
-    if (isLogin) {
+    if (decodedToken) {
       navigate('/');
     }
-  }, []);
+  }, [decodedToken]);
 
   const onChangeAccountEvent = useCallback(
     e => {

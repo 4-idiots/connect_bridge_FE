@@ -174,7 +174,7 @@ export const CommunitySearchForm = () => {
             className="button is-pink"
             type="button"
             id="search_btn"
-            onClick={() => window.location.replace(`/search/${querya}`)}
+            onClick={() => navigate(`/search/${querya}`)}
           >
             검색
           </button>

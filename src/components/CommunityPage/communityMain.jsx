@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from 'react-bulma-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useJwt } from 'react-jwt';
 import { useAuth } from '../../contexts/hooks/useAuth';
 import { Pagination } from '../../swr/Pagination';
@@ -8,6 +8,7 @@ import { getAllCommunity } from '../../services/communityService';
 import * as S from './mainStyle';
 
 export const CommunityForm = () => {
+  const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
@@ -203,7 +204,7 @@ export const CommunityForm = () => {
             className="button is-pink"
             type="button"
             id="search_btn"
-            onClick={() => window.location.replace(`/search/${query}`)}
+            onClick={() => navigate(`/search/${query}`)}
           >
             검색
           </button>

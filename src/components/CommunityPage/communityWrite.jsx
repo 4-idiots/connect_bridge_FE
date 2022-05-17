@@ -3,11 +3,13 @@
 import React, { useState } from 'react';
 import { Container, Heading, Form, Button, Box } from 'react-bulma-components';
 import { useJwt } from 'react-jwt';
+import { useNavigate } from 'react-router-dom';
 import SlateEditor from '../../SlateEditor/Editor';
 import { postCommunityService } from '../../services/communityService';
 import { useAuth } from '../../contexts/hooks/useAuth';
 
 export const CommunityWriteForm = () => {
+  const navigate = useNavigate();
   const auth = useAuth();
   const { decodedToken } = useJwt(auth.token);
   const [community, setCommunity] = useState({
@@ -47,7 +49,7 @@ export const CommunityWriteForm = () => {
         community.hashtag,
       );
       alert('작성이 완료되었습니다.');
-      window.location = '/community';
+      navigate('/community');
     } catch (error) {
       alert('다시 시도해주세요');
     }

@@ -1,41 +1,47 @@
-/* eslint-disable no-nested-ternary */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable no-shadow */
-/* eslint-disable no-undef */
-/* eslint-disable react/jsx-no-undef */
-import axios from 'axios';
+/* eslint-disable react/jsx-no-useless-fragment */
 import React, { useState, useEffect } from 'react';
 import validator from 'validator';
 import { Container, Heading, Form, Button, Box } from 'react-bulma-components';
-import {
-  mainArray,
-  planArray,
-  frontArray,
-  designArray,
-  backArray,
-  coopArray,
-  etcArray,
-} from '../ProjectPage/uploadComponent/uploadValue';
+import { useJwt } from 'react-jwt';
+import { useNavigate } from 'react-router-dom';
+import * as Arr from '../ProjectPage/uploadComponent/uploadValue';
+import * as Send from '../../services/signUpService';
+import { useAuth } from '../../contexts/hooks/useAuth';
 
 export const SignupForm = () => {
-  const [data, setdata] = useState('');
-  const [userID, setuserID] = useState('');
-  const [userPW, setuserPW] = useState('');
-  const [userREPW, setuserREPW] = useState('');
-  const [userNickname, setuserNickname] = useState('');
-  const [userName, setuserName] = useState('');
-  const [userEmail, setuserEmail] = useState('');
-  const [userIntroduce, setuserIntroduce] = useState('');
-  const [userAbility, setuserAbility] = useState('');
-  const [userArea, setuserArea] = useState('');
-  const [userTime, setuserTime] = useState('');
-  const [userInterestMain, setuserInterestMain] = useState('');
-  const [sameID, setsameID] = useState(false);
-  const [sameNickname, setsameNickname] = useState(false);
-  const [sameEmail, setsameEmail] = useState(false);
-  const [code, setcode] = useState('');
-  const [codeon, setcodeon] = useState(false);
-  const [userInterestSub, setuserInterestSub] = useState('');
+  const navigate = useNavigate();
+  const auth = useAuth();
+  const { decodedToken } = useJwt(auth.token);
+  const [userData, setUserData] = useState({
+    userID: '',
+    userPW: '',
+    userNickname: '',
+    userName: '',
+    userEmail: '',
+    userIntroduce: '',
+    userAbility: '',
+    userArea: '',
+    userTime: '',
+    userInterestMain: '',
+    userInterestSub: '',
+    userREPW: '',
+    userPortfolio: '',
+    sameID: true,
+    sameNickname: true,
+    sameEmail: true,
+    code: '',
+    codeon: '',
+  });
+
+  const regexpID = /^[A-za-z0-9+]{5,20}$/;
+  const regexKR = /^[|가-힣|+]{2,10}$/;
+
+  const onChangeAccountEvent = e => {
+    setUserData({
+      ...userData,
+      [e.currentTarget.name]: e.currentTarget.value,
+    });
+  };
 
   const genOption = arrayTitle => {
     return (
@@ -48,238 +54,163 @@ export const SignupForm = () => {
       </>
     );
   };
-  const userData = () => {
-    return axios.get('/api/users').then(response => {
-      console.log(response);
-      setdata(response.data);
-    });
-  };
 
-  useEffect(() => {
-    userData();
-  }, []);
-
-  const userIDdata = e => {
-    setuserID(e.target.value);
-  };
-
-  const userPWdata = e => {
-    setuserPW(e.target.value);
-  };
-
-  const userREPWdata = e => {
-    setuserREPW(e.target.value);
-  };
-
-  const userNicknamedata = e => {
-    setuserNickname(e.target.value);
-  };
-
-  const userNamedata = e => {
-    setuserName(e.target.value);
-  };
-
-  const userInterestSubdata = e => {
-    setuserInterestSub(e.target.value);
-  };
-
-  const userEmaildata = e => {
-    setuserEmail(e.target.value);
-  };
-
-  const userIntroducedata = e => {
-    setuserIntroduce(e.target.value);
-  };
-
-  const userAbilitydata = e => {
-    setuserAbility(e.target.value);
-  };
-
-  const userAreadata = e => {
-    setuserArea(e.target.value);
-  };
-
-  const userTimedata = e => {
-    setuserTime(e.target.value);
-  };
-
-  const userInterestMaindata = e => {
-    setuserInterestMain(e.target.value);
-  };
-  const codedata = e => {
-    setcode(e.target.value);
-  };
-
-  const sameIDButton = e => {
-    e.preventDefault();
-
-    axios.get(`/api/users/check/userID?userID=${userID}`).then(response => {
-      console.log(response);
-      if (response.data.value === true) {
+  const sameIDButton = async () => {
+    try {
+      const result = await Send.checkSameID(userData.userID);
+      if (result.data) {
         alert('중복입니다. 다시 입력해주세요');
-
-        setsameID(false);
       } else {
         alert('중복이 아닙니다.');
-        setsameID(true);
       }
-    });
+      setUserData({ ...userData, sameID: result.data });
+    } catch (error) {
+      // pass
+    }
   };
 
-  const sameNicknameButton = e => {
-    e.preventDefault();
-
-    axios
-      .get(`/api/users/check/userNickname?userNickname=${userNickname}`)
-      .then(response => {
-        console.log(response);
-        if (response.data.value === true) {
-          alert('중복입니다. 다시 입력해주세요');
-
-          setsameNickname(false);
-        } else {
-          alert('중복이 아닙니다.');
-          setsameNickname(true);
-        }
-      });
+  const sameNicknameButton = async () => {
+    try {
+      const result = await Send.checkSameNickname(userData.userNickname);
+      if (result.data) {
+        alert('중복입니다. 다시 입력해주세요');
+      } else {
+        alert('중복이 아닙니다.');
+      }
+      setUserData({ ...userData, sameNickname: result.data });
+    } catch (error) {
+      // pass
+    }
   };
 
-  const sameEmailButton = e => {
-    e.preventDefault();
-
-    axios
-      .get(`/api/users/check/userEmail?userEmail=${userEmail}`)
-      .then(response => {
-        console.log(response);
-        console.log(response.data.value);
-        if (response.data.value === true) {
-          alert('중복입니다. 다시 입력해주세요.');
-
-          setsameEmail(false);
-        } else {
-          alert('중복이 아닙니다.');
-          setsameEmail(true);
-        }
-      });
+  const sameEmailButton = async () => {
+    try {
+      const result = await Send.checkSameEmail(userData.userEmail);
+      if (result.data) {
+        alert('중복입니다. 다시 입력해주세요.');
+      } else {
+        alert('중복이 아닙니다.');
+      }
+      setUserData({ ...userData, sameEmail: result.data });
+    } catch (error) {
+      // pass
+    }
   };
 
-  const EmailOnClick = e => {
-    e.preventDefault();
-    if (sameEmail === true) {
-      // eslint-disable-next-line prefer-const
-      axios
-        .post('/api/users/check/Email', {
-          userEmail,
-        })
-        .then(response => {
-          console.log(data);
-          alert('이메일 인증칸에 6글자를 입력해주세요');
-          // eslint-disable-next-line react/no-this-in-sfc
-
-          // eslint-disable-next-line no-unused-vars
-        })
-        // eslint-disable-next-line no-unused-vars
-        .catch(error => {
-          alert('이메일 중복 체크를 해주세요.');
-        });
+  const EmailOnClick = async () => {
+    if (!userData.sameEmail) {
+      try {
+        await Send.issueEmailCode(userData.userEmail);
+        alert('이메일을 확인해주세요');
+      } catch (error) {
+        // pass
+      }
     } else alert('이메일 중복 체크를 해주세요');
   };
 
-  const EmailCode = e => {
-    e.preventDefault();
-    console.log(data);
-    console.log(code);
-    axios
-      .post('/api/verifycode', {
-        code,
-        userEmail,
-      })
-      .then(response => {
-        console.log(response);
-        console.log(response.data.message);
-        console.log(code);
-      });
-    if (codeon === false || data === 'ok') {
-      alert('인증완료');
-      setcodeon(true);
-    } else {
-      alert('다시 확인해 주세요.');
-      setcodeon(false);
+  const EmailCode = async () => {
+    try {
+      const result = await Send.checkEmailCode(
+        userData.code,
+        userData.userEmail,
+      );
+      if (result.data.message === 'ok') {
+        alert('인증완료');
+        setUserData({ ...userData, codeon: true });
+      } else {
+        alert('다시 확인해 주세요.');
+        setUserData({ ...userData, codeon: false });
+      }
+    } catch (error) {
+      // pass
     }
   };
-  const Click = e => {
-    e.preventDefault();
 
+  const Click = async () => {
     if (
-      userName &&
-      userIntroduce &&
-      userAbility &&
-      userArea &&
-      userTime &&
-      userInterestMain &&
-      userInterestSub &&
-      userREPW === userPW &&
-      validator.isLength(userID, { min: 5, max: 20 }) === true &&
-      validator.isLength(userPW, { min: 8, max: 20 }) === true &&
-      validator.isEmail(userEmail) === true &&
-      sameID === true &&
-      sameNickname === true &&
-      sameEmail === true
+      regexKR.test(userData.userName) &&
+      userData.userPortfolio &&
+      userData.userIntroduce &&
+      userData.userAbility &&
+      userData.userArea &&
+      userData.userTime &&
+      userData.userInterestMain &&
+      userData.userInterestSub &&
+      validator.equals(userData.userPW, userData.userREPW) &&
+      regexpID.test(userData.userID) &&
+      validator.isStrongPassword(userData.userPW, {
+        minLength: 8,
+        minLowercase: 1,
+        minUppercase: 1,
+        minNumbers: 1,
+        minSymbols: 0,
+      }) &&
+      validator.isEmail(userData.userEmail) &&
+      !userData.sameID &&
+      !userData.sameNickname &&
+      !userData.sameEmailtrue
     ) {
-      axios
-        .post('/api/users/register', {
-          userID,
-          userPW,
-          userNickname,
-          userName,
-          userEmail,
-          userIntroduce,
-          userAbility,
-          userArea,
-          userTime,
-          userInterestMain,
-          userInterestSub,
-        })
-
-        .then(response => {
-          console.log(response.data.message);
-
-          console.log(data);
-          userData();
-          alert('회원가입이 완료하였습니다.');
-          window.location = '/login';
-        })
-        .catch(response => {
-          alert('입력값을 다시 확인해주세요.');
-        });
+      try {
+        await Send.register(
+          userData.userID,
+          userData.userPW,
+          userData.userNickname,
+          userData.userName,
+          userData.userEmail,
+          userData.userIntroduce,
+          userData.userAbility,
+          userData.userArea,
+          userData.userTime,
+          userData.userInterestMain,
+          userData.userInterestSub,
+          userData.userPortfolio,
+        );
+        alert('회원가입이 완료하였습니다.');
+        navigate('/login');
+      } catch (error) {
+        // pass
+      }
     } else {
       alert('입력값을 확인해주세요');
     }
   };
 
-  return (
-    <Container>
-      <Heading style={{ textAlign: 'center', margin: 35 }}>회원가입</Heading>
+  useEffect(() => {
+    if (decodedToken) {
+      navigate('/');
+    }
+  }, [decodedToken]);
 
+  return (
+    <Container style={{ marginTop: 80 }}>
+      <Heading style={{ textAlign: 'center', margin: 10 }}>회원가입</Heading>
       <Box style={{ margin: 100, Box: 'center' }}>
         <Form.Field>
           <Form.Label>아이디</Form.Label>
-
           <Form.Control>
             <Form.Input
               type="text"
-              placeholder="아이디"
-              onChange={userIDdata}
-              value={userID}
+              placeholder="영문 또는 숫자를 사용하여 5~20자로 입력하세요"
+              name="userID"
+              onChange={onChangeAccountEvent}
+              value={userData.userID}
             />
           </Form.Control>
-          {validator.isLength(userID, { min: 5, max: 20 }) ? (
-            <Form.Label style={{ color: 'green' }} size="small">
-              5~20자로 입력했습니다
-            </Form.Label>
+          {regexpID.test(userData.userID) ? (
+            <>
+              {userData.sameID ? (
+                <Form.Label style={{ color: '#ff6347' }} size="small">
+                  아이디 중복을 확인해주세요.
+                </Form.Label>
+              ) : (
+                <Form.Label style={{ color: 'green' }} size="small">
+                  사용 가능합니다.
+                </Form.Label>
+              )}
+            </>
           ) : (
             <Form.Label style={{ color: '#ff6347' }} size="small">
-              5~20자로 입력하세요
+              영문 또는 숫자를 사용하여 5~20자로 입력하세요
             </Form.Label>
           )}
           <Button
@@ -297,18 +228,25 @@ export const SignupForm = () => {
           <Form.Control>
             <Form.Input
               type="password"
-              placeholder="비밀번호"
-              onChange={userPWdata}
-              value={userPW}
+              placeholder="대소문자를 포함한 8~20자로 입력하세요"
+              name="userPW"
+              onChange={onChangeAccountEvent}
+              value={userData.userPW}
             />
           </Form.Control>
-          {validator.isLength(userPW, { min: 8, max: 20 }) ? (
+          {validator.isStrongPassword(userData.userPW, {
+            minLength: 8,
+            minLowercase: 1,
+            minUppercase: 1,
+            minNumbers: 1,
+            minSymbols: 0,
+          }) ? (
             <Form.Label style={{ color: 'green' }} size="small">
-              8~20자로 입력했습니다
+              사용 가능합니다.
             </Form.Label>
           ) : (
             <Form.Label style={{ color: '#ff6347' }} size="small">
-              8~20자로 입력하세요
+              대소문자를 포함한 8~20자로 입력하세요
             </Form.Label>
           )}
         </Form.Field>
@@ -318,44 +256,72 @@ export const SignupForm = () => {
             <Form.Input
               type="password"
               placeholder="비밀번호 재확인"
-              onChange={userREPWdata}
-              value={userREPW}
+              onChange={onChangeAccountEvent}
+              name="userREPW"
+              value={userData.userREPW}
             />
           </Form.Control>
         </Form.Field>
+        {validator.equals(userData.userPW, userData.userREPW) &&
+        userData.userPW.length !== 0 ? (
+          <Form.Label style={{ color: 'green' }} size="small">
+            비밀번호가 일치합니다.
+          </Form.Label>
+        ) : (
+          <Form.Label style={{ color: '#ff6347' }} size="small">
+            비밀번호가 일치하지 않습니다.
+          </Form.Label>
+        )}
         <br />
         <Form.Field>
           <Form.Label>이름</Form.Label>
           <Form.Control>
             <Form.Input
               type="text"
-              placeholder="이름"
-              onChange={userNamedata}
-              value={userName}
+              placeholder="한글 이름을 입력해주세요"
+              name="userName"
+              onChange={onChangeAccountEvent}
+              value={userData.userName}
             />
           </Form.Control>
         </Form.Field>
+        {regexKR.test(userData.userName) ? (
+          <Form.Label style={{ color: 'green' }} size="small">
+            감사합니다.
+          </Form.Label>
+        ) : (
+          <Form.Label style={{ color: '#ff6347' }} size="small">
+            한글 이름을 입력해주세요
+          </Form.Label>
+        )}
         <Form.Field>
           <Form.Label>닉네임</Form.Label>
           <Form.Control>
             <Form.Input
               type="text"
-              placeholder="닉네임"
-              onChange={userNicknamedata}
-              value={userNickname}
+              placeholder="대소문자, 한글, 숫자"
+              name="userNickname"
+              onChange={onChangeAccountEvent}
+              value={userData.userNickname}
             />
           </Form.Control>
-
-          {sameNickname === true ? (
-            <Form.Label size="small" style={{ color: 'green' }}>
-              확인되었습니다
-            </Form.Label>
-          ) : sameNickname === false ? (
-            <Form.Label size="small">&nbsp;&nbsp;</Form.Label>
+          {userData.userNickname.length ? (
+            <>
+              {userData.sameNickname ? (
+                <Form.Label size="small" style={{ color: '#ff6347' }}>
+                  닉네임 중복 또는 양식을 확인해주세요.
+                </Form.Label>
+              ) : (
+                <Form.Label size="small" style={{ color: 'green' }}>
+                  사용가능한 닉네임입니다.
+                </Form.Label>
+              )}
+            </>
           ) : (
-            <Form.Label size="small">&nbsp;&nbsp;</Form.Label>
+            <Form.Label size="small" style={{ color: '#ff6347' }}>
+              닉네임을 입력해주세요
+            </Form.Label>
           )}
-
           <Button mt="1" size="small" color="" onClick={sameNicknameButton}>
             중복확인
           </Button>
@@ -367,8 +333,21 @@ export const SignupForm = () => {
             <Form.Input
               type="text"
               placeholder="자기소개"
-              onChange={userIntroducedata}
-              value={userIntroduce}
+              name="userIntroduce"
+              onChange={onChangeAccountEvent}
+              value={userData.userIntroduce}
+            />
+          </Form.Control>
+        </Form.Field>
+        <Form.Field>
+          <Form.Label>간단한 포트폴리오</Form.Label>
+          <Form.Control>
+            <Form.Input
+              type="text"
+              placeholder="github/velog ...."
+              name="userPortfolio"
+              onChange={onChangeAccountEvent}
+              value={userData.userPortfolio}
             />
           </Form.Control>
         </Form.Field>
@@ -379,17 +358,26 @@ export const SignupForm = () => {
             <Form.Input
               type="email"
               placeholder="이메일"
-              onChange={userEmaildata}
-              value={userEmail}
+              name="userEmail"
+              onChange={onChangeAccountEvent}
+              value={userData.userEmail}
             />
           </Form.Control>
-          {validator.isEmail(userEmail) ? (
-            <Form.Label style={{ color: 'green' }} size="small">
-              이메일 형식이 맞습니다
-            </Form.Label>
+          {validator.isEmail(userData.userEmail) ? (
+            <>
+              {userData.sameEmail ? (
+                <Form.Label style={{ color: '#ff6347' }} size="small">
+                  중복확인을 해주세요.
+                </Form.Label>
+              ) : (
+                <Form.Label style={{ color: 'green' }} size="small">
+                  사용 가능합니다.
+                </Form.Label>
+              )}
+            </>
           ) : (
             <Form.Label style={{ color: '#ff6347' }} size="small">
-              이메일 형식이 아닙니다!
+              이메일 형식이 아닙니다
             </Form.Label>
           )}
           <Button size="small" color="" onClick={sameEmailButton}>
@@ -403,19 +391,20 @@ export const SignupForm = () => {
             <br />
             <Form.Input
               type="emailcode"
-              placeholder="이메일코드"
-              onChange={codedata}
-              value={code}
+              placeholder="이메일 발급코드"
+              name="code"
+              onChange={onChangeAccountEvent}
+              value={userData.code}
             />
           </Form.Control>
-          {codeon === true ? (
+          {userData.codeon ? (
             <Form.Label size="small" style={{ color: 'green' }}>
               확인되었습니다
             </Form.Label>
-          ) : codeon === false ? (
-            <Form.Label size="small">&nbsp;&nbsp;</Form.Label>
           ) : (
-            <Form.Label size="small">&nbsp;&nbsp;</Form.Label>
+            <Form.Label size="small" style={{ color: '#ff6347' }}>
+              이메일을 확인해주세요
+            </Form.Label>
           )}
           <Button size="small" color="" onClick={EmailCode}>
             확인
@@ -426,7 +415,11 @@ export const SignupForm = () => {
         <Form.Field>
           <Form.Label>능력</Form.Label>
           <Form.Control>
-            <Form.Select onChange={userAbilitydata} value={userAbility}>
+            <Form.Select
+              onChange={onChangeAccountEvent}
+              name="userAbility"
+              value={userData.userAbility}
+            >
               <option value="">---------------------------</option>
               <option value="초심자">초심자</option>
               <option value="초보">초보</option>
@@ -438,24 +431,13 @@ export const SignupForm = () => {
         <Form.Field>
           <Form.Label>지역</Form.Label>
           <Form.Control>
-            <Form.Select onChange={userAreadata} value={userArea}>
+            <Form.Select
+              onChange={onChangeAccountEvent}
+              name="userArea"
+              value={userData.userArea}
+            >
               <option value="">---------------------------</option>
-              <option value="서울">서울</option>
-              <option value="경기도">경기도</option>
-              <option value="부산">부산</option>
-              <option value="인천">인천</option>
-              <option value="대구">대구</option>
-              <option value="대전">대전</option>
-              <option value="광주">광주</option>
-              <option value="울산">울산</option>
-              <option value="경상남도">경상남도</option>
-              <option value="경상북도">경상북도</option>
-              <option value="충청남도">충청남도</option>
-              <option value="충청북도">충청북도</option>
-              <option value="전라남도">전라남도</option>
-              <option value="전라북도">전라북도</option>
-              <option value="강원도">강원도</option>
-              <option value="제주도">제주도</option>
+              {genOption(Arr.areaArray)}
             </Form.Select>
           </Form.Control>
         </Form.Field>
@@ -464,13 +446,12 @@ export const SignupForm = () => {
           <Form.Control>
             <Form.Select
               style={{ size: 'large' }}
-              onChange={userTimedata}
-              value={userTime}
+              onChange={onChangeAccountEvent}
+              name="userTime"
+              value={userData.userTime}
             >
               <option value="">---------------------------</option>
-              <option value="평일만가능">평일만가능</option>
-              <option value="주말만가능">주말만가능</option>
-              <option value="전부가능">전부가능</option>
+              {genOption(Arr.onOffArray)}
             </Form.Select>
           </Form.Control>
         </Form.Field>
@@ -479,34 +460,43 @@ export const SignupForm = () => {
             <Form.Label>직무</Form.Label>
             <Form.Control>
               <Form.Select
-                onChange={userInterestMaindata}
-                value={userInterestMain}
+                onChange={onChangeAccountEvent}
+                name="userInterestMain"
+                value={userData.userInterestMain}
               >
                 <option value="">---------------------------</option>
-                {genOption(mainArray)}
+                {genOption(Arr.mainArray)}
               </Form.Select>
             </Form.Control>
           </Form.Field>
         </div>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <div style={{ display: 'inline-block' }}>
           <Form.Field>
             <Form.Control>
               <Form.Select
-                onChange={userInterestSubdata}
-                value={userInterestSub}
+                onChange={onChangeAccountEvent}
+                name="userInterestSub"
+                value={userData.userInterestSub}
               >
                 <option value="">---------------------------</option>
-                {userInterestMain === '기획' && <>{genOption(planArray)}</>}
-                {userInterestMain === '디자인' && <>{genOption(designArray)}</>}
-                {userInterestMain === '프론트엔드개발' && (
-                  <>{genOption(frontArray)}</>
+                {userData.userInterestMain === '기획' && (
+                  <>{genOption(Arr.planArray)}</>
                 )}
-                {userInterestMain === '백엔드개발' && (
-                  <>{genOption(backArray)}</>
+                {userData.userInterestMain === '디자인' && (
+                  <>{genOption(Arr.designArray)}</>
                 )}
-                {userInterestMain === '사업' && <>{genOption(coopArray)}</>}
-                {userInterestMain === '기타' && <>{genOption(etcArray)}</>}
+                {userData.userInterestMain === '프론트엔드개발' && (
+                  <>{genOption(Arr.frontArray)}</>
+                )}
+                {userData.userInterestMain === '백엔드개발' && (
+                  <>{genOption(Arr.backArray)}</>
+                )}
+                {userData.userInterestMain === '사업' && (
+                  <>{genOption(Arr.coopArray)}</>
+                )}
+                {userData.userInterestMain === '기타' && (
+                  <>{genOption(Arr.etcArray)}</>
+                )}
               </Form.Select>
             </Form.Control>
           </Form.Field>

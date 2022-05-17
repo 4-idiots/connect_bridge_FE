@@ -1,9 +1,21 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Container, Heading, Button, Box, Form } from 'react-bulma-components';
+import { useNavigate } from 'react-router-dom';
+import { useJwt } from 'react-jwt';
 import { findPWServcie } from '../../services/loginService';
+import { useAuth } from '../../contexts/hooks/useAuth';
 
 export const FindPWForm = () => {
+  const navigate = useNavigate();
+  const auth = useAuth();
+  const { decodedToken } = useJwt(auth.token);
   const [userInfo, setUserInfo] = useState({});
+
+  useEffect(() => {
+    if (decodedToken) {
+      navigate('/');
+    }
+  }, [decodedToken]);
 
   const { userID, userName, userEmail } = userInfo;
 

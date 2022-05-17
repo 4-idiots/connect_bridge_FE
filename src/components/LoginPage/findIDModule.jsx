@@ -1,9 +1,21 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Container, Heading, Button, Box, Form } from 'react-bulma-components';
+import { useNavigate } from 'react-router-dom';
+import { useJwt } from 'react-jwt';
 import { findIDService } from '../../services/loginService';
+import { useAuth } from '../../contexts/hooks/useAuth';
 
 export const FindIDForm = () => {
+  const navigate = useNavigate();
+  const auth = useAuth();
+  const { decodedToken } = useJwt(auth.token);
   const [userInfo, setUserInfo] = useState({});
+
+  useEffect(() => {
+    if (decodedToken) {
+      navigate('/');
+    }
+  }, [decodedToken]);
 
   const { userName, userEmail } = userInfo;
 
@@ -23,7 +35,7 @@ export const FindIDForm = () => {
       alert(`아이디는 ${result.data.userID} 입니다.`);
     } catch (error) {
       alert('다시 시도해주세요');
-      window.location.replace('/login/findID');
+      navigate('/login/findID');
     }
   };
 

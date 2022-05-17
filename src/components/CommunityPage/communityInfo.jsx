@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import React, { useState, useEffect } from 'react';
 import { Button } from 'react-bulma-components';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useJwt } from 'react-jwt';
 import * as S from './infoStyle';
 import { useAuth } from '../../contexts/hooks/useAuth';
@@ -16,6 +16,7 @@ import {
 } from '../../services/communityService';
 
 export const CommunityInfoForm = () => {
+  const navigate = useNavigate();
   const { communityID } = useParams();
   const auth = useAuth();
   const { decodedToken } = useJwt(auth.token);
@@ -50,13 +51,13 @@ export const CommunityInfoForm = () => {
   };
 
   const ChangeClick = () => {
-    window.location = `/community/change/${communityID}`;
+    navigate(`/community/change/${communityID}`);
   };
 
   const DeleteClick = async () => {
     try {
       await deleteCommunityService(communityID);
-      window.location = '/community';
+      navigate('/community');
     } catch (error) {
       // pass
     }

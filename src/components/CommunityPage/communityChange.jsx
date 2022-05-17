@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable react/no-array-index-key */
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Heading, Form, Button, Box } from 'react-bulma-components';
 import { useJwt } from 'react-jwt';
 import SlateEditor from '../../SlateEditor/Editor';
@@ -12,6 +12,7 @@ import {
 import { useAuth } from '../../contexts/hooks/useAuth';
 
 export const CommunityChangeForm = () => {
+  const navigate = useNavigate();
   const [community, setCommunity] = useState(null);
   const { communityID } = useParams();
   const auth = useAuth();
@@ -43,7 +44,7 @@ export const CommunityChangeForm = () => {
         JSON.stringify(community.content),
       );
       alert('수정이 완료되습니다.');
-      window.location = '/community';
+      navigate('/community');
     } catch (error) {
       alert('다시 시도해주세요');
     }
