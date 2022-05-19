@@ -38,7 +38,7 @@ export const Top111 = styled.option`
 
 export const People = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   row-gap: 3rem;
   margin-bottom: 80px;
 `;

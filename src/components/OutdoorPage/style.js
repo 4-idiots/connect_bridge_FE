@@ -23,7 +23,7 @@ export const OdCardUserBtndBox = styled.div`
 
 export const OdMainGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   row-gap: 3rem;
 `;
 

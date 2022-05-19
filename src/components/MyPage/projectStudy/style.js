@@ -20,7 +20,7 @@ export const PSText = styled.span`
 
 export const PSTrue = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   row-gap: 3rem;
 `;
 
@@ -32,7 +32,7 @@ export const CustomDiv = styled.div`
 
 export const gridBox = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   row-gap: 3rem;
 `;
 
@@ -242,7 +242,7 @@ export const mainRecruitWrap = styled.div`
 
 export const ProjectGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   row-gap: 3rem;
   margin-bottom: 80px;
 `;
