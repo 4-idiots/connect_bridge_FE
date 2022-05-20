@@ -7,6 +7,7 @@ import { TeamCard } from './mainCard/teamCard';
 import { StudyCard } from '../StudyPage/mainComponent/studyCard';
 import * as S from './style';
 import { SkelProject, SkelCommunity, SkelTeam } from '../skeleton/skelRouter';
+import { Mobile, Desktop, Tablet } from '../../mediaQuery';
 
 export const MainPageForm = () => {
   const [main, setMain] = useState(null);
@@ -30,40 +31,45 @@ export const MainPageForm = () => {
   if (main && !loading) {
     return (
       <Container style={{ marginTop: 80 }}>
-        <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
-          프로젝트
-        </Heading>
-        <S.MainGrid>
-          {main.project &&
-            main.project.map(item => (
-              <ProjectCard item={item} key={item.projectID} />
-            ))}
-        </S.MainGrid>
-        <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
-          스터디
-        </Heading>
-        <S.MainGrid>
-          {main.study &&
-            main.study.map(item => (
-              <StudyCard item={item} key={item.studyID} />
-            ))}
-        </S.MainGrid>
-        <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
-          커뮤니티
-        </Heading>
-        <S.MainGrid>
-          {main.community &&
-            main.community.map(item => (
-              <CommunityCard item={item} key={item.postID} />
-            ))}
-        </S.MainGrid>
-        <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
-          팀원들
-        </Heading>
-        <S.MainGrid>
-          {main.register &&
-            main.register.map(item => <TeamCard item={item} key={item.myid} />)}
-        </S.MainGrid>
+        <Mobile>난 폰이야</Mobile>
+        <Desktop>
+          <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
+            프로젝트
+          </Heading>
+          <S.MainGrid>
+            {main.project &&
+              main.project.map(item => (
+                <ProjectCard item={item} key={item.projectID} />
+              ))}
+          </S.MainGrid>
+          <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
+            스터디
+          </Heading>
+          <S.MainGrid>
+            {main.study &&
+              main.study.map(item => (
+                <StudyCard item={item} key={item.studyID} />
+              ))}
+          </S.MainGrid>
+          <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
+            커뮤니티
+          </Heading>
+          <S.MainGrid>
+            {main.community &&
+              main.community.map(item => (
+                <CommunityCard item={item} key={item.postID} />
+              ))}
+          </S.MainGrid>
+          <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
+            팀원들
+          </Heading>
+          <S.MainGrid>
+            {main.register &&
+              main.register.map(item => (
+                <TeamCard item={item} key={item.myid} />
+              ))}
+          </S.MainGrid>
+        </Desktop>
       </Container>
     );
   }
