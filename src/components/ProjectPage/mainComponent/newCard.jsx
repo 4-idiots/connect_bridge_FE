@@ -32,27 +32,16 @@ export const NewCard = ({ item }) => {
   }, []);
 
   return (
-    <S.newCardContainer onClick={() => navigate(`/project/${item.projectID}`)}>
-      <S.newImg>
-        <img
-          src={item.projectImg}
-          alt="test"
-          style={{
-            borderRadius: '3%',
-            objectFit: 'cover',
-            width: '516px',
-            height: '230px',
-          }}
-        />
-      </S.newImg>
-      <S.newBottom>
-        <S.newField>{item.projectField}</S.newField>
-        <S.newName>{item.projectName}</S.newName>
-        <div style={{ width: '500px', overflow: 'hidden', height: '28px' }}>
+    <S.ResNewCard onClick={() => navigate(`/project/${item.projectID}`)}>
+      <S.ResNewImg src={item.projectImg} />
+      <S.ResNewBottom>
+        <S.ResNewField>{item.projectField}</S.ResNewField>
+        <S.ResNewName>{item.projectName}</S.ResNewName>
+        <S.ResNewContent>
           {prContent && <ReadOnlySlate value={prContent} />}
-        </div>
-        <S.newInfoBox>
-          <S.newEveBox
+        </S.ResNewContent>
+        <S.ResNewInfoBox>
+          <S.ResNewMemberBox
             onMouseEnter={() => {
               setOnRecruit(true);
             }}
@@ -60,14 +49,14 @@ export const NewCard = ({ item }) => {
               setOnRecruit(false);
             }}
           >
-            <S.newreBox>
+            <S.ResMemberNow>
               모집현황
               <Icon>
                 <i className="fas fa-arrow-up" />
               </Icon>
-            </S.newreBox>
+            </S.ResMemberNow>
             {onRecruit ? <RecruitModal item={item} /> : ''}
-          </S.newEveBox>
+          </S.ResNewMemberBox>
           <S.newIconBox>
             <Icon>
               <i className="fas fa-heart" />
@@ -78,9 +67,9 @@ export const NewCard = ({ item }) => {
               <span style={{ marginLeft: 4 }}>{item.projectView}</span>
             </Icon>
           </S.newIconBox>
-        </S.newInfoBox>
-      </S.newBottom>
-    </S.newCardContainer>
+        </S.ResNewInfoBox>
+      </S.ResNewBottom>
+    </S.ResNewCard>
   );
 };
 

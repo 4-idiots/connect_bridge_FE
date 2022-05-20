@@ -4,300 +4,300 @@ import * as S from './style';
 
 export const RecruitModal = ({ item }) => {
   return (
-    <S.DetailStatus>
-      <S.StatusUl>
+    <S.ResRecruit>
+      <S.RecruitUl>
         {item.uiuxPlan ? (
-          <S.StatusLi>
-            <S.StatusBigP>UI/UX 기획</S.StatusBigP>
-            <S.StatusSmallP>
+          <S.RecruitLi>
+            <S.RecruitMean>UI/UX 기획</S.RecruitMean>
+            <S.RecruitNum>
               {item.uiuxPlanNow} / {item.uiuxPlan}
-            </S.StatusSmallP>
-          </S.StatusLi>
+            </S.RecruitNum>
+          </S.RecruitLi>
         ) : (
           ''
         )}
         {item.gamePlan ? (
-          <S.StatusLi>
-            <S.StatusBigP>게임 기획</S.StatusBigP>
-            <S.StatusSmallP>
+          <S.RecruitLi>
+            <S.RecruitMean>게임 기획</S.RecruitMean>
+            <S.RecruitNum>
               {item.gamePlanNow} / {item.gamePlan}
-            </S.StatusSmallP>
-          </S.StatusLi>
+            </S.RecruitNum>
+          </S.RecruitLi>
         ) : (
           ''
         )}
         {item.managerPlan ? (
-          <S.StatusLi>
-            <S.StatusBigP>프로젝트 매니저</S.StatusBigP>
-            <S.StatusSmallP>
+          <S.RecruitLi>
+            <S.RecruitMean>프로젝트 매니저</S.RecruitMean>
+            <S.RecruitNum>
               {item.managerPlanNow} / {item.managerPlan}
-            </S.StatusSmallP>
-          </S.StatusLi>
+            </S.RecruitNum>
+          </S.RecruitLi>
         ) : (
           ''
         )}
         {item.hwPlan ? (
-          <S.StatusLi>
-            <S.StatusBigP>하드웨어(제품) 기획</S.StatusBigP>
-            <S.StatusSmallP>
+          <S.RecruitLi>
+            <S.RecruitMean>하드웨어(제품) 기획</S.RecruitMean>
+            <S.RecruitNum>
               {item.hwPlanNow} / {item.hwPlan}
-            </S.StatusSmallP>
-          </S.StatusLi>
+            </S.RecruitNum>
+          </S.RecruitLi>
         ) : (
           ''
         )}
         {item.iosFr ? (
-          <S.StatusLi>
-            <S.StatusBigP>IOS</S.StatusBigP>
-            <S.StatusSmallP>
+          <S.RecruitLi>
+            <S.RecruitMean>IOS</S.RecruitMean>
+            <S.RecruitNum>
               {item.iosFrNow} / {item.iosFr}
-            </S.StatusSmallP>
-          </S.StatusLi>
+            </S.RecruitNum>
+          </S.RecruitLi>
         ) : (
           ''
         )}
         {item.androidFr ? (
-          <S.StatusLi>
-            <S.StatusBigP>안드로이드</S.StatusBigP>
-            <S.StatusSmallP>
+          <S.RecruitLi>
+            <S.RecruitMean>안드로이드</S.RecruitMean>
+            <S.RecruitNum>
               {item.androidFrNow} / {item.androidFr}
-            </S.StatusSmallP>
-          </S.StatusLi>
+            </S.RecruitNum>
+          </S.RecruitLi>
         ) : (
           ''
         )}
         {item.webFrontFr ? (
-          <S.StatusLi>
-            <S.StatusBigP>웹프론트엔드</S.StatusBigP>
-            <S.StatusSmallP>
+          <S.RecruitLi>
+            <S.RecruitMean>웹프론트엔드</S.RecruitMean>
+            <S.RecruitNum>
               {item.webFrontFrNow} / {item.webFrontFr}
-            </S.StatusSmallP>
-          </S.StatusLi>
+            </S.RecruitNum>
+          </S.RecruitLi>
         ) : (
           ''
         )}
         {item.webPublicFr ? (
-          <S.StatusLi>
-            <S.StatusBigP>웹퍼블리셔</S.StatusBigP>
-            <S.StatusSmallP>
+          <S.RecruitLi>
+            <S.RecruitMean>웹퍼블리셔</S.RecruitMean>
+            <S.RecruitNum>
               {item.webPublicFrNow} / {item.webPublicFr}
-            </S.StatusSmallP>
-          </S.StatusLi>
+            </S.RecruitNum>
+          </S.RecruitLi>
         ) : (
           ''
         )}
         {item.crossFr ? (
-          <S.StatusLi>
-            <S.StatusBigP>크로스플랫폼</S.StatusBigP>
-            <S.StatusSmallP>
+          <S.RecruitLi>
+            <S.RecruitMean>크로스플랫폼</S.RecruitMean>
+            <S.RecruitNum>
               {item.crossFrNow} / {item.crossFr}
-            </S.StatusSmallP>
-          </S.StatusLi>
+            </S.RecruitNum>
+          </S.RecruitLi>
         ) : (
           ''
         )}
         {item.graphicDe ? (
-          <S.StatusLi>
-            <S.StatusBigP>그래픽디자인</S.StatusBigP>
-            <S.StatusSmallP>
+          <S.RecruitLi>
+            <S.RecruitMean>그래픽디자인</S.RecruitMean>
+            <S.RecruitNum>
               {item.graphicDeNow} / {item.graphicDe}
-            </S.StatusSmallP>
-          </S.StatusLi>
+            </S.RecruitNum>
+          </S.RecruitLi>
         ) : (
           ''
         )}
         {item.uiuxDe ? (
-          <S.StatusLi>
-            <S.StatusBigP>UI/UX디자인</S.StatusBigP>
-            <S.StatusSmallP>
+          <S.RecruitLi>
+            <S.RecruitMean>UI/UX디자인</S.RecruitMean>
+            <S.RecruitNum>
               {item.uiuxDeNow} / {item.uiuxDe}
-            </S.StatusSmallP>
-          </S.StatusLi>
+            </S.RecruitNum>
+          </S.RecruitLi>
         ) : (
           ''
         )}
         {item.thrdDe ? (
-          <S.StatusLi>
-            <S.StatusBigP>3D디자인</S.StatusBigP>
-            <S.StatusSmallP>
+          <S.RecruitLi>
+            <S.RecruitMean>3D디자인</S.RecruitMean>
+            <S.RecruitNum>
               {item.thrdDeNow} / {item.thrdDe}
-            </S.StatusSmallP>
-          </S.StatusLi>
+            </S.RecruitNum>
+          </S.RecruitLi>
         ) : (
           ''
         )}
         {item.hwDe ? (
-          <S.StatusLi>
-            <S.StatusBigP>하드웨어(제품)디자인</S.StatusBigP>
-            <S.StatusSmallP>
+          <S.RecruitLi>
+            <S.RecruitMean>하드웨어(제품)디자인</S.RecruitMean>
+            <S.RecruitNum>
               {item.hwDeNow} / {item.hwDe}
-            </S.StatusSmallP>
-          </S.StatusLi>
+            </S.RecruitNum>
+          </S.RecruitLi>
         ) : (
           ''
         )}
         {item.etcDe ? (
-          <S.StatusLi>
-            <S.StatusBigP>(디자인)기타</S.StatusBigP>
-            <S.StatusSmallP>
+          <S.RecruitLi>
+            <S.RecruitMean>(디자인)기타</S.RecruitMean>
+            <S.RecruitNum>
               {item.etcDeNow} / {item.etcDe}
-            </S.StatusSmallP>
-          </S.StatusLi>
+            </S.RecruitNum>
+          </S.RecruitLi>
         ) : (
           ''
         )}
         {item.webBk ? (
-          <S.StatusLi>
-            <S.StatusBigP>웹서버</S.StatusBigP>
-            <S.StatusSmallP>
+          <S.RecruitLi>
+            <S.RecruitMean>웹서버</S.RecruitMean>
+            <S.RecruitNum>
               {item.webBkNow} / {item.webBk}
-            </S.StatusSmallP>
-          </S.StatusLi>
+            </S.RecruitNum>
+          </S.RecruitLi>
         ) : (
           ''
         )}
         {item.blchBk ? (
-          <S.StatusLi>
-            <S.StatusBigP>블록체인</S.StatusBigP>
-            <S.StatusSmallP>
+          <S.RecruitLi>
+            <S.RecruitMean>블록체인</S.RecruitMean>
+            <S.RecruitNum>
               {item.blchBkNow} / {item.blchBk}
-            </S.StatusSmallP>
-          </S.StatusLi>
+            </S.RecruitNum>
+          </S.RecruitLi>
         ) : (
           ''
         )}
         {item.aiBk ? (
-          <S.StatusLi>
-            <S.StatusBigP>AI</S.StatusBigP>
-            <S.StatusSmallP>
+          <S.RecruitLi>
+            <S.RecruitMean>AI</S.RecruitMean>
+            <S.RecruitNum>
               {item.aiBkNow} / {item.aiBk}
-            </S.StatusSmallP>
-          </S.StatusLi>
+            </S.RecruitNum>
+          </S.RecruitLi>
         ) : (
           ''
         )}
         {item.dsBk ? (
-          <S.StatusLi>
-            <S.StatusBigP>DB/빅데이터/DS</S.StatusBigP>
-            <S.StatusSmallP>
+          <S.RecruitLi>
+            <S.RecruitMean>DB/빅데이터/DS</S.RecruitMean>
+            <S.RecruitNum>
               {item.dsBkNow} / {item.dsBk}
-            </S.StatusSmallP>
-          </S.StatusLi>
+            </S.RecruitNum>
+          </S.RecruitLi>
         ) : (
           ''
         )}
         {item.gameBk ? (
-          <S.StatusLi>
-            <S.StatusBigP>게임서버</S.StatusBigP>
-            <S.StatusSmallP>
+          <S.RecruitLi>
+            <S.RecruitMean>게임서버</S.RecruitMean>
+            <S.RecruitNum>
               {item.gameBkNow} / {item.gameBk}
-            </S.StatusSmallP>
-          </S.StatusLi>
+            </S.RecruitNum>
+          </S.RecruitLi>
         ) : (
           ''
         )}
         {item.planBu ? (
-          <S.StatusLi>
-            <S.StatusBigP>사업기획</S.StatusBigP>
-            <S.StatusSmallP>
+          <S.RecruitLi>
+            <S.RecruitMean>사업기획</S.RecruitMean>
+            <S.RecruitNum>
               {item.planBuNow} / {item.planBu}
-            </S.StatusSmallP>
-          </S.StatusLi>
+            </S.RecruitNum>
+          </S.RecruitLi>
         ) : (
           ''
         )}
         {item.marketingBu ? (
-          <S.StatusLi>
-            <S.StatusBigP>마케팅</S.StatusBigP>
-            <S.StatusSmallP>
+          <S.RecruitLi>
+            <S.RecruitMean>마케팅</S.RecruitMean>
+            <S.RecruitNum>
               {item.marketingBuNow} / {item.marketingBu}
-            </S.StatusSmallP>
-          </S.StatusLi>
+            </S.RecruitNum>
+          </S.RecruitLi>
         ) : (
           ''
         )}
         {item.financeBu ? (
-          <S.StatusLi>
-            <S.StatusBigP>재무/회계</S.StatusBigP>
-            <S.StatusSmallP>
+          <S.RecruitLi>
+            <S.RecruitMean>재무/회계</S.RecruitMean>
+            <S.RecruitNum>
               {item.financeBuNow} / {item.financeBu}
-            </S.StatusSmallP>
-          </S.StatusLi>
+            </S.RecruitNum>
+          </S.RecruitLi>
         ) : (
           ''
         )}
         {item.salesBu ? (
-          <S.StatusLi>
-            <S.StatusBigP>영업</S.StatusBigP>
-            <S.StatusSmallP>
+          <S.RecruitLi>
+            <S.RecruitMean>영업</S.RecruitMean>
+            <S.RecruitNum>
               {item.salesBuNow} / {item.salesBu}
-            </S.StatusSmallP>
-          </S.StatusLi>
+            </S.RecruitNum>
+          </S.RecruitLi>
         ) : (
           ''
         )}
         {item.consultBu ? (
-          <S.StatusLi>
-            <S.StatusBigP>전략/컨설팅</S.StatusBigP>
-            <S.StatusSmallP>
+          <S.RecruitLi>
+            <S.RecruitMean>전략/컨설팅</S.RecruitMean>
+            <S.RecruitNum>
               {item.consultBuNow} / {item.consultBu}
-            </S.StatusSmallP>
-          </S.StatusLi>
+            </S.RecruitNum>
+          </S.RecruitLi>
         ) : (
           ''
         )}
         {item.investBu ? (
-          <S.StatusLi>
-            <S.StatusBigP>투자/고문</S.StatusBigP>
-            <S.StatusSmallP>
+          <S.RecruitLi>
+            <S.RecruitMean>투자/고문</S.RecruitMean>
+            <S.RecruitNum>
               {item.investBuNow} / {item.investBu}
-            </S.StatusSmallP>
-          </S.StatusLi>
+            </S.RecruitNum>
+          </S.RecruitLi>
         ) : (
           ''
         )}
         {item.etcBu ? (
-          <S.StatusLi>
-            <S.StatusBigP>(사업)그외</S.StatusBigP>
-            <S.StatusSmallP>
+          <S.RecruitLi>
+            <S.RecruitMean>(사업)그외</S.RecruitMean>
+            <S.RecruitNum>
               {item.etcBuNow} / {item.etcBu}
-            </S.StatusSmallP>
-          </S.StatusLi>
+            </S.RecruitNum>
+          </S.RecruitLi>
         ) : (
           ''
         )}
         {item.blogEtc ? (
-          <S.StatusLi>
-            <S.StatusBigP>작가/블로거</S.StatusBigP>
-            <S.StatusSmallP>
+          <S.RecruitLi>
+            <S.RecruitMean>작가/블로거</S.RecruitMean>
+            <S.RecruitNum>
               {item.blogEtcNow} / {item.blogEtc}
-            </S.StatusSmallP>
-          </S.StatusLi>
+            </S.RecruitNum>
+          </S.RecruitLi>
         ) : (
           ''
         )}
         {item.influEtc ? (
-          <S.StatusLi>
-            <S.StatusBigP>인플루언서/유튜버</S.StatusBigP>
-            <S.StatusSmallP>
+          <S.RecruitLi>
+            <S.RecruitMean>인플루언서/유튜버</S.RecruitMean>
+            <S.RecruitNum>
               {item.influEtcNow} / {item.influEtc}
-            </S.StatusSmallP>
-          </S.StatusLi>
+            </S.RecruitNum>
+          </S.RecruitLi>
         ) : (
           ''
         )}
         {item.compEtc ? (
-          <S.StatusLi>
-            <S.StatusBigP>작곡(사운드)</S.StatusBigP>
-            <S.StatusSmallP>
+          <S.RecruitLi>
+            <S.RecruitMean>작곡(사운드)</S.RecruitMean>
+            <S.RecruitNum>
               {item.compEtcNow} / {item.compEtc}
-            </S.StatusSmallP>
-          </S.StatusLi>
+            </S.RecruitNum>
+          </S.RecruitLi>
         ) : (
           ''
         )}
-      </S.StatusUl>
-    </S.DetailStatus>
+      </S.RecruitUl>
+    </S.ResRecruit>
   );
 };
 

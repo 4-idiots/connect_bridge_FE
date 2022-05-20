@@ -1,5 +1,5 @@
 import React from 'react';
-import { ReactComponent as Main } from '../../assets/svg/main.svg';
+import cnb from '../../assets/svg/main.svg';
 import * as S from './style';
 
 export const BannerForm = () => {
@@ -9,7 +9,7 @@ export const BannerForm = () => {
         <S.BnMainText>좋은 프로젝트의 시작</S.BnMainText>
         <S.BnSubText>CONNECT BRIDGE</S.BnSubText>
       </S.BnTextBox>
-      <Main />
+      <S.SvgBox src={cnb} />
     </S.BannerBox>
   );
 };

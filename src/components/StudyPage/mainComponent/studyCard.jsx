@@ -48,22 +48,13 @@ export const StudyCard = ({ item }) => {
   };
 
   return (
-    <Card
+    <S.ResCard
       style={
         isHover
           ? {
               transform: 'scale(1.1)',
-              width: 290,
-              position: 'relative',
-              borderRadius: '5%',
-              height: 360,
             }
-          : {
-              width: 290,
-              position: 'relative',
-              borderRadius: '5%',
-              height: 360,
-            }
+          : {}
       }
       onMouseEnter={() => {
         setIsHover(true);
@@ -72,36 +63,11 @@ export const StudyCard = ({ item }) => {
         setIsHover(false);
       }}
     >
-      <div
-        onClick={() => navigate(`/study/${item.studyID}`)}
-        className="imgclick"
-        role="presentation"
-      >
-        <img
-          src={item.studyImg}
-          style={{
-            width: '100%',
-            height: '160px',
-            borderRadius: '5%',
-            objectFit: 'cover',
-          }}
-          alt="img"
-        />
-      </div>
-      <div
-        style={{
-          position: 'absolute',
-          top: 5,
-          left: 10,
-          backgroundColor: '#594bba',
-          color: 'white',
-          padding: 5,
-          fontWeight: 'bold',
-        }}
-      >
-        스터디/네트워킹
-      </div>
-      <S.CustomDiv
+      <S.ResNormal onClick={() => navigate(`/study/${item.studyID}`)}>
+        <S.ResImg src={item.studyImg} />
+      </S.ResNormal>
+      <S.ResType>스터디/네트워킹</S.ResType>
+      <S.ResIcon
         onClick={handleLike}
         onMouseEnter={() => {
           setOnHeart(true);
@@ -127,7 +93,7 @@ export const StudyCard = ({ item }) => {
         ) : (
           ''
         )}
-      </S.CustomDiv>
+      </S.ResIcon>
       <Card.Content onClick={() => navigate(`/study/${item.studyID}`)}>
         <Media style={{ marginBottom: 0 }}>
           <Media.Item>
@@ -146,27 +112,21 @@ export const StudyCard = ({ item }) => {
               justifyContent: 'space-between',
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+            <S.ResIconBox>
               <Icon>
                 <i className="fas fa-heart" />
               </Icon>
-              <div>{dynLike}</div>
-            </div>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                marginRight: 10,
-              }}
-            >
+              <S.ResNormal>{dynLike}</S.ResNormal>
+            </S.ResIconBox>
+            <S.ResIconBox mar="10px">
               <Icon>
                 <i className="fas fa-eye" />
               </Icon>
-              <div>{item.studyView}</div>
-            </div>
+              <S.ResNormal>{item.studyView}</S.ResNormal>
+            </S.ResIconBox>
           </Content>
         </Media>
-        <S.mainRecruitWrap
+        <S.ResRecruitWrap
           onMouseEnter={() => {
             setOnRecruit(true);
           }}
@@ -174,19 +134,19 @@ export const StudyCard = ({ item }) => {
             setOnRecruit(false);
           }}
         >
-          <S.mainRecruitBox>
+          <S.ResRecruitBox>
             모집현황
-            <span style={{ color: '#ff6347', marginLeft: 4 }}>
+            <S.ResSpan>
               {item.studyMemberNow}/{item.studyMember}
-            </span>
+            </S.ResSpan>
             <Icon>
               <i className="fas fa-arrow-up" />
             </Icon>
-          </S.mainRecruitBox>
+          </S.ResRecruitBox>
           {onRecruit ? <RecruitModal item={item} /> : ''}
-        </S.mainRecruitWrap>
+        </S.ResRecruitWrap>
       </Card.Content>
-    </Card>
+    </S.ResCard>
   );
 };
 

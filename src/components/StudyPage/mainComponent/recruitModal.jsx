@@ -4,16 +4,16 @@ import * as S from './style';
 
 export const RecruitModal = ({ item }) => {
   return (
-    <S.DetailStatus>
-      <S.StatusUl>
-        <S.StatusLi>
-          <S.StatusBigP>모집 인원</S.StatusBigP>
-          <S.StatusSmallP>
+    <S.ResRecruit>
+      <S.RecruitUl>
+        <S.RecruitLi>
+          <S.RecruitMean>모집 인원</S.RecruitMean>
+          <S.RecruitNum>
             {item.studyMemberNow} / {item.studyMember}
-          </S.StatusSmallP>
-        </S.StatusLi>
-      </S.StatusUl>
-    </S.DetailStatus>
+          </S.RecruitNum>
+        </S.RecruitLi>
+      </S.RecruitUl>
+    </S.ResRecruit>
   );
 };
 

@@ -11,15 +11,15 @@ export const SuggestCard = ({ item }) => {
   const [onRecruit, setOnRecruit] = useState(false);
 
   return (
-    <S.suggestCardContainer
+    <S.ResSuggestContainer
       onClick={() => navigate(`/project/${item.projectID}`)}
     >
-      <S.suggestBox>
-        <S.suggestImg src={item.projectImg} />
-        <S.suggestInfo>
-          <S.suggestTop>
-            <S.suggestName>{item.projectName}</S.suggestName>
-            <S.suggestIconWrap>
+      <S.ResSuggestBox>
+        <S.ResSuggestImg src={item.projectImg} />
+        <S.ResSuggestInfo>
+          <S.ResSuggestTop>
+            <S.ResSuggestName>{item.projectName}</S.ResSuggestName>
+            <S.ResSuggestIconWrap>
               <Icon>
                 <i className="fas fa-heart" />
               </Icon>
@@ -28,13 +28,13 @@ export const SuggestCard = ({ item }) => {
                 <i className="fas fa-eye" />
               </Icon>
               <span style={{ marginLeft: 2 }}>{item.projectView}</span>
-            </S.suggestIconWrap>
-          </S.suggestTop>
-          <S.suggestMid>
+            </S.ResSuggestIconWrap>
+          </S.ResSuggestTop>
+          <S.ResSuggestMid>
             <ReadOnlySlate value={item.content} />
-          </S.suggestMid>
+          </S.ResSuggestMid>
           <S.suggestBottom>
-            <S.newEveBox
+            <S.ResNewMemberBox
               onMouseEnter={() => {
                 setOnRecruit(true);
               }}
@@ -42,18 +42,18 @@ export const SuggestCard = ({ item }) => {
                 setOnRecruit(false);
               }}
             >
-              <S.newreBox>
+              <S.ResMemberNow>
                 모집현황
                 <Icon>
                   <i className="fas fa-arrow-up" />
                 </Icon>
-              </S.newreBox>
+              </S.ResMemberNow>
               {onRecruit ? <RecruitModal item={item} /> : ''}
-            </S.newEveBox>
+            </S.ResNewMemberBox>
           </S.suggestBottom>
-        </S.suggestInfo>
-      </S.suggestBox>
-    </S.suggestCardContainer>
+        </S.ResSuggestInfo>
+      </S.ResSuggestBox>
+    </S.ResSuggestContainer>
   );
 };
 

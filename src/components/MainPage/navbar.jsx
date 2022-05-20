@@ -23,12 +23,7 @@ export const NavbarForm = () => {
           }}
           style={isHover ? { backgroundColor: '#e5e5e5' } : {}}
         >
-          <img
-            style={{ margin: '0 30px 0 30px' }}
-            src="https://cdn.discordapp.com/attachments/885739536301318172/973944679563399208/connectbridge.png"
-            alt="img"
-            width={140}
-          />
+          <S.Logo src="https://cdn.discordapp.com/attachments/885739536301318172/973944679563399208/connectbridge.png" />
         </Link>
         <Navbar.Burger
           onClick={() => {
@@ -75,7 +70,7 @@ export const NavbarForm = () => {
             </>
           ) : (
             <S.CustomUserItem renderAs={Link} to="/login">
-              로그인
+              로그인/회원가입
             </S.CustomUserItem>
           )}
         </Navbar.Container>
