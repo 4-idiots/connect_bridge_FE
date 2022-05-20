@@ -7,6 +7,7 @@ import * as S from './style';
 import { ReactComponent as Heart } from '../../../assets/svg/heart.svg';
 import { RecruitModal } from './recruitModal';
 import * as Send from '../../../services/projectService';
+import { calcMem } from './calcMember';
 import { useAuth } from '../../../contexts/hooks/useAuth';
 
 export const ProjectCard = ({ item }) => {
@@ -176,6 +177,9 @@ export const ProjectCard = ({ item }) => {
         >
           <S.mainRecruitBox>
             모집현황
+            <span style={{ color: '#ff6347', marginLeft: 4 }}>
+              {calcMem(item)}
+            </span>
             <Icon>
               <i className="fas fa-arrow-up" />
             </Icon>

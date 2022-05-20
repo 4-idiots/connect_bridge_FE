@@ -34,7 +34,7 @@ export const MainPageForm = () => {
         <Mobile>난 폰이야</Mobile>
         <Desktop>
           <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
-            프로젝트
+            새로운 프로젝트
           </Heading>
           <S.MainGrid>
             {main.project &&
@@ -43,7 +43,7 @@ export const MainPageForm = () => {
               ))}
           </S.MainGrid>
           <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
-            스터디
+            새로운 스터디
           </Heading>
           <S.MainGrid>
             {main.study &&
@@ -51,7 +51,7 @@ export const MainPageForm = () => {
                 <StudyCard item={item} key={item.studyID} />
               ))}
           </S.MainGrid>
-          <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
+          {/* <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
             커뮤니티
           </Heading>
           <S.MainGrid>
@@ -68,7 +68,7 @@ export const MainPageForm = () => {
               main.register.map(item => (
                 <TeamCard item={item} key={item.myid} />
               ))}
-          </S.MainGrid>
+          </S.MainGrid> */}
         </Desktop>
       </Container>
     );

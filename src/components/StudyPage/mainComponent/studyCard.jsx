@@ -93,13 +93,13 @@ export const StudyCard = ({ item }) => {
           position: 'absolute',
           top: 5,
           left: 10,
-          backgroundColor: 'black',
+          backgroundColor: '#594bba',
           color: 'white',
           padding: 5,
           fontWeight: 'bold',
         }}
       >
-        스터디 모집
+        스터디/네트워킹
       </div>
       <S.CustomDiv
         onClick={handleLike}
@@ -176,6 +176,9 @@ export const StudyCard = ({ item }) => {
         >
           <S.mainRecruitBox>
             모집현황
+            <span style={{ color: '#ff6347', marginLeft: 4 }}>
+              {item.studyMemberNow}/{item.studyMember}
+            </span>
             <Icon>
               <i className="fas fa-arrow-up" />
             </Icon>
