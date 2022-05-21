@@ -54,22 +54,13 @@ export const ProjectCard = ({ item, recu }) => {
   };
 
   return (
-    <B.Card
+    <S.ResCard
       style={
         isHover
           ? {
               transform: 'scale(1.1)',
-              width: 290,
-              position: 'relative',
-              borderRadius: '5%',
-              height: 360,
             }
-          : {
-              width: 290,
-              position: 'relative',
-              borderRadius: '5%',
-              height: 360,
-            }
+          : {}
       }
       onMouseEnter={() => {
         setIsHover(true);
@@ -78,36 +69,11 @@ export const ProjectCard = ({ item, recu }) => {
         setIsHover(false);
       }}
     >
-      <div
-        onClick={() => navigate(`/project/${item.projectID}`)}
-        className="imgclick"
-        role="presentation"
-      >
-        <img
-          src={item.projectImg}
-          style={{
-            width: '100%',
-            height: '160px',
-            borderRadius: '5%',
-            objectFit: 'cover',
-          }}
-          alt="img"
-        />
-      </div>
-      <div
-        style={{
-          position: 'absolute',
-          top: 5,
-          left: 10,
-          backgroundColor: 'black',
-          color: 'white',
-          padding: 5,
-          fontWeight: 'bold',
-        }}
-      >
-        사이드프로젝트
-      </div>
-      <S.CustomDiv
+      <S.ResNormal onClick={() => navigate(`/project/${item.projectID}`)}>
+        <S.ResImg src={item.projectImg} />
+      </S.ResNormal>
+      <S.ResType>사이드프로젝트</S.ResType>
+      <S.ResIcon
         onClick={handleLike}
         onMouseEnter={() => {
           setOnHeart(true);
@@ -133,12 +99,9 @@ export const ProjectCard = ({ item, recu }) => {
         ) : (
           ''
         )}
-      </S.CustomDiv>
-      <B.Card.Content>
-        <B.Media
-          style={{ marginBottom: 0 }}
-          onClick={() => navigate(`/project/${item.projectID}`)}
-        >
+      </S.ResIcon>
+      <B.Card.Content onClick={() => navigate(`/project/${item.projectID}`)}>
+        <B.Media style={{ marginBottom: 0 }}>
           <B.Media.Item>
             <B.Heading subtitle size={7}>
               {item.projectField}
@@ -146,10 +109,7 @@ export const ProjectCard = ({ item, recu }) => {
             <B.Heading size={6}>{item.projectName}</B.Heading>
           </B.Media.Item>
         </B.Media>
-        <B.Media
-          style={{ marginBottom: '0.8rem' }}
-          onClick={() => navigate(`/project/${item.projectID}`)}
-        >
+        <B.Media style={{ marginBottom: '0.8rem' }}>
           <B.Content
             style={{
               display: 'flex',
@@ -158,37 +118,33 @@ export const ProjectCard = ({ item, recu }) => {
               justifyContent: 'space-between',
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+            <S.ResIconBox>
               <B.Icon>
                 <i className="fas fa-heart" />
               </B.Icon>
               <div>{dynLike}</div>
-            </div>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                marginRight: 10,
-              }}
-            >
+            </S.ResIconBox>
+            <S.ResIconBox mar="10px">
               <B.Icon>
                 <i className="fas fa-eye" />
               </B.Icon>
               <div>{item.projectView}</div>
-            </div>
+            </S.ResIconBox>
           </B.Content>
         </B.Media>
-        <S.mainRecruitWrap>
-          {recu ? (
-            <B.Button color="danger" onClick={() => rejectService()}>
-              취소 하기
-            </B.Button>
-          ) : (
-            ''
-          )}
-        </S.mainRecruitWrap>
+        <S.ResRecruitWrap>
+          <S.ResRecruitBox>
+            {recu ? (
+              <B.Button color="danger" onClick={() => rejectService()}>
+                취소 하기
+              </B.Button>
+            ) : (
+              ''
+            )}
+          </S.ResRecruitBox>
+        </S.ResRecruitWrap>
       </B.Card.Content>
-    </B.Card>
+    </S.ResCard>
   );
 };
 

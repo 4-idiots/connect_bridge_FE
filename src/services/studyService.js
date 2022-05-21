@@ -30,7 +30,7 @@ export const studyGetAllService = cursor => {
   return `/api/study/page/${cursor}`;
 };
 
-export const studyUpdateService = ({
+export const studyUpdateService = (
   studyID,
   studyImg,
   studyName,
@@ -42,7 +42,7 @@ export const studyUpdateService = ({
   studyStart,
   content,
   studyOnline,
-}) => {
+) => {
   return customAxios.patch(`/api/study`, {
     studyImg,
     studyName,

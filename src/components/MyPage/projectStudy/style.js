@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Card } from 'react-bulma-components';
 
 export const PSBox = styled.div`
   width: 100%;
@@ -245,4 +246,68 @@ export const ProjectGrid = styled.div`
   grid-template-columns: 1fr 1fr 1fr 1fr;
   row-gap: 3rem;
   margin-bottom: 80px;
+`;
+
+export const ResCard = styled(Card)`
+  width: 90%;
+  height: 100%;
+  max-width: 290px;
+  max-height: 360px;
+  border-radius: 5%;
+  position: relative;
+`;
+
+export const ResImg = styled.img`
+  width: 100%;
+  height: 10vw;
+  max-height: 160px;
+  border-radius: 5%;
+  object-fit: cover;
+`;
+
+export const ResType = styled.div`
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  background-color: black;
+  color: white;
+  padding: 5px;
+  font-weight: bold;
+  font-size: min(1.4vw, 18px);
+`;
+
+export const ResIcon = styled.div`
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+`;
+
+export const ResNormal = styled.div``;
+
+export const ResIconBox = styled.div`
+  display: flex;
+  align-items: center;
+  margin-right: ${props => props.mar};
+`;
+
+export const ResRecruitBox = styled.div`
+  font-size: 0.8rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+`;
+
+export const ResRecruitWrap = styled.div`
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(219, 219, 219, 0.5);
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgba(219, 219, 219, 0.5);
+  position: relative;
+`;
+
+export const ResSpan = styled.span`
+  color: #ff6347;
+  margin-left: 4px;
 `;

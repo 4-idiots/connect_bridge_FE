@@ -45,7 +45,7 @@ export const MySubscribeForm = () => {
 
   if (subData && !loading) {
     return (
-      <>
+      <div style={{ margin: '0 20px' }}>
         <Heading size={4}>구독한 프로젝트</Heading>
         {poster.check && (
           <OutdoorModalForm
@@ -151,7 +151,7 @@ export const MySubscribeForm = () => {
             </S.PSBox>
           )}
         </S.SubGrid>
-      </>
+      </div>
     );
   }
   return <SkelSubscribe />;

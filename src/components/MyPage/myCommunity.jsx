@@ -37,7 +37,7 @@ export const MyCommunityForm = () => {
 
   if (community && !loading) {
     return (
-      <>
+      <div style={{ margin: '0 20px' }}>
         <Heading size={4}>작성한 글</Heading>
         {community.length !== 0 ? (
           <>
@@ -57,7 +57,7 @@ export const MyCommunityForm = () => {
             </S.PSNull>
           </S.PSBox>
         )}
-      </>
+      </div>
     );
   }
   return (

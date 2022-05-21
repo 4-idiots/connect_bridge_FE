@@ -72,17 +72,13 @@ export const OutdoorCardForm = ({ item, onActClick }) => {
   }, []);
 
   return (
-    <Card
+    <S.OdCard
       style={
         isHover
           ? {
-              width: 280,
-              height: 500,
               transform: 'scale(1.1)',
             }
           : {
-              width: 280,
-              height: 500,
               overflow: 'hidden',
             }
       }
@@ -104,8 +100,15 @@ export const OutdoorCardForm = ({ item, onActClick }) => {
             flexDirection: 'column',
           }}
         >
-          <Media.Item style={{ height: 36, textOverflow: 'ellipsis' }}>
-            <Heading size={isLogin ? 6 : 5}>{item.outActName}</Heading>
+          <Media.Item
+            style={{ height: 'min(3vw,36px)', textOverflow: 'ellipsis' }}
+          >
+            <Heading
+              size={isLogin ? 6 : 5}
+              style={{ fontSize: 'min(1.4vw, 24px)' }}
+            >
+              {item.outActName}
+            </Heading>
           </Media.Item>
           <Media.Item style={{ marginTop: 10 }}>
             {isLogin ? (
@@ -116,7 +119,7 @@ export const OutdoorCardForm = ({ item, onActClick }) => {
                       renderAs={Link}
                       to={`/outdoor/update/${item.outActID}`}
                       color="link"
-                      style={{ marginRight: 6 }}
+                      style={{ marginRight: 6, fontSize: 'min(2vw, 16px)' }}
                     >
                       수정
                     </Button>
@@ -125,6 +128,7 @@ export const OutdoorCardForm = ({ item, onActClick }) => {
                         deleteAxios(item.outActID);
                       }}
                       color="danger"
+                      style={{ fontSize: 'min(2vw, 16px)' }}
                     >
                       삭제
                     </Button>
@@ -150,7 +154,7 @@ export const OutdoorCardForm = ({ item, onActClick }) => {
           </Media.Item>
         </Media>
       </Card.Content>
-    </Card>
+    </S.OdCard>
   );
 };
 

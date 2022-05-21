@@ -23,18 +23,16 @@ export const OutdoorModalForm = ({ close, item }) => {
             justifyContent: 'space-between',
           }}
         >
-          <Box>
-            <Button color="info">
-              <a
-                target="_blank"
-                href={item.link}
-                rel="noopener noreferrer"
-                style={{ textDecorationLine: 'none', color: 'white' }}
-              >
-                공식 사이트로 이동
-              </a>
-            </Button>
-          </Box>
+          <Button color="info">
+            <a
+              target="_blank"
+              href={item.link}
+              rel="noopener noreferrer"
+              style={{ textDecorationLine: 'none', color: 'white' }}
+            >
+              공식 사이트로 이동
+            </a>
+          </Button>
         </Modal.Card.Footer>
       </Modal.Card>
     </Modal>

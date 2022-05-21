@@ -234,7 +234,7 @@ a.more-link {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 90%;
   max-width: 290px;
   height: 360px;
   overflow: hidden;

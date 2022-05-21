@@ -26,7 +26,7 @@ export const MyProjectForm = () => {
 
   if (project && !loading) {
     return (
-      <>
+      <div style={{ margin: '0 20px' }}>
         <S.PSBox>
           <Heading size={4}>지원 현황</Heading>
           <S.ProjectGrid>
@@ -81,7 +81,7 @@ export const MyProjectForm = () => {
             )}
           </S.ProjectGrid>
         </S.PSBox>
-      </>
+      </div>
     );
   }
   return <SkelSubscribe />;
