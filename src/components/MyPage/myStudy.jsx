@@ -4,24 +4,14 @@ import * as S from './projectStudy/style';
 import { myStudyGetService } from '../../services/mypageService';
 import { SkelSubscribe } from '../skeleton/mypage/subscribe';
 import { StudyCard } from './projectStudy/studyCard';
+import { getData } from '../../RefactorFunc/dataControl';
 
 export const MyStudyForm = () => {
   const [loading, setLoading] = useState(false);
   const [study, setStudy] = useState(null);
 
   useEffect(() => {
-    const getAxios = async () => {
-      setLoading(true);
-      try {
-        const result = await myStudyGetService();
-        setStudy(result.data);
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
-      }
-    };
-
-    getAxios();
+    getData(setLoading, setStudy, myStudyGetService);
   }, []);
 
   if (study && !loading) {

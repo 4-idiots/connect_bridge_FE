@@ -8,6 +8,7 @@ import * as Send from '../../services/studyService';
 import { useAuth } from '../../contexts/hooks/useAuth';
 import { NoticeTab, ApplyTab } from './detailTab/tabRoutes';
 import * as Sk from '../skeleton/project/skprRouter';
+import { getDetailData, deleteData } from '../../RefactorFunc/dataControl';
 
 export const StudyDetailForm = () => {
   const [loading, setLoading] = useState(false);
@@ -29,16 +30,6 @@ export const StudyDetailForm = () => {
     }
   };
 
-  const deleteAxios = async id => {
-    try {
-      await Send.studyDeleteService(id);
-      alert('삭제되었습니다.');
-      navigate('/study');
-    } catch (error) {
-      alert('다시 시도해주세요');
-    }
-  };
-
   const stateChange = async () => {
     try {
       await Send.studyStateService(studyID);
@@ -49,18 +40,7 @@ export const StudyDetailForm = () => {
   };
 
   useEffect(() => {
-    const getAxios = async id => {
-      setLoading(true);
-      try {
-        const result = await Send.studyGetSomeService(id);
-        setStudy(result.data);
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
-      }
-    };
-
-    getAxios(studyID);
+    getDetailData(setLoading, setStudy, Send.studyGetSomeService, studyID);
   }, []);
 
   if (study && !loading) {
@@ -155,7 +135,7 @@ export const StudyDetailForm = () => {
                   <Button
                     color="danger"
                     onClick={() => {
-                      deleteAxios(studyID);
+                      deleteData(studyID, '/study', Send.studyDeleteService);
                     }}
                   >
                     스터디 삭제

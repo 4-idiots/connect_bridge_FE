@@ -8,6 +8,7 @@ import { Icon } from 'react-bulma-components';
 import { ReactComponent as Heart } from '../../../assets/svg/heart.svg';
 import { useAuth } from '../../../contexts/hooks/useAuth';
 import { teamLike, teamLikeCheck } from '../../../services/mainService';
+import * as LK from '../../../RefactorFunc/likeFunc';
 
 export const TeamCard = ({ item }) => {
   const navigate = useNavigate();
@@ -17,31 +18,14 @@ export const TeamCard = ({ item }) => {
   const auth = useAuth();
   const { decodedToken } = useJwt(auth.token);
 
-  const checkLike = async () => {
-    try {
-      const result = await teamLikeCheck(item.myid);
-      setUsLike(result.data);
-    } catch (error) {
-      setUsLike(false);
-    }
-  };
-
-  const handleLike = async () => {
-    if (usLike) {
-      setDynLike(dynLike - 1);
-    } else {
-      setDynLike(dynLike + 1);
-    }
+  const handleLike = () => {
+    LK.changeDynLike(usLike, dynLike, setDynLike);
     setUsLike(!usLike);
-    try {
-      await teamLike(item.myid);
-    } catch (error) {
-      // pass
-    }
+    LK.likeCommunicate(teamLike, item.myid);
   };
 
   useEffect(() => {
-    checkLike();
+    LK.checkLike(item.myid, setUsLike, teamLikeCheck);
   }, []);
 
   return (

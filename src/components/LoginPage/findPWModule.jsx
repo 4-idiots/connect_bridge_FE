@@ -17,8 +17,6 @@ export const FindPWForm = () => {
     }
   }, [decodedToken]);
 
-  const { userID, userName, userEmail } = userInfo;
-
   const onChangeAccountEvent = useCallback(
     e => {
       setUserInfo({
@@ -31,7 +29,11 @@ export const FindPWForm = () => {
 
   const findPWAxios = async () => {
     try {
-      await findPWServcie(userID, userName, userEmail);
+      await findPWServcie(
+        userInfo.userID,
+        userInfo.userName,
+        userInfo.userEmail,
+      );
       alert('임시 비밀번호가 발급 되었습니다. 메일을 확인하세요');
     } catch (error) {
       alert('다시 시도해주세요');
@@ -51,7 +53,7 @@ export const FindPWForm = () => {
           <Form.Control>
             <Form.Input
               type="text"
-              value={userName || ''}
+              value={userInfo.userName || ''}
               name="userName"
               onChange={onChangeAccountEvent}
               placeholder="이름"
@@ -63,7 +65,7 @@ export const FindPWForm = () => {
           <Form.Control>
             <Form.Input
               type="text"
-              value={userID || ''}
+              value={userInfo.userID || ''}
               name="userID"
               onChange={onChangeAccountEvent}
               placeholder="아이디"
@@ -75,7 +77,7 @@ export const FindPWForm = () => {
           <Form.Control>
             <Form.Input
               type="email"
-              value={userEmail || ''}
+              value={userInfo.userEmail || ''}
               name="userEmail"
               onChange={onChangeAccountEvent}
               placeholder="이메일"

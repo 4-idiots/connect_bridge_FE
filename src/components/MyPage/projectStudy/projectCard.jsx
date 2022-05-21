@@ -7,6 +7,7 @@ import * as S from './style';
 import { ReactComponent as Heart } from '../../../assets/svg/heart.svg';
 import * as Send from '../../../services/projectService';
 import { useAuth } from '../../../contexts/hooks/useAuth';
+import * as LK from '../../../RefactorFunc/likeFunc';
 
 export const ProjectCard = ({ item, recu }) => {
   const navigate = useNavigate();
@@ -18,31 +19,10 @@ export const ProjectCard = ({ item, recu }) => {
   const [usLike, setUsLike] = useState(true);
   const [dynLike, setDynLike] = useState(item.projectLike);
 
-  const checkLike = async () => {
-    try {
-      const result = await Send.projectLikeCheck(item.projectID);
-      setUsLike(result.data);
-    } catch (error) {
-      setUsLike(false);
-    }
-  };
-
-  useEffect(() => {
-    checkLike();
-  }, []);
-
   const handleLike = async () => {
-    if (usLike) {
-      setDynLike(dynLike - 1);
-    } else {
-      setDynLike(dynLike + 1);
-    }
+    LK.changeDynLike(usLike, dynLike, setDynLike);
     setUsLike(!usLike);
-    try {
-      await Send.projectLikeService(item.projectID);
-    } catch (error) {
-      // pass
-    }
+    LK.likeCommunicate(Send.projectLikeService, item.projectID);
   };
 
   const rejectService = async () => {
@@ -52,6 +32,10 @@ export const ProjectCard = ({ item, recu }) => {
       // pass
     }
   };
+
+  useEffect(() => {
+    LK.checkLike(item.projectID, setUsLike, Send.projectLikeCheck);
+  }, []);
 
   return (
     <S.ResCard

@@ -33,6 +33,6 @@ export const StudyRecruit = ({ member, onChange }) => {
 };
 
 StudyRecruit.propTypes = {
-  member: PropTypes.number.isRequired,
+  member: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
 };

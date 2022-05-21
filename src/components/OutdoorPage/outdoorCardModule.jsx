@@ -7,50 +7,21 @@ import { Link } from 'react-router-dom';
 import * as Send from '../../services/outdoorService';
 import { useAuth } from '../../contexts/hooks/useAuth';
 import * as S from './style';
+import * as LK from '../../RefactorFunc/likeFunc';
+import { deleteData } from '../../RefactorFunc/dataControl';
 
 export const OutdoorCardForm = ({ item, onActClick }) => {
   const [isHover, setIsHover] = useState(false);
-  const [isLike, setIsLike] = useState(false);
+  const [usLike, setUsLike] = useState(false);
   const [dynLike, setDynLike] = useState(item.outActLike);
   const [dynView, setDynView] = useState(item.outActView);
-
   const auth = useAuth();
   const { decodedToken } = useJwt(auth.token);
-  const isLogin = localStorage.getItem('isLogin') || '';
 
-  const deleteAxios = async id => {
-    try {
-      await Send.outdoorDeleteService(id);
-      alert('삭제 완료');
-      window.location.replace('/outdoor');
-    } catch (error) {
-      alert('다시 시도해주세요');
-      window.location.replace('/outdoor');
-    }
-  };
-
-  const likeCheck = async () => {
-    try {
-      const result = await Send.outdoorLikeCheck(item.outActID);
-      setIsLike(result.data);
-    } catch (error) {
-      setIsLike(false);
-      // pass
-    }
-  };
-
-  const likeClick = async () => {
-    if (isLike) {
-      setDynLike(dynLike - 1);
-    } else {
-      setDynLike(dynLike + 1);
-    }
-    setIsLike(!isLike);
-    try {
-      await Send.outdoorLikeService(item.outActID);
-    } catch (error) {
-      // pass
-    }
+  const handleLike = async () => {
+    LK.changeDynLike(usLike, dynLike, setDynLike);
+    setUsLike(!usLike);
+    LK.likeCommunicate(Send.outdoorLikeService, item.outActID);
   };
 
   const addView = async () => {
@@ -68,7 +39,7 @@ export const OutdoorCardForm = ({ item, onActClick }) => {
   };
 
   useEffect(() => {
-    likeCheck();
+    LK.checkLike(item.outActID, setUsLike, Send.outdoorLikeCheck);
   }, []);
 
   return (
@@ -103,17 +74,14 @@ export const OutdoorCardForm = ({ item, onActClick }) => {
           <Media.Item
             style={{ height: 'min(3vw,36px)', textOverflow: 'ellipsis' }}
           >
-            <Heading
-              size={isLogin ? 6 : 5}
-              style={{ fontSize: 'min(1.4vw, 24px)' }}
-            >
+            <Heading style={{ fontSize: 'min(1.4vw, 20px)' }}>
               {item.outActName}
             </Heading>
           </Media.Item>
           <Media.Item style={{ marginTop: 10 }}>
-            {isLogin ? (
+            {decodedToken ? (
               <>
-                {decodedToken && decodedToken.role ? (
+                {decodedToken.role ? (
                   <S.OdCardBtnGroup>
                     <Button
                       renderAs={Link}
@@ -125,7 +93,11 @@ export const OutdoorCardForm = ({ item, onActClick }) => {
                     </Button>
                     <Button
                       onClick={() => {
-                        deleteAxios(item.outActID);
+                        deleteData(
+                          item.outActID,
+                          '/outdoor',
+                          Send.outdoorDeleteService,
+                        );
                       }}
                       color="danger"
                       style={{ fontSize: 'min(2vw, 16px)' }}
@@ -136,12 +108,12 @@ export const OutdoorCardForm = ({ item, onActClick }) => {
                 ) : (
                   <S.OdCardUserBtndBox>
                     <p>View: {dynView}</p>
-                    {isLike ? (
-                      <Button color="danger" onClick={likeClick}>
+                    {usLike ? (
+                      <Button color="danger" onClick={handleLike}>
                         Like: {dynLike}
                       </Button>
                     ) : (
-                      <Button color="warning" onClick={likeClick}>
+                      <Button color="warning" onClick={handleLike}>
                         Like: {dynLike}
                       </Button>
                     )}

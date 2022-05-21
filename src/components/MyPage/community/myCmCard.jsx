@@ -5,29 +5,16 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import * as S from './style';
 import ReadOnlySlate from '../../../SlateEditor/ReadOnly';
+import { deleteData } from '../../../RefactorFunc/dataControl';
+import { myCommunityDelete } from '../../../services/mypageService';
+import { arrayToPlain } from '../../../RefactorFunc/cardFunc';
 
-export const MyCmCard = ({ item, deleteAxios }) => {
-  const [content, setContent] = useState('');
+export const MyCmCard = ({ item }) => {
+  const [text, setText] = useState('');
   const navigate = useNavigate();
 
-  const getAll = () => {
-    let te = '';
-    JSON.parse(item.contents).map(text => {
-      return text.children.map(info => {
-        // eslint-disable-next-line no-return-assign
-        return (te = te.concat(' ', info.text));
-      });
-    });
-    setContent([
-      {
-        type: 'paragaph',
-        children: [{ text: te }],
-      },
-    ]);
-  };
-
   useEffect(() => {
-    getAll();
+    arrayToPlain(item.contents, setText);
   }, []);
 
   return (
@@ -35,7 +22,7 @@ export const MyCmCard = ({ item, deleteAxios }) => {
       <S.CmTextBox onClick={() => navigate(`/community/info/${item.postID}`)}>
         <Heading size={5}>{item.title}</Heading>
         <S.CmContentBox>
-          {content && <ReadOnlySlate value={content} />}
+          {text && <ReadOnlySlate value={text} />}
         </S.CmContentBox>
         <S.CmHashTagBox>
           {item.hashtag.map((htag, id) => (
@@ -77,7 +64,9 @@ export const MyCmCard = ({ item, deleteAxios }) => {
           <Button
             style={{ fontSize: 14 }}
             color="danger"
-            onClick={() => deleteAxios(item.postID)}
+            onClick={() =>
+              deleteData(item.postID, '/my/info', myCommunityDelete)
+            }
           >
             삭제
           </Button>
@@ -89,5 +78,4 @@ export const MyCmCard = ({ item, deleteAxios }) => {
 
 MyCmCard.propTypes = {
   item: PropTypes.objectOf(PropTypes.any).isRequired,
-  deleteAxios: PropTypes.func.isRequired,
 };

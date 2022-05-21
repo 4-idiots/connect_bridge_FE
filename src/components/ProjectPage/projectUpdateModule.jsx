@@ -8,13 +8,14 @@ import * as Send from '../../services/projectService';
 import SlateEditor from '../../SlateEditor/Editor';
 import { useAuth } from '../../contexts/hooks/useAuth';
 import { SkelUpdate } from '../skeleton/project/update';
+import { getDetailData, updateFormData } from '../../RefactorFunc/dataControl';
 
 export const ProjectUpdateForm = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [postInfo, setPostInfo] = useState(null);
   const auth = useAuth();
   const { decodedToken } = useJwt(auth.token);
-  const navigate = useNavigate();
-  const [postInfo, setPostInfo] = useState(null);
   const { projectID } = useParams();
 
   const onChangeProjectEvent = useCallback(
@@ -27,30 +28,13 @@ export const ProjectUpdateForm = () => {
     [postInfo],
   );
 
-  const updateAxios = async formdata => {
-    try {
-      await Send.proejctUpdateService(formdata);
-      alert('수정 되었습니다.');
-      navigate('/project');
-    } catch (error) {
-      alert('다시 시도해주세요');
-    }
-  };
-
-  const getSomeAxios = async prID => {
-    setLoading(true);
-    try {
-      const result = await Send.projectGetSomeService(prID);
-      setPostInfo(result.data);
-      setLoading(false);
-    } catch (error) {
-      navigate('/project');
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    getSomeAxios(projectID);
+    getDetailData(
+      setLoading,
+      setPostInfo,
+      Send.projectGetSomeService,
+      projectID,
+    );
   }, []);
 
   const onSubmitEvent = () => {
@@ -129,7 +113,7 @@ export const ProjectUpdateForm = () => {
     formData.append('influEtcNow', postInfo.influEtcNow);
     formData.append('compEtcNow', postInfo.compEtcNow);
 
-    updateAxios(formData);
+    updateFormData(formData, '/project', Send.proejctUpdateService, navigate);
   };
 
   if (postInfo && !loading) {

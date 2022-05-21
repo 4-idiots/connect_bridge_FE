@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Image, Button, Media, Box } from 'react-bulma-components';
+import { Modal, Image, Button, Media } from 'react-bulma-components';
 import PropTypes from 'prop-types';
 
 export const OutdoorModalForm = ({ close, item }) => {

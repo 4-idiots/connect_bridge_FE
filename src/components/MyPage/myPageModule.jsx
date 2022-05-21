@@ -2,13 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Button, Form } from 'react-bulma-components';
 import validator from 'validator';
 import { useJwt } from 'react-jwt';
+import { useNavigate } from 'react-router-dom';
 import { MyPageInput, MyPageSelect, MyPageImg } from './userInfo/infoRoute';
 import * as S from './userInfo/style';
 import * as Send from '../../services/mypageService';
 import { useAuth } from '../../contexts/hooks/useAuth';
 import { SkelInfo } from '../skeleton/mypage/mypageRouter';
+import { getData, updateFormData } from '../../RefactorFunc/dataControl';
 
 export const MyPageForm = () => {
+  const navigate = useNavigate();
   const auth = useAuth();
   const { decodedToken } = useJwt(auth.token);
 
@@ -39,26 +42,6 @@ export const MyPageForm = () => {
     try {
       const result = await Send.myCheckNickname(nick);
       setCheck({ ...check, nickCheck: result.data, nickClick: true });
-    } catch (error) {
-      alert('다시 시도해주세요');
-    }
-  };
-
-  const getAxios = async () => {
-    setLoading(true);
-    try {
-      const result = await Send.myGetUser();
-      setUser(result.data);
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-    }
-  };
-
-  const updateAxios = async data => {
-    try {
-      await Send.mypageUpdate(data);
-      window.location.replace('/my/info');
     } catch (error) {
       alert('다시 시도해주세요');
     }
@@ -104,9 +87,9 @@ export const MyPageForm = () => {
       check.nickClick &&
       check.imgChange
     ) {
-      updateAxios(formData);
+      updateFormData(formData, '/my/info', Send.mypageUpdate, navigate);
     } else if (check.nickChange === false && check.imgChange) {
-      updateAxios(formData);
+      updateFormData(formData, '/my/info', Send.mypageUpdate, navigate);
     } else if (check.imgChange === false) {
       updateNoImgAxios();
     } else {
@@ -115,7 +98,7 @@ export const MyPageForm = () => {
   };
 
   useEffect(() => {
-    getAxios();
+    getData(setLoading, setUser, Send.myGetUser);
   }, []);
 
   if (user && !loading) {

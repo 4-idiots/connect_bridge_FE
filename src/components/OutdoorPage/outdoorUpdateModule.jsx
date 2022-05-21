@@ -3,16 +3,13 @@ import * as B from 'react-bulma-components';
 import { useParams, useNavigate } from 'react-router-dom';
 import * as Send from '../../services/outdoorService';
 import * as S from './style';
+import { updateFormData } from '../../RefactorFunc/dataControl';
 
 export const OutdoorUpdateForm = () => {
   const navigate = useNavigate();
   const [uploadInfo, setUploadInfo] = useState({});
   const [imgData, setImageData] = useState({});
-
   const { outdoorID } = useParams();
-
-  const { outActID, outActName, outActLink } = uploadInfo;
-  const { imgSrc, preview } = imgData;
 
   const onChangeOutdoorEvent = useCallback(
     e => {
@@ -24,21 +21,22 @@ export const OutdoorUpdateForm = () => {
     [uploadInfo],
   );
 
+  const getAxios = async () => {
+    try {
+      const result = await Send.outdoorGetSomeService(outdoorID);
+      setUploadInfo({
+        ...uploadInfo,
+        outActID: outdoorID,
+        outActName: result.data.outActName,
+        outActLink: result.data.outActLink,
+      });
+      setImageData({ ...imgData, preview: result.data.outActImg });
+    } catch (error) {
+      alert('다시 시도해주세요');
+    }
+  };
+
   useEffect(() => {
-    const getAxios = async () => {
-      try {
-        const result = await Send.outdoorGetSomeService(outdoorID);
-        setUploadInfo({
-          ...uploadInfo,
-          outActID: outdoorID,
-          outActName: result.data.outActName,
-          outActLink: result.data.outActLink,
-        });
-        setImageData({ ...imgSrc, preview: result.data.outActImg });
-      } catch (error) {
-        alert('다시 시도해주세요');
-      }
-    };
     getAxios();
   }, []);
 
@@ -53,25 +51,18 @@ export const OutdoorUpdateForm = () => {
     });
   };
 
-  const updateAxios = async formdata => {
-    try {
-      await Send.outdoorUpdateService(formdata);
-      alert('수정이 완료되었습니다.');
-      navigate('/outdoor');
-    } catch (error) {
-      alert('다시 시도해주세요');
-      navigate('/outdoor');
-    }
-  };
-
   const onSubmitEvent = () => {
-    const formData = new FormData();
-    formData.append('outActID', outActID);
-    formData.append('outActName', outActName);
-    formData.append('outActImg', imgSrc);
-    formData.append('outActLink', outActLink);
+    if (imgData.imgSrc) {
+      const formData = new FormData();
+      formData.append('outActID', uploadInfo.outActID);
+      formData.append('outActName', uploadInfo.outActName);
+      formData.append('outActImg', imgData.imgSrc);
+      formData.append('outActLink', uploadInfo.outActLink);
 
-    updateAxios(formData);
+      updateFormData(formData, '/outdoor', Send.outdoorUpdateService, navigate);
+    } else {
+      alert('사진도 수정 해주세요');
+    }
   };
 
   return (
@@ -83,7 +74,7 @@ export const OutdoorUpdateForm = () => {
           <B.Form.Control>
             <B.Form.Input
               type="text"
-              value={outActName || ''}
+              value={uploadInfo.outActName || ''}
               name="outActName"
               onChange={onChangeOutdoorEvent}
               placeholder="대외 활동 제목"
@@ -94,8 +85,8 @@ export const OutdoorUpdateForm = () => {
           <B.Form.Label>포스터 이미지</B.Form.Label>
           <S.OdUploadBox>
             <B.Card style={{ width: 800 }}>
-              {preview ? (
-                <B.Card.Image src={preview} />
+              {imgData.preview ? (
+                <B.Card.Image src={imgData.preview} />
               ) : (
                 <B.Card.Image src="" />
               )}
@@ -111,7 +102,7 @@ export const OutdoorUpdateForm = () => {
               label="포스터 올리기"
               align="center"
               color="info"
-              filename={outActName}
+              filename={uploadInfo.outActName}
               boxed
             />
           </B.Form.Control>
@@ -121,7 +112,7 @@ export const OutdoorUpdateForm = () => {
           <B.Form.Control>
             <B.Form.Input
               type="text"
-              value={outActLink || ''}
+              value={uploadInfo.outActLink || ''}
               name="outActLink"
               onChange={onChangeOutdoorEvent}
               placeholder="관련 링크"

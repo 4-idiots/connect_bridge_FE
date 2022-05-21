@@ -7,6 +7,7 @@ import * as UR from './uploadComponent/uploadRoutes';
 import { projectUploadService } from '../../services/projectService';
 import SlateEditor from '../../SlateEditor/Editor';
 import { useAuth } from '../../contexts/hooks/useAuth';
+import { uploadFormData } from '../../RefactorFunc/dataControl';
 
 export const ProjectUploadForm = () => {
   const auth = useAuth();
@@ -58,50 +59,6 @@ export const ProjectUploadForm = () => {
     compEtc: 0,
   });
 
-  const {
-    projectOnline,
-    projectName,
-    projectField,
-    projectImg,
-    projectArea,
-    projectSkill,
-    projectReference,
-    content,
-    projectStart,
-    projectEnd,
-    projectPlatform,
-    projectTotal,
-    uiuxPlan,
-    gamePlan,
-    managerPlan,
-    hwPlan,
-    iosFr,
-    androidFr,
-    webFrontFr,
-    webPublicFr,
-    crossFr,
-    uiuxDe,
-    graphicDe,
-    thrdDe,
-    hwDe,
-    etcDe,
-    webBk,
-    blchBk,
-    aiBk,
-    dsBk,
-    gameBk,
-    planBu,
-    marketingBu,
-    financeBu,
-    salesBu,
-    consultBu,
-    investBu,
-    etcBu,
-    blogEtc,
-    influEtc,
-    compEtc,
-  } = postInfo;
-
   const onChangeProjectEvent = useCallback(
     e => {
       setPostInfo({
@@ -112,63 +69,53 @@ export const ProjectUploadForm = () => {
     [postInfo],
   );
 
-  const uploadAxios = async formData => {
-    try {
-      await projectUploadService(formData);
-      alert('등록 되었습니다.');
-      navigate('/project');
-    } catch (error) {
-      alert('다시 시도해주세요');
-    }
-  };
-
   const onSubmitEvent = () => {
-    if (projectImg) {
+    if (postInfo.projectImg) {
       const formData = new FormData();
       formData.append('userID', decodedToken.id);
-      formData.append('projectOnline', projectOnline);
-      formData.append('projectName', projectName);
-      formData.append('projectImg', projectImg);
-      formData.append('content', JSON.stringify(content));
-      formData.append('projectField', projectField);
-      formData.append('projectArea', projectArea);
-      formData.append('projectTotal', JSON.stringify(projectTotal));
-      formData.append('projectReference', projectReference);
-      formData.append('projectPlatform', projectPlatform);
-      formData.append('projectSkill', projectSkill);
-      formData.append('projectStart', projectStart);
-      formData.append('projectEnd', projectEnd);
-      formData.append('uiuxPlan', uiuxPlan);
-      formData.append('gamePlan', gamePlan);
-      formData.append('managerPlan', managerPlan);
-      formData.append('hwPlan', hwPlan);
-      formData.append('iosFr', iosFr);
-      formData.append('androidFr', androidFr);
-      formData.append('webFrontFr', webFrontFr);
-      formData.append('webPublicFr', webPublicFr);
-      formData.append('crossFr', crossFr);
-      formData.append('uiuxDe', uiuxDe);
-      formData.append('graphicDe', graphicDe);
-      formData.append('thrdDe', thrdDe);
-      formData.append('hwDe', hwDe);
-      formData.append('etcDe', etcDe);
-      formData.append('webBk', webBk);
-      formData.append('blchBk', blchBk);
-      formData.append('aiBk', aiBk);
-      formData.append('dsBk', dsBk);
-      formData.append('gameBk', gameBk);
-      formData.append('planBu', planBu);
-      formData.append('marketingBu', marketingBu);
-      formData.append('financeBu', financeBu);
-      formData.append('salesBu', salesBu);
-      formData.append('consultBu', consultBu);
-      formData.append('investBu', investBu);
-      formData.append('etcBu', etcBu);
-      formData.append('blogEtc', blogEtc);
-      formData.append('influEtc', influEtc);
-      formData.append('compEtc', compEtc);
+      formData.append('projectOnline', postInfo.projectOnline);
+      formData.append('projectName', postInfo.projectName);
+      formData.append('projectImg', postInfo.projectImg);
+      formData.append('content', JSON.stringify(postInfo.content));
+      formData.append('projectField', postInfo.projectField);
+      formData.append('projectArea', postInfo.projectArea);
+      formData.append('projectTotal', JSON.stringify(postInfo.projectTotal));
+      formData.append('projectReference', postInfo.projectReference);
+      formData.append('projectPlatform', postInfo.projectPlatform);
+      formData.append('projectSkill', postInfo.projectSkill);
+      formData.append('projectStart', postInfo.projectStart);
+      formData.append('projectEnd', postInfo.projectEnd);
+      formData.append('uiuxPlan', postInfo.uiuxPlan);
+      formData.append('gamePlan', postInfo.gamePlan);
+      formData.append('managerPlan', postInfo.managerPlan);
+      formData.append('hwPlan', postInfo.hwPlan);
+      formData.append('iosFr', postInfo.iosFr);
+      formData.append('androidFr', postInfo.androidFr);
+      formData.append('webFrontFr', postInfo.webFrontFr);
+      formData.append('webPublicFr', postInfo.webPublicFr);
+      formData.append('crossFr', postInfo.crossFr);
+      formData.append('uiuxDe', postInfo.uiuxDe);
+      formData.append('graphicDe', postInfo.graphicDe);
+      formData.append('thrdDe', postInfo.thrdDe);
+      formData.append('hwDe', postInfo.hwDe);
+      formData.append('etcDe', postInfo.etcDe);
+      formData.append('webBk', postInfo.webBk);
+      formData.append('blchBk', postInfo.blchBk);
+      formData.append('aiBk', postInfo.aiBk);
+      formData.append('dsBk', postInfo.dsBk);
+      formData.append('gameBk', postInfo.gameBk);
+      formData.append('planBu', postInfo.planBu);
+      formData.append('marketingBu', postInfo.marketingBu);
+      formData.append('financeBu', postInfo.financeBu);
+      formData.append('salesBu', postInfo.salesBu);
+      formData.append('consultBu', postInfo.consultBu);
+      formData.append('investBu', postInfo.investBu);
+      formData.append('etcBu', postInfo.etcBu);
+      formData.append('blogEtc', postInfo.blogEtc);
+      formData.append('influEtc', postInfo.influEtc);
+      formData.append('compEtc', postInfo.compEtc);
 
-      uploadAxios(formData);
+      uploadFormData(formData, projectUploadService, navigate, '/project');
     } else {
       alert('사진을 업로드 해주세요');
     }
@@ -180,12 +127,12 @@ export const ProjectUploadForm = () => {
         label="* 프로젝트명"
         help="! 직관적인 프로젝트명을 사용하시면 클릭률이 올라갑니다."
         placeholder="3~20글자로 적어주세요 ex)승차거부 신고앱"
-        value={projectName || ''}
+        value={postInfo.projectName || ''}
         name="projectName"
         onChange={onChangeProjectEvent}
       />
       <UR.ProjectField
-        checked={projectField}
+        checked={postInfo.projectField}
         onChange={e =>
           setPostInfo({
             ...postInfo,
@@ -207,8 +154,8 @@ export const ProjectUploadForm = () => {
       </Form.Field>
       <SlateEditor value={postInfo} setValue={setPostInfo} />
       <UR.ProjectDate
-        start={projectStart}
-        end={projectEnd}
+        start={postInfo.projectStart}
+        end={postInfo.projectEnd}
         startChange={date => {
           setPostInfo({ ...postInfo, projectStart: date });
         }}
@@ -220,7 +167,7 @@ export const ProjectUploadForm = () => {
         label="* 기술/언어 (최대 10개)"
         help="! 프로젝트에 적용된/적용하고자 하는 기술/디자인 플랫폼을 적어주세요."
         placeholder="ex) java, react, figma, photoshop"
-        value={projectSkill}
+        value={postInfo.projectSkill}
         name="projectSkill"
         onChange={onChangeProjectEvent}
       />
@@ -228,7 +175,7 @@ export const ProjectUploadForm = () => {
         label="* 참고자료"
         help="! 벤치마킹하는 서비스나, 프로젝트를 정리하신 자료의 웹주소를 등록해주세요."
         placeholder="https://4idiot.com"
-        value={projectReference}
+        value={postInfo.projectReference}
         name="projectReference"
         onChange={onChangeProjectEvent}
       />

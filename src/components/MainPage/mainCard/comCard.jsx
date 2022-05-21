@@ -12,6 +12,8 @@ import {
   communityLikeCheck,
   communityLike,
 } from '../../../services/mainService';
+import * as LK from '../../../RefactorFunc/likeFunc';
+import { arrayToPlain } from '../../../RefactorFunc/cardFunc';
 
 export const CommunityCard = ({ item }) => {
   const navigate = useNavigate();
@@ -22,43 +24,15 @@ export const CommunityCard = ({ item }) => {
   const auth = useAuth();
   const { decodedToken } = useJwt(auth.token);
 
-  const checkLike = async () => {
-    try {
-      const result = await communityLikeCheck(item.postID);
-      setUsLike(result.data);
-    } catch (error) {
-      setUsLike(false);
-    }
-  };
-
   const handleLike = async () => {
-    if (usLike) {
-      setDynLike(dynLike - 1);
-    } else {
-      setDynLike(dynLike + 1);
-    }
+    LK.changeDynLike(usLike, dynLike, setDynLike);
     setUsLike(!usLike);
-    try {
-      await communityLike(item.postID);
-    } catch (error) {
-      // pass
-    }
-  };
-
-  const getAll = () => {
-    let te = '';
-    item.contents.map(itext => {
-      return itext.children.map(info => {
-        // eslint-disable-next-line no-return-assign
-        return (te = te.concat(' ', info.text));
-      });
-    });
-    setText(te);
+    LK.likeCommunicate(communityLike, item.postID);
   };
 
   useEffect(() => {
-    getAll();
-    checkLike();
+    arrayToPlain(item.contents, setText);
+    LK.checkLike(item.postID, setUsLike, communityLikeCheck);
   }, []);
 
   return (

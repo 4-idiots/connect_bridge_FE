@@ -3,14 +3,12 @@ import * as B from 'react-bulma-components';
 import { useNavigate } from 'react-router-dom';
 import { outdoorUploadService } from '../../services/outdoorService';
 import * as S from './style';
+import { uploadFormData } from '../../RefactorFunc/dataControl';
 
 export const OutdoorUploadForm = () => {
   const navigate = useNavigate();
   const [uploadInfo, setUploadInfo] = useState({});
   const [imgData, setImageData] = useState({});
-
-  const { outActName, outActLink } = uploadInfo;
-  const { imgSrc, preview } = imgData;
 
   const onChangeOutdoorEvent = useCallback(
     e => {
@@ -33,22 +31,17 @@ export const OutdoorUploadForm = () => {
     });
   };
 
-  const uploadAxios = async formdata => {
-    try {
-      await outdoorUploadService(formdata);
-      alert('등록 되었습니다.');
-      navigate('/outdoor');
-    } catch (error) {
-      alert('다시 시도해주세요');
-    }
-  };
-
   const onSubmitEvent = () => {
-    const formData = new FormData();
-    formData.append('outActName', outActName);
-    formData.append('outActImg', imgSrc);
-    formData.append('outActLink', outActLink);
-    uploadAxios(formData);
+    if (imgData.imgSrc) {
+      const formData = new FormData();
+      formData.append('outActName', uploadInfo.outActName);
+      formData.append('outActImg', imgData.imgSrc);
+      formData.append('outActLink', uploadInfo.outActLink);
+
+      uploadFormData(formData, outdoorUploadService, navigate, '/outdoor');
+    } else {
+      alert('사진을 업로드 해주세요');
+    }
   };
 
   return (
@@ -60,7 +53,7 @@ export const OutdoorUploadForm = () => {
           <B.Form.Control>
             <B.Form.Input
               type="text"
-              value={outActName || ''}
+              value={uploadInfo.outActName || ''}
               name="outActName"
               onChange={onChangeOutdoorEvent}
               placeholder="대외 활동 제목"
@@ -71,8 +64,8 @@ export const OutdoorUploadForm = () => {
           <B.Form.Label>포스터 이미지</B.Form.Label>
           <S.OdUploadBox>
             <B.Card style={{ width: 800 }}>
-              {preview ? (
-                <B.Card.Image src={preview} />
+              {imgData.preview ? (
+                <B.Card.Image src={imgData.preview} />
               ) : (
                 <B.Card.Image src="" />
               )}
@@ -88,7 +81,7 @@ export const OutdoorUploadForm = () => {
               label="포스터 올리기"
               align="center"
               color="info"
-              filename={outActName}
+              filename={uploadInfo.outActName}
               boxed
             />
           </B.Form.Control>
@@ -98,7 +91,7 @@ export const OutdoorUploadForm = () => {
           <B.Form.Control>
             <B.Form.Input
               type="text"
-              value={outActLink || ''}
+              value={uploadInfo.outActLink || ''}
               name="outActLink"
               onChange={onChangeOutdoorEvent}
               placeholder="관련 링크"

@@ -9,6 +9,7 @@ import { OutdoorCardForm } from '../OutdoorPage/outdoorCardModule';
 import { OutdoorModalForm } from '../OutdoorPage/outdoorModalModule';
 import { SkelSubscribe } from '../skeleton/mypage/subscribe';
 import { StudyCard } from '../StudyPage/mainComponent/studyCard';
+import { getData } from '../../RefactorFunc/dataControl';
 
 export const MySubscribeForm = () => {
   const [loading, setLoading] = useState(false);
@@ -26,22 +27,9 @@ export const MySubscribeForm = () => {
     });
   };
 
-  const getAxios = async () => {
-    setLoading(true);
-    try {
-      const result = await mySubscribeGetService();
-      setSubData(result.data);
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    getAxios();
+    getData(setLoading, setSubData, mySubscribeGetService);
   }, []);
-
-  useEffect(() => {}, []);
 
   if (subData && !loading) {
     return (

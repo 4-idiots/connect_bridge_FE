@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Navbar } from 'react-bulma-components';
+import { useJwt } from 'react-jwt';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/hooks/useAuth';
 import * as S from './style';
@@ -8,7 +9,7 @@ export const NavbarForm = () => {
   const [burger, setBurger] = useState(false);
   const [isHover, setIsHover] = useState(false);
   const auth = useAuth();
-  const isLogin = localStorage.getItem('isLogin') || '';
+  const { decodedToken } = useJwt(auth.token);
 
   return (
     <Navbar fixed="top" color="white" style={{ padding: 10 }}>
@@ -51,7 +52,7 @@ export const NavbarForm = () => {
           </S.CustomItem>
         </Navbar.Container>
         <Navbar.Container align="right">
-          {isLogin ? (
+          {decodedToken ? (
             <>
               <S.CustomUserItem renderAs={Link} to="/project/upload">
                 프로젝트/스터디 생성

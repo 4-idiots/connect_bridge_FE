@@ -9,6 +9,7 @@ import { RecruitModal } from './recruitModal';
 import * as Send from '../../../services/projectService';
 import { calcMem } from './calcMember';
 import { useAuth } from '../../../contexts/hooks/useAuth';
+import * as LK from '../../../RefactorFunc/likeFunc';
 
 export const ProjectCard = ({ item }) => {
   const navigate = useNavigate();
@@ -21,32 +22,15 @@ export const ProjectCard = ({ item }) => {
   const [usLike, setUsLike] = useState(true);
   const [dynLike, setDynLike] = useState(item.projectLike);
 
-  const checkLike = async () => {
-    try {
-      const result = await Send.projectLikeCheck(item.projectID);
-      setUsLike(result.data);
-    } catch (error) {
-      setUsLike(false);
-    }
+  const handleLike = async () => {
+    LK.changeDynLike(usLike, dynLike, setDynLike);
+    setUsLike(!usLike);
+    LK.likeCommunicate(Send.projectLikeService, item.projectID);
   };
 
   useEffect(() => {
-    checkLike();
+    LK.checkLike(item.projectID, setUsLike, Send.projectLikeCheck);
   }, []);
-
-  const handleLike = async () => {
-    if (usLike) {
-      setDynLike(dynLike - 1);
-    } else {
-      setDynLike(dynLike + 1);
-    }
-    setUsLike(!usLike);
-    try {
-      await Send.projectLikeService(item.projectID);
-    } catch (error) {
-      // pass
-    }
-  };
 
   return (
     <S.ResCard

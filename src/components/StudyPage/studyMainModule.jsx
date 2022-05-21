@@ -6,24 +6,14 @@ import * as S from './mainComponent/style';
 import { StudyInfinite } from '../../swr/studyInfinite';
 import { studyGetNewService } from '../../services/studyService';
 import { SkelProject, SkelSuggest, SkelNew } from '../skeleton/skelRouter';
+import { getData } from '../../RefactorFunc/dataControl';
 
 export const StudyMainForm = () => {
   const [loading, setLoading] = useState(false);
   const [newStudy, setNewStudy] = useState(null);
 
   useEffect(() => {
-    const getAxios = async () => {
-      setLoading(true);
-      try {
-        const result = await studyGetNewService();
-        setNewStudy(result.data);
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
-      }
-    };
-
-    getAxios();
+    getData(setLoading, setNewStudy, studyGetNewService);
   }, []);
 
   if (newStudy && !loading) {

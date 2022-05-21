@@ -7,6 +7,7 @@ import * as S from './style';
 import { ReactComponent as Heart } from '../../../assets/svg/heart.svg';
 import * as Send from '../../../services/studyService';
 import { useAuth } from '../../../contexts/hooks/useAuth';
+import * as LK from '../../../RefactorFunc/likeFunc';
 
 export const StudyCard = ({ item, recu }) => {
   const navigate = useNavigate();
@@ -18,15 +19,6 @@ export const StudyCard = ({ item, recu }) => {
   const [usLike, setUsLike] = useState(true);
   const [dynLike, setDynLike] = useState(item.studyLike);
 
-  const checkLike = async () => {
-    try {
-      const result = await Send.studyLikeCheck(item.studyID);
-      setUsLike(result.data);
-    } catch (error) {
-      setUsLike(false);
-    }
-  };
-
   const rejectService = async () => {
     try {
       await Send.studyNoService(item.studyID, item.submitID);
@@ -35,23 +27,15 @@ export const StudyCard = ({ item, recu }) => {
     }
   };
 
-  useEffect(() => {
-    checkLike();
-  }, []);
-
   const handleLike = async () => {
-    if (usLike) {
-      setDynLike(dynLike - 1);
-    } else {
-      setDynLike(dynLike + 1);
-    }
+    LK.changeDynLike(usLike, dynLike, setDynLike);
     setUsLike(!usLike);
-    try {
-      await Send.studyLikeService(item.studyID);
-    } catch (error) {
-      // pass
-    }
+    LK.likeCommunicate(Send.studyLikeService, item.studyID);
   };
+
+  useEffect(() => {
+    LK.checkLike(item.studyID, setUsLike, Send.studyNoService);
+  }, []);
 
   return (
     <S.ResCard

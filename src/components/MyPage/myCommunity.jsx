@@ -5,34 +5,14 @@ import * as Send from '../../services/mypageService';
 import { MyCmCard } from './community/myCmCard';
 import { SkelCommunity } from '../skeleton/mypage/mypageRouter';
 import * as S from '../ProjectPage/detailTab/style';
+import { getData } from '../../RefactorFunc/dataControl';
 
 export const MyCommunityForm = () => {
   const [loading, setLoading] = useState(false);
   const [community, setCommunity] = useState(null);
 
-  const getAxios = async () => {
-    setLoading(true);
-    try {
-      const result = await Send.myCommunityGetService();
-      setCommunity(result.data);
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-    }
-  };
-
-  const deleteAxios = async cid => {
-    try {
-      await Send.myCommunityDelete(cid);
-      alert('삭제 되었습니다.');
-      window.location.replace('/my/info');
-    } catch (error) {
-      alert('다시 시도해주세요.');
-    }
-  };
-
   useEffect(() => {
-    getAxios();
+    getData(setLoading, setCommunity, Send.myCommunityGetService);
   }, []);
 
   if (community && !loading) {
@@ -42,13 +22,7 @@ export const MyCommunityForm = () => {
         {community.length !== 0 ? (
           <>
             {community &&
-              community.map(item => (
-                <MyCmCard
-                  item={item}
-                  deleteAxios={deleteAxios}
-                  key={item.postID}
-                />
-              ))}
+              community.map(item => <MyCmCard item={item} key={item.postID} />)}
           </>
         ) : (
           <S.PSBox>

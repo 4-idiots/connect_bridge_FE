@@ -17,8 +17,6 @@ export const FindIDForm = () => {
     }
   }, [decodedToken]);
 
-  const { userName, userEmail } = userInfo;
-
   const onChangeAccountEvent = useCallback(
     e => {
       setUserInfo({
@@ -31,7 +29,7 @@ export const FindIDForm = () => {
 
   const findIDAxios = async () => {
     try {
-      const result = await findIDService(userName, userEmail);
+      const result = await findIDService(userInfo.userName, userInfo.userEmail);
       alert(`아이디는 ${result.data.userID} 입니다.`);
     } catch (error) {
       alert('다시 시도해주세요');
@@ -53,7 +51,7 @@ export const FindIDForm = () => {
           <Form.Control>
             <Form.Input
               type="text"
-              value={userName || ''}
+              value={userInfo.userName || ''}
               name="userName"
               onChange={onChangeAccountEvent}
               placeholder="이름"
@@ -65,7 +63,7 @@ export const FindIDForm = () => {
           <Form.Control>
             <Form.Input
               type="email"
-              value={userEmail || ''}
+              value={userInfo.userEmail || ''}
               name="userEmail"
               onChange={onChangeAccountEvent}
               placeholder="이메일"

@@ -5,30 +5,15 @@ import PropTypes from 'prop-types';
 import * as S from './style';
 import ReadOnlySlate from '../../../SlateEditor/ReadOnly';
 import { RecruitModal } from './recruitModal';
+import { arrayToPlain } from '../../../RefactorFunc/cardFunc';
 
 export const NewCard = ({ item }) => {
   const navigate = useNavigate();
-  const [prContent, setPrContent] = useState();
+  const [text, setText] = useState();
   const [onRecruit, setOnRecruit] = useState(false);
 
-  const getAll = () => {
-    let te = '';
-    item.content.map(text => {
-      return text.children.map(info => {
-        // eslint-disable-next-line no-return-assign
-        return (te = te.concat(' ', info.text));
-      });
-    });
-    setPrContent([
-      {
-        type: 'paragaph',
-        children: [{ text: te }],
-      },
-    ]);
-  };
-
   useEffect(() => {
-    getAll();
+    arrayToPlain(item.content, setText);
   }, []);
 
   return (
@@ -38,7 +23,7 @@ export const NewCard = ({ item }) => {
         <S.ResNewField>{item.projectField}</S.ResNewField>
         <S.ResNewName>{item.projectName}</S.ResNewName>
         <S.ResNewContent>
-          {prContent && <ReadOnlySlate value={prContent} />}
+          {text && <ReadOnlySlate value={text} />}
         </S.ResNewContent>
         <S.ResNewInfoBox>
           <S.ResNewMemberBox

@@ -25,21 +25,25 @@ export const InfoForm = () => {
     }
   };
 
-  useEffect(() => {
-    const getAxios = async () => {
-      try {
-        const result = await getSomeTeamService(teamID);
-        setUser(result.data);
-        if (result.data.follow === 1) {
-          setfollow(false);
-        } else {
-          setfollow(true);
-        }
-      } catch (error) {
-        // pass
-      }
-    };
+  const isLike = flw => {
+    if (flw === 1) {
+      setfollow(false);
+    } else {
+      setfollow(true);
+    }
+  };
 
+  const getAxios = async () => {
+    try {
+      const result = await getSomeTeamService(teamID);
+      setUser(result.data);
+      isLike(result.data.follow);
+    } catch (error) {
+      // pass
+    }
+  };
+
+  useEffect(() => {
     getAxios();
   }, []);
 

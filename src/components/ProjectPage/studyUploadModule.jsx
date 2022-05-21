@@ -1,12 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { Form, Button } from 'react-bulma-components';
-import {
-  StudyInput,
-  StudyArea,
-  StudyDate,
-  StudyField,
-  StudyRecruit,
-} from './sUploadComponent/sUploadValue';
+import * as SC from './sUploadComponent/sUploadValue';
 import SlateEditor from '../../SlateEditor/Editor';
 import { studyUploadService } from '../../services/studyService';
 
@@ -81,18 +75,6 @@ export const StudyUploadForm = () => {
     ],
   });
 
-  const {
-    studyName,
-    studyKeyward,
-    studyField,
-    studyArea,
-    studyMember,
-    studyStart,
-    studyEnd,
-    content,
-    studyOnline,
-  } = study;
-
   const randImg = [
     'https://cdn.discordapp.com/attachments/885739536301318169/974946059811979304/pexels-olia-danilevich-5088022.jpg',
     'https://cdn.discordapp.com/attachments/885739536301318169/974946060680175636/pexels-olia-danilevich-5088008.jpg',
@@ -114,15 +96,15 @@ export const StudyUploadForm = () => {
     try {
       await studyUploadService(
         randImg[Math.floor(Math.random() * randImg.length)],
-        studyName,
-        studyKeyward,
-        studyField,
-        studyArea,
-        studyMember,
-        studyStart,
-        studyEnd,
-        JSON.stringify(content),
-        studyOnline,
+        study.studyName,
+        study.studyKeyward,
+        study.studyField,
+        study.studyArea,
+        study.studyMember,
+        study.studyStart,
+        study.studyEnd,
+        JSON.stringify(study.content),
+        study.studyOnline,
       );
       alert('등록 되었습니다.');
     } catch (error) {
@@ -136,28 +118,31 @@ export const StudyUploadForm = () => {
 
   return (
     <>
-      <StudyInput
+      <SC.StudyInput
         label="* 스터디/네트워킹 주제"
         help="! 진행하고자 하는 스터디 주제를 제목으로 정해주세요"
         placeholder="웹 개발 같이 공부하실분~"
-        value={studyName}
+        value={study.studyName}
         name="studyName"
         onChange={onChangeStudyEvent}
       />
-      <StudyInput
+      <SC.StudyInput
         label="* 스터디 분야/키워드"
         help="! 스터디의 키워드를 , 로 끊어주세요"
         placeholder="공부, 온라인"
-        value={studyKeyward}
+        value={study.studyKeyward}
         name="studyKeyward"
         onChange={onChangeStudyEvent}
       />
-      <StudyField field={studyField} onChange={onChangeStudyEvent} />
-      <StudyRecruit member={studyMember} onChange={onChangeStudyEvent} />
-      <StudyArea onChange={onChangeStudyEvent} />
-      <StudyDate
-        start={studyStart}
-        end={studyEnd}
+      <SC.StudyField field={study.studyField} onChange={onChangeStudyEvent} />
+      <SC.StudyRecruit
+        member={study.studyMember}
+        onChange={onChangeStudyEvent}
+      />
+      <SC.StudyArea onChange={onChangeStudyEvent} />
+      <SC.StudyDate
+        start={study.studyStart}
+        end={study.studyEnd}
         startChange={date => {
           setStudy({ ...study, studyStart: date });
         }}

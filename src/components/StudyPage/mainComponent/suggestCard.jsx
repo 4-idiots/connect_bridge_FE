@@ -11,13 +11,13 @@ export const SuggestCard = ({ item }) => {
   const [onRecruit, setOnRecruit] = useState(false);
 
   return (
-    <S.suggestCardContainer onClick={() => navigate(`/study/${item.studyID}`)}>
-      <S.suggestBox>
-        <S.suggestImg src={item.studyImg} />
-        <S.suggestInfo>
-          <S.suggestTop>
-            <S.suggestName>{item.studyName}</S.suggestName>
-            <S.suggestIconWrap>
+    <S.ResSuggestContainer onClick={() => navigate(`/study/${item.studyID}`)}>
+      <S.ResSuggestBox>
+        <S.ResSuggestImg src={item.studyImg} />
+        <S.ResSuggestInfo>
+          <S.ResSuggestTop>
+            <S.ResSuggestName>{item.studyName}</S.ResSuggestName>
+            <S.ResSuggestIconWrap>
               <Icon>
                 <i className="fas fa-heart" />
               </Icon>
@@ -26,13 +26,13 @@ export const SuggestCard = ({ item }) => {
                 <i className="fas fa-eye" />
               </Icon>
               <span style={{ marginLeft: 2 }}>{item.studyView}</span>
-            </S.suggestIconWrap>
-          </S.suggestTop>
-          <S.suggestMid>
+            </S.ResSuggestIconWrap>
+          </S.ResSuggestTop>
+          <S.ResSuggestMid>
             <ReadOnlySlate value={item.content} />
-          </S.suggestMid>
-          <S.suggestBottom>
-            <S.newEveBox
+          </S.ResSuggestMid>
+          <S.ResSuggestBottom>
+            <S.ResNewMemberBox
               onMouseEnter={() => {
                 setOnRecruit(true);
               }}
@@ -47,11 +47,11 @@ export const SuggestCard = ({ item }) => {
                 </Icon>
               </S.newreBox>
               {onRecruit ? <RecruitModal item={item} /> : ''}
-            </S.newEveBox>
-          </S.suggestBottom>
-        </S.suggestInfo>
-      </S.suggestBox>
-    </S.suggestCardContainer>
+            </S.ResNewMemberBox>
+          </S.ResSuggestBottom>
+        </S.ResSuggestInfo>
+      </S.ResSuggestBox>
+    </S.ResSuggestContainer>
   );
 };
 

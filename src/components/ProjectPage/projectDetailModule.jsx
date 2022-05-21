@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Heading, Tabs, Button } from 'react-bulma-components';
 import { useJwt } from 'react-jwt';
-import { min } from 'date-fns';
 import * as DR from './detailComponent/detailRoutes';
 import * as S from './detailComponent/style';
 import * as Send from '../../services/projectService';
 import { useAuth } from '../../contexts/hooks/useAuth';
 import { NoticeTab, ApplyTab } from './detailTab/tabRoutes';
 import * as Sk from '../skeleton/project/skprRouter';
+import { getDetailData, deleteData } from '../../RefactorFunc/dataControl';
 
 export const ProjectDetailForm = () => {
   const [loading, setLoading] = useState(false);
@@ -21,29 +21,13 @@ export const ProjectDetailForm = () => {
   const [comment, setComment] = useState('');
   const [where, setWhere] = useState('info');
 
-  const getAxios = async id => {
-    setLoading(true);
-    try {
-      const result = await Send.projectGetSomeService(id);
-      setPostData(result.data);
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-    }
-  };
-
-  const deleteAxios = async id => {
-    try {
-      await Send.projectDeleteService(id);
-      alert('삭제되었습니다.');
-      navigate('/project');
-    } catch (error) {
-      alert('다시 시도해주세요');
-    }
-  };
-
   useEffect(() => {
-    getAxios(projectID);
+    getDetailData(
+      setLoading,
+      setPostData,
+      Send.projectGetSomeService,
+      projectID,
+    );
   }, []);
 
   const applyService = async (prid, uid, field) => {
@@ -162,7 +146,11 @@ export const ProjectDetailForm = () => {
                   <Button
                     color="danger"
                     onClick={() => {
-                      deleteAxios(projectID);
+                      deleteData(
+                        projectID,
+                        '/project',
+                        Send.projectDeleteService,
+                      );
                     }}
                   >
                     프로젝트 삭제

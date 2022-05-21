@@ -318,3 +318,152 @@ export const RecruitNum = styled.p`
   font-weight: bold;
   color: #3e56c4;
 `;
+
+// resposive new card
+export const ResNewCard = styled.div`
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+`;
+
+export const ResNewImg = styled.img`
+  width: 100%;
+  max-width: 516px;
+  min-width: 300px;
+  max-height: 230px;
+  border-radius: 3%;
+  object-fit: cover;
+`;
+
+export const ResNewBottom = styled.div`
+  width: 100%;
+  max-width: 518px;
+  min-width: 300px;
+  max-height: 132px;
+  padding: 12px;
+`;
+
+export const ResNewField = styled.p`
+  font-size: min(2vw, 14px);
+  color: #b1b1b1;
+  font-weight: bold;
+`;
+
+export const ResNewName = styled.span`
+  font-size: min(2vw, 18px);
+  font-weight: bold;
+  margin: 10px 0 10px 0;
+  display: inline-block;
+`;
+
+export const ResNewContent = styled.div`
+  width: 100%;
+  max-width: 500px;
+  min-width: 300px;
+  overflow: hidden;
+  height: 28px;
+`;
+
+export const ResNewInfoBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+`;
+
+export const ResNewMemberBox = styled.div`
+  position: relative;
+`;
+
+export const ResMemberNow = styled.div`
+  font-size: 0.8rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+`;
+
+// responsive suggest card
+export const ResSuggestContainer = styled.div`
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  cursor: pointer;
+`;
+
+export const ResSuggestBox = styled.div`
+  width: 100%;
+  max-width: 580px;
+  /* height: 98px; */
+  margin-bottom: 12px;
+  background-color: #fff;
+  border: 1px solid #ebebeb;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+`;
+
+export const ResSuggestImg = styled.img`
+  width: 100%;
+  max-width: 104px;
+  min-width: 80px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #f3f3f4;
+  margin-left: 10px;
+`;
+
+export const ResSuggestInfo = styled.div`
+  margin-left: 10%;
+  width: 100%;
+`;
+
+export const ResSuggestTop = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+`;
+
+export const ResSuggestName = styled.div`
+  height: min(1vw, 18px);
+  font-weight: bold;
+`;
+
+export const ResSuggestIconWrap = styled.div`
+  display: flex;
+  margin-right: 20px;
+`;
+
+export const ResSuggestWrap = styled.div`
+  width: 100%;
+  max-width: 590px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`;
+
+export const ResSuggestMid = styled.div`
+  overflow: hidden;
+  height: 28px;
+  width: 100%;
+  max-width: 400px;
+`;
+
+export const ResSuggestBottom = styled.div`
+  height: 30px;
+  width: 100%;
+  max-width: 400px;
+`;
+
+export const ResSuggestHeart = styled.div`
+  height: 18px;
+  margin-right: 6px;
+`;

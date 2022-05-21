@@ -11,7 +11,6 @@ export const LoginForm = () => {
   const auth = useAuth();
   const { decodedToken } = useJwt(auth.token);
   const [userInfo, setUserInfo] = useState({});
-  const { userID, userPW } = userInfo;
 
   useEffect(() => {
     if (decodedToken) {
@@ -42,7 +41,7 @@ export const LoginForm = () => {
   };
 
   const onSubmitEvent = () => {
-    loginAxios(userID, userPW);
+    loginAxios(userInfo.userID, userInfo.userPW);
   };
 
   return (
@@ -54,7 +53,7 @@ export const LoginForm = () => {
           <Form.Control>
             <Form.Input
               type="text"
-              value={userID || ''}
+              value={userInfo.userID || ''}
               name="userID"
               onChange={onChangeAccountEvent}
               placeholder="아이디"
@@ -66,7 +65,7 @@ export const LoginForm = () => {
           <Form.Control>
             <Form.Input
               type="password"
-              value={userPW || ''}
+              value={userInfo.userPW || ''}
               name="userPW"
               onChange={onChangeAccountEvent}
               placeholder="비밀번호"

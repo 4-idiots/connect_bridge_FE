@@ -4,24 +4,14 @@ import * as S from './projectStudy/style';
 import { myProjectGetService } from '../../services/mypageService';
 import { ProjectCard } from './projectStudy/projectCard';
 import { SkelSubscribe } from '../skeleton/mypage/subscribe';
+import { getData } from '../../RefactorFunc/dataControl';
 
 export const MyProjectForm = () => {
   const [loading, setLoading] = useState(false);
   const [project, setProject] = useState(null);
 
   useEffect(() => {
-    const getAxios = async () => {
-      setLoading(true);
-      try {
-        const result = await myProjectGetService();
-        setProject(result.data);
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
-      }
-    };
-
-    getAxios();
+    getData(setLoading, setProject, myProjectGetService);
   }, []);
 
   if (project && !loading) {

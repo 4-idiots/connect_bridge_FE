@@ -8,6 +8,7 @@ import { ReactComponent as Heart } from '../../../assets/svg/heart.svg';
 import { RecruitModal } from './recruitModal';
 import * as Send from '../../../services/studyService';
 import { useAuth } from '../../../contexts/hooks/useAuth';
+import * as LK from '../../../RefactorFunc/likeFunc';
 
 export const StudyCard = ({ item }) => {
   const navigate = useNavigate();
@@ -20,17 +21,8 @@ export const StudyCard = ({ item }) => {
   const [usLike, setUsLike] = useState(true);
   const [dynLike, setDynLike] = useState(item.studyLike);
 
-  const checkLike = async () => {
-    try {
-      const result = await Send.studyLikeCheck(item.studyID);
-      setUsLike(result.data);
-    } catch (error) {
-      setUsLike(false);
-    }
-  };
-
   useEffect(() => {
-    checkLike();
+    LK.checkLike(item.studyID, setUsLike, Send.studyLikeCheck);
   }, []);
 
   const handleLike = async () => {

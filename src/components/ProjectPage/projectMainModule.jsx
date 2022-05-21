@@ -6,24 +6,14 @@ import * as S from './mainComponent/style';
 import { ProjectInfinite } from '../../swr/projectInfinite';
 import { projectGetNewService } from '../../services/projectService';
 import { SkelProject, SkelSuggest, SkelNew } from '../skeleton/skelRouter';
+import { getData } from '../../RefactorFunc/dataControl';
 
 export const ProjectMainForm = () => {
   const [loading, setLoading] = useState(true);
   const [newPr, setNewPr] = useState(null);
 
   useEffect(() => {
-    const getNewAxios = async () => {
-      setLoading(true);
-      try {
-        const result = await projectGetNewService();
-        setNewPr(result.data);
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
-      }
-    };
-
-    getNewAxios();
+    getData(setLoading, setNewPr, projectGetNewService);
   }, []);
 
   if (newPr && !loading) {

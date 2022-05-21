@@ -5,54 +5,28 @@ import PropTypes from 'prop-types';
 import * as S from './style';
 import ReadOnlySlate from '../../../SlateEditor/ReadOnly';
 import { RecruitModal } from './recruitModal';
+import { arrayToPlain } from '../../../RefactorFunc/cardFunc';
 
 export const NewCard = ({ item }) => {
   const navigate = useNavigate();
-  const [stContent, setStContent] = useState(null);
+  const [text, setText] = useState(null);
   const [onRecruit, setOnRecruit] = useState(false);
 
-  const getAll = () => {
-    let te = '';
-    item.content.map(text => {
-      return text.children.map(info => {
-        // eslint-disable-next-line no-return-assign
-        return (te = te.concat(' ', info.text));
-      });
-    });
-    setStContent([
-      {
-        type: 'paragaph',
-        children: [{ text: te }],
-      },
-    ]);
-  };
-
   useEffect(() => {
-    getAll();
+    arrayToPlain(item.content, setText);
   }, []);
 
   return (
-    <S.newCardContainer onClick={() => navigate(`/study/${item.studyID}`)}>
-      <S.newImg>
-        <img
-          src={item.studyImg}
-          alt="test"
-          style={{
-            borderRadius: '3%',
-            objectFit: 'cover',
-            width: '516px',
-            height: '230px',
-          }}
-        />
-      </S.newImg>
-      <S.newBottom>
-        <S.newField>{item.studyField}</S.newField>
-        <S.newName>{item.studyName}</S.newName>
-        <div style={{ width: '500px', overflow: 'hidden', height: '28px' }}>
-          {stContent && <ReadOnlySlate value={stContent} />}
-        </div>
-        <S.newInfoBox>
-          <S.newEveBox
+    <S.ResNewCard onClick={() => navigate(`/study/${item.studyID}`)}>
+      <S.ResNewImg src={item.studyImg} />
+      <S.ResNewBottom>
+        <S.ResNewField>{item.studyField}</S.ResNewField>
+        <S.ResNewName>{item.studyName}</S.ResNewName>
+        <S.ResNewContent>
+          {text && <ReadOnlySlate value={text} />}
+        </S.ResNewContent>
+        <S.ResNewInfoBox>
+          <S.ResNewMemberBox
             onMouseEnter={() => {
               setOnRecruit(true);
             }}
@@ -60,14 +34,14 @@ export const NewCard = ({ item }) => {
               setOnRecruit(false);
             }}
           >
-            <S.newreBox>
+            <S.ResMemberNow>
               모집현황
               <Icon>
                 <i className="fas fa-arrow-up" />
               </Icon>
-            </S.newreBox>
+            </S.ResMemberNow>
             {onRecruit ? <RecruitModal item={item} /> : ''}
-          </S.newEveBox>
+          </S.ResNewMemberBox>
           <S.newIconBox>
             <Icon>
               <i className="fas fa-heart" />
@@ -78,9 +52,9 @@ export const NewCard = ({ item }) => {
               <span style={{ marginLeft: 4 }}>{item.studyView}</span>
             </Icon>
           </S.newIconBox>
-        </S.newInfoBox>
-      </S.newBottom>
-    </S.newCardContainer>
+        </S.ResNewInfoBox>
+      </S.ResNewBottom>
+    </S.ResNewCard>
   );
 };
 
