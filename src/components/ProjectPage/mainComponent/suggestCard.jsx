@@ -33,7 +33,7 @@ export const SuggestCard = ({ item }) => {
           <S.ResSuggestMid>
             <ReadOnlySlate value={item.content} />
           </S.ResSuggestMid>
-          <S.suggestBottom>
+          <S.ResSuggestBottom>
             <S.ResNewMemberBox
               onMouseEnter={() => {
                 setOnRecruit(true);
@@ -50,7 +50,7 @@ export const SuggestCard = ({ item }) => {
               </S.ResMemberNow>
               {onRecruit ? <RecruitModal item={item} /> : ''}
             </S.ResNewMemberBox>
-          </S.suggestBottom>
+          </S.ResSuggestBottom>
         </S.ResSuggestInfo>
       </S.ResSuggestBox>
     </S.ResSuggestContainer>

@@ -46,10 +46,10 @@ export const StatusBox = styled.div`
 
 export const PageWrap = styled.div`
   max-width: 1200px;
-  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin: 0 20px 0 20px;
 `;
 
 export const PageRight = styled.div`
@@ -60,6 +60,7 @@ export const PageRight = styled.div`
   border: 1px solid #ddd;
   padding: 20px;
   border-radius: 5px;
+  margin-left: 30px;
 `;
 
 export const RightInfo = styled.div`

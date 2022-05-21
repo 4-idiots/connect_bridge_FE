@@ -22,7 +22,7 @@ export const NoticeUpload = ({ projectID }) => {
       <Form.Field>
         <Form.Control>
           <Form.Input
-            style={{ width: '600px', height: '100px' }}
+            style={{ height: '100px', width: '600px' }}
             placeholder="공지를 작성해주세요 (최대 500자)"
             type="text"
             onChange={e => setContent(e.currentTarget.value)}

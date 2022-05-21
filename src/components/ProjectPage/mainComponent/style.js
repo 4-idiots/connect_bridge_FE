@@ -24,53 +24,6 @@ export const textWrap = styled.div`
   padding-left: 14px;
 `;
 
-export const newCardContainer = styled.div`
-  width: 520px;
-  height: 380px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-`;
-
-export const newImg = styled.div`
-  width: 516px;
-  padding: 8px 0 4px 0;
-  background-color: #eee;
-  border-radius: 3%;
-`;
-
-export const newBottom = styled.div`
-  width: 518px;
-  height: 132px;
-  padding: 12px;
-`;
-
-export const newField = styled.p`
-  font-size: 14px;
-  color: #b1b1b1;
-  font-weight: bold;
-`;
-
-export const newName = styled.span`
-  font-size: 18px;
-  font-weight: bold;
-  margin: 10px 0 10px 0;
-  display: inline-block;
-`;
-
-export const newInfoBox = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 20px;
-`;
-
-export const newEveBox = styled.div`
-  position: relative;
-`;
-
 export const newreBox = styled.div`
   font-size: 0.8rem;
   font-weight: bold;
@@ -368,10 +321,12 @@ export const ResSuggestImg = styled.img`
   object-fit: cover;
   border-radius: 6px;
   border: 1px solid #f3f3f4;
+  margin-left: 10px;
 `;
 
 export const ResSuggestInfo = styled.div`
-  margin-left: 20px;
+  margin-left: 10%;
+  width: 100%;
 `;
 
 export const ResSuggestTop = styled.div`

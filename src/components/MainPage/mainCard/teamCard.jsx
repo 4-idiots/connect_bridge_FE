@@ -45,7 +45,7 @@ export const TeamCard = ({ item }) => {
   }, []);
 
   return (
-    <div className="card">
+    <div className="cards">
       <div style={{ position: 'absolute', top: '0.5rem', right: '1rem' }}>
         {decodedToken ? (
           <div

@@ -14,6 +14,7 @@ export const NoticeContent = styled.div`
 `;
 
 export const NoticeUploadWrap = styled.div`
+  width: 100%;
   padding: 10px;
   border: 1px solid #e5e5e5;
   border-radius: 10px;

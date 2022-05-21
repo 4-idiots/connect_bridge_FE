@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Heading, Tabs, Button } from 'react-bulma-components';
 import { useJwt } from 'react-jwt';
+import { min } from 'date-fns';
 import * as DR from './detailComponent/detailRoutes';
 import * as S from './detailComponent/style';
 import * as Send from '../../services/projectService';
@@ -141,14 +142,14 @@ export const ProjectDetailForm = () => {
               <>
                 <Button.Group align="center">
                   <Button
-                    style={{ marginRight: 100 }}
+                    style={{ marginRight: 'min(2vw, 100px)' }}
                     color="link"
                     onClick={() => navigate(`/project/update/${projectID}`)}
                   >
                     프로젝트 수정
                   </Button>
                   <Button
-                    style={{ marginRight: 100 }}
+                    style={{ marginRight: 'min(2vw, 100px)' }}
                     color={postData.projectOnOff ? 'warning' : 'success'}
                     onClick={() => {
                       stateChange();

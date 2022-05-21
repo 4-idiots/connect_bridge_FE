@@ -9,7 +9,7 @@ export const MemberCard = ({ item }) => {
 
   return (
     <div
-      className="card"
+      className="cards"
       onClick={() => navigate(`/team/info/${item.memberID}`)}
     >
       <img src={item.memberImg} className="card__image" alt="" />
