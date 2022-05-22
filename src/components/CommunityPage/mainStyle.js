@@ -41,8 +41,9 @@ export const Newboard = styled.article`
   flex-grow: 1;
   margin: 0 auto;
   position: relative;
-  width: auto;
+  width: 1152px;
   box-sizing: inherit;
+  overflow: auto;
 `;
 
 export const Boardtop = styled.div`

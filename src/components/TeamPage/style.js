@@ -6,6 +6,12 @@ export const Top1 = styled.div`
   margin-bottom: 0px;
   flex-direction: row;
 `;
+export const Top1Mobile = styled.div`
+  padding: 16px 5;
+  margin-top: 20px;
+  margin-bottom: -15px;
+  margin-left: 25px;
+`;
 
 export const Top11 = styled.select`
   max-width: 140px;
@@ -38,8 +44,20 @@ export const Top111 = styled.option`
 
 export const People = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   row-gap: 3rem;
+  margin-bottom: 80px;
+`;
+export const PeopleMobile = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  row-gap: 4rem;
+  margin-bottom: 80px;
+`;
+export const PeopleTablet = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  row-gap: 4rem;
   margin-bottom: 80px;
 `;
 
@@ -61,6 +79,25 @@ export const AllInfo = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px 0 0;
+  width: 100%;
+  margin: 0 auto;
+  transition: all 0.2s;
+`;
+export const AllInfoTablet = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 30px 0;
+  width: 100%;
+  margin: 0 auto;
+  transition: all 0.2s;
+`;
+
+export const AllInfoMobile = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 35px 0;
   width: 100%;
   margin: 0 auto;
   transition: all 0.2s;
@@ -243,6 +280,20 @@ export const Portfolio11 = styled.p`
   flex-direction: row;
   align-items: center;
   font-size: 1.4rem;
+`;
+
+export const Portfolio11Mobile = styled.p`
+  justify-content: left;
+  color: #42495b;
+  line-height: 1.6;
+  margin-top: 12px;
+  margin-left: 12px;
+  margin-bottom: 12px;
+  font-weight: 700;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 1.1rem;
 `;
 
 export const Portfolio21 = styled.ul`
