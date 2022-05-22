@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import * as S from './pStyle';
 import { Pagination } from '../../swr/Pagination';
 import { getPopularCommunity } from '../../services/communityService';
+import { Mobile, Desktop, Tablet } from '../../mediaQuery';
 
 export const CommunityPForm = () => {
   const [posts, setPosts] = useState([]);
