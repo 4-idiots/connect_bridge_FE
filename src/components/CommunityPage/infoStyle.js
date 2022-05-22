@@ -81,7 +81,13 @@ export const Top33 = styled.div`
 `;
 
 export const Top331 = styled.div`
-  margin: 0;
+  margin-bottom: 0;
+  padding: 0;
+  display: block;
+`;
+
+export const Top331Mobile = styled.div`
+  margin-bottom: -55px;
   padding: 0;
   display: block;
 `;
@@ -249,8 +255,22 @@ export const Reply11121 = styled.div`
 `;
 
 export const Reply11122 = styled.div`
-  margin-left: 5px;
+  margin-left: 8px;
   width: 870px;
+  font-family: 'Malgun Gothic', '맑은 고딕', helvetica, 'Apple SD Gothic Neo',
+    sans-serif;
+  font-size: 14px;
+`;
+export const Reply11122Tablet = styled.div`
+  margin-left: 15px;
+  width: 600px;
+  font-family: 'Malgun Gothic', '맑은 고딕', helvetica, 'Apple SD Gothic Neo',
+    sans-serif;
+  font-size: 14px;
+`;
+export const Reply11122Mobile = styled.div`
+  margin-left: -19px;
+  width: 220px;
   font-family: 'Malgun Gothic', '맑은 고딕', helvetica, 'Apple SD Gothic Neo',
     sans-serif;
   font-size: 14px;

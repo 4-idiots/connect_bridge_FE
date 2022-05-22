@@ -10,6 +10,7 @@ import {
   patchCommunityService,
 } from '../../services/communityService';
 import { useAuth } from '../../contexts/hooks/useAuth';
+import { Mobile, Desktop, Tablet } from '../../mediaQuery';
 
 export const CommunityChangeForm = () => {
   const navigate = useNavigate();
@@ -66,84 +67,258 @@ export const CommunityChangeForm = () => {
   if (community) {
     return (
       <Container>
-        {decodedToken && decodedToken.id === community.userID ? (
-          <>
-            <Heading style={{ textAlign: 'center', margin: 35 }}>
-              커뮤니티 수정하기
-            </Heading>
-            <Box style={{ margin: 100, Box: 'center' }}>
-              <Form.Field>
-                <Form.Label>제목</Form.Label>
-                <Form.Control>
-                  <Form.Input
-                    type="text"
-                    onChange={e =>
-                      setCommunity({
-                        ...community,
-                        title: e.currentTarget.value,
-                      })
-                    }
-                    value={community.title}
-                  />
-                </Form.Control>
-              </Form.Field>
-
-              <Form.Label>내용</Form.Label>
-              {community.content && (
-                <SlateEditor value={community} setValue={setCommunity} />
-              )}
-              <br />
-              <br />
-              <Form.Field>
-                <Form.Label>태그 (#)</Form.Label>
-                <Form.Control>
-                  <div>
-                    <input
+        <Mobile>
+          {decodedToken && decodedToken.id === community.userID ? (
+            <>
+              <Heading style={{ textAlign: 'center', margin: 60 }}>
+                커뮤니티 수정
+              </Heading>
+              <Box style={{ margin: 20, Box: 'center' }}>
+                <Form.Field>
+                  <Form.Label>제목</Form.Label>
+                  <Form.Control>
+                    <Form.Input
                       type="text"
-                      value={community.tagInput || ''}
                       onChange={e =>
                         setCommunity({
                           ...community,
-                          tagInput: e.currentTarget.value,
+                          title: e.currentTarget.value,
                         })
                       }
-                      placeholder="해시태그 입력"
-                      onKeyPress={onEnter}
+                      value={community.title}
                     />
-                  </div>
-                  <br />
+                  </Form.Control>
+                </Form.Field>
 
-                  {community.hashtag.map((item, id) => (
-                    <span
-                      item={item}
-                      key={id}
-                      className="tag is-warning is-medium"
-                    >
-                      #{item}
-                      <button
-                        key={id}
-                        onClick={() => removeList(item)}
-                        className="delete is-small"
-                        type="button"
+                <Form.Label>내용</Form.Label>
+                {community.content && (
+                  <SlateEditor value={community} setValue={setCommunity} />
+                )}
+                <br />
+                <br />
+                <Form.Field>
+                  <Form.Label>태그 (#)</Form.Label>
+                  <Form.Control>
+                    <div>
+                      <input
+                        type="text"
+                        value={community.tagInput || ''}
+                        onChange={e =>
+                          setCommunity({
+                            ...community,
+                            tagInput: e.currentTarget.value,
+                          })
+                        }
+                        placeholder="해시태그 입력"
+                        onKeyPress={onEnter}
                       />
-                      <br />
-                    </span>
-                  ))}
-                </Form.Control>
-              </Form.Field>
+                    </div>
+                    <br />
 
-              <div style={{ textAlign: 'center' }}>
-                <Button color="danger" size="small" onClick={() => postAxios()}>
-                  수정
-                </Button>
-              </div>
-            </Box>
-          </>
-        ) : (
-          <Heading style={{ textAlign: 'center', marginTop: 80 }}>
-            권한이 없습니다.
-          </Heading>
-        )}
+                    {community.hashtag.map((item, id) => (
+                      <span
+                        item={item}
+                        key={id}
+                        className="tag is-warning is-medium"
+                      >
+                        #{item}
+                        <button
+                          key={id}
+                          onClick={() => removeList(item)}
+                          className="delete is-small"
+                          type="button"
+                        />
+                        <br />
+                      </span>
+                    ))}
+                  </Form.Control>
+                </Form.Field>
+
+                <div style={{ textAlign: 'center' }}>
+                  <Button
+                    color="danger"
+                    size="small"
+                    onClick={() => postAxios()}
+                  >
+                    수정
+                  </Button>
+                </div>
+              </Box>
+            </>
+          ) : (
+            <Heading style={{ textAlign: 'center', marginTop: 80 }}>
+              권한이 없습니다.
+            </Heading>
+          )}
+        </Mobile>
+        <Tablet>
+          {decodedToken && decodedToken.id === community.userID ? (
+            <>
+              <Heading style={{ textAlign: 'center', margin: 70 }}>
+                커뮤니티 수정
+              </Heading>
+              <Box style={{ margin: 50, Box: 'center' }}>
+                <Form.Field>
+                  <Form.Label>제목</Form.Label>
+                  <Form.Control>
+                    <Form.Input
+                      type="text"
+                      onChange={e =>
+                        setCommunity({
+                          ...community,
+                          title: e.currentTarget.value,
+                        })
+                      }
+                      value={community.title}
+                    />
+                  </Form.Control>
+                </Form.Field>
+
+                <Form.Label>내용</Form.Label>
+                {community.content && (
+                  <SlateEditor value={community} setValue={setCommunity} />
+                )}
+                <br />
+                <br />
+                <Form.Field>
+                  <Form.Label>태그 (#)</Form.Label>
+                  <Form.Control>
+                    <div>
+                      <input
+                        type="text"
+                        value={community.tagInput || ''}
+                        onChange={e =>
+                          setCommunity({
+                            ...community,
+                            tagInput: e.currentTarget.value,
+                          })
+                        }
+                        placeholder="해시태그 입력"
+                        onKeyPress={onEnter}
+                      />
+                    </div>
+                    <br />
+
+                    {community.hashtag.map((item, id) => (
+                      <span
+                        item={item}
+                        key={id}
+                        className="tag is-warning is-medium"
+                      >
+                        #{item}
+                        <button
+                          key={id}
+                          onClick={() => removeList(item)}
+                          className="delete is-small"
+                          type="button"
+                        />
+                        <br />
+                      </span>
+                    ))}
+                  </Form.Control>
+                </Form.Field>
+
+                <div style={{ textAlign: 'center' }}>
+                  <Button
+                    color="danger"
+                    size="small"
+                    onClick={() => postAxios()}
+                  >
+                    수정
+                  </Button>
+                </div>
+              </Box>
+            </>
+          ) : (
+            <Heading style={{ textAlign: 'center', marginTop: 80 }}>
+              권한이 없습니다.
+            </Heading>
+          )}
+        </Tablet>
+        <Desktop>
+          {decodedToken && decodedToken.id === community.userID ? (
+            <>
+              <Heading style={{ textAlign: 'center', margin: 120 }}>
+                커뮤니티 수정
+              </Heading>
+              <Box style={{ margin: 100, Box: 'center' }}>
+                <Form.Field>
+                  <Form.Label>제목</Form.Label>
+                  <Form.Control>
+                    <Form.Input
+                      type="text"
+                      onChange={e =>
+                        setCommunity({
+                          ...community,
+                          title: e.currentTarget.value,
+                        })
+                      }
+                      value={community.title}
+                    />
+                  </Form.Control>
+                </Form.Field>
+
+                <Form.Label>내용</Form.Label>
+                {community.content && (
+                  <SlateEditor value={community} setValue={setCommunity} />
+                )}
+                <br />
+                <br />
+                <Form.Field>
+                  <Form.Label>태그 (#)</Form.Label>
+                  <Form.Control>
+                    <div>
+                      <input
+                        type="text"
+                        value={community.tagInput || ''}
+                        onChange={e =>
+                          setCommunity({
+                            ...community,
+                            tagInput: e.currentTarget.value,
+                          })
+                        }
+                        placeholder="해시태그 입력"
+                        onKeyPress={onEnter}
+                      />
+                    </div>
+                    <br />
+
+                    {community.hashtag.map((item, id) => (
+                      <span
+                        item={item}
+                        key={id}
+                        className="tag is-warning is-medium"
+                      >
+                        #{item}
+                        <button
+                          key={id}
+                          onClick={() => removeList(item)}
+                          className="delete is-small"
+                          type="button"
+                        />
+                        <br />
+                      </span>
+                    ))}
+                  </Form.Control>
+                </Form.Field>
+
+                <div style={{ textAlign: 'center' }}>
+                  <Button
+                    color="danger"
+                    size="small"
+                    onClick={() => postAxios()}
+                  >
+                    수정
+                  </Button>
+                </div>
+              </Box>
+            </>
+          ) : (
+            <Heading style={{ textAlign: 'center', marginTop: 80 }}>
+              권한이 없습니다.
+            </Heading>
+          )}
+        </Desktop>
       </Container>
     );
   }
