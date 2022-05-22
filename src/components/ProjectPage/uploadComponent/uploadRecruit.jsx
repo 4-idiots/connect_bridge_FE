@@ -6,35 +6,35 @@ import * as A from './uploadValue';
 
 export const ProjectRecruit = ({ member, setMember }) => {
   const [fieldMember, setFieldMember] = useState({
-    nuiuxPlan: 1,
-    ngamePlan: 1,
-    nmanagerPlan: 1,
-    nhwPlan: 1,
-    niosFr: 1,
-    nandroidFr: 1,
-    nwebFrontFr: 1,
-    nwebPublicFr: 1,
-    ncrossFr: 1,
-    nuiuxDe: 1,
-    ngraphicDe: 1,
-    nthrdDe: 1,
-    nhwDe: 1,
-    netcDe: 1,
-    nwebBk: 1,
-    nblchBk: 1,
-    naiBk: 1,
-    ndsBk: 1,
-    ngameBk: 1,
-    nplanBu: 1,
-    nmarketingBu: 1,
-    nfinanceBu: 1,
-    nsalesBu: 1,
-    nconsultBu: 1,
-    ninvestBu: 1,
-    netcBu: 1,
-    nblogEtc: 1,
-    ninfluEtc: 1,
-    ncompEtc: 1,
+    nuiuxPlan: member.uiuxPlan,
+    ngamePlan: member.gamePlan,
+    nmanagerPlan: member.managerPlan,
+    nhwPlan: member.hwPlan,
+    niosFr: member.iosFr,
+    nandroidFr: member.androidFr,
+    nwebFrontFr: member.webFrontFr,
+    nwebPublicFr: member.webPublicFr,
+    ncrossFr: member.crossFr,
+    nuiuxDe: member.uiuxDe,
+    ngraphicDe: member.graphicDe,
+    nthrdDe: member.thrdDe,
+    nhwDe: member.hwDe,
+    netcDe: member.etcDe,
+    nwebBk: member.webBk,
+    nblchBk: member.blchBk,
+    naiBk: member.aiBk,
+    ndsBk: member.dsBk,
+    ngameBk: member.gameBk,
+    nplanBu: member.planBu,
+    nmarketingBu: member.marketingBu,
+    nfinanceBu: member.financeBu,
+    nsalesBu: member.salesBu,
+    nconsultBu: member.consultBu,
+    ninvestBu: member.investBu,
+    netcBu: member.etcBu,
+    nblogEtc: member.blogEtc,
+    ninfluEtc: member.influEtc,
+    ncompEtc: member.compEtc,
   });
 
   const handleInputChange = (e, index) => {
@@ -44,22 +44,28 @@ export const ProjectRecruit = ({ member, setMember }) => {
 
     if (value === '기획') {
       list[index].sub = 'UI/UX 기획';
-      setMember({ ...member, projectTotal: list, uiuxPlan: 1 });
+      list[index].num = 0;
+      setMember({ ...member, projectTotal: list, uiuxPlan: 0 });
     } else if (value === '디자인') {
       list[index].sub = '그래픽디자인';
-      setMember({ ...member, projectTotal: list, graphicDe: 1 });
+      list[index].num = 0;
+      setMember({ ...member, projectTotal: list, graphicDe: 0 });
     } else if (value === '프론트엔드개발') {
       list[index].sub = 'IOS';
-      setMember({ ...member, projectTotal: list, iosFr: 1 });
+      list[index].num = 0;
+      setMember({ ...member, projectTotal: list, iosFr: 0 });
     } else if (value === '백엔드개발') {
       list[index].sub = '웹서버';
-      setMember({ ...member, projectTotal: list, webBk: 1 });
+      list[index].num = 0;
+      setMember({ ...member, projectTotal: list, webBk: 0 });
     } else if (value === '사업') {
       list[index].sub = '사업기획';
-      setMember({ ...member, projectTotal: list, planBu: 1 });
+      list[index].num = 0;
+      setMember({ ...member, projectTotal: list, planBu: 0 });
     } else if (value === '기타') {
       list[index].sub = '작가/블로거';
-      setMember({ ...member, projectTotal: list, blogEtc: 1 });
+      list[index].num = 0;
+      setMember({ ...member, projectTotal: list, blogEtc: 0 });
     }
 
     if (e.target.value === 'UI/UX 기획') {
@@ -592,7 +598,7 @@ export const ProjectRecruit = ({ member, setMember }) => {
       ...member,
       projectTotal: [
         ...member.projectTotal,
-        { main: '-------', sub: '-------' },
+        { main: '-------', sub: '-------', num: 0 },
       ],
     });
   };

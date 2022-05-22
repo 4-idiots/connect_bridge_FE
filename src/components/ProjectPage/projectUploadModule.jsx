@@ -26,9 +26,9 @@ export const ProjectUploadForm = () => {
         children: [{ text: '프로젝트를 소개 하자면....' }],
       },
     ],
-    projectTotal: [{ main: '-------', sub: '-------' }],
+    projectTotal: [{ main: '-------', sub: '-------', num: 0 }],
     projectImg: '',
-    uiuxPlan: 1,
+    uiuxPlan: 0,
     gamePlan: 0,
     managerPlan: 0,
     hwPlan: 0,
@@ -141,7 +141,8 @@ export const ProjectUploadForm = () => {
         }
       />
       <UR.ProjectImg postInfo={postInfo} setPostInfo={setPostInfo} />
-      <UR.ProjectArea onChange={onChangeProjectEvent} />
+      <UR.ProjectArea onChange={onChangeProjectEvent} value={postInfo} />
+      {JSON.stringify(postInfo.projectTotal)}
       <UR.ProjectRecruit member={postInfo} setMember={setPostInfo} />
       <UR.ProjectPlatform checked={postInfo} onChange={setPostInfo} />
 

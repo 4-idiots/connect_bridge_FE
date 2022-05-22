@@ -147,7 +147,10 @@ export const ProjectUpdateForm = () => {
                 setPostInfo={setPostInfo}
                 nowImg={postInfo.projectImg.toString()}
               />
-              <UR.ProjectArea onChange={onChangeProjectEvent} />
+              <UR.ProjectArea
+                onChange={onChangeProjectEvent}
+                value={postInfo}
+              />
               <UR.ProjectRecruit member={postInfo} setMember={setPostInfo} />
               <UR.ProjectPlatform checked={postInfo} onChange={setPostInfo} />
               <Form.Field>

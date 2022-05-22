@@ -20,7 +20,7 @@ export const StudyUploadForm = () => {
       {
         type: 'paragaph',
         children: [
-          { text: '[목표] : ( 예: 자바스크립트를 마스터하고자 합니다) ' },
+          { text: '[목표] : (예: 자바스크립트를 마스터하고자 합니다) ' },
         ],
       },
       { type: 'paragaph', children: [{ text: '' }] },
@@ -62,14 +62,14 @@ export const StudyUploadForm = () => {
       {
         type: 'paragaph',
         children: [
-          { text: '[참여회비] (예 : 매 모임마다 1만원의 회비가 있습니다)' },
+          { text: '[참여회비] : (예 : 매 모임마다 1만원의 회비가 있습니다)' },
         ],
       },
       { type: 'paragaph', children: [{ text: '' }] },
       {
         type: 'paragaph',
         children: [
-          { text: '[기타] ( 예: 인천 거주하시는 분이시면 더욱 좋겠습니다)' },
+          { text: '[기타] : (예: 인천 거주하시는 분이시면 더욱 좋겠습니다)' },
         ],
       },
     ],
