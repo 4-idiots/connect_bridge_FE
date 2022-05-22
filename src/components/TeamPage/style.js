@@ -87,7 +87,7 @@ export const AllInfoTablet = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 20px 25px 0;
+  padding: 20px 30px 0;
   width: 100%;
   margin: 0 auto;
   transition: all 0.2s;
@@ -97,7 +97,7 @@ export const AllInfoMobile = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 20px 25px 0;
+  padding: 20px 35px 0;
   width: 100%;
   margin: 0 auto;
   transition: all 0.2s;
@@ -293,7 +293,7 @@ export const Portfolio11Mobile = styled.p`
   display: flex;
   flex-direction: row;
   align-items: center;
-  font-size: 1.4rem;
+  font-size: 1.1rem;
 `;
 
 export const Portfolio21 = styled.ul`

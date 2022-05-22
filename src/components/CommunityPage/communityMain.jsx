@@ -206,6 +206,7 @@ export const CommunityForm = () => {
               className="form-control rounded"
               placeholder="검색 입력"
               onChange={e => setquery(e.target.value)}
+              onKeyPress={onKeyPress}
             />
             &nbsp;
             <button
@@ -214,139 +215,6 @@ export const CommunityForm = () => {
               id="search_btn"
               onClick={() => navigate(`/search/${query}`)}
             >
-<<<<<<< HEAD
-              <option value="10">10</option>
-              <option value="12">12</option>
-              <option value="20">20</option>
-              <option value="50">50</option>
-              <option value="100">100</option>
-            </select>
-          </span>
-        </S.Boardtop>
-        <S.Table0>
-          <S.Table1>
-            <S.Table2>
-              <S.Table3>
-                <col
-                  className="size01"
-                  data-alias="num"
-                  style={{ width: '9%', display: 'tableColumn' }}
-                />
-                <col
-                  className="size02"
-                  data-alias="tit"
-                  style={{ width: '56%', display: 'tableColumn' }}
-                />
-                <col
-                  className="size03"
-                  data-alias="wri"
-                  style={{ width: '15%', display: 'tableColumn' }}
-                />
-                <col
-                  className="size04"
-                  data-alias="look"
-                  style={{ width: '10%', display: 'tableColumn' }}
-                />
-                <col
-                  className="size05"
-                  data-alias="like"
-                  style={{ width: '10%', display: 'tableColumn' }}
-                />
-              </S.Table3>
-              <S.Ble1>
-                <S.Ble2>
-                  <S.Ble3>번호 </S.Ble3>
-                  <S.Ble3>제목 </S.Ble3>
-                  <S.Ble3>글쓴이 </S.Ble3>
-                  <S.Ble3>조회수 </S.Ble3>
-                  <S.Ble3>좋아요 </S.Ble3>
-                </S.Ble2>
-              </S.Ble1>
-              <S.Bl1>
-                {posts
-                  .slice(offset, offset + limit)
-                  .map(
-                    ({
-                      postID,
-                      title,
-                      userNickname,
-                      viewCount,
-                      likeCount,
-                      commentCount,
-                    }) => (
-                      <S.Bl2 style={{ cursor: 'pointer' }} key={postID}>
-                        <S.Bl3
-                          style={{ fontSize: 'medium' }}
-                          className="size01"
-                        >
-                          {postID}
-                        </S.Bl3>
-                        <S.Bl3
-                          style={{
-                            fontSize: 'medium',
-                          }}
-                          className="size02"
-                        >
-                          <Link
-                            style={{ color: 'black' }}
-                            to={`/community/info/${postID}`}
-                          >
-                            {title}{' '}
-                            <span style={{ color: 'red' }}>
-                              ({commentCount})
-                            </span>
-                          </Link>
-                        </S.Bl3>
-                        <S.Bl3
-                          style={{ fontSize: 'medium' }}
-                          className="size03"
-                        >
-                          {userNickname}
-                        </S.Bl3>
-                        <S.Bl3
-                          style={{ fontSize: 'medium' }}
-                          className="size04"
-                        >
-                          {viewCount}
-                        </S.Bl3>
-                        <S.Bl3
-                          style={{ fontSize: 'medium' }}
-                          className="size05"
-                        >
-                          {likeCount}
-                        </S.Bl3>
-                      </S.Bl2>
-                    ),
-                  )}
-              </S.Bl1>
-            </S.Table2>
-          </S.Table1>
-        </S.Table0>
-        <div
-          style={{
-            textalign: 'center',
-            width: '160px',
-            margin: '0 auto',
-            display: 'flex',
-          }}
-        >
-          <input
-            type="search"
-            className="form-control rounded"
-            placeholder="검색 입력"
-            onChange={e => setquery(e.target.value)}
-            onKeyPress={onKeyPress}
-          />
-          &nbsp;
-          <button
-            className="button is-pink"
-            type="button"
-            id="search_btn"
-            onClick={() => navigate(`/search/${query}`)}
-          >
-            검색
-          </button>
-=======
               검색
             </button>
           </div>
@@ -358,7 +226,6 @@ export const CommunityForm = () => {
               setPage={setPage}
             />
           </footer>
->>>>>>> team_phonetwo
         </div>
       </Mobile>
       <Tablet>

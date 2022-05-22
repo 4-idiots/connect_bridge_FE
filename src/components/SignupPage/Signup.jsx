@@ -293,32 +293,7 @@ export const SignupForm = () => {
               한글 이름을 입력해주세요
             </Form.Label>
           )}
-<<<<<<< HEAD
-          <Button size="small" color="" onClick={sameEmailButton}>
-            중복확인
-          </Button>
-          &nbsp;&nbsp;
-          <Button size="small" color="" onClick={EmailOnClick}>
-            {emLoading ? (
-              <ReactLoading type="bubbles" color="#bdbdbd" />
-            ) : (
-              '이메일 인증'
-            )}
-          </Button>
-          <Form.Control>
-            <br />
-            <Form.Input
-              type="emailcode"
-              placeholder="이메일 발급코드"
-              name="code"
-              onChange={onChangeAccountEvent}
-              value={userData.code}
-            />
-          </Form.Control>
-          {userData.codeon ? (
-            <Form.Label size="small" style={{ color: 'green' }}>
-              확인되었습니다
-=======
+
           <Form.Field>
             <Form.Label>닉네임</Form.Label>
             <Form.Control>
@@ -410,7 +385,11 @@ export const SignupForm = () => {
             </Button>
             &nbsp;&nbsp;
             <Button size="small" color="" onClick={EmailOnClick}>
-              이메일 인증
+              {emLoading ? (
+                <ReactLoading type="bubbles" color="#bdbdbd" />
+              ) : (
+                '이메일 인증'
+              )}
             </Button>
             <Form.Control>
               <br />
@@ -623,7 +602,6 @@ export const SignupForm = () => {
           userData.userPW.length !== 0 ? (
             <Form.Label style={{ color: 'green' }} size="small">
               비밀번호가 일치합니다.
->>>>>>> team_phonetwo
             </Form.Label>
           ) : (
             <Form.Label style={{ color: '#ff6347' }} size="small">
