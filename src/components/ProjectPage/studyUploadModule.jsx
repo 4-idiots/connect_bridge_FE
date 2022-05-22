@@ -139,7 +139,7 @@ export const StudyUploadForm = () => {
         member={study.studyMember}
         onChange={onChangeStudyEvent}
       />
-      <SC.StudyArea onChange={onChangeStudyEvent} />
+      <SC.StudyArea onChange={onChangeStudyEvent} value={study} />
       <SC.StudyDate
         start={study.studyStart}
         end={study.studyEnd}
