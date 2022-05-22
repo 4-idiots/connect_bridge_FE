@@ -25,19 +25,11 @@ export const InfoForm = () => {
     }
   };
 
-  const isLike = flw => {
-    if (flw === 1) {
-      setfollow(false);
-    } else {
-      setfollow(true);
-    }
-  };
-
   const getAxios = async () => {
     try {
       const result = await getSomeTeamService(teamID);
       setUser(result.data);
-      isLike(result.data.follow);
+      setfollow(result.data.follow);
     } catch (error) {
       // pass
     }
@@ -105,13 +97,6 @@ export const InfoForm = () => {
                   <S.Info3>
                     <S.Info31>능 &nbsp;&nbsp;력</S.Info31>
                     <S.Info32>{user.userAbility}</S.Info32>
-                  </S.Info3>
-                  <S.Info3>
-                    <S.Info31>하나 &nbsp;&nbsp;더</S.Info31>
-                    <S.Info32>
-                      {user.userInterestMain} &nbsp;&nbsp;/ &nbsp;&nbsp;
-                      {user.userInterestSub}
-                    </S.Info32>
                   </S.Info3>
                   <S.Botinfo>
                     <S.Botinfo1>

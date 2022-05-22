@@ -16,7 +16,6 @@ export const getDetailData = async (setLoad, setData, getFunc, itemID) => {
   try {
     const result = await getFunc(itemID);
     setData(result.data);
-    console.log(result);
     setLoad(false);
   } catch (error) {
     setLoad(false);

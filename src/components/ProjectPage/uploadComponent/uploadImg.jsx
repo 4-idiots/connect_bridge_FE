@@ -17,6 +17,7 @@ export const ProjectImg = ({ postInfo, setPostInfo }) => {
             <img
               src=""
               alt="img"
+              style={{ height: '300px', width: '600px' }}
               onError={e => {
                 e.target.src = defPr;
               }}

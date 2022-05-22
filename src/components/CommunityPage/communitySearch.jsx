@@ -26,6 +26,12 @@ export const CommunitySearchForm = () => {
     getAxios();
   }, []);
 
+  const onKeyPress = e => {
+    if (e.key === 'Enter') {
+      window.location.replace(`/search/${querya}`);
+    }
+  };
+
   return (
     <S.Newboard>
       <div>
@@ -168,6 +174,7 @@ export const CommunitySearchForm = () => {
             className="form-control rounded"
             placeholder="검색 입력"
             onChange={e => setquerya(e.target.value)}
+            onKeyPress={onKeyPress}
           />
           &nbsp;
           <button

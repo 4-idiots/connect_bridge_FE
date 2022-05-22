@@ -21,7 +21,7 @@ export const DetailRecruit = ({ item, apply, studyID }) => {
           <S.StatusSmallP>
             {item.studyMemberNow} / {item.studyMember}
           </S.StatusSmallP>
-          {decodedToken && item.studyOnOff && (
+          {decodedToken && item.studyOnOff && decodedToken.id !== item.userID && (
             <>
               {item.studyMemberNow !== 0 ? (
                 <>

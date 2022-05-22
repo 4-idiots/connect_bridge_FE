@@ -44,6 +44,12 @@ export const LoginForm = () => {
     loginAxios(userInfo.userID, userInfo.userPW);
   };
 
+  const onKeyPress = e => {
+    if (e.key === 'Enter') {
+      onSubmitEvent();
+    }
+  };
+
   return (
     <Container>
       <Heading style={{ textAlign: 'center' }}>로그인</Heading>
@@ -69,6 +75,7 @@ export const LoginForm = () => {
               name="userPW"
               onChange={onChangeAccountEvent}
               placeholder="비밀번호"
+              onKeyPress={onKeyPress}
             />
           </Form.Control>
         </Form.Field>

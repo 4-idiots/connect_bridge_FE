@@ -14,6 +14,7 @@ import {
 } from '../../../services/mainService';
 import * as LK from '../../../RefactorFunc/likeFunc';
 import { arrayToPlain } from '../../../RefactorFunc/etcFunc';
+import ReadOnlySlate from '../../../SlateEditor/ReadOnly';
 
 export const CommunityCard = ({ item }) => {
   const navigate = useNavigate();
@@ -93,7 +94,7 @@ export const CommunityCard = ({ item }) => {
         className="card-info"
         onClick={() => navigate(`/community/info/${item.postID}`)}
       >
-        {text}
+        {text && <ReadOnlySlate value={text} />}
       </div>
       <div
         className="utility-info"

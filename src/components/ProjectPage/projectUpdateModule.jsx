@@ -41,6 +41,7 @@ export const ProjectUpdateForm = () => {
     const formData = new FormData();
     formData.append('userID', decodedToken.id);
     formData.append('projectOnOff', true);
+    formData.append('projectOnline', postInfo.projectOnline);
     formData.append('projectID', projectID);
     formData.append('projectName', postInfo.projectName);
     formData.append('projectMotive', postInfo.projectMotive);

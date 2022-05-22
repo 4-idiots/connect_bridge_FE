@@ -85,13 +85,16 @@ export const MyPageForm = () => {
       check.nickChange &&
       check.nickCheck === false &&
       check.nickClick &&
-      check.imgChange
+      check.imgChange &&
+      user.userPW
     ) {
       updateFormData(formData, '/my/info', Send.mypageUpdate, navigate);
-    } else if (check.nickChange === false && check.imgChange) {
+    } else if (check.nickChange === false && check.imgChange && user.userPW) {
       updateFormData(formData, '/my/info', Send.mypageUpdate, navigate);
-    } else if (check.imgChange === false) {
+    } else if (check.imgChange === false && user.userPW) {
       updateNoImgAxios();
+    } else if (!user.userPW) {
+      alert('수정시 비밀번호를 재입력해주세요');
     } else {
       alert('입력을 확인해주세요');
     }

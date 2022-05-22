@@ -17,8 +17,8 @@ export const ProjectUploadForm = () => {
   const [postInfo, setPostInfo] = useState({
     projectOnline: '-------',
     projectArea: '-------',
-    projectStart: new Date('2022/01/01'),
-    projectEnd: new Date('2022/01/07'),
+    projectStart: new Date(),
+    projectEnd: new Date(),
     projectPlatform: [],
     content: [
       {
@@ -142,7 +142,6 @@ export const ProjectUploadForm = () => {
       />
       <UR.ProjectImg postInfo={postInfo} setPostInfo={setPostInfo} />
       <UR.ProjectArea onChange={onChangeProjectEvent} value={postInfo} />
-      {JSON.stringify(postInfo.projectTotal)}
       <UR.ProjectRecruit member={postInfo} setMember={setPostInfo} />
       <UR.ProjectPlatform checked={postInfo} onChange={setPostInfo} />
 

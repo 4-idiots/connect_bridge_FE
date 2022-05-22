@@ -110,19 +110,12 @@ export const SignupForm = () => {
 
   const EmailCode = async () => {
     try {
-      const result = await Send.checkEmailCode(
-        userData.code,
-        userData.userEmail,
-      );
-      if (result.data.message === 'ok') {
-        alert('인증완료');
-        setUserData({ ...userData, codeon: true });
-      } else {
-        alert('다시 확인해 주세요.');
-        setUserData({ ...userData, codeon: false });
-      }
+      await Send.checkEmailCode(userData.code, userData.userEmail);
+      alert('인증완료');
+      setUserData({ ...userData, codeon: true });
     } catch (error) {
-      // pass
+      alert('다시 확인해 주세요.');
+      setUserData({ ...userData, codeon: false });
     }
   };
 

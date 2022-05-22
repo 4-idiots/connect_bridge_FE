@@ -11,8 +11,8 @@ export const StudyUploadForm = () => {
     studyField: '',
     studyArea: '',
     studyMember: '',
-    studyStart: new Date('2022/01/01'),
-    studyEnd: new Date('2022/01/07'),
+    studyStart: new Date(),
+    studyEnd: new Date(),
     studyOnline: '',
     content: [
       { type: 'paragaph', children: [{ text: '● 스터디 목표 및 진행방식' }] },
@@ -107,6 +107,7 @@ export const StudyUploadForm = () => {
         study.studyOnline,
       );
       alert('등록 되었습니다.');
+      window.location.replace('/study');
     } catch (error) {
       // pass
     }

@@ -79,11 +79,7 @@ export const MySubscribeForm = () => {
           {subData && subData.team.length !== 0 ? (
             <>
               {subData.team.map(item => (
-                <TeamCard
-                  key={item.myid}
-                  item={item}
-                  cnt={Math.floor(Math.random() * 4)}
-                />
+                <TeamCard key={item.myid} item={item} />
               ))}
             </>
           ) : (
@@ -96,7 +92,7 @@ export const MySubscribeForm = () => {
         </S.SubGrid>
         <Heading size={4}>구독한 커뮤니티</Heading>
         <S.SubGrid>
-          {subData && subData.team.length !== 0 ? (
+          {subData && subData.community.length !== 0 ? (
             <>
               {subData.community.map(item => (
                 <CommunityCard key={item.postID} item={item} />
@@ -112,7 +108,7 @@ export const MySubscribeForm = () => {
         </S.SubGrid>
         <Heading size={4}>구독한 대외 활동</Heading>
         <S.SubGrid>
-          {subData && subData.team.length !== 0 ? (
+          {subData && subData.outact.length !== 0 ? (
             <>
               {subData.outact.map(item => (
                 <OutdoorCardForm

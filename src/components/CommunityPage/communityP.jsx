@@ -24,6 +24,12 @@ export const CommunityPForm = () => {
     getAxios();
   }, []);
 
+  const onKeyPress = e => {
+    if (e.key === 'Enter') {
+      navigate(`/search/${query}`);
+    }
+  };
+
   return (
     <S.Newboard>
       <div>
@@ -167,6 +173,7 @@ export const CommunityPForm = () => {
             className="form-control rounded"
             placeholder="검색 입력"
             onChange={e => setquery(e.target.value)}
+            onKeyPress={onKeyPress}
           />
           &nbsp;
           <button
