@@ -337,8 +337,9 @@ export const ResSuggestTop = styled.div`
 `;
 
 export const ResSuggestName = styled.div`
-  height: min(1vw, 18px);
+  height: 22px;
   font-weight: bold;
+  overflow: hidden;
 `;
 
 export const ResSuggestIconWrap = styled.div`

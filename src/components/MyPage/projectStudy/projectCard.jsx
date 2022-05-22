@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import React, { useState, useEffect } from 'react';
 import * as B from 'react-bulma-components';
 import { useNavigate } from 'react-router-dom';
@@ -28,6 +29,7 @@ export const ProjectCard = ({ item, recu }) => {
   const rejectService = async () => {
     try {
       await Send.projectNoService(item.submitID);
+      alert('취소 되었습니다.');
     } catch (error) {
       // pass
     }
@@ -84,8 +86,11 @@ export const ProjectCard = ({ item, recu }) => {
           ''
         )}
       </S.ResIcon>
-      <B.Card.Content onClick={() => navigate(`/project/${item.projectID}`)}>
-        <B.Media style={{ marginBottom: 0 }}>
+      <B.Card.Content>
+        <B.Media
+          style={{ marginBottom: 0 }}
+          onClick={() => navigate(`/project/${item.projectID}`)}
+        >
           <B.Media.Item>
             <B.Heading subtitle size={7}>
               {item.projectField}
@@ -93,7 +98,10 @@ export const ProjectCard = ({ item, recu }) => {
             <B.Heading size={6}>{item.projectName}</B.Heading>
           </B.Media.Item>
         </B.Media>
-        <B.Media style={{ marginBottom: '0.8rem' }}>
+        <B.Media
+          style={{ marginBottom: '0.8rem' }}
+          onClick={() => navigate(`/project/${item.projectID}`)}
+        >
           <B.Content
             style={{
               display: 'flex',
@@ -118,10 +126,16 @@ export const ProjectCard = ({ item, recu }) => {
         </B.Media>
         <S.ResRecruitWrap>
           <S.ResRecruitBox>
-            {recu ? (
-              <B.Button color="danger" onClick={() => rejectService()}>
-                취소 하기
-              </B.Button>
+            {decodedToken && decodedToken.id !== item.userID ? (
+              <>
+                {recu ? (
+                  <B.Button color="danger" onClick={() => rejectService()}>
+                    취소 하기
+                  </B.Button>
+                ) : (
+                  ''
+                )}
+              </>
             ) : (
               ''
             )}

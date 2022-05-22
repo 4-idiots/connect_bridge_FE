@@ -25,26 +25,27 @@ export const StudyMainForm = () => {
             backgroundColor: '#fbfbfb',
             display: 'flex',
             paddingBottom: '30px',
+            justifyContent: 'space-around',
           }}
         >
           <S.newWrap>
             <S.textWrap>
               <Heading size={4} style={{ fontWeight: 'bold' }}>
-                관심 스터디
+                인기 스터디
               </Heading>
             </S.textWrap>
             {newStudy[0].content && <NewCard item={newStudy[0]} />}
           </S.newWrap>
-          <S.suggestWrap>
+          <S.ResSuggestWrap>
             <S.textWrap>
               <Heading size={4} style={{ fontWeight: 'bold' }}>
-                추천 스터디
+                신규 스터디
               </Heading>
             </S.textWrap>
             <SuggestCard item={newStudy[1]} />
             <SuggestCard item={newStudy[2]} />
             <SuggestCard item={newStudy[3]} />
-          </S.suggestWrap>
+          </S.ResSuggestWrap>
         </Block>
         <Block>
           <Heading size={4}>전체 스터디</Heading>

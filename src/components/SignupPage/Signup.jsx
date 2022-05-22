@@ -4,6 +4,7 @@ import validator from 'validator';
 import { Container, Heading, Form, Button, Box } from 'react-bulma-components';
 import { useJwt } from 'react-jwt';
 import { useNavigate } from 'react-router-dom';
+import ReactLoading from 'react-loading';
 import * as Arr from '../ProjectPage/uploadComponent/uploadValue';
 import * as Send from '../../services/signUpService';
 import { useAuth } from '../../contexts/hooks/useAuth';
@@ -12,6 +13,7 @@ export const SignupForm = () => {
   const navigate = useNavigate();
   const auth = useAuth();
   const { decodedToken } = useJwt(auth.token);
+  const [emLoading, setEmLoading] = useState(false);
   const [userData, setUserData] = useState({
     userID: '',
     userPW: '',
@@ -98,12 +100,14 @@ export const SignupForm = () => {
   };
 
   const EmailOnClick = async () => {
+    setEmLoading(true);
     if (!userData.sameEmail) {
       try {
         await Send.issueEmailCode(userData.userEmail);
+        setEmLoading(false);
         alert('이메일을 확인해주세요');
       } catch (error) {
-        // pass
+        setEmLoading(false);
       }
     } else alert('이메일 중복 체크를 해주세요');
   };
@@ -378,7 +382,11 @@ export const SignupForm = () => {
           </Button>
           &nbsp;&nbsp;
           <Button size="small" color="" onClick={EmailOnClick}>
-            이메일 인증
+            {emLoading ? (
+              <ReactLoading type="bubbles" color="#bdbdbd" />
+            ) : (
+              '이메일 인증'
+            )}
           </Button>
           <Form.Control>
             <br />

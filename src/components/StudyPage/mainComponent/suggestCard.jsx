@@ -40,12 +40,12 @@ export const SuggestCard = ({ item }) => {
                 setOnRecruit(false);
               }}
             >
-              <S.newreBox>
+              <S.ResMemberNow>
                 모집현황
                 <Icon>
                   <i className="fas fa-arrow-up" />
                 </Icon>
-              </S.newreBox>
+              </S.ResMemberNow>
               {onRecruit ? <RecruitModal item={item} /> : ''}
             </S.ResNewMemberBox>
           </S.ResSuggestBottom>

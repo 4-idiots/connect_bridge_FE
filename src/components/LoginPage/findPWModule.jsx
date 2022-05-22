@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { Container, Heading, Button, Box, Form } from 'react-bulma-components';
 import { useNavigate } from 'react-router-dom';
 import { useJwt } from 'react-jwt';
+import ReactLoading from 'react-loading';
 import { findPWServcie } from '../../services/loginService';
 import { useAuth } from '../../contexts/hooks/useAuth';
 
@@ -9,6 +10,7 @@ export const FindPWForm = () => {
   const navigate = useNavigate();
   const auth = useAuth();
   const { decodedToken } = useJwt(auth.token);
+  const [emLoading, setEmLoading] = useState(false);
   const [userInfo, setUserInfo] = useState({});
 
   useEffect(() => {
@@ -28,14 +30,17 @@ export const FindPWForm = () => {
   );
 
   const findPWAxios = async () => {
+    setEmLoading(true);
     try {
       await findPWServcie(
         userInfo.userID,
         userInfo.userName,
         userInfo.userEmail,
       );
+      setEmLoading(false);
       alert('임시 비밀번호가 발급 되었습니다. 메일을 확인하세요');
     } catch (error) {
+      setEmLoading(false);
       alert('다시 시도해주세요');
     }
   };
@@ -86,7 +91,11 @@ export const FindPWForm = () => {
         </Form.Field>
         <Button.Group align="center">
           <Button color="success" onClick={onSubmitEvent}>
-            재설정 하기
+            {emLoading ? (
+              <ReactLoading type="bubbles" color="white" />
+            ) : (
+              '재설정 하기'
+            )}
           </Button>
         </Button.Group>
       </Box>

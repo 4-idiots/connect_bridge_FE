@@ -14,7 +14,8 @@ export const gridBox = styled.div`
 `;
 
 export const newWrap = styled.div`
-  width: 590px;
+  width: 100%;
+  max-width: 590px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -433,8 +434,9 @@ export const ResSuggestTop = styled.div`
 `;
 
 export const ResSuggestName = styled.div`
-  height: min(1vw, 18px);
+  height: 22px;
   font-weight: bold;
+  overflow: hidden;
 `;
 
 export const ResSuggestIconWrap = styled.div`
