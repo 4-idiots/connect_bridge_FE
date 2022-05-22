@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import * as S from './style';
 import ReadOnlySlate from '../../../SlateEditor/ReadOnly';
 import { RecruitModal } from './recruitModal';
-import { arrayToPlain } from '../../../RefactorFunc/cardFunc';
+import { arrayToPlain } from '../../../RefactorFunc/etcFunc';
 
 export const NewCard = ({ item }) => {
   const navigate = useNavigate();

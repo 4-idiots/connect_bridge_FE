@@ -1,22 +1,9 @@
 import React from 'react';
 import { Form, Card } from 'react-bulma-components';
 import PropTypes from 'prop-types';
+import { encodeFileToBase64 } from '../../../RefactorFunc/etcFunc';
 
 export const UpdateImg = ({ postInfo, setPostInfo, nowImg }) => {
-  const encodeFileToBase64 = fileBlob => {
-    const reader = new FileReader();
-    reader.readAsDataURL(fileBlob);
-    return new Promise(resolve => {
-      reader.onload = () => {
-        setPostInfo({
-          ...postInfo,
-          preview: reader.result,
-          projectImg: fileBlob,
-        });
-        resolve();
-      };
-    });
-  };
   return (
     <Form.Field>
       <Form.Label>* 대표 이미지</Form.Label>
@@ -33,7 +20,9 @@ export const UpdateImg = ({ postInfo, setPostInfo, nowImg }) => {
           <Form.Control>
             <Form.InputFile
               name="imgSrc"
-              onChange={e => encodeFileToBase64(e.target.files[0])}
+              onChange={e =>
+                encodeFileToBase64(e.target.files[0], postInfo, setPostInfo)
+              }
               accept="img/*"
               label="대표 이미지 올리기"
               color="info"

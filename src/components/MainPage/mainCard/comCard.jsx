@@ -13,7 +13,7 @@ import {
   communityLike,
 } from '../../../services/mainService';
 import * as LK from '../../../RefactorFunc/likeFunc';
-import { arrayToPlain } from '../../../RefactorFunc/cardFunc';
+import { arrayToPlain } from '../../../RefactorFunc/etcFunc';
 
 export const CommunityCard = ({ item }) => {
   const navigate = useNavigate();

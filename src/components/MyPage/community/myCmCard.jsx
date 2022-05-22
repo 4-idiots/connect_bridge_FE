@@ -7,7 +7,7 @@ import * as S from './style';
 import ReadOnlySlate from '../../../SlateEditor/ReadOnly';
 import { deleteData } from '../../../RefactorFunc/dataControl';
 import { myCommunityDelete } from '../../../services/mypageService';
-import { arrayToPlain } from '../../../RefactorFunc/cardFunc';
+import { arrayToPlain } from '../../../RefactorFunc/etcFunc';
 
 export const MyCmCard = ({ item }) => {
   const [text, setText] = useState('');
