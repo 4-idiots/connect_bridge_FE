@@ -28,7 +28,7 @@ export const ProjectCard = ({ item, recu }) => {
 
   const rejectService = async () => {
     try {
-      await Send.projectNoService(item.submitID);
+      await Send.projectOutService(item.projectID, decodedToken.id);
       alert('취소 되었습니다.');
     } catch (error) {
       // pass

@@ -22,7 +22,7 @@ export const StudyCard = ({ item, recu }) => {
 
   const rejectService = async () => {
     try {
-      await Send.studyNoService(item.studyID, item.submitID);
+      await Send.studyOutService(item.studyID, decodedToken.id);
       alert('취소 되었습니다.');
     } catch (error) {
       // pass
