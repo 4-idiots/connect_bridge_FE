@@ -14,7 +14,7 @@ export const TeamForm = () => {
             <S.Top111>지역</S.Top111>
           </S.Top11>
         </S.Top1Mobile>
-        <S.PeopleMobile style={{ marginLeft: 65 }}>
+        <S.PeopleMobile style={{ marginLeft: 45 }}>
           <TeamInfinite />
         </S.PeopleMobile>
       </Mobile>

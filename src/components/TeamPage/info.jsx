@@ -105,26 +105,26 @@ export const InfoForm = () => {
                       <S.Info32>{user.userAbility}</S.Info32>
                     </S.Info3>
 
-                    <S.Botinfo>
-                      <S.Botinfo1>
-                        <S.Botinfo11>사는 장소</S.Botinfo11>
+                    <S.BotinfoMobile>
+                      <S.Botinfo1Mobile>
+                        <S.Botinfo11Mobile>사는 장소</S.Botinfo11Mobile>
                         <S.Botinfo12>{user.userArea}</S.Botinfo12>
-                      </S.Botinfo1>
-                      <S.Botinfo1>
-                        <S.Botinfo11>가능 시간</S.Botinfo11>
+                      </S.Botinfo1Mobile>
+                      <S.Botinfo1Mobile>
+                        <S.Botinfo11Mobile>가능 시간</S.Botinfo11Mobile>
                         <S.Botinfo12>{user.userTime}</S.Botinfo12>
-                      </S.Botinfo1>
-                      <S.Botinfo1>
-                        <S.Botinfo11>온/오프라인</S.Botinfo11>
+                      </S.Botinfo1Mobile>
+                      <S.Botinfo1Mobile>
+                        <S.Botinfo11Mobile>온/오프라인</S.Botinfo11Mobile>
                         <S.Botinfo12>온라인만 가능</S.Botinfo12>
-                      </S.Botinfo1>
-                      <S.Botinfo1>
-                        <S.Botinfo11>진행 현황</S.Botinfo11>
+                      </S.Botinfo1Mobile>
+                      <S.Botinfo1Mobile>
+                        <S.Botinfo11Mobile>진행 현황</S.Botinfo11Mobile>
                         <S.Botinfo12>
                           프로젝트 0 &nbsp;&nbsp;/ &nbsp;&nbsp;스터디 0
                         </S.Botinfo12>
-                      </S.Botinfo1>
-                    </S.Botinfo>
+                      </S.Botinfo1Mobile>
+                    </S.BotinfoMobile>
                     <S.Text1>
                       <S.Text2>자기 소개</S.Text2>
                       <S.Text3>{user.userIntroduce}</S.Text3>

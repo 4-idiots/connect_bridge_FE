@@ -108,7 +108,7 @@ export const CommunityInfoForm = () => {
             <S.Top2>.</S.Top2>
             <S.Top3>
               <S.Top311>
-                <S.Top31>{community.title}</S.Top31>
+                <S.Top31Mobile>{community.title}</S.Top31Mobile>
               </S.Top311>
               <S.Top32>
                 {community.hashtag.map((item, id) => (
