@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Heading, Block } from 'react-bulma-components';
-import { NewCard } from './mainComponent/newCard';
-// import { SuggestCard } from './mainComponent/suggestCard';
+import { StudyNew } from '../Style/Card/Use/StudyNew';
 import { StudySuggest } from '../Style/Card/Use/StudySuggest';
 import * as S from './mainComponent/style';
 import { StudyInfinite } from '../../swr/studyInfinite';
@@ -32,10 +31,10 @@ export const StudyMainForm = () => {
           <S.newWrap>
             <S.textWrap>
               <Heading size={4} style={{ fontWeight: 'bold' }}>
-                인기 스터디
+                신규 스터디
               </Heading>
             </S.textWrap>
-            {newStudy[0].content && <NewCard item={newStudy[0]} />}
+            {newStudy[0].content && <StudyNew item={newStudy[0]} />}
           </S.newWrap>
           <S.ResSuggestWrap>
             <S.textWrap>
