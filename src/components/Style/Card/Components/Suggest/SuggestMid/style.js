@@ -5,4 +5,8 @@ export const SuggestMid = styled.div`
   height: 28px;
   width: 100%;
   max-width: 400px;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 `;

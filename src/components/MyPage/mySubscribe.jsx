@@ -3,8 +3,8 @@ import { Heading } from 'react-bulma-components';
 import { mySubscribeGetService } from '../../services/mypageService';
 import * as S from './subscribe/style';
 import { ProjectCard } from '../Style/Card/Use/ProjectCard';
-import { TeamCard } from '../MainPage/mainCard/teamCard';
-import { CommunityCard } from '../MainPage/mainCard/comCard';
+import { TeamCard } from '../Style/Card/Use/TeamCard';
+import { MyCommunityCard } from '../Style/Card/Use/MyCommunityCard';
 import { OutdoorCardForm } from '../OutdoorPage/outdoorCardModule';
 import { OutdoorModalForm } from '../OutdoorPage/outdoorModalModule';
 import { SkelSubscribe } from '../skeleton/mypage/subscribe';
@@ -95,7 +95,7 @@ export const MySubscribeForm = () => {
           {subData && subData.community.length !== 0 ? (
             <>
               {subData.community.map(item => (
-                <CommunityCard key={item.postID} item={item} />
+                <MyCommunityCard key={item.postID} item={item} />
               ))}
             </>
           ) : (

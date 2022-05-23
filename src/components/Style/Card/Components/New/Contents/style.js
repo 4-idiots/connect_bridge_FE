@@ -6,4 +6,8 @@ export const NewContent = styled.div`
   min-width: 300px;
   overflow: hidden;
   height: 28px;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 `;

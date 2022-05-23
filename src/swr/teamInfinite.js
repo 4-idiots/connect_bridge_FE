@@ -3,7 +3,7 @@ import React, { useRef, useEffect } from 'react';
 import useSWRInfinite from 'swr/infinite';
 import fetcher from './fetcher';
 import useOnScreen from './useOnScreen';
-import { TeamCard } from '../components/TeamPage/teamCard';
+import { TeamCard } from '../components/Style/Card/Use/TeamCard';
 import { SkelTeam } from '../components/skeleton/skelRouter';
 
 const getKey = (pageIndex, previousPageData) => {

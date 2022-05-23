@@ -6,17 +6,17 @@ import PropTypes from 'prop-types';
 import { Tag, Icon } from 'react-bulma-components';
 import { useNavigate } from 'react-router-dom';
 import { useJwt } from 'react-jwt';
-import { ReactComponent as Heart } from '../../../assets/svg/heart.svg';
-import { useAuth } from '../../../contexts/hooks/useAuth';
+import { ReactComponent as Heart } from '../../../../assets/svg/heart.svg';
+import { useAuth } from '../../../../contexts/hooks/useAuth';
 import {
   communityLikeCheck,
   communityLike,
-} from '../../../services/mainService';
-import * as LK from '../../../RefactorFunc/likeFunc';
-import { arrayToPlain } from '../../../RefactorFunc/etcFunc';
-import ReadOnlySlate from '../../../SlateEditor/ReadOnly';
+} from '../../../../services/mainService';
+import * as LK from '../../../../RefactorFunc/likeFunc';
+import { arrayToPlain } from '../../../../RefactorFunc/etcFunc';
+import ReadOnlySlate from '../../../../SlateEditor/ReadOnly';
 
-export const CommunityCard = ({ item }) => {
+export const MyCommunityCard = ({ item }) => {
   const navigate = useNavigate();
   const [text, setText] = useState(null);
   const [onHeart, setOnHeart] = useState(false);
@@ -125,6 +125,6 @@ export const CommunityCard = ({ item }) => {
   );
 };
 
-CommunityCard.propTypes = {
+MyCommunityCard.propTypes = {
   item: PropTypes.objectOf(PropTypes.any).isRequired,
 };

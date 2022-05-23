@@ -8,7 +8,7 @@ import {
   mainArray,
 } from '../ProjectPage/uploadComponent/uploadValue';
 import { filterTeamService } from '../../services/teamService';
-import { TeamCard } from './teamCard';
+import { TeamCard } from '../Style/Card/Use/TeamCard';
 
 export const TeamForm = () => {
   const [search, setSearch] = useState({
