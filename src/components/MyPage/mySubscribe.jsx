@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Heading } from 'react-bulma-components';
 import { mySubscribeGetService } from '../../services/mypageService';
 import * as S from './subscribe/style';
-import { ProjectCard } from '../ProjectPage/mainComponent/projectCard';
+import { ProjectCard } from '../Style/Card/Use/ProjectCard';
 import { TeamCard } from '../MainPage/mainCard/teamCard';
 import { CommunityCard } from '../MainPage/mainCard/comCard';
 import { OutdoorCardForm } from '../OutdoorPage/outdoorCardModule';
 import { OutdoorModalForm } from '../OutdoorPage/outdoorModalModule';
 import { SkelSubscribe } from '../skeleton/mypage/subscribe';
-import { StudyCard } from '../StudyPage/mainComponent/studyCard';
+import { StudyCard } from '../Style/Card/Use/StudyCard';
 import { getData } from '../../RefactorFunc/dataControl';
 
 export const MySubscribeForm = () => {

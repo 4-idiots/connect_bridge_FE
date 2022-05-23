@@ -7,3 +7,7 @@ export const getSomeTeamService = teamID => {
 export const teamLikeService = teamID => {
   return customAxios.get(`/api/follow?toUserId=${teamID}`);
 };
+
+export const filterTeamService = (area, field) => {
+  return customAxios.get(`/api/team/${area}/${field}`);
+};

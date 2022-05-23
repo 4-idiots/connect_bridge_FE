@@ -172,7 +172,6 @@ export const ResRecruitBox = styled.div`
 `;
 
 export const ResRecruitWrap = styled.div`
-  margin-top: 1rem;
   padding-top: 1rem;
   border-top: 1px solid rgba(219, 219, 219, 0.5);
   border-top-width: 1px;
@@ -261,7 +260,12 @@ export const ResNewName = styled.span`
   font-size: min(2vw, 18px);
   font-weight: bold;
   margin: 10px 0 10px 0;
-  display: inline-block;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  height: 30px;
 `;
 
 export const ResNewContent = styled.div`

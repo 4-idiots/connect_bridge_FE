@@ -91,11 +91,23 @@ export const ProjectCard = ({ item, recu }) => {
           style={{ marginBottom: 0 }}
           onClick={() => navigate(`/project/${item.projectID}`)}
         >
-          <B.Media.Item>
+          <B.Media.Item
+            style={{
+              overflow: 'hidden',
+              height: 56,
+              textOverflow: 'ellipsis',
+              display: '-webkit-box',
+              WebkitLineClamp: 3,
+              WebkitBoxOrient: 'vertical',
+            }}
+          >
             <B.Heading subtitle size={7}>
               {item.projectField}
             </B.Heading>
-            <B.Heading size={6}>{item.projectName}</B.Heading>
+            <B.Heading size={6}>
+              <span style={{ color: '#716666' }}>[{item.projectArea}]</span>{' '}
+              {item.projectName}
+            </B.Heading>
           </B.Media.Item>
         </B.Media>
         <B.Media

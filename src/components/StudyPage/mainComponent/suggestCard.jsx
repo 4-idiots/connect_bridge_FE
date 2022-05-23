@@ -16,7 +16,10 @@ export const SuggestCard = ({ item }) => {
         <S.ResSuggestImg src={item.studyImg} />
         <S.ResSuggestInfo>
           <S.ResSuggestTop>
-            <S.ResSuggestName>{item.studyName}</S.ResSuggestName>
+            <S.ResSuggestName>
+              <span style={{ color: '#716666' }}>[{item.studyArea}]</span>
+              &nbsp;{item.studyName}
+            </S.ResSuggestName>
             <S.ResSuggestIconWrap>
               <Icon>
                 <i className="fas fa-heart" />

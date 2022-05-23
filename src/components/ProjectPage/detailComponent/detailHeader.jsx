@@ -12,7 +12,8 @@ export const DetailHeader = ({ item }) => {
           size={4}
           style={{ fontWeight: 'bold', fontSize: 38, margin: 24 }}
         >
-          {item.projectName}
+          <span style={{ color: '#716666' }}>[{item.projectArea}]</span>
+          &nbsp;{item.projectName}
         </Heading>
         <S.LeaderWrap>
           <S.LeaderImg src={item.leaderInfo.leaderImg} />

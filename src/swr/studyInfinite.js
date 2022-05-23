@@ -3,7 +3,7 @@ import React, { useRef, useEffect } from 'react';
 import useSWRInfinite from 'swr/infinite';
 import fetcher from './fetcher';
 import useOnScreen from './useOnScreen';
-import { StudyCard } from '../components/StudyPage/mainComponent/studyCard';
+import { StudyCard } from '../components/Style/Card/Use/StudyCard';
 import { studyGetAllService } from '../services/studyService';
 import { SkelProject } from '../components/skeleton/skelRouter';
 

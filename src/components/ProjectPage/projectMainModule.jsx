@@ -31,7 +31,7 @@ export const ProjectMainForm = () => {
           <S.newWrap>
             <S.textWrap>
               <Heading size={4} style={{ fontWeight: 'bold' }}>
-                인기 프로젝트
+                신규 프로젝트
               </Heading>
             </S.textWrap>
             {newPr[0].content && <NewCard item={newPr[0]} />}

@@ -3,9 +3,10 @@ import React, { useRef, useEffect } from 'react';
 import useSWRInfinite from 'swr/infinite';
 import fetcher from './fetcher';
 import useOnScreen from './useOnScreen';
-import { ProjectCard } from '../components/ProjectPage/mainComponent/projectCard';
+// import { ProjectCard } from '../components/ProjectPage/mainComponent/projectCard';
 import { projectGetAllService } from '../services/projectService';
 import { SkelProject } from '../components/skeleton/project';
+import { ProjectCard } from '../components/Style/Card/Use/ProjectCard';
 
 const getKey = (pageIndex, previousPageData) => {
   if (previousPageData && !previousPageData.length) return null;

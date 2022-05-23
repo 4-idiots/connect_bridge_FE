@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Heading, Container } from 'react-bulma-components';
 import { getMainService } from '../../services/mainService';
-import { ProjectCard } from '../ProjectPage/mainComponent/projectCard';
-import { StudyCard } from '../StudyPage/mainComponent/studyCard';
+import { ProjectCard } from '../Style/Card/Use/ProjectCard';
+import { StudyCard } from '../Style/Card/Use/StudyCard';
 import * as S from './style';
 import { SkelProject } from '../skeleton/skelRouter';
 import { Mobile, Desktop } from '../../mediaQuery';

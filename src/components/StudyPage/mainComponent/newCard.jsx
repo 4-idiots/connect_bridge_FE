@@ -21,7 +21,10 @@ export const NewCard = ({ item }) => {
       <S.ResNewImg src={item.studyImg} />
       <S.ResNewBottom>
         <S.ResNewField>{item.studyField}</S.ResNewField>
-        <S.ResNewName>{item.studyName}</S.ResNewName>
+        <S.ResNewName>
+          <span style={{ color: '#716666' }}>[{item.studyArea}]</span>
+          &nbsp;{item.studyName}
+        </S.ResNewName>
         <S.ResNewContent>
           {text && <ReadOnlySlate value={text} />}
         </S.ResNewContent>
