@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Heading, Block } from 'react-bulma-components';
 import { NewCard } from './mainComponent/newCard';
-import { SuggestCard } from './mainComponent/suggestCard';
+// import { SuggestCard } from './mainComponent/suggestCard';
+import { ProjectSuggest } from '../Style/Card/Use/ProjectSuggest';
 import * as S from './mainComponent/style';
 import { ProjectInfinite } from '../../swr/projectInfinite';
 import { projectGetNewService } from '../../services/projectService';
@@ -42,9 +43,9 @@ export const ProjectMainForm = () => {
                 신규 프로젝트
               </Heading>
             </S.textWrap>
-            <SuggestCard item={newPr[1]} />
-            <SuggestCard item={newPr[2]} />
-            <SuggestCard item={newPr[3]} />
+            <ProjectSuggest item={newPr[1]} />
+            <ProjectSuggest item={newPr[2]} />
+            <ProjectSuggest item={newPr[3]} />
           </S.ResSuggestWrap>
         </Block>
         <Block>

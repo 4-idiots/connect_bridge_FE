@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as S from './style';
-import { ReactComponent as Heart } from '../../../../../assets/svg/heart.svg';
+import { ReactComponent as Heart } from '../../../../../../assets/svg/heart.svg';
 
 export const LikeBox = ({
   onClick,

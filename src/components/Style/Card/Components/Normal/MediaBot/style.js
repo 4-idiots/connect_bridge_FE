@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const MediaBot = styled.div`
-  padding-top: 1rem;
+  padding-top: 8px;
   border-top: 1px solid rgba(219, 219, 219, 0.5);
   border-top-width: 1px;
   border-top-style: solid;

@@ -11,7 +11,7 @@ export const MediaTop = ({ field, area, name }) => {
           {field}
         </Heading>
         <Heading size={6}>
-          <span style={{ color: '#716666' }}>[{area}]</span>
+          <S.AreaText>[{area}]</S.AreaText>
           &nbsp;{name}
         </Heading>
       </S.MediaTop>

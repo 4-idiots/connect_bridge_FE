@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Heading, Block } from 'react-bulma-components';
 import { NewCard } from './mainComponent/newCard';
-import { SuggestCard } from './mainComponent/suggestCard';
+// import { SuggestCard } from './mainComponent/suggestCard';
+import { StudySuggest } from '../Style/Card/Use/StudySuggest';
 import * as S from './mainComponent/style';
 import { StudyInfinite } from '../../swr/studyInfinite';
 import { studyGetNewService } from '../../services/studyService';
@@ -42,9 +43,9 @@ export const StudyMainForm = () => {
                 신규 스터디
               </Heading>
             </S.textWrap>
-            <SuggestCard item={newStudy[1]} />
-            <SuggestCard item={newStudy[2]} />
-            <SuggestCard item={newStudy[3]} />
+            <StudySuggest item={newStudy[1]} />
+            <StudySuggest item={newStudy[2]} />
+            <StudySuggest item={newStudy[3]} />
           </S.ResSuggestWrap>
         </Block>
         <Block>

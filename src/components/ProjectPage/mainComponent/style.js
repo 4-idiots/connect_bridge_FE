@@ -307,7 +307,6 @@ export const ResSuggestContainer = styled.div`
 export const ResSuggestBox = styled.div`
   width: 100%;
   max-width: 580px;
-  /* height: 98px; */
   margin-bottom: 12px;
   background-color: #fff;
   border: 1px solid #ebebeb;
