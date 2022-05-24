@@ -17,6 +17,18 @@ export const MainGrid = styled.div`
   row-gap: 3rem;
   margin-bottom: 80px;
 `;
+export const MainGridTablet = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 3rem;
+  margin-bottom: 80px;
+`;
+export const MainGridMobile = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 3rem;
+  margin-bottom: 80px;
+`;
 
 export const BannerBox = styled.div`
   margin: 80px 0 30px 0;

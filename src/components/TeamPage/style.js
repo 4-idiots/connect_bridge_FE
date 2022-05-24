@@ -44,21 +44,18 @@ export const Top111 = styled.option`
 
 export const People = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   row-gap: 3rem;
-  margin-bottom: 80px;
 `;
 export const PeopleMobile = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  row-gap: 4rem;
-  margin-bottom: 80px;
+  grid-template-columns: repeat(1, 1fr);
+  row-gap: 3rem;
 `;
 export const PeopleTablet = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   row-gap: 4rem;
-  margin-bottom: 80px;
 `;
 
 export const Main = styled.section`
@@ -203,6 +200,14 @@ export const Info32 = styled.span`
   color: #666;
 `;
 
+export const BotinfoMobile = styled.ul`
+  box-sizing: border-box;
+  background-color: #f6f6f9;
+  padding: 20px 0 3px 20px;
+  border-bottom: 0 solid #42495b;
+  margin-top: 14px;
+  margin-bottom: 27px;
+`;
 export const Botinfo = styled.ul`
   box-sizing: border-box;
   background-color: #f6f6f9;
@@ -218,9 +223,21 @@ export const Botinfo1 = styled.li`
   line-height: 0.875rem;
   list-style: none;
 `;
+export const Botinfo1Mobile = styled.li`
+  margin-bottom: 20px;
+  font-size: 0.875rem;
+  line-height: 0.875rem;
+  list-style: none;
+`;
 export const Botinfo11 = styled.span`
   width: 72px;
   margin-right: 48px;
+  display: inline-flex;
+  color: #424251;
+`;
+export const Botinfo11Mobile = styled.span`
+  width: 72px;
+  margin-right: 30px;
   display: inline-flex;
   color: #424251;
 `;

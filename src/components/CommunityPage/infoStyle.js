@@ -42,6 +42,17 @@ export const Top31 = styled.h2`
   line-height: 38px;
   font-weight: bold;
 `;
+export const Top31Mobile = styled.h2`
+  color: #fff;
+  max-width: 600px;
+  min-width: 320px;
+  display: block;
+  text-align: center;
+  margin: 0 25px;
+  font-size: 28px;
+  line-height: 38px;
+  font-weight: bold;
+`;
 
 export const Top311 = styled.div`
   display: inline-flex;

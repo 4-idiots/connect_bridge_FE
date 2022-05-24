@@ -5,7 +5,7 @@ import { ProjectCard } from '../Style/Card/Use/ProjectCard';
 import { StudyCard } from '../Style/Card/Use/StudyCard';
 import * as S from './style';
 import { SkelProject } from '../skeleton/skelRouter';
-import { Mobile, Desktop } from '../../mediaQuery';
+import { Mobile, Desktop, Tablet } from '../../mediaQuery';
 import { getData } from '../../RefactorFunc/dataControl';
 
 export const MainPageForm = () => {
@@ -19,7 +19,58 @@ export const MainPageForm = () => {
   if (main && !loading) {
     return (
       <Container style={{ marginTop: 80 }}>
-        <Mobile>난 폰이야</Mobile>
+        <Mobile>
+          <Heading
+            size={7}
+            style={{ fontWeight: 'bold', fontSize: 26, marginLeft: 35 }}
+          >
+            새로운 프로젝트
+          </Heading>
+          <S.MainGridMobile style={{ marginLeft: 45 }}>
+            {main.project &&
+              main.project.map(item => (
+                <ProjectCard item={item} key={item.projectID} />
+              ))}
+          </S.MainGridMobile>
+          <Heading
+            size={7}
+            style={{ fontWeight: 'bold', fontSize: 26, marginLeft: 35 }}
+          >
+            새로운 스터디
+          </Heading>
+          <S.MainGridMobile style={{ marginLeft: 45 }}>
+            {main.study &&
+              main.study.map(item => (
+                <StudyCard item={item} key={item.studyID} />
+              ))}
+          </S.MainGridMobile>
+        </Mobile>
+        <Tablet>
+          <Heading
+            size={7}
+            style={{ fontWeight: 'bold', fontSize: 26, marginLeft: 45 }}
+          >
+            새로운 프로젝트
+          </Heading>
+          <S.MainGridTablet style={{ marginLeft: 60 }}>
+            {main.project &&
+              main.project.map(item => (
+                <ProjectCard item={item} key={item.projectID} />
+              ))}
+          </S.MainGridTablet>
+          <Heading
+            size={7}
+            style={{ fontWeight: 'bold', fontSize: 26, marginLeft: 45 }}
+          >
+            새로운 스터디
+          </Heading>
+          <S.MainGridTablet style={{ marginLeft: 60 }}>
+            {main.study &&
+              main.study.map(item => (
+                <StudyCard item={item} key={item.studyID} />
+              ))}
+          </S.MainGridTablet>
+        </Tablet>
         <Desktop>
           <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
             새로운 프로젝트

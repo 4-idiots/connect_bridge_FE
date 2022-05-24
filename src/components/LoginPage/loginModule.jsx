@@ -5,6 +5,7 @@ import { useJwt } from 'react-jwt';
 import { loginService } from '../../services/loginService';
 import customAxios from '../../services/customAxios';
 import { useAuth } from '../../contexts/hooks/useAuth';
+import { Mobile, Desktop, Tablet } from '../../mediaQuery';
 
 export const LoginForm = () => {
   const navigate = useNavigate();
@@ -52,9 +53,10 @@ export const LoginForm = () => {
 
   return (
     <Container>
-      <Heading style={{ textAlign: 'center' }}>로그인</Heading>
-      <Box style={{ width: '60%', margin: 'auto' }}>
-        <Form.Field>
+      <Mobile>
+        <Heading style={{ textAlign: 'center' }}>로그인</Heading>
+
+        <Form.Field style={{ marginLeft: 30, marginRight: 30 }}>
           <Form.Label>아이디</Form.Label>
           <Form.Control>
             <Form.Input
@@ -66,7 +68,7 @@ export const LoginForm = () => {
             />
           </Form.Control>
         </Form.Field>
-        <Form.Field>
+        <Form.Field style={{ marginLeft: 30, marginRight: 30 }}>
           <Form.Label>비밀번호</Form.Label>
           <Form.Control>
             <Form.Input
@@ -80,13 +82,16 @@ export const LoginForm = () => {
           </Form.Control>
         </Form.Field>
         <Button.Group align="center">
-          <Button color="success" onClick={onSubmitEvent}>
+          <Button
+            style={{ marginLeft: 30, marginRight: 30, marginTop: 10 }}
+            className="button is-medium is-fullwidth"
+            color="success"
+            onClick={onSubmitEvent}
+          >
             로그인
           </Button>
         </Button.Group>
-      </Box>
 
-      <Box style={{ width: '60%', margin: 'auto' }}>
         <Button.Group align="center">
           <Button renderAs={Link} to="/sign" color="danger">
             회원 가입
@@ -98,7 +103,107 @@ export const LoginForm = () => {
             비밀번호 재설정
           </Button>
         </Button.Group>
-      </Box>
+      </Mobile>
+
+      <Tablet>
+        <Heading style={{ textAlign: 'center' }}>로그인</Heading>
+        <Box style={{ width: '60%', margin: 'auto' }}>
+          <Form.Field>
+            <Form.Label>아이디</Form.Label>
+            <Form.Control>
+              <Form.Input
+                type="text"
+                value={userInfo.userID || ''}
+                name="userID"
+                onChange={onChangeAccountEvent}
+                placeholder="아이디"
+              />
+            </Form.Control>
+          </Form.Field>
+          <Form.Field>
+            <Form.Label>비밀번호</Form.Label>
+            <Form.Control>
+              <Form.Input
+                type="password"
+                value={userInfo.userPW || ''}
+                name="userPW"
+                onChange={onChangeAccountEvent}
+                placeholder="비밀번호"
+                onKeyPress={onKeyPress}
+              />
+            </Form.Control>
+          </Form.Field>
+          <Button.Group align="center">
+            <Button color="success" onClick={onSubmitEvent}>
+              로그인
+            </Button>
+          </Button.Group>
+        </Box>
+
+        <Box style={{ width: '60%', margin: 'auto' }}>
+          <Button.Group align="center">
+            <Button renderAs={Link} to="/sign" color="danger">
+              회원 가입
+            </Button>
+            <Button renderAs={Link} to="/login/findID" color="info">
+              아이디 찾기
+            </Button>
+            <Button renderAs={Link} to="/login/findPW" color="info">
+              비밀번호 재설정
+            </Button>
+          </Button.Group>
+        </Box>
+      </Tablet>
+
+      <Desktop>
+        <Heading style={{ textAlign: 'center' }}>로그인</Heading>
+        <Box style={{ width: '60%', margin: 'auto' }}>
+          <Form.Field>
+            <Form.Label>아이디</Form.Label>
+            <Form.Control>
+              <Form.Input
+                type="text"
+                value={userInfo.userID || ''}
+                name="userID"
+                onChange={onChangeAccountEvent}
+                placeholder="아이디"
+              />
+            </Form.Control>
+          </Form.Field>
+          <Form.Field>
+            <Form.Label>비밀번호</Form.Label>
+            <Form.Control>
+              <Form.Input
+                type="password"
+                value={userInfo.userPW || ''}
+                name="userPW"
+                onChange={onChangeAccountEvent}
+                placeholder="비밀번호"
+                onKeyPress={onKeyPress}
+              />
+            </Form.Control>
+          </Form.Field>
+          <Button.Group align="center">
+            <Button color="success" onClick={onSubmitEvent}>
+              로그인
+            </Button>
+          </Button.Group>
+        </Box>
+
+        <Box style={{ width: '60%', margin: 'auto' }}>
+          <Button.Group align="center">
+            <Button renderAs={Link} to="/sign" color="danger">
+              회원 가입
+            </Button>
+            <Button renderAs={Link} to="/login/findID" color="info">
+              아이디 찾기
+            </Button>
+            <Button renderAs={Link} to="/login/findPW" color="info">
+              비밀번호 재설정
+            </Button>
+          </Button.Group>
+        </Box>
+      </Desktop>
     </Container>
   );
 };

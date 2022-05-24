@@ -29,7 +29,7 @@ export const TeamCard = ({ item }) => {
   }, []);
 
   return (
-    <div className="cards">
+    <div className="cards" style={{ width: '360px', height: '360px' }}>
       <div style={{ position: 'absolute', top: '0.5rem', right: '1rem' }}>
         {decodedToken ? (
           <div
