@@ -49,7 +49,10 @@ export const ProjectCard = ({ item }) => {
       }}
     >
       <S.ResNormal onClick={() => navigate(`/project/${item.projectID}`)}>
-        <S.ResImg src={item.projectImg} />
+        <S.ResImg
+          style={{ width: '360px', height: '360px' }}
+          src={item.projectImg}
+        />
       </S.ResNormal>
       <S.ResType>사이드프로젝트</S.ResType>
       <S.ResIcon
@@ -79,7 +82,10 @@ export const ProjectCard = ({ item }) => {
           ''
         )}
       </S.ResIcon>
-      <Card.Content onClick={() => navigate(`/project/${item.projectID}`)}>
+      <Card.Content
+        style={{ width: '300px', height: '400px' }}
+        onClick={() => navigate(`/project/${item.projectID}`)}
+      >
         <Media style={{ marginBottom: 0 }}>
           <Media.Item>
             <Heading subtitle size={7}>

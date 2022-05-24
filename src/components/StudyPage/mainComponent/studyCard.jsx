@@ -56,7 +56,10 @@ export const StudyCard = ({ item }) => {
       }}
     >
       <S.ResNormal onClick={() => navigate(`/study/${item.studyID}`)}>
-        <S.ResImg src={item.studyImg} />
+        <S.ResImg
+          style={{ width: '360px', height: '360px' }}
+          src={item.studyImg}
+        />
       </S.ResNormal>
       <S.ResType>스터디/네트워킹</S.ResType>
       <S.ResIcon

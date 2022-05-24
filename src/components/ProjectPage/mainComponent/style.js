@@ -6,6 +6,16 @@ export const gridBox = styled.div`
   grid-template-columns: 1fr 1fr 1fr 1fr;
   row-gap: 3rem;
 `;
+export const gridBoxTablet = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 3rem;
+`;
+export const gridBoxMobile = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 3rem;
+`;
 
 export const newWrap = styled.div`
   width: 100%;
@@ -15,6 +25,14 @@ export const newWrap = styled.div`
   justify-content: center;
   flex-direction: column;
   padding-bottom: 10px;
+`;
+export const newWrapMobile = styled.div`
+  max-width: 100%;
+  margin-top: 20px;
+  flex: 1 1;
+  width: 100%;
+  transition: all 0.2s;
+  margin-right: 20px;
 `;
 
 export const textWrap = styled.div`
@@ -353,6 +371,15 @@ export const ResSuggestWrap = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+`;
+
+export const ResSuggestWrapMobile = styled.div`
+  max-width: 100%;
+  margin-top: 20px;
+  flex: 1 1;
+  width: 100%;
+  transition: all 0.2s;
+  margin-right: 20px;
 `;
 
 export const ResSuggestMid = styled.div`
