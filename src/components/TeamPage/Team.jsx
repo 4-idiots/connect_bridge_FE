@@ -50,27 +50,9 @@ export const TeamForm = () => {
             </Form.Control>
           </Form.Field>
         </S.Top1Mobile>
-<<<<<<< HEAD
-        <S.PeopleMobile style={{ marginLeft: 45 }}>
-          {isFilter ? (
-            <>
-              {data.length !== 0 ? (
-                data.map(item => <TeamCard key={item.myid} item={item} />)
-              ) : (
-                <S.PSBox>
-                  <S.PSNull>
-                    <S.PSText>해당 조건에 일치하는 정보가 없습니다.</S.PSText>
-                  </S.PSNull>
-                </S.PSBox>
-              )}
-            </>
-          ) : (
-            <TeamInfinite />
-          )}
-=======
+
         <S.PeopleMobile style={{ marginLeft: 45, marginTop: 45 }}>
           <TeamInfinite />
->>>>>>> Mobile_one
         </S.PeopleMobile>
       </Mobile>
       <Tablet>

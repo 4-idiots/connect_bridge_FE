@@ -10,6 +10,7 @@ import { OutdoorModalForm } from '../OutdoorPage/outdoorModalModule';
 import { SkelSubscribe } from '../skeleton/mypage/subscribe';
 import { StudyCard } from '../Style/Card/Use/StudyCard';
 import { getData } from '../../RefactorFunc/dataControl';
+import { Mobile, Desktop, Tablet } from '../../mediaQuery';
 
 export const MySubscribeForm = () => {
   const [loading, setLoading] = useState(false);
@@ -34,107 +35,315 @@ export const MySubscribeForm = () => {
   if (subData && !loading) {
     return (
       <div style={{ margin: '0 20px' }}>
-        <Heading size={4}>구독한 프로젝트</Heading>
-        {poster.check && (
-          <OutdoorModalForm
-            close={() => {
-              changePoster('', '', '');
-            }}
-            item={poster}
-          />
-        )}
-        <S.SubGrid>
-          {subData && subData.project.length !== 0 ? (
-            <>
-              {subData.project.map(item => (
-                <ProjectCard key={item.projectID} item={item} />
-              ))}
-            </>
-          ) : (
-            <S.PSBox>
-              <S.PSNull>
-                <S.PSText>구독한 프로젝트가 없습니다.</S.PSText>
-              </S.PSNull>
-            </S.PSBox>
+        <Mobile>
+          <Heading size={4}>구독한 프로젝트</Heading>
+          {poster.check && (
+            <OutdoorModalForm
+              close={() => {
+                changePoster('', '', '');
+              }}
+              item={poster}
+            />
           )}
-        </S.SubGrid>
-        <Heading size={4}>구독한 스터디</Heading>
-        <S.SubGrid>
-          {subData.study && subData.study.length !== 0 ? (
-            <>
-              {subData.study.map(item => (
-                <StudyCard item={item} key={item.studyID} />
-              ))}
-            </>
-          ) : (
-            <S.PSBox>
-              <S.PSNull>
-                <S.PSText>구독한 스터디가 없습니다.</S.PSText>
-              </S.PSNull>
-            </S.PSBox>
+          <S.SubGridMobile>
+            {subData && subData.project.length !== 0 ? (
+              <>
+                {subData.project.map(item => (
+                  <ProjectCard key={item.projectID} item={item} />
+                ))}
+              </>
+            ) : (
+              <S.PSBox>
+                <S.PSNull>
+                  <S.PSText>구독한 프로젝트가 없습니다.</S.PSText>
+                </S.PSNull>
+              </S.PSBox>
+            )}
+          </S.SubGridMobile>
+          <Heading size={4}>구독한 스터디</Heading>
+          <S.SubGridMobile>
+            {subData.study && subData.study.length !== 0 ? (
+              <>
+                {subData.study.map(item => (
+                  <StudyCard item={item} key={item.studyID} />
+                ))}
+              </>
+            ) : (
+              <S.PSBox>
+                <S.PSNull>
+                  <S.PSText>구독한 스터디가 없습니다.</S.PSText>
+                </S.PSNull>
+              </S.PSBox>
+            )}
+          </S.SubGridMobile>
+          <Heading size={4}>구독한 팀원</Heading>
+          <S.SubGridMobile>
+            {subData && subData.team.length !== 0 ? (
+              <>
+                {subData.team.map(item => (
+                  <TeamCard key={item.myid} item={item} />
+                ))}
+              </>
+            ) : (
+              <S.PSBox>
+                <S.PSNull>
+                  <S.PSText>구독한 팀원이 없습니다.</S.PSText>
+                </S.PSNull>
+              </S.PSBox>
+            )}
+          </S.SubGridMobile>
+          <Heading size={4}>구독한 커뮤니티</Heading>
+          <S.SubGridMobile>
+            {subData && subData.community.length !== 0 ? (
+              <>
+                {subData.community.map(item => (
+                  <MyCommunityCard key={item.postID} item={item} />
+                ))}
+              </>
+            ) : (
+              <S.PSBox>
+                <S.PSNull>
+                  <S.PSText>구독한 커뮤니티가 없습니다.</S.PSText>
+                </S.PSNull>
+              </S.PSBox>
+            )}
+          </S.SubGridMobile>
+          <Heading size={4}>구독한 대외 활동</Heading>
+          <S.SubGridMobile>
+            {subData && subData.outact.length !== 0 ? (
+              <>
+                {subData.outact.map(item => (
+                  <OutdoorCardForm
+                    key={item.outActID}
+                    item={item}
+                    onActClick={() => {
+                      changePoster(
+                        item.outActName,
+                        item.outActImg,
+                        item.outActLink,
+                        item.outActView,
+                        item.outActLike,
+                        item.outActID,
+                      );
+                    }}
+                  />
+                ))}
+              </>
+            ) : (
+              <S.PSBox>
+                <S.PSNull>
+                  <S.PSText>구독한 대외활동이 없습니다.</S.PSText>
+                </S.PSNull>
+              </S.PSBox>
+            )}
+          </S.SubGridMobile>
+        </Mobile>
+        <Tablet>
+          <Heading size={4}>구독한 프로젝트</Heading>
+          {poster.check && (
+            <OutdoorModalForm
+              close={() => {
+                changePoster('', '', '');
+              }}
+              item={poster}
+            />
           )}
-        </S.SubGrid>
-        <Heading size={4}>구독한 팀원</Heading>
-        <S.SubGrid>
-          {subData && subData.team.length !== 0 ? (
-            <>
-              {subData.team.map(item => (
-                <TeamCard key={item.myid} item={item} />
-              ))}
-            </>
-          ) : (
-            <S.PSBox>
-              <S.PSNull>
-                <S.PSText>구독한 팀원이 없습니다.</S.PSText>
-              </S.PSNull>
-            </S.PSBox>
+          <S.SubGridTablet>
+            {subData && subData.project.length !== 0 ? (
+              <>
+                {subData.project.map(item => (
+                  <ProjectCard key={item.projectID} item={item} />
+                ))}
+              </>
+            ) : (
+              <S.PSBox>
+                <S.PSNull>
+                  <S.PSText>구독한 프로젝트가 없습니다.</S.PSText>
+                </S.PSNull>
+              </S.PSBox>
+            )}
+          </S.SubGridTablet>
+          <Heading size={4}>구독한 스터디</Heading>
+          <S.SubGridTablet>
+            {subData.study && subData.study.length !== 0 ? (
+              <>
+                {subData.study.map(item => (
+                  <StudyCard item={item} key={item.studyID} />
+                ))}
+              </>
+            ) : (
+              <S.PSBox>
+                <S.PSNull>
+                  <S.PSText>구독한 스터디가 없습니다.</S.PSText>
+                </S.PSNull>
+              </S.PSBox>
+            )}
+          </S.SubGridTablet>
+          <Heading size={4}>구독한 팀원</Heading>
+          <S.SubGridTablet>
+            {subData && subData.team.length !== 0 ? (
+              <>
+                {subData.team.map(item => (
+                  <TeamCard key={item.myid} item={item} />
+                ))}
+              </>
+            ) : (
+              <S.PSBox>
+                <S.PSNull>
+                  <S.PSText>구독한 팀원이 없습니다.</S.PSText>
+                </S.PSNull>
+              </S.PSBox>
+            )}
+          </S.SubGridTablet>
+          <Heading size={4}>구독한 커뮤니티</Heading>
+          <S.SubGridTablet>
+            {subData && subData.community.length !== 0 ? (
+              <>
+                {subData.community.map(item => (
+                  <MyCommunityCard key={item.postID} item={item} />
+                ))}
+              </>
+            ) : (
+              <S.PSBox>
+                <S.PSNull>
+                  <S.PSText>구독한 커뮤니티가 없습니다.</S.PSText>
+                </S.PSNull>
+              </S.PSBox>
+            )}
+          </S.SubGridTablet>
+          <Heading size={4}>구독한 대외 활동</Heading>
+          <S.SubGridTablet>
+            {subData && subData.outact.length !== 0 ? (
+              <>
+                {subData.outact.map(item => (
+                  <OutdoorCardForm
+                    key={item.outActID}
+                    item={item}
+                    onActClick={() => {
+                      changePoster(
+                        item.outActName,
+                        item.outActImg,
+                        item.outActLink,
+                        item.outActView,
+                        item.outActLike,
+                        item.outActID,
+                      );
+                    }}
+                  />
+                ))}
+              </>
+            ) : (
+              <S.PSBox>
+                <S.PSNull>
+                  <S.PSText>구독한 대외활동이 없습니다.</S.PSText>
+                </S.PSNull>
+              </S.PSBox>
+            )}
+          </S.SubGridTablet>
+        </Tablet>
+        <Desktop>
+          <Heading size={4}>구독한 프로젝트</Heading>
+          {poster.check && (
+            <OutdoorModalForm
+              close={() => {
+                changePoster('', '', '');
+              }}
+              item={poster}
+            />
           )}
-        </S.SubGrid>
-        <Heading size={4}>구독한 커뮤니티</Heading>
-        <S.SubGrid>
-          {subData && subData.community.length !== 0 ? (
-            <>
-              {subData.community.map(item => (
-                <MyCommunityCard key={item.postID} item={item} />
-              ))}
-            </>
-          ) : (
-            <S.PSBox>
-              <S.PSNull>
-                <S.PSText>구독한 커뮤니티가 없습니다.</S.PSText>
-              </S.PSNull>
-            </S.PSBox>
-          )}
-        </S.SubGrid>
-        <Heading size={4}>구독한 대외 활동</Heading>
-        <S.SubGrid>
-          {subData && subData.outact.length !== 0 ? (
-            <>
-              {subData.outact.map(item => (
-                <OutdoorCardForm
-                  key={item.outActID}
-                  item={item}
-                  onActClick={() => {
-                    changePoster(
-                      item.outActName,
-                      item.outActImg,
-                      item.outActLink,
-                      item.outActView,
-                      item.outActLike,
-                      item.outActID,
-                    );
-                  }}
-                />
-              ))}
-            </>
-          ) : (
-            <S.PSBox>
-              <S.PSNull>
-                <S.PSText>구독한 대외활동이 없습니다.</S.PSText>
-              </S.PSNull>
-            </S.PSBox>
-          )}
-        </S.SubGrid>
+          <S.SubGrid>
+            {subData && subData.project.length !== 0 ? (
+              <>
+                {subData.project.map(item => (
+                  <ProjectCard key={item.projectID} item={item} />
+                ))}
+              </>
+            ) : (
+              <S.PSBox>
+                <S.PSNull>
+                  <S.PSText>구독한 프로젝트가 없습니다.</S.PSText>
+                </S.PSNull>
+              </S.PSBox>
+            )}
+          </S.SubGrid>
+          <Heading size={4}>구독한 스터디</Heading>
+          <S.SubGrid>
+            {subData.study && subData.study.length !== 0 ? (
+              <>
+                {subData.study.map(item => (
+                  <StudyCard item={item} key={item.studyID} />
+                ))}
+              </>
+            ) : (
+              <S.PSBox>
+                <S.PSNull>
+                  <S.PSText>구독한 스터디가 없습니다.</S.PSText>
+                </S.PSNull>
+              </S.PSBox>
+            )}
+          </S.SubGrid>
+          <Heading size={4}>구독한 팀원</Heading>
+          <S.SubGrid>
+            {subData && subData.team.length !== 0 ? (
+              <>
+                {subData.team.map(item => (
+                  <TeamCard key={item.myid} item={item} />
+                ))}
+              </>
+            ) : (
+              <S.PSBox>
+                <S.PSNull>
+                  <S.PSText>구독한 팀원이 없습니다.</S.PSText>
+                </S.PSNull>
+              </S.PSBox>
+            )}
+          </S.SubGrid>
+          <Heading size={4}>구독한 커뮤니티</Heading>
+          <S.SubGrid>
+            {subData && subData.community.length !== 0 ? (
+              <>
+                {subData.community.map(item => (
+                  <MyCommunityCard key={item.postID} item={item} />
+                ))}
+              </>
+            ) : (
+              <S.PSBox>
+                <S.PSNull>
+                  <S.PSText>구독한 커뮤니티가 없습니다.</S.PSText>
+                </S.PSNull>
+              </S.PSBox>
+            )}
+          </S.SubGrid>
+          <Heading size={4}>구독한 대외 활동</Heading>
+          <S.SubGrid>
+            {subData && subData.outact.length !== 0 ? (
+              <>
+                {subData.outact.map(item => (
+                  <OutdoorCardForm
+                    key={item.outActID}
+                    item={item}
+                    onActClick={() => {
+                      changePoster(
+                        item.outActName,
+                        item.outActImg,
+                        item.outActLink,
+                        item.outActView,
+                        item.outActLike,
+                        item.outActID,
+                      );
+                    }}
+                  />
+                ))}
+              </>
+            ) : (
+              <S.PSBox>
+                <S.PSNull>
+                  <S.PSText>구독한 대외활동이 없습니다.</S.PSText>
+                </S.PSNull>
+              </S.PSBox>
+            )}
+          </S.SubGrid>
+        </Desktop>
       </div>
     );
   }

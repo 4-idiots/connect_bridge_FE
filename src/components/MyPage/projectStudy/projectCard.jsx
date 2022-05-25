@@ -141,7 +141,12 @@ export const ProjectCard = ({ item, recu }) => {
             {decodedToken && decodedToken.id !== item.userID ? (
               <>
                 {recu ? (
-                  <B.Button color="danger" onClick={() => rejectService()}>
+                  <B.Button
+                    style={{ marginTop: -10 }}
+                    color="danger"
+                    size="small"
+                    onClick={() => rejectService()}
+                  >
                     취소 하기
                   </B.Button>
                 ) : (

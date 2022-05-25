@@ -247,19 +247,34 @@ export const ProjectGrid = styled.div`
   row-gap: 3rem;
   margin-bottom: 80px;
 `;
+export const ProjectGridMobile = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 3rem;
+  margin-bottom: 80px;
+  margin-left: 20px;
+`;
+export const ProjectGridTablet = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 3rem;
+  margin-bottom: 80px;
+  margin-left: 70px;
+`;
 
 export const ResCard = styled(Card)`
-  width: 90%;
-  height: 100%;
+  width: 300px;
+  height: 360px;
   max-width: 290px;
   max-height: 360px;
   border-radius: 5%;
   position: relative;
+  margin-left: 10px;
 `;
 
 export const ResImg = styled.img`
-  width: 100%;
-  height: 10vw;
+  width: 300px;
+  height: 360px;
   max-height: 160px;
   border-radius: 5%;
   object-fit: cover;

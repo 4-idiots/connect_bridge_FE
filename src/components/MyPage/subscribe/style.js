@@ -6,6 +6,19 @@ export const SubGrid = styled.div`
   row-gap: 3rem;
   margin-bottom: 80px;
 `;
+export const SubGridMobile = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 3rem;
+  margin-bottom: 80px;
+  margin-left: 20px;
+`;
+export const SubGridTablet = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 3rem;
+  margin-bottom: 80px;
+`;
 
 export const PSBox = styled.div`
   width: 84vw;
