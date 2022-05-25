@@ -9,9 +9,9 @@ import { SkelTeam } from '../components/skeleton/skelRouter';
 const getKey = (pageIndex, previousPageData) => {
   if (previousPageData && !previousPageData.length) return null;
 
-  if (pageIndex === 0) return `/api/team${0}`;
+  if (pageIndex === 0) return `https://4idiot.ddns.net:8080/api/team${0}`;
 
-  return `/api/team${pageIndex}`;
+  return `https://4idiot.ddns.net:8080/api/team${pageIndex}`;
 };
 
 export const TeamInfinite = () => {
