@@ -12,7 +12,7 @@ export const studyUploadService = (
   content,
   studyOnline,
 ) => {
-  return customAxios.post(`http://4idiot.ddns.net:8080/api/study`, {
+  return customAxios.post(`https://4idiot.ddns.net:8080/api/study`, {
     studyImg,
     studyName,
     studyKeyward,
@@ -27,7 +27,7 @@ export const studyUploadService = (
 };
 
 export const studyGetAllService = cursor => {
-  return `http://4idiot.ddns.net:8080/api/study/page/${cursor}`;
+  return `https://4idiot.ddns.net:8080/api/study/page/${cursor}`;
 };
 
 export const studyUpdateService = (
@@ -43,7 +43,7 @@ export const studyUpdateService = (
   content,
   studyOnline,
 ) => {
-  return customAxios.patch(`http://4idiot.ddns.net:8080/api/study`, {
+  return customAxios.patch(`https://4idiot.ddns.net:8080/api/study`, {
     studyImg,
     studyName,
     studyKeyward,
@@ -60,73 +60,75 @@ export const studyUpdateService = (
 
 export const studyLikeCheck = studyID => {
   return customAxios.get(
-    `http://4idiot.ddns.net:8080/api/study/islike/${studyID}`,
+    `https://4idiot.ddns.net:8080/api/study/islike/${studyID}`,
   );
 };
 
 export const studyLikeService = studyID => {
   return customAxios.get(
-    `http://4idiot.ddns.net:8080/api/study/like?studyID=${studyID}`,
+    `https://4idiot.ddns.net:8080/api/study/like?studyID=${studyID}`,
   );
 };
 
 export const studyGetSomeService = studyID => {
-  return customAxios.get(`http://4idiot.ddns.net:8080/api/study/${studyID}`);
+  return customAxios.get(`https://4idiot.ddns.net:8080/api/study/${studyID}`);
 };
 
 export const studyApplyService = (studyID, field) => {
-  return customAxios.patch(`http://4idiot.ddns.net:8080/api/study/apply`, {
+  return customAxios.patch(`https://4idiot.ddns.net:8080/api/study/apply`, {
     studyID,
     field,
   });
 };
 
 export const studyDeleteService = studyID => {
-  return customAxios.delete(`http://4idiot.ddns.net:8080/api/study/${studyID}`);
+  return customAxios.delete(
+    `https://4idiot.ddns.net:8080/api/study/${studyID}`,
+  );
 };
 
 export const studyGetNewService = () => {
-  return customAxios.get(`http://4idiot.ddns.net:8080/api/study/page/new`);
+  return customAxios.get(`https://4idiot.ddns.net:8080/api/study/page/new`);
 };
 
 export const studyStateService = studyID => {
   return customAxios.patch(
-    `http://4idiot.ddns.net:8080/api/${studyID}/manage/end`,
+    `https://4idiot.ddns.net:8080/api/${studyID}/manage/end`,
   );
 };
 
 export const studyOutService = (studyID, memberID) => {
   return customAxios.get(
-    `http://4idiot.ddns.net:8080/api/study/${studyID}/manage/fire/${memberID}`,
+    `https://4idiot.ddns.net:8080/api/study/${studyID}/manage/fire/${memberID}`,
   );
 };
 
 export const studyGetAdminService = studyID => {
   return customAxios.get(
-    `http://4idiot.ddns.net:8080/api/study/${studyID}/manage`,
+    `https://4idiot.ddns.net:8080/api/study/${studyID}/manage`,
   );
 };
 
 export const studyYesService = (studyID, submitID) => {
   return customAxios.get(
-    `http://4idiot.ddns.net:8080/api/study/${studyID}/apply/${submitID}`,
+    `https://4idiot.ddns.net:8080/api/study/${studyID}/apply/${submitID}`,
   );
 };
 
 export const studyNoService = (studyID, submitID) => {
   return customAxios.get(
-    `http://4idiot.ddns.net:8080/api/study/${studyID}/reject/${submitID}`,
+    `https://4idiot.ddns.net:8080/api/study/${studyID}/reject/${submitID}`,
   );
 };
 
 export const studyGetNoticeServie = studyID => {
   return customAxios.get(
-    `http://4idiot.ddns.net:8080/api/study/${studyID}/notice`,
+    `https://4idiot.ddns.net:8080/api/study/${studyID}/notice`,
   );
 };
 
 export const studyNoticeUploadService = (studyID, content) => {
-  return customAxios.post(`http://4idiot.ddns.net:8080/api/study/notice`, {
+  return customAxios.post(`https://4idiot.ddns.net:8080/api/study/notice`, {
     studyID,
     content,
   });
@@ -134,6 +136,6 @@ export const studyNoticeUploadService = (studyID, content) => {
 
 export const filterStudyService = (area, field) => {
   return customAxios.get(
-    `http://4idiot.ddns.net:8080/api/study/${area}/${field}`,
+    `https://4idiot.ddns.net:8080/api/study/${area}/${field}`,
   );
 };
