@@ -12,7 +12,7 @@ import {
 import { SkelProject, SkelSuggest, SkelNew } from '../skeleton/skelRouter';
 import { getData } from '../../RefactorFunc/dataControl';
 import { Mobile, Desktop, Tablet } from '../../mediaQuery';
-import { areaArray, mainArray } from './uploadComponent/uploadValue';
+import { areaArray, checekArray } from './uploadComponent/uploadValue';
 import { ProjectCard } from '../Style/Card/Use/ProjectCard';
 
 export const ProjectMainForm = () => {
@@ -123,7 +123,7 @@ export const ProjectMainForm = () => {
                     onChange={searchHandler}
                   >
                     <option>상관없음</option>
-                    {mainArray.map(item => (
+                    {checekArray.map(item => (
                       <option key={item}>{item}</option>
                     ))}
                   </Form.Select>
@@ -133,19 +133,10 @@ export const ProjectMainForm = () => {
             <S.gridBoxMobile style={{ marginLeft: 45 }}>
               {isFilter ? (
                 <>
-                  {data ? (
+                  {data &&
                     data.map(item => (
                       <ProjectCard key={item.projectID} item={item} />
-                    ))
-                  ) : (
-                    <S.PSBox>
-                      <S.PSNull>
-                        <S.PSText>
-                          해당 조건에 일치하는 정보가 없습니다.
-                        </S.PSText>
-                      </S.PSNull>
-                    </S.PSBox>
-                  )}
+                    ))}
                 </>
               ) : (
                 <ProjectInfinite />
@@ -210,7 +201,7 @@ export const ProjectMainForm = () => {
                     onChange={searchHandler}
                   >
                     <option>상관없음</option>
-                    {mainArray.map(item => (
+                    {checekArray.map(item => (
                       <option key={item}>{item}</option>
                     ))}
                   </Form.Select>
@@ -295,7 +286,7 @@ export const ProjectMainForm = () => {
                     onChange={searchHandler}
                   >
                     <option>상관없음</option>
-                    {mainArray.map(item => (
+                    {checekArray.map(item => (
                       <option key={item}>{item}</option>
                     ))}
                   </Form.Select>
