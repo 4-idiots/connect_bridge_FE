@@ -1,21 +1,25 @@
 import customAxios from './customAxios';
 
 export const myGetUser = () => {
-  return customAxios.get(`/api/my/info`);
+  return customAxios.get(`https://4idiot.ddns.net:8080/api/my/info`);
 };
 
 export const myCheckNickname = userNickname => {
   return customAxios.get(
-    `/api/users/check/userNickname?userNickname=${userNickname}`,
+    `https://4idiot.ddns.net:8080/api/users/check/userNickname?userNickname=${userNickname}`,
   );
 };
 
 export const mypageUpdate = formData => {
-  return customAxios.patch(`/api/my/info`, formData, {
-    headers: {
-      'content-type': 'multipart/form-data',
+  return customAxios.patch(
+    `https://4idiot.ddns.net:8080/api/my/info`,
+    formData,
+    {
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
     },
-  });
+  );
 };
 
 export const mypageUpdatePost = (
@@ -30,7 +34,7 @@ export const mypageUpdatePost = (
   userInterestSub,
   userPortfolio,
 ) => {
-  return customAxios.post(`/api/my/info`, {
+  return customAxios.post(`https://4idiot.ddns.net:8080/api/my/info`, {
     id,
     userPW,
     userNickname,
@@ -45,21 +49,23 @@ export const mypageUpdatePost = (
 };
 
 export const myCommunityGetService = () => {
-  return customAxios.get(`/api/mycommunity`);
+  return customAxios.get(`https://4idiot.ddns.net:8080/api/mycommunity`);
 };
 
 export const myCommunityDelete = communityID => {
-  return customAxios.delete(`/api/community/${communityID}`);
+  return customAxios.delete(
+    `https://4idiot.ddns.net:8080/api/community/${communityID}`,
+  );
 };
 
 export const mySubscribeGetService = () => {
-  return customAxios.get(`/api/myfollow`);
+  return customAxios.get(`https://4idiot.ddns.net:8080/api/myfollow`);
 };
 
 export const myProjectGetService = () => {
-  return customAxios.get(`/api/myproject`);
+  return customAxios.get(`https://4idiot.ddns.net:8080/api/myproject`);
 };
 
 export const myStudyGetService = () => {
-  return customAxios.get(`/api/mystudy`);
+  return customAxios.get(`https://4idiot.ddns.net:8080/api/mystudy`);
 };
