@@ -41,17 +41,39 @@ export const TeamForm = () => {
     <Container style={{ marginTop: 80 }}>
       <Mobile>
         <Heading style={{ marginLeft: 15 }}>팀원 구하기</Heading>
-        <S.Top1Mobile>
-          <Form.Field>
+        <div style={{ display: 'flex' }}>
+          <Form.Field style={{ marginLeft: 20 }}>
+            <Form.Label>지역</Form.Label>
             <Form.Control>
-              <Form.Select>
-                <option>----------</option>
+              <Form.Select
+                name="area"
+                value={search.area}
+                onChange={searchHandler}
+              >
+                {areaArray.map(item => (
+                  <option key={item}>{item}</option>
+                ))}
               </Form.Select>
             </Form.Control>
           </Form.Field>
-        </S.Top1Mobile>
-<<<<<<< HEAD
-        <S.PeopleMobile style={{ marginLeft: 45 }}>
+          <Form.Field>
+            <Form.Label>분야</Form.Label>
+            <Form.Control>
+              <Form.Select
+                name="field"
+                value={search.field}
+                onChange={searchHandler}
+              >
+                <option>상관없음</option>
+                {mainArray.map(item => (
+                  <option key={item}>{item}</option>
+                ))}
+              </Form.Select>
+            </Form.Control>
+          </Form.Field>
+        </div>
+
+        <S.PeopleMobile style={{ marginLeft: 45, marginTop: 45 }}>
           {isFilter ? (
             <>
               {data.length !== 0 ? (
@@ -67,20 +89,41 @@ export const TeamForm = () => {
           ) : (
             <TeamInfinite />
           )}
-=======
-
-        <S.PeopleMobile style={{ marginLeft: 45, marginTop: 45 }}>
-          <TeamInfinite />
->>>>>>> Mobile_two
         </S.PeopleMobile>
       </Mobile>
       <Tablet>
         <Heading style={{ marginLeft: 15 }}>팀원 구하기</Heading>
-        <S.Top1Mobile>
-          <S.Top11>
-            <S.Top111>지역</S.Top111>
-          </S.Top11>
-        </S.Top1Mobile>
+        <div style={{ display: 'flex' }}>
+          <Form.Field style={{ marginLeft: 40 }}>
+            <Form.Label>지역</Form.Label>
+            <Form.Control>
+              <Form.Select
+                name="area"
+                value={search.area}
+                onChange={searchHandler}
+              >
+                {areaArray.map(item => (
+                  <option key={item}>{item}</option>
+                ))}
+              </Form.Select>
+            </Form.Control>
+          </Form.Field>
+          <Form.Field>
+            <Form.Label>분야</Form.Label>
+            <Form.Control>
+              <Form.Select
+                name="field"
+                value={search.field}
+                onChange={searchHandler}
+              >
+                <option>상관없음</option>
+                {mainArray.map(item => (
+                  <option key={item}>{item}</option>
+                ))}
+              </Form.Select>
+            </Form.Control>
+          </Form.Field>
+        </div>
         <S.PeopleTablet style={{ marginLeft: 65 }}>
           {isFilter ? (
             <>

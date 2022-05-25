@@ -1,12 +1,12 @@
 import { useMediaQuery } from 'react-responsive';
 
 export const Desktop = ({ children }) => {
-  const isDesktop = useMediaQuery({ minWidth: 992 });
+  const isDesktop = useMediaQuery({ minWidth: 1023 });
   return isDesktop ? children : null;
 };
 
 export const Tablet = ({ children }) => {
-  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 991 });
+  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1022 });
   return isTablet ? children : null;
 };
 
