@@ -8,7 +8,7 @@ export const SubGrid = styled.div`
 `;
 
 export const PSBox = styled.div`
-  width: 100%;
+  width: 84vw;
 `;
 
 export const PSNull = styled.div`

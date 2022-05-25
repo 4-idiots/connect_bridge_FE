@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import React, { useState, useEffect } from 'react';
 import { Container, Heading, Form } from 'react-bulma-components';
 import { TeamInfinite } from '../../swr/teamInfinite';
@@ -23,7 +24,7 @@ export const TeamForm = () => {
       const result = await filterTeamService(search.area, search.field);
       setData(result.data);
     } catch (error) {
-      // pass
+      setData(null);
     }
   };
 
@@ -50,7 +51,21 @@ export const TeamForm = () => {
           </Form.Field>
         </S.Top1Mobile>
         <S.PeopleMobile style={{ marginLeft: 45 }}>
-          <TeamInfinite />
+          {isFilter ? (
+            <>
+              {data.length !== 0 ? (
+                data.map(item => <TeamCard key={item.myid} item={item} />)
+              ) : (
+                <S.PSBox>
+                  <S.PSNull>
+                    <S.PSText>해당 조건에 일치하는 정보가 없습니다.</S.PSText>
+                  </S.PSNull>
+                </S.PSBox>
+              )}
+            </>
+          ) : (
+            <TeamInfinite />
+          )}
         </S.PeopleMobile>
       </Mobile>
       <Tablet>
@@ -61,7 +76,21 @@ export const TeamForm = () => {
           </S.Top11>
         </S.Top1Mobile>
         <S.PeopleTablet style={{ marginLeft: 65 }}>
-          <TeamInfinite />
+          {isFilter ? (
+            <>
+              {data.length !== 0 ? (
+                data.map(item => <TeamCard key={item.myid} item={item} />)
+              ) : (
+                <S.PSBox>
+                  <S.PSNull>
+                    <S.PSText>해당 조건에 일치하는 정보가 없습니다.</S.PSText>
+                  </S.PSNull>
+                </S.PSBox>
+              )}
+            </>
+          ) : (
+            <TeamInfinite />
+          )}
         </S.PeopleTablet>
       </Tablet>
       <Desktop>
@@ -100,9 +129,15 @@ export const TeamForm = () => {
         <S.People>
           {isFilter ? (
             <>
-              {data.map(item => (
-                <TeamCard key={item.myid} item={item} />
-              ))}
+              {data.length !== 0 ? (
+                data.map(item => <TeamCard key={item.myid} item={item} />)
+              ) : (
+                <S.PSBox>
+                  <S.PSNull>
+                    <S.PSText>해당 조건에 일치하는 정보가 없습니다.</S.PSText>
+                  </S.PSNull>
+                </S.PSBox>
+              )}
             </>
           ) : (
             <TeamInfinite />

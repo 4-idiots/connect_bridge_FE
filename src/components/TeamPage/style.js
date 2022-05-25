@@ -354,3 +354,21 @@ export const Portfoliohttp = styled.a`
   background-color: transparent;
   cursor: pointer;
 `;
+
+export const PSBox = styled.div`
+  width: 84vw;
+`;
+
+export const PSNull = styled.div`
+  width: 100%;
+  background-color: #f7f7f7;
+  height: 74px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const PSText = styled.span`
+  opacity: 0.6;
+`;

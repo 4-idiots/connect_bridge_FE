@@ -1,17 +1,50 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import React, { useState, useEffect } from 'react';
-import { Container, Heading, Block } from 'react-bulma-components';
+import { Container, Heading, Block, Form } from 'react-bulma-components';
 import { StudyNew } from '../Style/Card/Use/StudyNew';
+import { StudyCard } from '../Style/Card/Use/StudyCard';
 import { StudySuggest } from '../Style/Card/Use/StudySuggest';
 import * as S from './mainComponent/style';
 import { StudyInfinite } from '../../swr/studyInfinite';
-import { studyGetNewService } from '../../services/studyService';
+import {
+  studyGetNewService,
+  filterStudyService,
+} from '../../services/studyService';
 import { SkelProject, SkelSuggest, SkelNew } from '../skeleton/skelRouter';
 import { getData } from '../../RefactorFunc/dataControl';
 import { Mobile, Desktop, Tablet } from '../../mediaQuery';
+import {
+  areaArray,
+  mainArray,
+} from '../ProjectPage/uploadComponent/uploadValue';
 
 export const StudyMainForm = () => {
   const [loading, setLoading] = useState(false);
   const [newStudy, setNewStudy] = useState(null);
+  const [search, setSearch] = useState({
+    area: '상관없음',
+    field: '상관없음',
+  });
+  const [isFilter, setIsFilter] = useState(false);
+  const [data, setData] = useState(null);
+
+  const getFilterData = async () => {
+    try {
+      const result = await filterStudyService(search.area, search.field);
+      setData(result.data);
+    } catch (error) {
+      setData(null);
+    }
+  };
+
+  useEffect(() => {
+    getFilterData();
+  }, [search]);
+
+  const searchHandler = e => {
+    setIsFilter(true);
+    setSearch({ ...search, [e.currentTarget.name]: e.currentTarget.value });
+  };
 
   useEffect(() => {
     getData(setLoading, setNewStudy, studyGetNewService);
@@ -69,8 +102,57 @@ export const StudyMainForm = () => {
             <Heading style={{ marginLeft: 35 }} size={4}>
               전체 스터디
             </Heading>
+            <div style={{ display: 'flex' }}>
+              <Form.Field>
+                <Form.Label>지역</Form.Label>
+                <Form.Control>
+                  <Form.Select
+                    name="area"
+                    value={search.area}
+                    onChange={searchHandler}
+                  >
+                    {areaArray.map(item => (
+                      <option key={item}>{item}</option>
+                    ))}
+                  </Form.Select>
+                </Form.Control>
+              </Form.Field>
+              <Form.Field>
+                <Form.Label>분야</Form.Label>
+                <Form.Control>
+                  <Form.Select
+                    name="field"
+                    value={search.field}
+                    onChange={searchHandler}
+                  >
+                    <option>상관없음</option>
+                    {mainArray.map(item => (
+                      <option key={item}>{item}</option>
+                    ))}
+                  </Form.Select>
+                </Form.Control>
+              </Form.Field>
+            </div>
             <S.gridBoxMobile style={{ marginLeft: 45 }}>
-              <StudyInfinite />
+              {isFilter ? (
+                <>
+                  {data ? (
+                    data.map(item => (
+                      <StudyCard key={item.studyID} item={item} />
+                    ))
+                  ) : (
+                    <S.PSBox>
+                      <S.PSNull>
+                        <S.PSText>
+                          해당 조건에 일치하는 정보가 없습니다.
+                        </S.PSText>
+                      </S.PSNull>
+                    </S.PSBox>
+                  )}
+                </>
+              ) : (
+                <StudyInfinite />
+              )}
             </S.gridBoxMobile>
           </Block>
         </Mobile>
@@ -107,8 +189,57 @@ export const StudyMainForm = () => {
             <Heading size={4} style={{ marginLeft: 45 }}>
               전체 스터디
             </Heading>
+            <div style={{ display: 'flex' }}>
+              <Form.Field>
+                <Form.Label>지역</Form.Label>
+                <Form.Control>
+                  <Form.Select
+                    name="area"
+                    value={search.area}
+                    onChange={searchHandler}
+                  >
+                    {areaArray.map(item => (
+                      <option key={item}>{item}</option>
+                    ))}
+                  </Form.Select>
+                </Form.Control>
+              </Form.Field>
+              <Form.Field>
+                <Form.Label>분야</Form.Label>
+                <Form.Control>
+                  <Form.Select
+                    name="field"
+                    value={search.field}
+                    onChange={searchHandler}
+                  >
+                    <option>상관없음</option>
+                    {mainArray.map(item => (
+                      <option key={item}>{item}</option>
+                    ))}
+                  </Form.Select>
+                </Form.Control>
+              </Form.Field>
+            </div>
             <S.gridBoxTablet style={{ marginLeft: 60 }}>
-              <StudyInfinite />
+              {isFilter ? (
+                <>
+                  {data ? (
+                    data.map(item => (
+                      <StudyCard key={item.studyID} item={item} />
+                    ))
+                  ) : (
+                    <S.PSBox>
+                      <S.PSNull>
+                        <S.PSText>
+                          해당 조건에 일치하는 정보가 없습니다.
+                        </S.PSText>
+                      </S.PSNull>
+                    </S.PSBox>
+                  )}
+                </>
+              ) : (
+                <StudyInfinite />
+              )}
             </S.gridBoxTablet>
           </Block>
         </Tablet>
@@ -143,8 +274,57 @@ export const StudyMainForm = () => {
           </Block>
           <Block>
             <Heading size={4}>전체 스터디</Heading>
+            <div style={{ display: 'flex' }}>
+              <Form.Field>
+                <Form.Label>지역</Form.Label>
+                <Form.Control>
+                  <Form.Select
+                    name="area"
+                    value={search.area}
+                    onChange={searchHandler}
+                  >
+                    {areaArray.map(item => (
+                      <option key={item}>{item}</option>
+                    ))}
+                  </Form.Select>
+                </Form.Control>
+              </Form.Field>
+              <Form.Field>
+                <Form.Label>분야</Form.Label>
+                <Form.Control>
+                  <Form.Select
+                    name="field"
+                    value={search.field}
+                    onChange={searchHandler}
+                  >
+                    <option>상관없음</option>
+                    {mainArray.map(item => (
+                      <option key={item}>{item}</option>
+                    ))}
+                  </Form.Select>
+                </Form.Control>
+              </Form.Field>
+            </div>
             <S.gridBox>
-              <StudyInfinite />
+              {isFilter ? (
+                <>
+                  {data ? (
+                    data.map(item => (
+                      <StudyCard key={item.studyID} item={item} />
+                    ))
+                  ) : (
+                    <S.PSBox>
+                      <S.PSNull>
+                        <S.PSText>
+                          해당 조건에 일치하는 정보가 없습니다.
+                        </S.PSText>
+                      </S.PSNull>
+                    </S.PSBox>
+                  )}
+                </>
+              ) : (
+                <StudyInfinite />
+              )}
             </S.gridBox>
           </Block>
         </Desktop>

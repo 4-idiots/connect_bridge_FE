@@ -112,3 +112,7 @@ export const studyGetNoticeServie = studyID => {
 export const studyNoticeUploadService = (studyID, content) => {
   return customAxios.post(`/api/study/notice`, { studyID, content });
 };
+
+export const filterStudyService = (area, field) => {
+  return customAxios.get(`/api/study/${area}/${field}`);
+};
