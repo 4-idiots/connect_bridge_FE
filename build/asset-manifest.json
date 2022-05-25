@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/static/css/main.7403c1c6.css",
+    "main.js": "/static/js/main.4ac2a8db.js",
+    "static/media/defPr.png": "/static/media/defPr.7aca99b8d105bdf077e6.png",
+    "static/media/program.png": "/static/media/program.19b68a68dcc11febfde2.png",
+    "static/media/saas.png": "/static/media/saas.f5f81af12a5b15687017.png",
+    "static/media/main.svg": "/static/media/main.010709b2a09715d8cd834975e02da8e1.svg",
+    "static/media/web.png": "/static/media/web.ecaa9dbbd61791a46116.png",
+    "static/media/question.png": "/static/media/question.28d7f8efae077fe2c809.png",
+    "static/media/android.png": "/static/media/android.6a7967112fa468a64514.png",
+    "static/media/apple.png": "/static/media/apple.927ff216dfe57705963a.png",
+    "static/media/unlink.svg": "/static/media/unlink.b8761030d4a17499149d2d61adc064b3.svg",
+    "static/media/heart.svg": "/static/media/heart.5fde1bf5049d4543c76e4d07d5fe6db9.svg",
+    "index.html": "/index.html",
+    "main.7403c1c6.css.map": "/static/css/main.7403c1c6.css.map",
+    "main.4ac2a8db.js.map": "/static/js/main.4ac2a8db.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7403c1c6.css",
+    "static/js/main.4ac2a8db.js"
+  ]
+}
