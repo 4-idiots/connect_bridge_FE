@@ -49,7 +49,7 @@ export const TeamForm = () => {
             </Form.Control>
           </Form.Field>
         </S.Top1Mobile>
-        <S.PeopleMobile style={{ marginLeft: 45 }}>
+        <S.PeopleMobile style={{ marginLeft: 45, marginTop: 45 }}>
           <TeamInfinite />
         </S.PeopleMobile>
       </Mobile>

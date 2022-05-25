@@ -20,42 +20,6 @@ export const StudyMainForm = () => {
   if (newStudy && !loading) {
     return (
       <Container style={{ marginTop: 80 }}>
-<<<<<<< HEAD
-        <Heading>스터디</Heading>
-        <Block
-          style={{
-            backgroundColor: '#fbfbfb',
-            display: 'flex',
-            paddingBottom: '30px',
-            justifyContent: 'space-around',
-          }}
-        >
-          <S.newWrap>
-            <S.textWrap>
-              <Heading size={4} style={{ fontWeight: 'bold' }}>
-                신규 스터디
-              </Heading>
-            </S.textWrap>
-            {newStudy[0].content && <StudyNew item={newStudy[0]} />}
-          </S.newWrap>
-          <S.ResSuggestWrap>
-            <S.textWrap>
-              <Heading size={4} style={{ fontWeight: 'bold' }}>
-                신규 스터디
-              </Heading>
-            </S.textWrap>
-            <StudySuggest item={newStudy[1]} />
-            <StudySuggest item={newStudy[2]} />
-            <StudySuggest item={newStudy[3]} />
-          </S.ResSuggestWrap>
-        </Block>
-        <Block>
-          <Heading size={4}>전체 스터디</Heading>
-          <S.gridBox>
-            <StudyInfinite />
-          </S.gridBox>
-        </Block>
-=======
         <Mobile>
           <Heading style={{ marginLeft: 25 }}>스터디</Heading>
           <Block
@@ -85,7 +49,7 @@ export const StudyMainForm = () => {
                   인기 스터디
                 </Heading>
               </S.textWrap>
-              {newStudy[0].content && <NewCard item={newStudy[0]} />}
+              {newStudy[0].content && <StudyNew item={newStudy[0]} />}
             </S.newWrap>
             <S.ResSuggestWrap>
               <S.textWrap>
@@ -96,9 +60,9 @@ export const StudyMainForm = () => {
                   신규 스터디
                 </Heading>
               </S.textWrap>
-              <SuggestCard item={newStudy[1]} />
-              <SuggestCard item={newStudy[2]} />
-              <SuggestCard item={newStudy[3]} />
+              <StudySuggest item={newStudy[1]} />
+              <StudySuggest item={newStudy[2]} />
+              <StudySuggest item={newStudy[3]} />
             </S.ResSuggestWrap>
           </Block>
           <Block>
@@ -126,7 +90,7 @@ export const StudyMainForm = () => {
                   인기 스터디
                 </Heading>
               </S.textWrap>
-              {newStudy[0].content && <NewCard item={newStudy[0]} />}
+              {newStudy[0].content && <StudyNew item={newStudy[0]} />}
             </S.newWrap>
             <S.ResSuggestWrap style={{ marginLeft: 45, marginRight: 45 }}>
               <S.textWrap>
@@ -134,9 +98,9 @@ export const StudyMainForm = () => {
                   신규 스터디
                 </Heading>
               </S.textWrap>
-              <SuggestCard item={newStudy[1]} />
-              <SuggestCard item={newStudy[2]} />
-              <SuggestCard item={newStudy[3]} />
+              <StudySuggest item={newStudy[1]} />
+              <StudySuggest item={newStudy[2]} />
+              <StudySuggest item={newStudy[3]} />
             </S.ResSuggestWrap>
           </Block>
           <Block>
@@ -164,7 +128,7 @@ export const StudyMainForm = () => {
                   인기 스터디
                 </Heading>
               </S.textWrap>
-              {newStudy[0].content && <NewCard item={newStudy[0]} />}
+              {newStudy[0].content && <StudyNew item={newStudy[0]} />}
             </S.newWrap>
             <S.ResSuggestWrap>
               <S.textWrap>
@@ -172,9 +136,9 @@ export const StudyMainForm = () => {
                   신규 스터디
                 </Heading>
               </S.textWrap>
-              <SuggestCard item={newStudy[1]} />
-              <SuggestCard item={newStudy[2]} />
-              <SuggestCard item={newStudy[3]} />
+              <StudySuggest item={newStudy[1]} />
+              <StudySuggest item={newStudy[2]} />
+              <StudySuggest item={newStudy[3]} />
             </S.ResSuggestWrap>
           </Block>
           <Block>
@@ -184,7 +148,6 @@ export const StudyMainForm = () => {
             </S.gridBox>
           </Block>
         </Desktop>
->>>>>>> team_Mobile
       </Container>
     );
   }
