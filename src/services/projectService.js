@@ -77,5 +77,7 @@ export const projectOutService = (projectID, memberID) => {
 };
 
 export const filterProjectService = (area, field) => {
-  return customAxios.get(`/api/project/${area}/${field}`);
+  return customAxios.get(
+    `/api/project/?projectField=${field}&projectArea=${area}`,
+  );
 };
