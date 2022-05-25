@@ -20,42 +20,6 @@ export const ProjectMainForm = () => {
   if (newPr && !loading) {
     return (
       <Container style={{ marginTop: 80 }}>
-<<<<<<< HEAD
-        <Heading>프로젝트</Heading>
-        <Block
-          style={{
-            backgroundColor: '#fbfbfb',
-            display: 'flex',
-            paddingBottom: '30px',
-            justifyContent: 'space-around',
-          }}
-        >
-          <S.newWrap>
-            <S.textWrap>
-              <Heading size={4} style={{ fontWeight: 'bold' }}>
-                신규 프로젝트
-              </Heading>
-            </S.textWrap>
-            {newPr[0].content && <ProjectNew item={newPr[0]} />}
-          </S.newWrap>
-          <S.ResSuggestWrap>
-            <S.textWrap>
-              <Heading size={4} style={{ fontWeight: 'bold' }}>
-                신규 프로젝트
-              </Heading>
-            </S.textWrap>
-            <ProjectSuggest item={newPr[1]} />
-            <ProjectSuggest item={newPr[2]} />
-            <ProjectSuggest item={newPr[3]} />
-          </S.ResSuggestWrap>
-        </Block>
-        <Block>
-          <Heading size={4}>전체 프로젝트</Heading>
-          <S.gridBox>
-            <ProjectInfinite />
-          </S.gridBox>
-        </Block>
-=======
         <Mobile>
           <Heading style={{ marginLeft: 25 }}>프로젝트</Heading>
           <Block
@@ -85,7 +49,7 @@ export const ProjectMainForm = () => {
                   인기 프로젝트
                 </Heading>
               </S.textWrap>
-              {newPr[0].content && <NewCard item={newPr[0]} />}
+              {newPr[0].content && <ProjectNew item={newPr[0]} />}
             </S.newWrapMobile>
             <S.ResSuggestWrapMobile>
               <S.textWrap>
@@ -96,9 +60,9 @@ export const ProjectMainForm = () => {
                   신규 프로젝트
                 </Heading>
               </S.textWrap>
-              <SuggestCard item={newPr[1]} />
-              <SuggestCard item={newPr[2]} />
-              <SuggestCard item={newPr[3]} />
+              <ProjectSuggest item={newPr[1]} />
+              <ProjectSuggest item={newPr[2]} />
+              <ProjectSuggest item={newPr[3]} />
             </S.ResSuggestWrapMobile>
           </Block>
           <Block>
@@ -126,7 +90,7 @@ export const ProjectMainForm = () => {
                   인기 프로젝트
                 </Heading>
               </S.textWrap>
-              {newPr[0].content && <NewCard item={newPr[0]} />}
+              {newPr[0].content && <ProjectNew item={newPr[0]} />}
             </S.newWrap>
             <S.ResSuggestWrap style={{ marginLeft: 45, marginRight: 45 }}>
               <S.textWrap>
@@ -134,9 +98,9 @@ export const ProjectMainForm = () => {
                   신규 프로젝트
                 </Heading>
               </S.textWrap>
-              <SuggestCard item={newPr[1]} />
-              <SuggestCard item={newPr[2]} />
-              <SuggestCard item={newPr[3]} />
+              <ProjectSuggest item={newPr[1]} />
+              <ProjectSuggest item={newPr[2]} />
+              <ProjectSuggest item={newPr[3]} />
             </S.ResSuggestWrap>
           </Block>
           <Block>
@@ -164,7 +128,7 @@ export const ProjectMainForm = () => {
                   인기 프로젝트
                 </Heading>
               </S.textWrap>
-              {newPr[0].content && <NewCard item={newPr[0]} />}
+              {newPr[0].content && <ProjectNew item={newPr[0]} />}
             </S.newWrap>
             <S.ResSuggestWrap>
               <S.textWrap>
@@ -172,9 +136,9 @@ export const ProjectMainForm = () => {
                   신규 프로젝트
                 </Heading>
               </S.textWrap>
-              <SuggestCard item={newPr[1]} />
-              <SuggestCard item={newPr[2]} />
-              <SuggestCard item={newPr[3]} />
+              <ProjectSuggest item={newPr[1]} />
+              <ProjectSuggest item={newPr[2]} />
+              <ProjectSuggest item={newPr[3]} />
             </S.ResSuggestWrap>
           </Block>
           <Block>
@@ -184,7 +148,6 @@ export const ProjectMainForm = () => {
             </S.gridBox>
           </Block>
         </Desktop>
->>>>>>> team_Mobile
       </Container>
     );
   }

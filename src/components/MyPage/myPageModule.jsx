@@ -93,7 +93,7 @@ export const MyPageForm = () => {
       updateFormData(formData, '/my/info', Send.mypageUpdate, navigate);
     } else if (check.imgChange === false && user.userPW) {
       updateNoImgAxios();
-    } else if (!user.userPW) {
+    } else if (!pwInfo.userPW) {
       alert('수정시 비밀번호를 재입력해주세요');
     } else {
       alert('입력을 확인해주세요');
