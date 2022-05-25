@@ -50,6 +50,7 @@ export const TeamForm = () => {
             </Form.Control>
           </Form.Field>
         </S.Top1Mobile>
+<<<<<<< HEAD
         <S.PeopleMobile style={{ marginLeft: 45 }}>
           {isFilter ? (
             <>
@@ -66,6 +67,10 @@ export const TeamForm = () => {
           ) : (
             <TeamInfinite />
           )}
+=======
+        <S.PeopleMobile style={{ marginLeft: 45, marginTop: 45 }}>
+          <TeamInfinite />
+>>>>>>> Mobile_one
         </S.PeopleMobile>
       </Mobile>
       <Tablet>
