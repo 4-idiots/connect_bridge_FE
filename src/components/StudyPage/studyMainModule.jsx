@@ -99,10 +99,10 @@ export const StudyMainForm = () => {
             </S.ResSuggestWrap>
           </Block>
           <Block>
-            <Heading style={{ marginLeft: 35 }} size={4}>
+            <Heading style={{ marginLeft: 35, marginTop: 15 }} size={4}>
               전체 스터디
             </Heading>
-            <div style={{ display: 'flex' }}>
+            <div style={{ display: 'flex', marginLeft: 35, marginBottom: 15 }}>
               <Form.Field>
                 <Form.Label>지역</Form.Label>
                 <Form.Control>
@@ -189,7 +189,7 @@ export const StudyMainForm = () => {
             <Heading size={4} style={{ marginLeft: 45 }}>
               전체 스터디
             </Heading>
-            <div style={{ display: 'flex' }}>
+            <div style={{ display: 'flex', marginLeft: 55, marginBottom: 15 }}>
               <Form.Field>
                 <Form.Label>지역</Form.Label>
                 <Form.Control>

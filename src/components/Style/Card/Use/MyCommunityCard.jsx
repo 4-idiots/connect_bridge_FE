@@ -37,7 +37,10 @@ export const MyCommunityCard = ({ item }) => {
   }, []);
 
   return (
-    <div className="blog-card spring-fever" style={{ position: 'relative' }}>
+    <div
+      className="blog-card spring-fever"
+      style={{ position: 'relative', width: '300px', height: '360px' }}
+    >
       <div className="title-content">
         <div style={{ position: 'absolute', top: '0.5rem', right: '1rem' }}>
           {decodedToken ? (

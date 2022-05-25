@@ -96,10 +96,10 @@ export const ProjectMainForm = () => {
             </S.ResSuggestWrapMobile>
           </Block>
           <Block>
-            <Heading size={4} style={{ marginLeft: 35 }}>
+            <Heading size={4} style={{ marginLeft: 30, marginTop: 15 }}>
               전체 프로젝트
             </Heading>
-            <div style={{ display: 'flex' }}>
+            <div style={{ display: 'flex', marginLeft: 35, marginBottom: 15 }}>
               <Form.Field>
                 <Form.Label>지역</Form.Label>
                 <Form.Control>
@@ -177,7 +177,7 @@ export const ProjectMainForm = () => {
             <Heading size={4} style={{ marginLeft: 45 }}>
               전체 프로젝트
             </Heading>
-            <div style={{ display: 'flex' }}>
+            <div style={{ display: 'flex', marginLeft: 55, marginBottom: 15 }}>
               <Form.Field>
                 <Form.Label>지역</Form.Label>
                 <Form.Control>
