@@ -25,7 +25,6 @@ export const TeamCard = ({ item }) => {
   };
 
   useEffect(() => {
-    console.log(item);
     LK.checkLike(item.myid, setUsLike, teamLikeCheck);
   }, []);
 

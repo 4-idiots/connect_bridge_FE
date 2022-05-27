@@ -5,13 +5,14 @@ import fetcher from './fetcher';
 import useOnScreen from './useOnScreen';
 import { TeamCard } from '../components/Style/Card/Use/TeamCard';
 import { SkelTeam } from '../components/skeleton/skelRouter';
+import { getAllTeamService } from '../services/teamService';
 
 const getKey = (pageIndex, previousPageData) => {
   if (previousPageData && !previousPageData.length) return null;
 
-  if (pageIndex === 0) return `https://4idiot.ddns.net:8080/api/team${0}`;
+  if (pageIndex === 0) return getAllTeamService(0);
 
-  return `https://4idiot.ddns.net:8080/api/team${pageIndex}`;
+  return getAllTeamService(pageIndex);
 };
 
 export const TeamInfinite = () => {
