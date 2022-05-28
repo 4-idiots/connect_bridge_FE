@@ -29,6 +29,17 @@ export const OdMainGrid = styled.div`
   row-gap: 3rem;
 `;
 
+export const OdMainGridMobile = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 3rem;
+`;
+export const OdMainGridTablet = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 3rem;
+`;
+
 export const OdMainBox = styled(Box)`
   border-radius: 50%;
   background-color: 'brown';
@@ -45,8 +56,8 @@ export const OdUploadBox = styled(Box)`
 `;
 
 export const OdCard = styled(Card)`
-  width: 90%;
-  max-width: 280%;
-  height: 100%;
+  width: 300px;
+  max-width: 300;
+  height: 500px;
   max-height: 500;
 `;
