@@ -26,18 +26,23 @@ export const InfoForm = () => {
     }
   };
 
-  const getAxios = async () => {
-    try {
-      const result = await getSomeTeamService(teamID);
-      setUser(result.data);
-      setfollow(result.data.follow);
-    } catch (error) {
-      // pass
-    }
-  };
-
   useEffect(() => {
+    let mounted = true;
+    const getAxios = async () => {
+      try {
+        const result = await getSomeTeamService(teamID);
+        if (mounted) {
+          setUser(result.data);
+          setfollow(result.data.follow);
+        }
+      } catch (error) {
+        // pass
+      }
+    };
     getAxios();
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   if (user) {

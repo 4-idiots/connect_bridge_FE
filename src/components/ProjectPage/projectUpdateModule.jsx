@@ -29,12 +29,17 @@ export const ProjectUpdateForm = () => {
   );
 
   useEffect(() => {
+    let mounted = true;
     getDetailData(
       setLoading,
       setPostInfo,
       Send.projectGetSomeService,
       projectID,
+      mounted,
     );
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   const onSubmitEvent = () => {

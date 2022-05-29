@@ -4,7 +4,6 @@ import * as S from './projectStudy/style';
 import { myStudyGetService } from '../../services/mypageService';
 import { SkelSubscribe } from '../skeleton/mypage/subscribe';
 import { StudyCard } from './projectStudy/studyCard';
-import { getData } from '../../RefactorFunc/dataControl';
 import { Mobile, Desktop, Tablet } from '../../mediaQuery';
 
 export const MyStudyForm = () => {
@@ -12,7 +11,23 @@ export const MyStudyForm = () => {
   const [study, setStudy] = useState(null);
 
   useEffect(() => {
+    let mounted = true;
+    const getData = async (setLoad, setData, getFunc) => {
+      setLoad(true);
+      try {
+        const result = await getFunc();
+        if (mounted) {
+          setData(result.data);
+          setLoad(false);
+        }
+      } catch (error) {
+        setLoad(false);
+      }
+    };
     getData(setLoading, setStudy, myStudyGetService);
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   if (study && !loading) {

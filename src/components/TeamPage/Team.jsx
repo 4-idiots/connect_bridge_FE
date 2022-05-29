@@ -19,17 +19,22 @@ export const TeamForm = () => {
   const [isFilter, setIsFilter] = useState(false);
   const [data, setData] = useState(null);
 
-  const getFilterData = async () => {
-    try {
-      const result = await filterTeamService(search.area, search.field);
-      setData(result.data);
-    } catch (error) {
-      setData(null);
-    }
-  };
-
   useEffect(() => {
+    let mounted = true;
+    const getFilterData = async () => {
+      try {
+        const result = await filterTeamService(search.area, search.field);
+        if (mounted) {
+          setData(result.data);
+        }
+      } catch (error) {
+        setData(null);
+      }
+    };
     getFilterData();
+    return () => {
+      mounted = false;
+    };
   }, [search]);
 
   const searchHandler = e => {

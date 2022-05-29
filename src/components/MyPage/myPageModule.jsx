@@ -8,7 +8,7 @@ import * as S from './userInfo/style';
 import * as Send from '../../services/mypageService';
 import { useAuth } from '../../contexts/hooks/useAuth';
 import { SkelInfo } from '../skeleton/mypage/mypageRouter';
-import { getData, updateFormData } from '../../RefactorFunc/dataControl';
+import { updateFormData } from '../../RefactorFunc/dataControl';
 
 export const MyPageForm = () => {
   const navigate = useNavigate();
@@ -101,7 +101,23 @@ export const MyPageForm = () => {
   };
 
   useEffect(() => {
+    let mounted = true;
+    const getData = async (setLoad, setData, getFunc) => {
+      setLoad(true);
+      try {
+        const result = await getFunc();
+        if (mounted) {
+          setData(result.data);
+          setLoad(false);
+        }
+      } catch (error) {
+        setLoad(false);
+      }
+    };
     getData(setLoading, setUser, Send.myGetUser);
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   if (user && !loading) {

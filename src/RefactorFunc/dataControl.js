@@ -1,21 +1,31 @@
 // 데이터를 가져와서 state에 저장하는 함수
-export const getData = async (setLoad, setData, getFunc) => {
+export const getData = async (setLoad, setData, getFunc, mount) => {
   setLoad(true);
   try {
     const result = await getFunc();
-    setData(result.data);
-    setLoad(false);
+    if (mount) {
+      setData(result.data);
+      setLoad(false);
+    }
   } catch (error) {
     setLoad(false);
   }
 };
 
 // 아이디 한 개의 상세 데이터를 가져와서 state에 저장하는 함수
-export const getDetailData = async (setLoad, setData, getFunc, itemID) => {
+export const getDetailData = async (
+  setLoad,
+  setData,
+  getFunc,
+  itemID,
+  mount,
+) => {
   setLoad(true);
   try {
     const result = await getFunc(itemID);
-    setData(result.data);
+    if (mount) {
+      setData(result.data);
+    }
     setLoad(false);
   } catch (error) {
     setLoad(false);

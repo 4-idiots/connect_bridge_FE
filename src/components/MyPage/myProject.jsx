@@ -4,7 +4,6 @@ import * as S from './projectStudy/style';
 import { myProjectGetService } from '../../services/mypageService';
 import { ProjectCard } from './projectStudy/projectCard';
 import { SkelSubscribe } from '../skeleton/mypage/subscribe';
-import { getData } from '../../RefactorFunc/dataControl';
 import { Mobile, Desktop, Tablet } from '../../mediaQuery';
 
 export const MyProjectForm = () => {
@@ -12,7 +11,23 @@ export const MyProjectForm = () => {
   const [project, setProject] = useState(null);
 
   useEffect(() => {
+    let mounted = true;
+    const getData = async (setLoad, setData, getFunc) => {
+      setLoad(true);
+      try {
+        const result = await getFunc();
+        if (mounted) {
+          setData(result.data);
+          setLoad(false);
+        }
+      } catch (error) {
+        setLoad(false);
+      }
+    };
     getData(setLoading, setProject, myProjectGetService);
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   if (project && !loading) {

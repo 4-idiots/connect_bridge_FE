@@ -6,14 +6,29 @@ import { StudyCard } from '../Style/Card/Use/StudyCard';
 import * as S from './style';
 import { SkelProject } from '../skeleton/skelRouter';
 import { Mobile, Desktop, Tablet } from '../../mediaQuery';
-import { getData } from '../../RefactorFunc/dataControl';
 
 export const MainPageForm = () => {
   const [main, setMain] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    let mounted = true;
+    const getData = async (setLoad, setData, getFunc) => {
+      setLoad(true);
+      try {
+        const result = await getFunc();
+        if (mounted) {
+          setData(result.data);
+          setLoad(false);
+        }
+      } catch (error) {
+        setLoad(false);
+      }
+    };
     getData(setLoading, setMain, getMainService);
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   if (main && !loading) {

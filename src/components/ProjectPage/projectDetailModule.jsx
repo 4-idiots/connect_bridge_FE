@@ -22,12 +22,17 @@ export const ProjectDetailForm = () => {
   const [where, setWhere] = useState('info');
 
   useEffect(() => {
+    let mounted = true;
     getDetailData(
       setLoading,
       setPostData,
       Send.projectGetSomeService,
       projectID,
+      mounted,
     );
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   const applyService = async (prid, uid, field) => {

@@ -40,7 +40,17 @@ export const StudyDetailForm = () => {
   };
 
   useEffect(() => {
-    getDetailData(setLoading, setStudy, Send.studyGetSomeService, studyID);
+    let mounted = true;
+    getDetailData(
+      setLoading,
+      setStudy,
+      Send.studyGetSomeService,
+      studyID,
+      mounted,
+    );
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   if (study && !loading) {

@@ -5,14 +5,29 @@ import * as Send from '../../services/mypageService';
 import { MyCmCard } from './community/myCmCard';
 import { SkelCommunity } from '../skeleton/mypage/mypageRouter';
 import * as S from '../ProjectPage/detailTab/style';
-import { getData } from '../../RefactorFunc/dataControl';
 
 export const MyCommunityForm = () => {
   const [loading, setLoading] = useState(false);
   const [community, setCommunity] = useState(null);
 
   useEffect(() => {
+    let mounted = true;
+    const getData = async (setLoad, setData, getFunc) => {
+      setLoad(true);
+      try {
+        const result = await getFunc();
+        if (mounted) {
+          setData(result.data);
+          setLoad(false);
+        }
+      } catch (error) {
+        setLoad(false);
+      }
+    };
     getData(setLoading, setCommunity, Send.myCommunityGetService);
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   if (community && !loading) {

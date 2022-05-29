@@ -51,7 +51,17 @@ export const StudyUpdateForm = () => {
   };
 
   useEffect(() => {
-    getDetailData(setLoading, setStudy, Send.studyGetSomeService, studyID);
+    let mounted = true;
+    getDetailData(
+      setLoading,
+      setStudy,
+      Send.studyGetSomeService,
+      studyID,
+      mounted,
+    );
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   const onSubmitEvent = () => {
