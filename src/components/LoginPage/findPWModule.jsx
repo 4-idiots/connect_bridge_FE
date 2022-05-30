@@ -5,6 +5,7 @@ import { useJwt } from 'react-jwt';
 import ReactLoading from 'react-loading';
 import { findPWServcie } from '../../services/loginService';
 import { useAuth } from '../../contexts/hooks/useAuth';
+import { Mobile, Desktop, Tablet } from '../../mediaQuery';
 
 export const FindPWForm = () => {
   const navigate = useNavigate();
@@ -51,9 +52,10 @@ export const FindPWForm = () => {
 
   return (
     <Container>
-      <Heading style={{ textAlign: 'center' }}>비밀번호 재설정</Heading>
-      <Box style={{ width: '60%', margin: 'auto' }}>
-        <Form.Field>
+      <Mobile>
+        <Heading style={{ textAlign: 'center' }}>비밀번호 재설정</Heading>
+
+        <Form.Field style={{ marginLeft: 30, marginRight: 30 }}>
           <Form.Label>이름</Form.Label>
           <Form.Control>
             <Form.Input
@@ -65,7 +67,7 @@ export const FindPWForm = () => {
             />
           </Form.Control>
         </Form.Field>
-        <Form.Field>
+        <Form.Field style={{ marginLeft: 30, marginRight: 30 }}>
           <Form.Label>아이디</Form.Label>
           <Form.Control>
             <Form.Input
@@ -77,7 +79,7 @@ export const FindPWForm = () => {
             />
           </Form.Control>
         </Form.Field>
-        <Form.Field>
+        <Form.Field style={{ marginLeft: 30, marginRight: 30 }}>
           <Form.Label>이메일</Form.Label>
           <Form.Control>
             <Form.Input
@@ -98,7 +100,107 @@ export const FindPWForm = () => {
             )}
           </Button>
         </Button.Group>
-      </Box>
+      </Mobile>
+      <Tablet>
+        <Heading style={{ textAlign: 'center' }}>비밀번호 재설정</Heading>
+        <Box style={{ width: '60%', margin: 'auto' }}>
+          <Form.Field>
+            <Form.Label>이름</Form.Label>
+            <Form.Control>
+              <Form.Input
+                type="text"
+                value={userInfo.userName || ''}
+                name="userName"
+                onChange={onChangeAccountEvent}
+                placeholder="이름"
+              />
+            </Form.Control>
+          </Form.Field>
+          <Form.Field>
+            <Form.Label>아이디</Form.Label>
+            <Form.Control>
+              <Form.Input
+                type="text"
+                value={userInfo.userID || ''}
+                name="userID"
+                onChange={onChangeAccountEvent}
+                placeholder="아이디"
+              />
+            </Form.Control>
+          </Form.Field>
+          <Form.Field>
+            <Form.Label>이메일</Form.Label>
+            <Form.Control>
+              <Form.Input
+                type="email"
+                value={userInfo.userEmail || ''}
+                name="userEmail"
+                onChange={onChangeAccountEvent}
+                placeholder="이메일"
+              />
+            </Form.Control>
+          </Form.Field>
+          <Button.Group align="center">
+            <Button color="success" onClick={onSubmitEvent}>
+              {emLoading ? (
+                <ReactLoading type="bubbles" color="white" />
+              ) : (
+                '재설정 하기'
+              )}
+            </Button>
+          </Button.Group>
+        </Box>
+      </Tablet>
+      <Desktop>
+        <Heading style={{ textAlign: 'center' }}>비밀번호 재설정</Heading>
+        <Box style={{ width: '60%', margin: 'auto' }}>
+          <Form.Field>
+            <Form.Label>이름</Form.Label>
+            <Form.Control>
+              <Form.Input
+                type="text"
+                value={userInfo.userName || ''}
+                name="userName"
+                onChange={onChangeAccountEvent}
+                placeholder="이름"
+              />
+            </Form.Control>
+          </Form.Field>
+          <Form.Field>
+            <Form.Label>아이디</Form.Label>
+            <Form.Control>
+              <Form.Input
+                type="text"
+                value={userInfo.userID || ''}
+                name="userID"
+                onChange={onChangeAccountEvent}
+                placeholder="아이디"
+              />
+            </Form.Control>
+          </Form.Field>
+          <Form.Field>
+            <Form.Label>이메일</Form.Label>
+            <Form.Control>
+              <Form.Input
+                type="email"
+                value={userInfo.userEmail || ''}
+                name="userEmail"
+                onChange={onChangeAccountEvent}
+                placeholder="이메일"
+              />
+            </Form.Control>
+          </Form.Field>
+          <Button.Group align="center">
+            <Button color="success" onClick={onSubmitEvent}>
+              {emLoading ? (
+                <ReactLoading type="bubbles" color="white" />
+              ) : (
+                '재설정 하기'
+              )}
+            </Button>
+          </Button.Group>
+        </Box>
+      </Desktop>
     </Container>
   );
 };

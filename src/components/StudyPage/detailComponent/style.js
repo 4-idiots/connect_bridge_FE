@@ -52,6 +52,28 @@ export const PageWrap = styled.div`
   justify-content: space-between;
 `;
 
+export const PageWrapMobile = styled.div`
+  flex-direction: column;
+  padding: 0;
+  box-sizing: border-box;
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 auto;
+`;
+export const PageWrapTablet = styled.div`
+  box-sizing: border-box;
+  padding: 0 25px;
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 auto;
+`;
+
 export const PageRight = styled.div`
   max-width: 300px;
   max-height: 600px;
@@ -60,6 +82,7 @@ export const PageRight = styled.div`
   border: 1px solid #ddd;
   padding: 20px;
   border-radius: 5px;
+  margin-left: 30px;
 `;
 
 export const RightInfo = styled.div`

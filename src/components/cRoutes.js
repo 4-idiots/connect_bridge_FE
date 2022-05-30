@@ -1,6 +1,7 @@
 // MainPage
 export { NavbarForm } from './MainPage/navbar';
 export { FooterForm } from './MainPage/footer';
+export { FooterTabletForm } from './MainPage/Tabletfooter';
 export { BannerForm } from './MainPage/banner';
 export { MainPageForm } from './MainPage/mainPageModule';
 
