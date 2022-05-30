@@ -52,10 +52,32 @@ export const PageWrap = styled.div`
   margin: 0 20px 0 20px;
 `;
 
+export const PageWrapMobile = styled.div`
+  flex-direction: column;
+  padding: 0;
+  box-sizing: border-box;
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 auto;
+`;
+export const PageWrapTablet = styled.div`
+  box-sizing: border-box;
+  padding: 0 25px;
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 auto;
+`;
+
 export const PageRight = styled.div`
   max-width: 300px;
   max-height: 600px;
-  width: 100%;
+  width: 90%;
   height: 100%;
   border: 1px solid #ddd;
   padding: 20px;
