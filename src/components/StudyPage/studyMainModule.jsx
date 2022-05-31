@@ -99,7 +99,7 @@ export const StudyMainForm = () => {
                   size={4}
                   style={{ fontWeight: 'bold', marginLeft: -20 }}
                 >
-                  인기 스터디
+                  신규 스터디
                 </Heading>
               </S.textWrap>
               {newStudy[0].content && <StudyNew item={newStudy[0]} />}
@@ -189,7 +189,7 @@ export const StudyMainForm = () => {
             <S.newWrap style={{ marginLeft: 45 }}>
               <S.textWrap>
                 <Heading size={4} style={{ fontWeight: 'bold' }}>
-                  인기 스터디
+                  신규 스터디
                 </Heading>
               </S.textWrap>
               {newStudy[0].content && <StudyNew item={newStudy[0]} />}
@@ -276,7 +276,7 @@ export const StudyMainForm = () => {
             <S.newWrap>
               <S.textWrap>
                 <Heading size={4} style={{ fontWeight: 'bold' }}>
-                  인기 스터디
+                  신규 스터디
                 </Heading>
               </S.textWrap>
               {newStudy[0].content && <StudyNew item={newStudy[0]} />}
@@ -364,7 +364,7 @@ export const StudyMainForm = () => {
         <S.newWrap>
           <S.textWrap>
             <Heading size={4} style={{ fontWeight: 'bold' }}>
-              관심 스터디
+              신규 스터디
             </Heading>
           </S.textWrap>
           <SkelNew />
@@ -372,7 +372,7 @@ export const StudyMainForm = () => {
         <S.suggestWrap>
           <S.textWrap>
             <Heading size={4} style={{ fontWeight: 'bold' }}>
-              추천 스터디
+              신규 스터디
             </Heading>
           </S.textWrap>
           {[0, 1, 2].map(item => (

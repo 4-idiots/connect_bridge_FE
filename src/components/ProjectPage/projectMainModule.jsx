@@ -96,7 +96,7 @@ export const ProjectMainForm = () => {
                   size={4}
                   style={{ fontWeight: 'bold', marginLeft: -20 }}
                 >
-                  인기 프로젝트
+                  신규 프로젝트
                 </Heading>
               </S.textWrap>
               {newPr[0].content && <ProjectNew item={newPr[0]} />}
@@ -177,7 +177,7 @@ export const ProjectMainForm = () => {
             <S.newWrap style={{ marginLeft: 45 }}>
               <S.textWrap>
                 <Heading size={4} style={{ fontWeight: 'bold' }}>
-                  인기 프로젝트
+                  신규 프로젝트
                 </Heading>
               </S.textWrap>
               {newPr[0].content && <ProjectNew item={newPr[0]} />}
@@ -264,7 +264,7 @@ export const ProjectMainForm = () => {
             <S.newWrap>
               <S.textWrap>
                 <Heading size={4} style={{ fontWeight: 'bold' }}>
-                  인기 프로젝트
+                  신규 프로젝트
                 </Heading>
               </S.textWrap>
               {newPr[0].content && <ProjectNew item={newPr[0]} />}
@@ -352,7 +352,7 @@ export const ProjectMainForm = () => {
         <S.newWrap>
           <S.textWrap>
             <Heading size={4} style={{ fontWeight: 'bold' }}>
-              관심 프로젝트
+              신규 프로젝트
             </Heading>
           </S.textWrap>
           <SkelNew />
@@ -360,7 +360,7 @@ export const ProjectMainForm = () => {
         <S.suggestWrap>
           <S.textWrap>
             <Heading size={4} style={{ fontWeight: 'bold' }}>
-              추천 프로젝트
+              신규 프로젝트
             </Heading>
           </S.textWrap>
           {[0, 1, 2].map(item => (
