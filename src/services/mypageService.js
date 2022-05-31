@@ -1,18 +1,18 @@
 import customAxios from './customAxios';
 
 export const myGetUser = () => {
-  return customAxios.get(`${process.env.REACT_APP_MOON_URL}/api/my/info`);
+  return customAxios.get(`${process.env.REACT_APP_AWS}/api/my/info`);
 };
 
 export const myCheckNickname = userNickname => {
   return customAxios.get(
-    `${process.env.REACT_APP_MOON_URL}/api/users/check/userNickname?userNickname=${userNickname}`,
+    `${process.env.REACT_APP_AWS}/api/users/check/userNickname?userNickname=${userNickname}`,
   );
 };
 
 export const mypageUpdate = formData => {
   return customAxios.patch(
-    `${process.env.REACT_APP_MOON_URL}/api/my/info`,
+    `${process.env.REACT_APP_AWS}/api/my/info`,
     formData,
     {
       headers: {
@@ -34,7 +34,7 @@ export const mypageUpdatePost = (
   userInterestSub,
   userPortfolio,
 ) => {
-  return customAxios.post(`${process.env.REACT_APP_MOON_URL}/api/my/info`, {
+  return customAxios.post(`${process.env.REACT_APP_AWS}/api/my/info`, {
     id,
     userPW,
     userNickname,
@@ -49,23 +49,23 @@ export const mypageUpdatePost = (
 };
 
 export const myCommunityGetService = () => {
-  return customAxios.get(`${process.env.REACT_APP_MOON_URL}/api/mycommunity`);
+  return customAxios.get(`${process.env.REACT_APP_AWS}/api/mycommunity`);
 };
 
 export const myCommunityDelete = communityID => {
   return customAxios.delete(
-    `${process.env.REACT_APP_MOON_URL}/api/community/${communityID}`,
+    `${process.env.REACT_APP_AWS}/api/community/${communityID}`,
   );
 };
 
 export const mySubscribeGetService = () => {
-  return customAxios.get(`${process.env.REACT_APP_MOON_URL}/api/myfollow`);
+  return customAxios.get(`${process.env.REACT_APP_AWS}/api/myfollow`);
 };
 
 export const myProjectGetService = () => {
-  return customAxios.get(`${process.env.REACT_APP_MOON_URL}/api/myproject`);
+  return customAxios.get(`${process.env.REACT_APP_AWS}/api/myproject`);
 };
 
 export const myStudyGetService = () => {
-  return customAxios.get(`${process.env.REACT_APP_MOON_URL}/api/mystudy`);
+  return customAxios.get(`${process.env.REACT_APP_AWS}/api/mystudy`);
 };
