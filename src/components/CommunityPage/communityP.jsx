@@ -40,7 +40,7 @@ export const CommunityPForm = () => {
               textAlign: 'left',
             }}
           >
-            <h1 style={{ marginTop: 80, fontWeight: 'bold' }}>
+            <h1 style={{ marginTop: 130, fontWeight: 'bold' }}>
               인기 게시물 목록
             </h1>
             <br />
