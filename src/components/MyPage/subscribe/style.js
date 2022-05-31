@@ -5,6 +5,7 @@ export const SubGrid = styled.div`
   grid-template-columns: 1fr 1fr 1fr 1fr;
   row-gap: 3rem;
   margin-bottom: 80px;
+  column-gap: 1rem;
 `;
 export const SubGridMobile = styled.div`
   display: grid;
@@ -12,12 +13,14 @@ export const SubGridMobile = styled.div`
   row-gap: 3rem;
   margin-bottom: 80px;
   margin-left: 20px;
+  column-gap: 1rem;
 `;
 export const SubGridTablet = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   row-gap: 3rem;
   margin-bottom: 80px;
+  column-gap: 1rem;
 `;
 
 export const PSBox = styled.div`

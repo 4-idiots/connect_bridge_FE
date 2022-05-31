@@ -46,16 +46,19 @@ export const People = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   row-gap: 3rem;
+  column-gap: 1rem;
 `;
 export const PeopleMobile = styled.div`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   row-gap: 3rem;
+  column-gap: 1rem;
 `;
 export const PeopleTablet = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   row-gap: 4rem;
+  column-gap: 1rem;
 `;
 
 export const Main = styled.section`

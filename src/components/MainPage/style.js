@@ -15,18 +15,21 @@ export const MainGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   row-gap: 3rem;
+  column-gap: 1rem;
   margin-bottom: 80px;
 `;
 export const MainGridTablet = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   row-gap: 3rem;
+  column-gap: 1rem;
   margin-bottom: 80px;
 `;
 export const MainGridMobile = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   row-gap: 3rem;
+  column-gap: 1rem;
   margin-bottom: 80px;
 `;
 
