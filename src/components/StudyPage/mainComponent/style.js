@@ -4,17 +4,20 @@ export const gridBox = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   row-gap: 3rem;
+  column-gap: 1rem;
 `;
 
 export const gridBoxTablet = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   row-gap: 3rem;
+  column-gap: 1rem;
 `;
 export const gridBoxMobile = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   row-gap: 3rem;
+  column-gap: 1rem;
 `;
 
 export const newWrap = styled.div`

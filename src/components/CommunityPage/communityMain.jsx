@@ -46,7 +46,7 @@ export const CommunityForm = () => {
                 textAlign: 'left',
               }}
             >
-              <h1 style={{ marginTop: 80, fontWeight: 'bold' }}>
+              <h1 style={{ marginTop: 130, fontWeight: 'bold' }}>
                 전체 게시물 목록
               </h1>
               <br />
@@ -236,7 +236,7 @@ export const CommunityForm = () => {
                 textAlign: 'left',
               }}
             >
-              <h1 style={{ marginTop: 80, fontWeight: 'bold' }}>
+              <h1 style={{ marginTop: 130, fontWeight: 'bold' }}>
                 전체 게시물 목록
               </h1>
               <br />
@@ -425,7 +425,7 @@ export const CommunityForm = () => {
                 textAlign: 'left',
               }}
             >
-              <h1 style={{ marginTop: 80, fontWeight: 'bold' }}>
+              <h1 style={{ marginTop: 130, fontWeight: 'bold' }}>
                 전체 게시물 목록
               </h1>
               <br />

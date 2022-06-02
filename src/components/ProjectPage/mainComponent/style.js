@@ -3,16 +3,19 @@ import styled from 'styled-components';
 export const gridBox = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  column-gap: 1rem;
   row-gap: 3rem;
 `;
 export const gridBoxTablet = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
+  column-gap: 1rem;
   row-gap: 3rem;
 `;
 export const gridBoxMobile = styled.div`
   display: grid;
   grid-template-columns: 1fr;
+  column-gap: 1rem;
   row-gap: 3rem;
 `;
 
