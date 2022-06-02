@@ -105,7 +105,7 @@ export const projectNoService = (projectID, submitID) => {
 
 export const projectStateService = projectID => {
   return customAxios.patch(
-    `${process.env.REACT_APP_MOON_URL}/api/${projectID}/manage/end`,
+    `${process.env.REACT_APP_MOON_URL}/api/project/${projectID}/manage/end`,
   );
 };
 

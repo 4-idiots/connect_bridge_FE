@@ -42,7 +42,7 @@ export const StudyCard = ({ item }) => {
         imgSrc={item.studyImg}
         onClick={() => navigate(`/study/${item.studyID}`)}
       />
-      <C.CardType cardType />
+      <C.CardType cardType={false} />
       <C.LikeBox
         onClick={handleLike}
         decodedToken={decodedToken}

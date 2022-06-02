@@ -16,8 +16,8 @@ export const DetailHeader = ({ item }) => {
           &nbsp;{item.studyName}
         </Heading>
         <S.LeaderWrap>
-          <S.LeaderImg src={item.leaderImg} />
-          <S.LeaderName>{item.leaderName}</S.LeaderName>
+          <S.LeaderImg src={item.leaderInfo.leaderImg} />
+          <S.LeaderName>{item.leaderInfo.leaderName}</S.LeaderName>
         </S.LeaderWrap>
         <S.StatusBox>
           <Tag
