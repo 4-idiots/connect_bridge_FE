@@ -98,9 +98,7 @@ export const StudyMainForm = () => {
                 <Heading
                   size={4}
                   style={{ fontWeight: 'bold', marginLeft: -20 }}
-                >
-                  신규 스터디
-                </Heading>
+                />
               </S.textWrap>
               {newStudy[0].content && <StudyNew item={newStudy[0]} />}
             </S.newWrap>
@@ -109,9 +107,7 @@ export const StudyMainForm = () => {
                 <Heading
                   size={4}
                   style={{ fontWeight: 'bold', marginLeft: -20 }}
-                >
-                  신규 스터디
-                </Heading>
+                />
               </S.textWrap>
               <StudySuggest item={newStudy[1]} />
               <StudySuggest item={newStudy[2]} />
@@ -188,17 +184,13 @@ export const StudyMainForm = () => {
           >
             <S.newWrap style={{ marginLeft: 45 }}>
               <S.textWrap>
-                <Heading size={4} style={{ fontWeight: 'bold' }}>
-                  신규 스터디
-                </Heading>
+                <Heading size={4} style={{ fontWeight: 'bold' }} />
               </S.textWrap>
               {newStudy[0].content && <StudyNew item={newStudy[0]} />}
             </S.newWrap>
             <S.ResSuggestWrap style={{ marginLeft: 45, marginRight: 45 }}>
               <S.textWrap>
-                <Heading size={4} style={{ fontWeight: 'bold' }}>
-                  신규 스터디
-                </Heading>
+                <Heading size={4} style={{ fontWeight: 'bold' }} />
               </S.textWrap>
               <StudySuggest item={newStudy[1]} />
               <StudySuggest item={newStudy[2]} />
@@ -275,17 +267,13 @@ export const StudyMainForm = () => {
           >
             <S.newWrap>
               <S.textWrap>
-                <Heading size={4} style={{ fontWeight: 'bold' }}>
-                  신규 스터디
-                </Heading>
+                <Heading size={4} style={{ fontWeight: 'bold' }} />
               </S.textWrap>
               {newStudy[0].content && <StudyNew item={newStudy[0]} />}
             </S.newWrap>
             <S.ResSuggestWrap>
               <S.textWrap>
-                <Heading size={4} style={{ fontWeight: 'bold' }}>
-                  신규 스터디
-                </Heading>
+                <Heading size={4} style={{ fontWeight: 'bold' }} />
               </S.textWrap>
               <StudySuggest item={newStudy[1]} />
               <StudySuggest item={newStudy[2]} />
@@ -363,17 +351,13 @@ export const StudyMainForm = () => {
       >
         <S.newWrap>
           <S.textWrap>
-            <Heading size={4} style={{ fontWeight: 'bold' }}>
-              신규 스터디
-            </Heading>
+            <Heading size={4} style={{ fontWeight: 'bold' }} />
           </S.textWrap>
           <SkelNew />
         </S.newWrap>
         <S.suggestWrap>
           <S.textWrap>
-            <Heading size={4} style={{ fontWeight: 'bold' }}>
-              신규 스터디
-            </Heading>
+            <Heading size={4} style={{ fontWeight: 'bold' }} />
           </S.textWrap>
           {[0, 1, 2].map(item => (
             <SkelSuggest key={item} />

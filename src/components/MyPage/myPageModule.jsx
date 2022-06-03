@@ -86,12 +86,12 @@ export const MyPageForm = () => {
       check.nickCheck === false &&
       check.nickClick &&
       check.imgChange &&
-      user.userPW
+      pwInfo.userPW
     ) {
       updateFormData(formData, '/my/info', Send.mypageUpdate, navigate);
-    } else if (check.nickChange === false && check.imgChange && user.userPW) {
+    } else if (check.nickChange === false && check.imgChange && pwInfo.userPW) {
       updateFormData(formData, '/my/info', Send.mypageUpdate, navigate);
-    } else if (check.imgChange === false && user.userPW) {
+    } else if (check.imgChange === false && pwInfo.userPW) {
       updateNoImgAxios();
     } else if (!pwInfo.userPW) {
       alert('수정시 비밀번호를 재입력해주세요');

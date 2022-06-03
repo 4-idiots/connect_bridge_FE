@@ -95,9 +95,7 @@ export const ProjectMainForm = () => {
                 <Heading
                   size={4}
                   style={{ fontWeight: 'bold', marginLeft: -20 }}
-                >
-                  신규 프로젝트
-                </Heading>
+                />
               </S.textWrap>
               {newPr[0].content && <ProjectNew item={newPr[0]} />}
             </S.newWrapMobile>
@@ -106,9 +104,7 @@ export const ProjectMainForm = () => {
                 <Heading
                   size={4}
                   style={{ fontWeight: 'bold', marginLeft: -20 }}
-                >
-                  신규 프로젝트
-                </Heading>
+                />
               </S.textWrap>
               <ProjectSuggest item={newPr[1]} />
               <ProjectSuggest item={newPr[2]} />
@@ -176,17 +172,13 @@ export const ProjectMainForm = () => {
           >
             <S.newWrap style={{ marginLeft: 45 }}>
               <S.textWrap>
-                <Heading size={4} style={{ fontWeight: 'bold' }}>
-                  신규 프로젝트
-                </Heading>
+                <Heading size={4} style={{ fontWeight: 'bold' }} />
               </S.textWrap>
               {newPr[0].content && <ProjectNew item={newPr[0]} />}
             </S.newWrap>
             <S.ResSuggestWrap style={{ marginLeft: 45, marginRight: 45 }}>
               <S.textWrap>
-                <Heading size={4} style={{ fontWeight: 'bold' }}>
-                  신규 프로젝트
-                </Heading>
+                <Heading size={4} style={{ fontWeight: 'bold' }} />
               </S.textWrap>
               <ProjectSuggest item={newPr[1]} />
               <ProjectSuggest item={newPr[2]} />
@@ -263,17 +255,13 @@ export const ProjectMainForm = () => {
           >
             <S.newWrap>
               <S.textWrap>
-                <Heading size={4} style={{ fontWeight: 'bold' }}>
-                  신규 프로젝트
-                </Heading>
+                <Heading size={4} style={{ fontWeight: 'bold' }} />
               </S.textWrap>
               {newPr[0].content && <ProjectNew item={newPr[0]} />}
             </S.newWrap>
             <S.ResSuggestWrap>
               <S.textWrap>
-                <Heading size={4} style={{ fontWeight: 'bold' }}>
-                  신규 프로젝트
-                </Heading>
+                <Heading size={4} style={{ fontWeight: 'bold' }} />
               </S.textWrap>
               <ProjectSuggest item={newPr[1]} />
               <ProjectSuggest item={newPr[2]} />
@@ -351,17 +339,13 @@ export const ProjectMainForm = () => {
       >
         <S.newWrap>
           <S.textWrap>
-            <Heading size={4} style={{ fontWeight: 'bold' }}>
-              신규 프로젝트
-            </Heading>
+            <Heading size={4} style={{ fontWeight: 'bold' }} />
           </S.textWrap>
           <SkelNew />
         </S.newWrap>
         <S.suggestWrap>
           <S.textWrap>
-            <Heading size={4} style={{ fontWeight: 'bold' }}>
-              신규 프로젝트
-            </Heading>
+            <Heading size={4} style={{ fontWeight: 'bold' }} />
           </S.textWrap>
           {[0, 1, 2].map(item => (
             <SkelSuggest key={item} />
