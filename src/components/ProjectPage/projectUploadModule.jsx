@@ -148,7 +148,7 @@ export const ProjectUploadForm = () => {
       <Form.Field>
         <Form.Label>* 프로젝트 설명</Form.Label>
         <Form.Help>
-          ! 설명이 풍부한 프로젝트는 풍부하지 않은 프로젝트에 비해 지원율리 50%
+          ! 설명이 풍부한 프로젝트는 풍부하지 않은 프로젝트에 비해 지원율이 50%
           높습니다.
         </Form.Help>
       </Form.Field>

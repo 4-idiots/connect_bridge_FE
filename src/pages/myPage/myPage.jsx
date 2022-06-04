@@ -47,7 +47,7 @@ export const MyPage = () => {
             >
               구독
             </Tabs.Tab>
-            <Tabs.Tab>알림</Tabs.Tab>
+            {/* <Tabs.Tab>알림</Tabs.Tab> */}
           </Tabs>
           {where === 'my' && <C.MyPageForm />}
           {where === 'project' && <C.MyProjectForm />}

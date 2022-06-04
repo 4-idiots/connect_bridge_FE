@@ -12,7 +12,7 @@ export const studyUploadService = (
   content,
   studyOnline,
 ) => {
-  return customAxios.post(`${process.env.REACT_APP_AWS}/api/study`, {
+  return customAxios.post(`${process.env.REACT_APP_MOON_URL}/api/study`, {
     studyImg,
     studyName,
     studyKeyward,
@@ -27,7 +27,7 @@ export const studyUploadService = (
 };
 
 export const studyGetAllService = cursor => {
-  return `${process.env.REACT_APP_AWS}/api/study/page/${cursor}`;
+  return `${process.env.REACT_APP_MOON_URL}/api/study/page/${cursor}`;
 };
 
 export const studyUpdateService = (
@@ -43,7 +43,7 @@ export const studyUpdateService = (
   content,
   studyOnline,
 ) => {
-  return customAxios.patch(`${process.env.REACT_APP_AWS}/api/study`, {
+  return customAxios.patch(`${process.env.REACT_APP_MOON_URL}/api/study`, {
     studyImg,
     studyName,
     studyKeyward,
@@ -60,82 +60,92 @@ export const studyUpdateService = (
 
 export const studyLikeCheck = studyID => {
   return customAxios.get(
-    `${process.env.REACT_APP_AWS}/api/study/islike/${studyID}`,
+    `${process.env.REACT_APP_MOON_URL}/api/study/islike/${studyID}`,
   );
 };
 
 export const studyLikeService = studyID => {
   return customAxios.get(
-    `${process.env.REACT_APP_AWS}/api/study/like?studyID=${studyID}`,
+    `${process.env.REACT_APP_MOON_URL}/api/study/like?studyID=${studyID}`,
   );
 };
 
 export const studyGetSomeService = studyID => {
-  return customAxios.get(`${process.env.REACT_APP_AWS}/api/study/${studyID}`);
+  return customAxios.get(
+    `${process.env.REACT_APP_MOON_URL}/api/study/${studyID}`,
+  );
 };
 
 export const studyApplyService = (studyID, field) => {
-  return customAxios.patch(`${process.env.REACT_APP_AWS}/api/study/apply`, {
-    studyID,
-    field,
-  });
+  return customAxios.patch(
+    `${process.env.REACT_APP_MOON_URL}/api/study/apply`,
+    {
+      studyID,
+      field,
+    },
+  );
 };
 
 export const studyDeleteService = studyID => {
   return customAxios.delete(
-    `${process.env.REACT_APP_AWS}/api/study/${studyID}`,
+    `${process.env.REACT_APP_MOON_URL}/api/study/${studyID}`,
   );
 };
 
 export const studyGetNewService = () => {
-  return customAxios.get(`${process.env.REACT_APP_AWS}/api/study/page/new`);
+  return customAxios.get(
+    `${process.env.REACT_APP_MOON_URL}/api/study/page/new`,
+  );
 };
 
 export const studyStateService = studyID => {
   return customAxios.patch(
-    `${process.env.REACT_APP_AWS}/api/${studyID}/manage/end`,
+    `${process.env.REACT_APP_MOON_URL}/api/${studyID}/manage/end`,
   );
 };
 
 export const studyOutService = (studyID, memberID) => {
   return customAxios.get(
-    `${process.env.REACT_APP_AWS}/api/study/${studyID}/manage/fire/${memberID}`,
+    `${process.env.REACT_APP_MOON_URL}/api/study/${studyID}/manage/fire/${memberID}`,
   );
 };
 
 export const studyGetAdminService = studyID => {
   return customAxios.get(
-    `${process.env.REACT_APP_AWS}/api/study/${studyID}/manage`,
+    `${process.env.REACT_APP_MOON_URL}/api/study/${studyID}/manage`,
   );
 };
 
 export const studyYesService = (studyID, submitID) => {
   return customAxios.get(
-    `${process.env.REACT_APP_AWS}/api/study/${studyID}/apply/${submitID}`,
+    `${process.env.REACT_APP_MOON_URL}/api/study/${studyID}/apply/${submitID}`,
   );
 };
 
 export const studyNoService = (studyID, submitID) => {
   return customAxios.get(
-    `${process.env.REACT_APP_AWS}/api/study/${studyID}/reject/${submitID}`,
+    `${process.env.REACT_APP_MOON_URL}/api/study/${studyID}/reject/${submitID}`,
   );
 };
 
 export const studyGetNoticeServie = studyID => {
   return customAxios.get(
-    `${process.env.REACT_APP_AWS}/api/study/${studyID}/notice`,
+    `${process.env.REACT_APP_MOON_URL}/api/study/${studyID}/notice`,
   );
 };
 
 export const studyNoticeUploadService = (studyID, content) => {
-  return customAxios.post(`${process.env.REACT_APP_AWS}/api/study/notice`, {
-    studyID,
-    content,
-  });
+  return customAxios.post(
+    `${process.env.REACT_APP_MOON_URL}/api/study/notice`,
+    {
+      studyID,
+      content,
+    },
+  );
 };
 
 export const filterStudyService = (area, field) => {
   return customAxios.get(
-    `${process.env.REACT_APP_AWS}/api/study/${area}/${field}`,
+    `${process.env.REACT_APP_MOON_URL}/api/study/${area}/${field}`,
   );
 };
