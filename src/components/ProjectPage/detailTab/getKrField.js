@@ -5,7 +5,7 @@ const fieldObject = {
   hwPlan: '하드웨어(제품) 기획',
   ios_fr: 'IOS',
   android_fr: '안드로이드',
-  webFront_fr: '웹프론트엔드',
+  webfront_fr: '웹프론트엔드',
   webPublic_fr: '웹퍼블리셔',
   cross_fr: '크로스플랫폼',
   uiux_de: 'UI/UX디자인',

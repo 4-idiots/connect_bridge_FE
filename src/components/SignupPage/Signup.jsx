@@ -86,7 +86,7 @@ export const SignupForm = () => {
     }
   };
 
-  const sameEmailButton = async () => {
+  const SameEmailButton = async () => {
     try {
       const result = await Send.checkSameEmail(userData.userEmail);
       if (result.data) {
@@ -380,7 +380,7 @@ export const SignupForm = () => {
                 이메일 형식이 아닙니다
               </Form.Label>
             )}
-            <Button size="small" color="" onClick={sameEmailButton}>
+            <Button size="small" color="" onClick={SameEmailButton}>
               중복확인
             </Button>
             &nbsp;&nbsp;
@@ -716,7 +716,7 @@ export const SignupForm = () => {
                 이메일 형식이 아닙니다
               </Form.Label>
             )}
-            <Button size="small" color="" onClick={sameEmailButton}>
+            <Button size="small" color="" onClick={SameEmailButton}>
               중복확인
             </Button>
             &nbsp;&nbsp;
@@ -1048,7 +1048,7 @@ export const SignupForm = () => {
                 이메일 형식이 아닙니다
               </Form.Label>
             )}
-            <Button size="small" color="" onClick={sameEmailButton}>
+            <Button size="small" color="" onClick={SameEmailButton}>
               중복확인
             </Button>
             &nbsp;&nbsp;

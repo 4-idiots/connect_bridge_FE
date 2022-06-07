@@ -7,7 +7,7 @@ export const CustomItem = styled(Navbar.Item)`
 `;
 
 export const CustomUserItem = styled(Navbar.Item)`
-  font-size: min(2vw, 20px);
+  font-size: min(3vw, 22px);
   font-weight: bold;
 `;
 

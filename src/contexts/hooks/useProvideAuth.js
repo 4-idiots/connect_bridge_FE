@@ -22,6 +22,7 @@ export const useProvideAuth = () => {
     localStorage.removeItem('token');
     setToken(null);
     setIsLogin(false);
+    delete customAxios.defaults.headers.common.Authorization;
     alert('다시 로그인 해주세요.');
     window.location.replace('/login');
   };
@@ -45,16 +46,5 @@ export const useProvideAuth = () => {
     setIsLoading(isValidating);
   }, [data, error, isValidating]);
 
-  useEffect(() => {
-    // Sync all tabs on login or logout
-    window.addEventListener('storage', e => {
-      if (e.key === 'isLogin') {
-        setIsLogin(e.newValue);
-      }
-    });
-  });
-
   return { token, login, logout, isLogin, isLoading };
 };
-
-// 이게 로그인, 로그 아웃, refreshtoken 관련 hook

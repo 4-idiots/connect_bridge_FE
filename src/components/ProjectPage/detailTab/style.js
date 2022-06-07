@@ -40,6 +40,20 @@ export const MemberGrid = styled.div`
   margin-bottom: 80px;
 `;
 
+export const MobileGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  row-gap: 3rem;
+  column-gap: 1rem;
+`;
+
+export const TabletGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 4rem;
+  column-gap: 1rem;
+`;
+
 export const PSBox = styled.div`
   width: 100%;
 `;

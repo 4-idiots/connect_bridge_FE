@@ -56,3 +56,17 @@ export const PSNull = styled.div`
 export const PSText = styled.span`
   opacity: 0.6;
 `;
+
+export const MobileGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  row-gap: 3rem;
+  column-gap: 1rem;
+`;
+
+export const TabletGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 4rem;
+  column-gap: 1rem;
+`;

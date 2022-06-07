@@ -11,6 +11,7 @@ export const MemberCard = ({ item }) => {
     <div
       className="card"
       onClick={() => navigate(`/team/info/${item.memberID}`)}
+      style={{ width: '300px', height: '360px' }}
     >
       <img src={item.memberImg} className="card__image" alt="" />
       <div className="card__overlay">

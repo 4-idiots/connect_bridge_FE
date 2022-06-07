@@ -14,7 +14,7 @@ export const ApplyMemCard = ({ item, projectID }) => {
   const onNo = async () => {
     try {
       await Send.projectOutService(projectID, item.memberID);
-      alert('거절 되었습니다.');
+      alert('방출 되었습니다.');
       window.location.replace(`/project/${projectID}`);
     } catch (error) {
       // pass
@@ -26,7 +26,7 @@ export const ApplyMemCard = ({ item, projectID }) => {
   }, []);
 
   return (
-    <div className="cards">
+    <div className="cards" style={{ width: '300px', height: '360px' }}>
       <div style={{ position: 'absolute', top: '0.5rem', right: '1rem' }}>
         <B.Button onClick={onNo} color="danger">
           방출하기

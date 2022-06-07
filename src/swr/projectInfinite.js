@@ -3,7 +3,6 @@ import React, { useRef, useEffect } from 'react';
 import useSWRInfinite from 'swr/infinite';
 import fetcher from './fetcher';
 import useOnScreen from './useOnScreen';
-// import { ProjectCard } from '../components/ProjectPage/mainComponent/projectCard';
 import { projectGetAllService } from '../services/projectService';
 import { SkelProject } from '../components/skeleton/project';
 import { ProjectCard } from '../components/Style/Card/Use/ProjectCard';
@@ -22,7 +21,7 @@ export const ProjectInfinite = () => {
     getKey,
     fetcher,
   );
-  const issues = data ? [].concat(...data) : []; // 하나로 통일 하는 코드, 안쓰면 렌더링에서 map을 2번 써야 함
+  const issues = data ? [].concat(...data) : [];
   const isLoadingInitialData = !data && !error;
   const isLoadingMore =
     isLoadingInitialData ||
@@ -39,7 +38,7 @@ export const ProjectInfinite = () => {
 
   return (
     <>
-      {isEmpty ? <p>Yay, no outdoor found.</p> : null}
+      {isEmpty ? <p>데이터가 없습니다.</p> : null}
       {issues &&
         issues.map(item => <ProjectCard key={item.projectID} item={item} />)}
       <div ref={ref}>

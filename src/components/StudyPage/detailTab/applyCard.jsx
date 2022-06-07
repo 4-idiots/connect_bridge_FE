@@ -29,7 +29,7 @@ export const ApplyCard = ({ item, studyID }) => {
   };
 
   return (
-    <div className="cards">
+    <div className="cards" style={{ width: '300px', height: '360px' }}>
       <div style={{ position: 'absolute', top: '0.5rem', right: '1rem' }}>
         <B.Button.Group>
           <B.Button onClick={onYes} color="success">
