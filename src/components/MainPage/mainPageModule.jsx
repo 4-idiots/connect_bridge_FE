@@ -3,6 +3,7 @@ import { Heading, Container } from 'react-bulma-components';
 import { getMainService } from '../../services/mainService';
 import { ProjectCard } from '../Style/Card/Use/ProjectCard';
 import { StudyCard } from '../Style/Card/Use/StudyCard';
+import { TeamCard } from '../Style/Card/Use/TeamCard';
 import * as S from './style';
 import { SkelProject } from '../skeleton/skelRouter';
 import { Mobile, Desktop, Tablet } from '../../mediaQuery';
@@ -59,6 +60,15 @@ export const MainPageForm = () => {
                 <StudyCard item={item} key={item.studyID} />
               ))}
           </S.MainGridMobile>
+          <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
+            팀원들
+          </Heading>
+          <S.MainGridMobile>
+            {main.register &&
+              main.register.map(item => (
+                <TeamCard item={item} key={item.myid} />
+              ))}
+          </S.MainGridMobile>
         </Mobile>
         <Tablet>
           <Heading
@@ -85,6 +95,15 @@ export const MainPageForm = () => {
                 <StudyCard item={item} key={item.studyID} />
               ))}
           </S.MainGridTablet>
+          <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
+            팀원들
+          </Heading>
+          <S.MainGridTablet>
+            {main.register &&
+              main.register.map(item => (
+                <TeamCard item={item} key={item.myid} />
+              ))}
+          </S.MainGridTablet>
         </Tablet>
         <Desktop>
           <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
@@ -103,6 +122,15 @@ export const MainPageForm = () => {
             {main.study &&
               main.study.map(item => (
                 <StudyCard item={item} key={item.studyID} />
+              ))}
+          </S.MainGrid>
+          <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
+            팀원들
+          </Heading>
+          <S.MainGrid>
+            {main.register &&
+              main.register.map(item => (
+                <TeamCard item={item} key={item.myid} />
               ))}
           </S.MainGrid>
         </Desktop>
