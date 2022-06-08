@@ -3,7 +3,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import * as S from './serachStyle';
 import { Pagination } from '../../swr/Pagination';
 import { getSearchCommunity } from '../../services/communityService';
-import { Mobile, Desktop, Tablet } from '../../mediaQuery';
 
 export const CommunitySearchForm = () => {
   const navigate = useNavigate();

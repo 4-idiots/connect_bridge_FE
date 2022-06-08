@@ -60,10 +60,13 @@ export const MainPageForm = () => {
                 <StudyCard item={item} key={item.studyID} />
               ))}
           </S.MainGridMobile>
-          <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
+          <Heading
+            size={7}
+            style={{ fontWeight: 'bold', fontSize: 26, marginLeft: 35 }}
+          >
             팀원들
           </Heading>
-          <S.MainGridMobile>
+          <S.MainGridMobile style={{ marginLeft: 45 }}>
             {main.register &&
               main.register.map(item => (
                 <TeamCard item={item} key={item.myid} />
@@ -95,10 +98,13 @@ export const MainPageForm = () => {
                 <StudyCard item={item} key={item.studyID} />
               ))}
           </S.MainGridTablet>
-          <Heading size={7} style={{ fontWeight: 'bold', fontSize: 26 }}>
+          <Heading
+            size={7}
+            style={{ fontWeight: 'bold', fontSize: 26, marginLeft: 45 }}
+          >
             팀원들
           </Heading>
-          <S.MainGridTablet>
+          <S.MainGridTablet style={{ marginLeft: 60 }}>
             {main.register &&
               main.register.map(item => (
                 <TeamCard item={item} key={item.myid} />
